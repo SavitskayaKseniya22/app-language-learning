@@ -1,4 +1,4 @@
-# [Lang app](https://awesome-lang-app.netlify.app)
+# [Lang app](https://app-language-learning.netlify.app/)
 App for learning English through games
 
 ## Features
