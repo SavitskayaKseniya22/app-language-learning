@@ -1,22 +1,21 @@
-/* eslint-disable jsx-a11y/media-has-caption */
-import React, { useEffect, useState } from 'react';
-import { fetchAndCreateReactImage } from '../../../utils';
-import Spinner from '../../../components/spinner/Spinner';
+import React, { useEffect, useState } from "react";
+import { fetchAndCreateReactImage } from "../../../utils";
+import Spinner from "../../../components/spinner/Spinner";
 
 function WordImage({ source }: { source: string }) {
-  const [image, setImage] = useState<React.ReactElement | null>();
+    const [image, setImage] = useState<React.ReactElement | null>();
 
-  useEffect(() => {
-    fetchAndCreateReactImage(source).then((imageTemp) => {
-      setImage(imageTemp);
-    });
-  }, [source]);
+    useEffect(() => {
+        fetchAndCreateReactImage(source).then(imageTemp => {
+            setImage(imageTemp);
+        });
+    }, [source]);
 
-  if (!image) {
-    return <Spinner />;
-  }
+    if (!image) {
+        return <Spinner />;
+    }
 
-  return { image };
+    return { image };
 }
 
 export default WordImage;

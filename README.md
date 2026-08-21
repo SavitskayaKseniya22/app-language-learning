@@ -1,7 +1,9 @@
 # [Lang app](https://app-language-learning.netlify.app/)
+
 App for learning English through games
 
 ## Features
+
 - Mobile layout
 - Autorization
 - Textbook
@@ -13,6 +15,7 @@ App for learning English through games
 - User game statistics
 
 ## Tech Stack
+
 - React
 - Create-react-app
 - Typescript
@@ -27,27 +30,26 @@ App for learning English through games
 - React-toastify
 
 ## How to use
+
 1. Clone the repo
-``` bash
+
+```bash
 git clone https://github.com/SavitskayaKseniya22/lang-app.git
 ```
 
 2. Install dependencies
-``` bash
+
+```bash
 npm install
 ```
 
 3. Start the dev server
-``` bash
+
+```bash
 npm start
 ```
 
-### Screenshots: 
+### Screenshots:
 
 ![изображение](https://github.com/SavitskayaKseniya22/projects-photos/blob/main/photos/lang-app/screenshots/main-page.png)
 ![изображение](https://github.com/SavitskayaKseniya22/projects-photos/blob/main/photos/lang-app/screenshots/textbook-desktop.png)
-
-
-
-
-
