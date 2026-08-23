@@ -6,7 +6,6 @@ import { useGetAllWordsQuery } from "../../store/wordsApi";
 import WordList from "./components/WordList";
 import ModalContext from "../../components/modal/ModalContext";
 import GamesPanel from "./components/GamesPanel";
-import { StyledMain } from "../../styled/SharedStyles";
 import Spinner from "../../components/spinner/Spinner";
 import { useAppSelector } from "../../store/store";
 import { useGetUserWordsQuery } from "../../store/userWordsApi";
@@ -86,7 +85,7 @@ function TextBookPage() {
 
     if (data) {
         return (
-            <StyledMain>
+            <main className="main">
                 <h2 className="main__title_main">Textbook</h2>
 
                 <StyledTextBookContainer>
@@ -104,7 +103,7 @@ function TextBookPage() {
                         Practice this set of words
                     </button>
                 </StyledTextBookSettings>
-            </StyledMain>
+            </main>
         );
     }
 

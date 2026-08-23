@@ -1,11 +1,10 @@
 import React from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { StyledMain } from "../../../styled/SharedStyles";
 import { useAppSelector } from "../../../store/store";
 import GameResultDetailed from "./GameResultDetailed";
 import GameResultInfo from "./GameResultInfo";
 import { makeLineFromParcedTime, getParcedTime } from "../../../utils";
-import { ResultType } from "../../../interfaces";
+import type { ResultType } from "../../../interfaces";
 
 function GameResult({
     type,
@@ -20,7 +19,7 @@ function GameResult({
 
     if (result && (result.answers.correct.length || result.answers.wrong.length)) {
         return (
-            <StyledMain>
+            <main className="main">
                 <h2 className="main__title_main">Results</h2>
                 <GameResultDetailed results={results} type={type} />
                 <GameResultInfo
@@ -41,7 +40,7 @@ function GameResult({
                         </button>
                     )}
                 </GameResultInfo>
-            </StyledMain>
+            </main>
         );
     }
 

@@ -8,8 +8,6 @@ import SprintRound from "./SprintRound";
 import ActiveWordsList from "./ActiveWordsList";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { updateSprintResult } from "../../../store/ResultSlice";
-import { StyledGameContainer, StyledMain } from "../../../styled/SharedStyles";
-
 import GameInfo from "../../game/components/GameInfo";
 import ProgressTracking from "../../game/components/ProgressTracking";
 
@@ -45,17 +43,17 @@ function SprintShortGame({ data }: { data: DataQueue }) {
     };
 
     return (
-        <StyledMain>
+        <main className="main">
             <GameInfo>
                 <ProgressTracking streak={data.head} total={data.startLength} />
                 <Points step={sprint.step} total={sprint.total} subtrahend={0} />
             </GameInfo>
-            <StyledGameContainer>
+            <div className="game__container">
                 <Streak streak={sprint.streak} total={3} />
                 <ActiveWordsList words={activeWords} />
                 <SprintRound handleClick={handleClick} />
-            </StyledGameContainer>
-        </StyledMain>
+            </div>
+        </main>
     );
 }
 

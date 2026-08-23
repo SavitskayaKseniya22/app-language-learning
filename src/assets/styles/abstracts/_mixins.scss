@@ -1,0 +1,169 @@
+@use "@abstracts/variables" as vars;
+
+// ========================================
+// Font family
+// ========================================
+
+@mixin font-geologica($weight: 400) {
+    font-family: Geologica, sans-serif;
+    font-style: normal;
+    font-weight: $weight;
+    font-optical-sizing: auto;
+}
+
+@mixin font-onest($weight: 400) {
+    font-family: Onest, sans-serif;
+    font-style: normal;
+    font-weight: $weight;
+    font-optical-sizing: auto;
+}
+
+// ========================================
+// Typography
+// ========================================
+
+@mixin text-s {
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
+@mixin text-m {
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+@mixin text-l {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+@mixin text-btn-m {
+    @include text-m;
+    @include font-onest(500);
+}
+
+@mixin text-btn-l {
+    @include text-l;
+    @include font-onest(700);
+}
+
+@mixin text-emphasis-m {
+    @include text-l;
+    @include font-onest(500);
+}
+
+@mixin text-headline-s {
+    @include font-geologica(500);
+
+    font-size: 1.25rem;
+    line-height: 1.2;
+    letter-spacing: 0.005em;
+}
+
+@mixin text-headline-m {
+    @include font-geologica(500);
+
+    font-size: 1.5rem;
+    line-height: 1.2;
+    letter-spacing: 0.005em;
+}
+
+@mixin text-headline-l {
+    @include font-geologica(700);
+
+    font-size: 1.75rem;
+    line-height: 1.2;
+    letter-spacing: 0.003em;
+}
+
+// ========================================
+// Color combinations
+// ========================================
+
+@mixin color-combination-error($type: default) {
+    color: vars.$color-error-700;
+
+    @if $type == alert {
+        background-color: vars.$color-error-100;
+    } @else {
+        background-color: vars.$color-error-300;
+    }
+}
+
+@mixin color-combination-success($type: default) {
+    color: vars.$color-success-700;
+
+    @if $type == alert {
+        background-color: vars.$color-success-100;
+    } @else {
+        background-color: vars.$color-success-300;
+    }
+}
+
+@mixin color-combination-warning($type: default) {
+    color: vars.$color-warning-700;
+
+    @if $type == alert {
+        background-color: vars.$color-warning-100;
+    } @else {
+        background-color: vars.$color-warning-300;
+    }
+}
+
+@mixin color-combination-info($type: default) {
+    color: vars.$color-info-700;
+
+    @if $type == alert {
+        background-color: vars.$color-info-100;
+    } @else {
+        background-color: vars.$color-info-300;
+    }
+}
+
+// ========================================
+// Animation
+// ========================================
+
+@mixin pulse {
+    animation: pulse-animation 2s infinite;
+}
+
+@mixin rotation {
+    animation: rotation 1s linear infinite;
+}
+
+@mixin fade-in {
+    animation: fade-in 0.15s ease;
+}
+
+// ========================================
+// Utilities
+// ========================================
+
+@mixin text-note-error {
+    @include text-s;
+
+    color: vars.$color-error-500;
+}
+
+@mixin with-custom-scroll-bar {
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: vars.$color-stroke vars.$color-white;
+}
+
+@mixin view-transition {
+    transition:
+        color 0.25s ease,
+        border-color 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+@mixin clamp-strings($lines) {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines;
+    line-clamp: $lines;
+}

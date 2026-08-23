@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { StyledGameContainer, StyledMain } from "../../../styled/SharedStyles";
+
 import { DataQueue } from "../../../utils";
 import { StyledPuzzlesGameAnswer } from "../../sentences/components/PuzzlesGame";
 import GameInfo from "../../game/components/GameInfo";
@@ -107,7 +107,7 @@ function ConstructorGame({ data }: { data: DataQueue }) {
     const timer = useRef(0);
 
     return (
-        <StyledMain>
+        <main className="main">
             <GameInfo>
                 <ProgressTracking streak={data.head} total={data.startLength} />
                 <Points step={constructor.step} total={constructor.total} subtrahend={constructor.subtrahend} />
@@ -117,7 +117,7 @@ function ConstructorGame({ data }: { data: DataQueue }) {
                     timer.current = value;
                 }}
             />
-            <StyledGameContainer>
+            <div className="game__container">
                 {middleResult !== null ? (
                     <>
                         {middleResult ? <h3>{`+${constructor.step}`}</h3> : <h3>{`-${constructor.subtrahend}`}</h3>}
@@ -211,8 +211,8 @@ function ConstructorGame({ data }: { data: DataQueue }) {
                         </button>
                     </>
                 )}
-            </StyledGameContainer>
-        </StyledMain>
+            </div>
+        </main>
     );
 }
 

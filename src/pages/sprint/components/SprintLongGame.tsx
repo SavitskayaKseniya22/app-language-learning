@@ -11,7 +11,6 @@ import ActiveWordsList from "./ActiveWordsList";
 import Spinner from "../../../components/spinner/Spinner";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { updateSprintResult } from "../../../store/ResultSlice";
-import { StyledGameContainer, StyledMain } from "../../../styled/SharedStyles";
 import GameInfo from "../../game/components/GameInfo";
 import ErrorPage, { ErrorType } from "../../errorPage/ErrorPage";
 
@@ -74,18 +73,18 @@ function SprintLongGame({ group }: GroupType) {
 
     if (data.current && activeWords) {
         return (
-            <StyledMain>
+            <main className="main">
                 <GameInfo>
                     <Points step={sprint.step} total={sprint.total} subtrahend={0} />
                 </GameInfo>
                 <Timer duration={60} doAfterTimer={doAfterTimer} />
 
-                <StyledGameContainer>
+                <div className="game__container">
                     <Streak streak={sprint.streak} total={3} />
                     <ActiveWordsList words={activeWords} />
                     <SprintRound handleClick={handleClick} />
-                </StyledGameContainer>
-            </StyledMain>
+                </div>
+            </main>
         );
     }
 

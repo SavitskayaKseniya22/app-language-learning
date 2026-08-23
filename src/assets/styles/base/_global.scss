@@ -1,0 +1,83 @@
+@use "@abstracts/variables" as vars;
+@use "@abstracts/mixins" as mx;
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: vars.$color-text-dark;
+
+    @include mx.text-m;
+    @include mx.font-onest(400);
+
+    position: relative;
+
+    &::after {
+        content: " ";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-image: url("../../images/jpeg/vecteezy_beautiful-abstract-background-with-gradient-rainbow-blob_13047954.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: 1;
+        filter: opacity(0.1);
+    }
+}
+
+#root {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: vars.$tablet) {
+        flex-direction: row;
+    }
+}
+
+// StyledMain
+.main {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    flex-grow: 2;
+    min-width: 320px;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+
+    @media (min-width: vars.$tablet) {
+        border-left: 0.5rem solid white;
+    }
+
+    .main__title-main {
+        align-self: flex-start;
+        color: rgb(38 70 83);
+    }
+}
+
+// StyledGameContainer
+.game__container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    justify-content: space-around;
+    text-align: center;
+    gap: 1rem;
+    width: 100%;
+
+    @media (min-width: vars.$tablet) {
+        width: 90%;
+    }
+    @media (min-width: vars.$laptop) {
+        width: 70%;
+    }
+    @media (min-width: vars.$desktop) {
+        width: 50%;
+    }
+}

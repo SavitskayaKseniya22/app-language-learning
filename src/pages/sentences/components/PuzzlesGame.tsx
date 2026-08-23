@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { StyledGameContainer, StyledMain } from "../../../styled/SharedStyles";
+
 import DragAndDrop from "./DragAndDrop";
 import { DataQueue } from "../../../utils";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
@@ -34,7 +34,7 @@ function PuzzlesGame({ data }: { data: DataQueue }) {
     const timer = useRef(0);
 
     return (
-        <StyledMain>
+        <main className="main">
             <GameInfo>
                 <ProgressTracking streak={data.head} total={data.startLength} />
                 <Points step={puzzles.step} total={puzzles.total} subtrahend={puzzles.subtrahend} />
@@ -45,7 +45,7 @@ function PuzzlesGame({ data }: { data: DataQueue }) {
                 }}
             />
 
-            <StyledGameContainer>
+            <div className="game__container">
                 <h4>
                     {word.word} - {word.wordTranslate}
                 </h4>
@@ -80,8 +80,8 @@ function PuzzlesGame({ data }: { data: DataQueue }) {
                         Check
                     </button>
                 )}
-            </StyledGameContainer>
-        </StyledMain>
+            </div>
+        </main>
     );
 }
 

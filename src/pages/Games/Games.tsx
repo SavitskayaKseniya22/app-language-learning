@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { StyledMain } from "../../styled/SharedStyles";
 
 export const StyledGameList = styled("ul")`
     display: flex;
@@ -29,7 +28,7 @@ export const StyledGameItem = styled("li")`
 
 function Games() {
     return (
-        <StyledMain>
+        <main className="main">
             <h2 className="main__title_main">Games</h2>
             <StyledGameList>
                 <StyledGameItem>
@@ -53,7 +52,7 @@ function Games() {
                     </Link>
                 </StyledGameItem>
             </StyledGameList>
-        </StyledMain>
+        </main>
     );
 }
 

@@ -3,7 +3,6 @@ import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { NavArrow } from "./component/NavArrow";
 import { ScreenSize } from "../../interfaces";
-import { StyledMain } from "../../styled/SharedStyles";
 
 export const StyledMainPageBlock = styled("ul")`
     min-height: 100vh;
@@ -25,7 +24,7 @@ export const StyledMainPageBlock = styled("ul")`
 
 function MainPage() {
     return (
-        <StyledMain>
+        <main className="main">
             <NavArrow />
             <StyledMainPageBlock id="section-0">
                 <h1>Awesome language learning app</h1>
@@ -102,7 +101,7 @@ function MainPage() {
                     </p>
                 </li>
             </StyledMainPageBlock>
-        </StyledMain>
+        </main>
     );
 }
 

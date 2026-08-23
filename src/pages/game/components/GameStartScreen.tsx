@@ -2,7 +2,6 @@ import React, { createContext, useContext, useMemo, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { GameDifficultyType, GameType, WordType } from "../../../interfaces";
 import GroupPicker from "./GroupPicker";
-import { StyledMain } from "../../../styled/SharedStyles";
 import GameTip from "./GameTip";
 
 interface InintialGameContextType {
@@ -41,7 +40,7 @@ function GameStartScreen({ value, type }: { value: GameDifficultyType; type: Gam
     const navigate = useNavigate();
 
     return (
-        <StyledMain>
+        <main className="main">
             <h2 className="main__title_main">{type}</h2>
             <GroupPicker
                 value={value}
@@ -55,7 +54,7 @@ function GameStartScreen({ value, type }: { value: GameDifficultyType; type: Gam
                 }}
             />
             <GameTip type={type} />
-        </StyledMain>
+        </main>
     );
 }
 

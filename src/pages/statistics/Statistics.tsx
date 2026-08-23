@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { StyledMain } from "../../styled/SharedStyles";
 import StatTable from "./components/StatTable";
 import StatTableControl from "./components/StatTableControl";
 import { useGetUserResultsQuery } from "../../store/userWordsApi";
@@ -32,7 +31,7 @@ function Statistics() {
     const [type, setType] = useState<StatControlType>(StatControlType.TODAY);
 
     return (
-        <StyledMain>
+        <main className="main">
             <h2 className="main__title_main">Statistics</h2>
 
             {data && isSuccess && (
@@ -41,7 +40,7 @@ function Statistics() {
                     <StatTable preData={data[type]} />
                 </StyledStatistics>
             )}
-        </StyledMain>
+        </main>
     );
 }
 

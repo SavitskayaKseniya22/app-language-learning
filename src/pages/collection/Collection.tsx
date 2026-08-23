@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { StyledMain } from "../../styled/SharedStyles";
+
 import { useAppSelector } from "../../store/store";
 import { CollectionType, WordWithIdType } from "../../interfaces";
 import Spinner from "../../components/spinner/Spinner";
@@ -37,7 +37,7 @@ function Collection() {
 
     if (isSuccess) {
         return (
-            <StyledMain>
+            <main className="main">
                 <h2 className="main__title_main">Collection</h2>
                 <StyledCollectionList>
                     <CollectionPart data={data} type={CollectionType.DIFFICULT} />
@@ -71,7 +71,7 @@ function Collection() {
                     }}>
                     <i className="fa-regular fa-trash-can" />
                 </StyledRemoveAllButton>
-            </StyledMain>
+            </main>
         );
     }
     return <>no Data</>;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { StyledMain } from "../../styled/SharedStyles";
+
 import { useAppDispatch } from "../../store/store";
 import { resetUser } from "../../store/auth/authSlice";
 import { StyledGameList, StyledGameItem } from "../Games/Games";
@@ -9,7 +9,7 @@ function Profile() {
     const dispatch = useAppDispatch();
 
     return (
-        <StyledMain>
+        <main>
             <h2 className="main__title_main">Profile</h2>
             <StyledGameList>
                 <StyledGameItem>
@@ -30,7 +30,7 @@ function Profile() {
                 }}>
                 Sign Out
             </button>
-        </StyledMain>
+        </main>
     );
 }
 

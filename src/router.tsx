@@ -23,9 +23,8 @@ import Statistics from "./pages/statistics/Statistics";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" errorElement={<ErrorPage type={ErrorType.ERROR} />} id="root" element={<Outlet />}>
+        <Route path="/" errorElement={<ErrorPage type={ErrorType.ERROR} />} element={<Outlet />}>
             <Route
-                errorElement={<ErrorPage type={ErrorType.ERROR} />}
                 element={
                     <ModalProvider>
                         <SidePanel />
@@ -46,19 +45,15 @@ const router = createBrowserRouter(
                     </ModalProvider>
                 }>
                 <Route index element={<MainPage />} />
-                <Route
-                    path="/text-book"
-                    element={<TextBookPage />}
-                    errorElement={<ErrorPage type={ErrorType.ERROR} />}
-                />
+                <Route path="text-book" element={<TextBookPage />} />
 
-                <Route path="/profile" element={<PrivateRoute />} errorElement={<ErrorPage type={ErrorType.ERROR} />}>
+                <Route path="profile" element={<PrivateRoute />}>
                     <Route index element={<Profile />} />
                     <Route path="statistics" element={<Statistics />} />
                     <Route path="collection" element={<Collection />} />
                 </Route>
 
-                <Route path="/games" errorElement={<ErrorPage type={ErrorType.ERROR} />}>
+                <Route path="games">
                     <Route index element={<Games />} />
                     <Route path="sprint" element={<GameInitialData />}>
                         <Route

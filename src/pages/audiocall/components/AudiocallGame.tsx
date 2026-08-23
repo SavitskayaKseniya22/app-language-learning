@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { DataQueue } from "../../../utils";
-import { StyledGameContainer, StyledMain } from "../../../styled/SharedStyles";
 import { StyledPuzzlesGameAnswer } from "../../sentences/components/PuzzlesGame";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import Points from "../../game/components/Points";
@@ -95,13 +94,13 @@ function AudiocallGame({ data }: { data: DataQueue }) {
     }, [handleKeyDown]);
 
     return (
-        <StyledMain>
+        <main>
             <GameInfo>
                 <ProgressTracking streak={data.head} total={data.startLength} />
                 <Points step={audiocall.step} total={audiocall.total} subtrahend={0} />
             </GameInfo>
 
-            <StyledGameContainer>
+            <div className="game__container">
                 <Streak streak={audiocall.streak} total={3} />
                 <WordAudio source={words.ref.audio} />
                 {middleResult !== null ? (
@@ -165,8 +164,8 @@ function AudiocallGame({ data }: { data: DataQueue }) {
                         </button>
                     </>
                 )}
-            </StyledGameContainer>
-        </StyledMain>
+            </div>
+        </main>
     );
 }
 

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../../../store/store";
-import { StyledMain } from "../../../styled/SharedStyles";
 import GameResultInfo from "../../game/components/GameResultInfo";
 import { makeLineFromParcedTime, getParcedTime, getPercent } from "../../../utils";
 
@@ -35,7 +34,7 @@ function PuzzleResult() {
 
     if (puzzles && (puzzles.correct || puzzles.wrong)) {
         return (
-            <StyledMain>
+            <main className="main">
                 <h2 className="main__title_main">Results</h2>
                 <GameResultInfo correct={puzzles.correct} wrong={puzzles.wrong} total={puzzles.total}>
                     <ul className="result__detailed">
@@ -48,7 +47,7 @@ function PuzzleResult() {
                     </ul>
                     <div>{makeLineFromParcedTime(getParcedTime({ time: puzzles.time }))}</div>
                 </GameResultInfo>
-            </StyledMain>
+            </main>
         );
     }
 
