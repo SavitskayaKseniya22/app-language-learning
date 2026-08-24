@@ -1,11 +1,12 @@
-import React, { useContext, useEffect } from "react";
-import SprintShortGame from "./components/SprintShortGame";
-import SprintLongGame from "./components/SprintLongGame";
-import { resetSprintResult } from "../../store/ResultSlice";
+import { useContext, useEffect } from "react";
+import SprintShortGame from "./components/sprint-short-game";
+import SprintLongGame from "./components/sprint-long-game";
+import { resetSprintResult } from "../../store/result-slice";
 import { useAppDispatch } from "../../store/store";
-import { GameContext } from "../game/components/GameStartScreen";
-import { DataQueue } from "../../utils";
-import ErrorPage, { ErrorType } from "../errorPage/ErrorPage";
+import { GameContext } from "../game/components/game-start-screen";
+import { DataQueue } from "../../utilities";
+import ErrorPage from "../error-page/error-page";
+import { ErrorType } from "@/interfaces";
 
 function Sprint() {
     const dispatch = useAppDispatch();

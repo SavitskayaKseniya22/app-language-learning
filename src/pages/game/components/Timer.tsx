@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 export const StyledTimer = styled("div")`
@@ -20,22 +20,22 @@ export const StyledTimer = styled("div")`
 function Timer({ duration, doAfterTimer }: { duration: number; doAfterTimer: () => void }) {
     const [timer, setTimer] = useState(duration);
 
-    const intervalRef = useRef<NodeJS.Timeout>();
+    const intervalReference = useRef<NodeJS.Timeout>();
 
     useEffect(() => {
         if (timer === 0) {
-            clearInterval(intervalRef.current);
+            clearInterval(intervalReference.current);
             doAfterTimer();
         }
     }, [doAfterTimer, timer]);
 
     useEffect(() => {
-        intervalRef.current = setInterval(() => {
+        intervalReference.current = setInterval(() => {
             setTimer(seconds => seconds - 1);
         }, 1000);
 
         return () => {
-            clearInterval(intervalRef.current);
+            clearInterval(intervalReference.current);
         };
     }, []);
 

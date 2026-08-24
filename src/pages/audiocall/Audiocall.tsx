@@ -1,12 +1,13 @@
-import React, { useContext, useEffect } from "react";
-import { GameContext } from "../game/components/GameStartScreen";
-import Spinner from "../../components/spinner/Spinner";
-import { useGetRandomWordsQuery } from "../../store/wordsApi";
-import { DataQueue } from "../../utils";
-import AudiocallGame from "./components/AudiocallGame";
+import { useContext, useEffect } from "react";
+import { GameContext } from "../game/components/game-start-screen";
+import Spinner from "../../components/spinner/spinner";
+import { useGetRandomWordsQuery } from "../../store/words-api";
+import { DataQueue } from "../../utilities";
+import AudiocallGame from "./components/audiocall-game";
 import { useAppDispatch } from "../../store/store";
-import { resetAudiocallResult } from "../../store/ResultSlice";
-import ErrorPage, { ErrorType } from "../errorPage/ErrorPage";
+import { resetAudiocallResult } from "../../store/result-slice";
+import ErrorPage from "../error-page/error-page";
+import { ErrorType } from "@/interfaces";
 
 function Audiocall() {
     const { initial } = useContext(GameContext);

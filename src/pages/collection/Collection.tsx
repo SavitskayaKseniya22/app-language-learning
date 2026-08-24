@@ -1,13 +1,12 @@
-import React from "react";
 import styled from "styled-components";
-
 import { useAppSelector } from "../../store/store";
-import { CollectionType, WordWithIdType } from "../../interfaces";
-import Spinner from "../../components/spinner/Spinner";
-import CollectionPart from "./components/CollectionPart";
-import { useAddToUserWordsMutation, useGetUserWordsCollectionsQuery } from "../../store/userWordsApi";
+import type { WordWithIdType } from "../../interfaces";
+import { CollectionType } from "../../interfaces";
+import Spinner from "../../components/spinner/spinner";
+import CollectionPart from "./components/collection-part";
+import { useAddToUserWordsMutation, useGetUserWordsCollectionsQuery } from "../../store/user-words-api";
 
-export const StyledCollectionList = styled("ul")`
+const StyledCollectionList = styled("ul")`
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -15,7 +14,7 @@ export const StyledCollectionList = styled("ul")`
     width: 100%;
 `;
 
-export const StyledRemoveAllButton = styled("button")`
+const StyledRemoveAllButton = styled("button")`
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -48,9 +47,9 @@ function Collection() {
                     type="button"
                     onClick={() => {
                         if (data) {
-                            const updatedWords: WordWithIdType = {} as WordWithIdType;
+                            const updatedWords: WordWithIdType = {};
 
-                            data.all.forEach(word => {
+                            for (const word of data.all) {
                                 Object.assign(updatedWords, {
                                     [word.id]: {
                                         ...word,
@@ -60,7 +59,7 @@ function Collection() {
                                         guessed: 0,
                                     },
                                 });
-                            });
+                            }
 
                             addToUserWords({
                                 userId: user!.localId,

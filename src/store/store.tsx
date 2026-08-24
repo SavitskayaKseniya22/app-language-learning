@@ -1,12 +1,14 @@
+/* eslint-disable unicorn/prefer-spread */
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/es/storage";
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from "redux-persist";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import authReducer from "./auth/authSlice";
-import resultsReducer from "./ResultSlice";
-import { authApi } from "./auth/authApi";
-import { wordsApi } from "./wordsApi";
-import { userWordsApi } from "./userWordsApi";
+import type { TypedUseSelectorHook } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import authReducer from "./auth/auth-slice";
+import resultsReducer from "./result-slice";
+import { authApi } from "./auth/auth-api";
+import { wordsApi } from "./words-api";
+import { userWordsApi } from "./user-words-api";
 
 const persistConfig = {
     key: "lang-app-root",

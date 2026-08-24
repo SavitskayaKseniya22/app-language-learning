@@ -1,13 +1,13 @@
-import React, { useContext, useEffect } from "react";
-import PuzzlesGame from "./components/PuzzlesGame";
-import Spinner from "../../components/spinner/Spinner";
-import { useGetRandomWordsQuery } from "../../store/wordsApi";
-import { GameContext } from "../game/components/GameStartScreen";
-import { DataQueue, checkStepValue, checkSubtrahendValue, getRandomItemsFromArray } from "../../utils";
-import { resetPuzzlesResult, setPuzzlesResult } from "../../store/ResultSlice";
+import { useContext, useEffect } from "react";
+import PuzzlesGame from "./components/puzzles-game";
+import Spinner from "../../components/spinner/spinner";
+import { useGetRandomWordsQuery } from "../../store/words-api";
+import { GameContext } from "../game/components/game-start-screen";
+import { DataQueue, checkStepValue, checkSubtrahendValue, getRandomItemsFromArray } from "../../utilities";
+import { resetPuzzlesResult, setPuzzlesResult } from "../../store/result-slice";
 import { useAppDispatch } from "../../store/store";
-import ErrorPage, { ErrorType } from "../errorPage/ErrorPage";
-import { GameType } from "../../interfaces";
+import ErrorPage from "../error-page/error-page";
+import { ErrorType, GameType } from "../../interfaces";
 
 function Puzzles() {
     const dispatch = useAppDispatch();

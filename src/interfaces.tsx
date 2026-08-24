@@ -283,3 +283,8 @@ export interface RefinedResultsType {
     [ResultType.sprintLong]: ResultPartType;
     total: ResultPartType;
 }
+
+export enum ErrorType {
+    ERROR,
+    PAGENOTFOUND,
+}

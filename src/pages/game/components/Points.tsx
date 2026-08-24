@@ -1,6 +1,6 @@
-import React from "react";
 import styled from "styled-components";
-import { PointsType, ScreenSize, SubtrahendType } from "../../../interfaces";
+import type { PointsType, SubtrahendType } from "../../../interfaces";
+import { ScreenSize } from "../../../interfaces";
 
 const StyledPointsList = styled("div")`
     display: flex;

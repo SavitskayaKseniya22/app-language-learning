@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
+import SignIn from "./components/sign-in";
+import SignUp from "./components/sign-up";
 
 const StyledAuthContainer = styled("div")`
     display: flex;

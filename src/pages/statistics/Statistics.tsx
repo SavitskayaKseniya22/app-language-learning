@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import StatTable from "./components/StatTable";
-import StatTableControl from "./components/StatTableControl";
-import { useGetUserResultsQuery } from "../../store/userWordsApi";
+import StatTable from "./components/stat-table";
+import StatTableControl from "./components/stat-table-control";
+import { useGetUserResultsQuery } from "../../store/user-words-api";
 import { useAppSelector } from "../../store/store";
 import { StatControlType } from "../../interfaces";
 

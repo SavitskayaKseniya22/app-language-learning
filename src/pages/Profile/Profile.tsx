@@ -1,9 +1,7 @@
-import React from "react";
 import { Link } from "react-router-dom";
-
 import { useAppDispatch } from "../../store/store";
-import { resetUser } from "../../store/auth/authSlice";
-import { StyledGameList, StyledGameItem } from "../Games/Games";
+import { resetUser } from "../../store/auth/auth-slice";
+import { StyledGameList, StyledGameItem } from "../games/games";
 
 function Profile() {
     const dispatch = useAppDispatch();

@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import type React from "react";
+import { useContext, useEffect } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import ModalContext from "./ModalContext";
+import ModalContext from "./modal-context";
 
 function ReactPortal({ children }: { children: React.ReactNode }) {
-    return createPortal(children, document.getElementById("root") as HTMLElement);
+    return createPortal(children, document.querySelector("#root") as HTMLElement);
 }
 
 const StyledModalOuterContainer = styled("div")`
@@ -54,8 +55,8 @@ function Modal() {
     return (
         <ReactPortal>
             <StyledModalOuterContainer
-                onClick={e => {
-                    if (e.currentTarget === e.target) {
+                onClick={event => {
+                    if (event.currentTarget === event.target) {
                         setContent(null);
                     }
                 }}>

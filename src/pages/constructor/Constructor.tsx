@@ -1,13 +1,13 @@
-import React, { useContext, useEffect } from "react";
-import { GameContext } from "../game/components/GameStartScreen";
-import Spinner from "../../components/spinner/Spinner";
-import { useGetRandomWordsQuery } from "../../store/wordsApi";
-import { DataQueue, checkStepValue, checkSubtrahendValue } from "../../utils";
-import ConstructorGame from "./components/ConstructorGame";
+import { useContext, useEffect } from "react";
+import { GameContext } from "../game/components/game-start-screen";
+import Spinner from "../../components/spinner/spinner";
+import { useGetRandomWordsQuery } from "../../store/words-api";
+import { DataQueue, checkStepValue, checkSubtrahendValue } from "../../utilities";
+import ConstructorGame from "./components/constructor-game";
 import { useAppDispatch } from "../../store/store";
-import { resetConstructorResult, setConstructorResult } from "../../store/ResultSlice";
-import ErrorPage, { ErrorType } from "../errorPage/ErrorPage";
-import { GameType } from "../../interfaces";
+import { resetConstructorResult, setConstructorResult } from "../../store/result-slice";
+import ErrorPage from "../error-page/error-page";
+import { ErrorType, GameType } from "../../interfaces";
 
 function Constructor() {
     const { initial } = useContext(GameContext);
