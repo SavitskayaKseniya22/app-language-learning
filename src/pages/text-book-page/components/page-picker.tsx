@@ -1,8 +1,8 @@
 import type { Dispatch, SetStateAction } from "react";
 import { useRef } from "react";
 import styled from "styled-components";
-import type { PageType } from "../../../interfaces";
-import { ScreenSize, WordBaseValues } from "../../../interfaces";
+import type { PageType } from "../../../shared/types/interfaces";
+import { ScreenSize, WordBaseValues } from "../../../shared/types/interfaces";
 
 const StyledPagePicker = styled("div")`
     display: flex;

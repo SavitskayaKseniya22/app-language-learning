@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import type { WordType } from "../../../interfaces";
-import { ScreenSize } from "../../../interfaces";
+import type { WordType } from "../../../shared/types/interfaces";
+import { ScreenSize } from "../../../shared/types/interfaces";
 import WordDetailed from "./word-detailed";
 import ModalContext from "../../../components/modal/modal-context";
 

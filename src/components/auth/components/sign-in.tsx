@@ -2,7 +2,7 @@ import { useCallback, useContext } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useSignInMutation } from "../../../store/auth/auth-api";
-import type { BasicUserCredentials } from "../../../interfaces";
+import type { BasicUserCredentials } from "../../../shared/types/interfaces";
 import ModalContext from "../../modal/modal-context";
 import AuthForm from "./auth-form";
 

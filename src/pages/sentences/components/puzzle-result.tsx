@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { useAppSelector } from "../../../store/store";
+import { useAppSelector } from "../../../app/store/store";
 import GameResultInfo from "../../game/components/game-result-info";
-import { makeLineFromParcedTime, getParcedTime, getPercent } from "../../../utilities";
+import { makeLineFromParcedTime, getParcedTime, getPercent } from "../../../shared/lib/utilities";
 
-import { ResultType } from "../../../interfaces";
+import { ResultType } from "../../../shared/types/interfaces";
 import { useUpdateUserResultsMutation } from "../../../store/user-words-api";
 
 function PuzzleResult() {

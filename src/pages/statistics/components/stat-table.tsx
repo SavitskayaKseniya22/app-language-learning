@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import type { RefinedResultsType, StatiscticsType } from "../../../interfaces";
-import { ScreenSize } from "../../../interfaces";
-import { refineData } from "../../../utilities";
+import type { RefinedResultsType, StatiscticsType } from "../../../shared/types/interfaces";
+import { ScreenSize } from "../../../shared/types/interfaces";
+import { refineData } from "../../../shared/lib/utilities";
 
 const StyledStatisticTable = styled("table")`
     border-spacing: 0.1rem;

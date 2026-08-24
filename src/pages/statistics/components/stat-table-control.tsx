@@ -1,6 +1,6 @@
 import type React from "react";
 import styled from "styled-components";
-import { StatControlType } from "../../../interfaces";
+import { StatControlType } from "../../../shared/types/interfaces";
 
 const StyledStatisticTableControl = styled("div")`
     display: flex;

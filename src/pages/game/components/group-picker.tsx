@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 
 import styled from "styled-components";
-import { makeEmptyArrayWithIds } from "../../../utilities";
-import type { GameDifficultyType } from "../../../interfaces";
+import { makeEmptyArrayWithIds } from "../../../shared/lib/utilities";
+import type { GameDifficultyType } from "../../../shared/types/interfaces";
 
 const StyledGroupPicker = styled("form")`
     padding: 1rem;

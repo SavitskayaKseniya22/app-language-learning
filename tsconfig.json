@@ -28,10 +28,11 @@
 
         "paths": {
             "@/*": ["./src/*"],
-            "@api/*": ["./src/api/*"],
-            "@assets/*": ["./src/assets/*"],
-            "@images/*": ["./src/assets/images/*"],
-            "@abstracts/*": ["./src/assets/styles/abstracts/*"],
+            "@app/*": ["./src/app/*"],
+            "@abstracts/*": ["./src/app/styles/abstracts/*"],
+            "@shared/*": ["./src/shared*"],
+            "@images/*": ["./src/shared/assets/images/*"],
+            //
             "@components/*": ["./src/components/*"],
             "@modules/*": ["./src/modules/*"],
             "@pages/*": ["./src/pages/*"]

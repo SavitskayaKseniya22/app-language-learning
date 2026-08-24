@@ -3,15 +3,15 @@ import { useCallback, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-import type { DataQueue } from "../../../utilities";
+import type { DataQueue } from "../../../shared/lib/utilities";
 import { StyledPuzzlesGameAnswer } from "../../sentences/components/puzzles-game";
 import GameInfo from "../../game/components/game-info";
 import Points from "../../game/components/points";
 import ProgressTracking from "../../game/components/progress-tracking";
-import { useAppDispatch, useAppSelector } from "../../../store/store";
+import { useAppDispatch, useAppSelector } from "../../../app/store/store";
 import { updateConstructorResult } from "../../../store/result-slice";
 import StopWatch from "../../game/components/stop-watch";
-import { ScreenSize } from "../../../interfaces";
+import { ScreenSize } from "../../../shared/types/interfaces";
 
 const StyledActiveLetter = css<{ $type: "disabled" | "active" }>`
     color: white;

@@ -1,24 +1,24 @@
 import { Route, Outlet, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import ErrorPage from "./pages/error-page/error-page";
-import MainPage from "./pages/main-page/main-page";
-import TextBookPage from "./pages/text-book-page/text-book-page";
-import Sprint from "./pages/sprint/sprint";
-import Audiocall from "./pages/audiocall/audiocall";
-import { ErrorType, GameDifficultyType, GameType, ResultType } from "./interfaces";
-import GameResult from "./pages/game/components/game-result";
-import Puzzles from "./pages/sentences/puzzles";
-import SidePanel from "./components/side-navigation/side-panel";
-import ModalProvider from "./components/modal/modal-provider";
-import Collection from "./pages/collection/collection";
-import GitHubLink from "./components/side-navigation/components/git-hub-link";
-import Profile from "./pages/profile/profile";
-import Games from "./pages/games/games";
-import PrivateRoute from "./components/private-route";
-import GameStartScreen, { GameInitialData } from "./pages/game/components/game-start-screen";
-import PuzzleResult from "./pages/sentences/components/puzzle-result";
-import Constructor from "./pages/constructor/constructor";
-import Statistics from "./pages/statistics/statistics";
+import ErrorPage from "../../pages/error-page/error-page";
+import MainPage from "../../pages/main-page/main-page";
+import TextBookPage from "../../pages/text-book-page/text-book-page";
+import Sprint from "../../pages/sprint/sprint";
+import Audiocall from "../../pages/audiocall/audiocall";
+import { ErrorType, GameDifficultyType, GameType, ResultType } from "../../shared/types/interfaces";
+import GameResult from "../../pages/game/components/game-result";
+import Puzzles from "../../pages/sentences/puzzles";
+import SidePanel from "../../components/side-navigation/side-panel";
+import ModalProvider from "../../components/modal/modal-provider";
+import Collection from "../../pages/collection/collection";
+import GitHubLink from "../../components/side-navigation/components/git-hub-link/git-hub-link";
+import Profile from "../../pages/profile/profile";
+import Games from "../../pages/games/games";
+import PrivateRoute from "../../components/private-route";
+import GameStartScreen, { GameInitialData } from "../../pages/game/components/game-start-screen";
+import PuzzleResult from "../../pages/sentences/components/puzzle-result";
+import Constructor from "../../pages/constructor/constructor";
+import Statistics from "../../pages/statistics/statistics";
 
 const router = createBrowserRouter(
     createRoutesFromElements(

@@ -1,6 +1,6 @@
 import type React from "react";
 import styled from "styled-components";
-import type { GroupType } from "../../../interfaces";
+import type { GroupType } from "../../../shared/types/interfaces";
 
 const StyledGroupSelect = styled("select")`
     background-color: transparent;

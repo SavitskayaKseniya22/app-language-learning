@@ -7,8 +7,8 @@ import type {
     StepType,
     UpdateResultType,
     SubtrahendType,
-} from "../interfaces";
-import { StepValues, StreakValues, ResultType } from "../interfaces";
+} from "../shared/types/interfaces";
+import { StepValues, StreakValues, ResultType } from "../shared/types/interfaces";
 
 export function updateResultData(
     result: ComplicatedResultType,

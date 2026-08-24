@@ -7,10 +7,10 @@ import WordList from "./components/word-list";
 import ModalContext from "../../components/modal/modal-context";
 import GamesPanel from "./components/games-panel";
 import Spinner from "../../components/spinner/spinner";
-import { useAppSelector } from "../../store/store";
+import { useAppSelector } from "../../app/store/store";
 import { useGetUserWordsQuery } from "../../store/user-words-api";
-import type { WordType } from "../../interfaces";
-import { ScreenSize } from "../../interfaces";
+import type { WordType } from "../../shared/types/interfaces";
+import { ScreenSize } from "../../shared/types/interfaces";
 
 const StyledTextBookContainer = styled("div")`
     overflow: auto;

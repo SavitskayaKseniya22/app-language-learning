@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import type { WordType } from "../../../interfaces";
+import type { WordType } from "../../../shared/types/interfaces";
 import Word from "./word";
 
 const StyledWordList = styled("ul")`

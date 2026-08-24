@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import ModalContext from "../../../components/modal/modal-context";
-import type { WordType } from "../../../interfaces";
+import type { WordType } from "../../../shared/types/interfaces";
 import { StyledGameItem, StyledGameList } from "../../games/games";
 
 function GamesPanel({ data, group }: { data: WordType[]; group: string }) {

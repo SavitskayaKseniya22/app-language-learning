@@ -1,6 +1,6 @@
 import type React from "react";
 import styled from "styled-components";
-import { ScreenSize } from "../../../interfaces";
+import { ScreenSize } from "../../../shared/types/interfaces";
 
 const StyledGameInfo = styled("div")`
     display: flex;

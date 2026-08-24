@@ -2,8 +2,8 @@ import type { DropResult } from "@hello-pangea/dnd";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import type { WordForDrop, DropData, DnDWordType } from "../../../interfaces";
-import { useAppDispatch } from "../../../store/store";
+import type { WordForDrop, DropData, DnDWordType } from "../../../shared/types/interfaces";
+import { useAppDispatch } from "../../../app/store/store";
 import { updatePuzzlesMiddleResult } from "../../../store/result-slice";
 
 const reorder = (list: WordForDrop[], startIndex: number, endIndex: number) => {

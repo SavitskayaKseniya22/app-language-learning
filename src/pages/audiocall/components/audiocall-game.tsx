@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import type { DataQueue } from "../../../utilities";
+import type { DataQueue } from "../../../shared/lib/utilities";
 import { StyledPuzzlesGameAnswer } from "../../sentences/components/puzzles-game";
-import { useAppDispatch, useAppSelector } from "../../../store/store";
+import { useAppDispatch, useAppSelector } from "../../../app/store/store";
 import Points from "../../game/components/points";
 import Streak from "../../game/components/streak";
 import { updateAudiocallResult } from "../../../store/result-slice";

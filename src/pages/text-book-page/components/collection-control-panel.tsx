@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import type { WordType, WordWithIdDataType } from "../../../interfaces";
-import { CollectionType } from "../../../interfaces";
+import type { WordType, WordWithIdDataType } from "../../../shared/types/interfaces";
+import { CollectionType } from "../../../shared/types/interfaces";
 import CollectionControl from "./collection-control";
 
 const StyledCollectionControlPanel = styled("form")`

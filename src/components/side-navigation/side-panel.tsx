@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import MainNavigation from "./components/main-navigation";
-import { ScreenSize } from "../../interfaces";
+import { ScreenSize } from "../../shared/types/interfaces";
 
 const StyledSidePanel = styled("nav")`
     background-color: rgba(38, 70, 83);

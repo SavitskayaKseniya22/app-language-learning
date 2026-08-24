@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import type { PointsType, SubtrahendType } from "../../../interfaces";
-import { ScreenSize } from "../../../interfaces";
+import type { PointsType, SubtrahendType } from "../../../shared/types/interfaces";
+import { ScreenSize } from "../../../shared/types/interfaces";
 
 const StyledPointsList = styled("div")`
     display: flex;

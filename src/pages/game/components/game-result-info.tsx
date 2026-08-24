@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import styled from "styled-components";
-import { getPercent, getResultMessage } from "../../../utilities";
+import { getPercent, getResultMessage } from "../../../shared/lib/utilities";
 
 const StyledGameResultInfo = styled("div")`
     display: flex;

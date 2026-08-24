@@ -3,9 +3,9 @@ import styled from "styled-components";
 import GamesPanel from "../../text-book-page/components/games-panel";
 import WordList from "../../text-book-page/components/word-list";
 import ModalContext from "../../../components/modal/modal-context";
-import type { CollectionLikeArraysType, WordWithIdType } from "../../../interfaces";
-import { CollectionType, ScreenSize } from "../../../interfaces";
-import { useAppSelector } from "../../../store/store";
+import type { CollectionLikeArraysType, WordWithIdType } from "../../../shared/types/interfaces";
+import { CollectionType, ScreenSize } from "../../../shared/types/interfaces";
+import { useAppSelector } from "../../../app/store/store";
 import { useAddToUserWordsMutation } from "../../../store/user-words-api";
 
 const StyledCollectionPart = styled("li")`

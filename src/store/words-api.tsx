@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { toast } from "react-toastify";
-import type { FirebaseErrorTypes, TextBookValuesTypes, WordType } from "../interfaces";
-import { WordBaseValues } from "../interfaces";
-import { getRandom } from "../utilities";
+import type { FirebaseErrorTypes, TextBookValuesTypes, WordType } from "../shared/types/interfaces";
+import { WordBaseValues } from "../shared/types/interfaces";
+import { getRandom } from "../shared/lib/utilities";
 
 function handleError(error: unknown) {
     if (error && typeof error === "object" && "error" in error) {

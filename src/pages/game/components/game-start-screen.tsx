@@ -1,7 +1,7 @@
 import type React from "react";
 import { createContext, useContext, useMemo, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import type { GameDifficultyType, GameType, WordType } from "../../../interfaces";
+import type { GameDifficultyType, GameType, WordType } from "../../../shared/types/interfaces";
 import GroupPicker from "./group-picker";
 import GameTip from "./game-tip";
 

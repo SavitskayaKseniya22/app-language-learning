@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { NavArrow } from "./component/nav-arrow";
-import { ScreenSize } from "../../interfaces";
+import { ScreenSize } from "../../shared/types/interfaces";
 
 const StyledMainPageBlock = styled("ul")`
     min-height: 100vh;

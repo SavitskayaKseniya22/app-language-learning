@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAppDispatch } from "../../store/store";
+import { useAppDispatch } from "../../app/store/store";
 import { resetUser } from "../../store/auth/auth-slice";
 import { StyledGameList, StyledGameItem } from "../games/games";
 

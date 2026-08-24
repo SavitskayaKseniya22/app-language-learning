@@ -4,11 +4,11 @@ import storage from "redux-persist/es/storage";
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from "redux-persist";
 import type { TypedUseSelectorHook } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
-import authReducer from "./auth/auth-slice";
-import resultsReducer from "./result-slice";
-import { authApi } from "./auth/auth-api";
-import { wordsApi } from "./words-api";
-import { userWordsApi } from "./user-words-api";
+import authReducer from "../../store/auth/auth-slice";
+import resultsReducer from "../../store/result-slice";
+import { authApi } from "../../store/auth/auth-api";
+import { wordsApi } from "../../store/words-api";
+import { userWordsApi } from "../../store/user-words-api";
 
 const persistConfig = {
     key: "lang-app-root",

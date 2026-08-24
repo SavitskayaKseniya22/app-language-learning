@@ -1,6 +1,6 @@
 import type React from "react";
 import { useEffect, useState } from "react";
-import { fetchAndCreateReactImage } from "../../../utilities";
+import { fetchAndCreateReactImage } from "../../../shared/lib/utilities";
 import Spinner from "../../../components/spinner/spinner";
 
 function WordImage({ source }: { source: string }) {

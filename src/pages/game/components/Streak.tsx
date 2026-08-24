@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { makeEmptyArrayWithIds } from "../../../utilities";
-import type { ProgressType } from "../../../interfaces";
+import { makeEmptyArrayWithIds } from "../../../shared/lib/utilities";
+import type { ProgressType } from "../../../shared/types/interfaces";
 
 const StyledStreak = styled("ul")`
     display: flex;

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ScreenSize } from "../../../interfaces";
+import { ScreenSize } from "../../../../shared/types/interfaces";
 
 const StyledGitHubLink = styled(Link)`
     display: block;

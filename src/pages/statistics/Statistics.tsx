@@ -3,8 +3,8 @@ import styled from "styled-components";
 import StatTable from "./components/stat-table";
 import StatTableControl from "./components/stat-table-control";
 import { useGetUserResultsQuery } from "../../store/user-words-api";
-import { useAppSelector } from "../../store/store";
-import { StatControlType } from "../../interfaces";
+import { useAppSelector } from "../../app/store/store";
+import { StatControlType } from "../../shared/types/interfaces";
 
 const StyledStatistics = styled("div")`
     flex-grow: 2;

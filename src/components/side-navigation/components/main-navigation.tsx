@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { ScreenSize } from "../../../interfaces";
-import { useAppSelector } from "../../../store/store";
+import { ScreenSize } from "../../../shared/types/interfaces";
+import { useAppSelector } from "../../../app/store/store";
 import SignInControl from "./sign-in-control";
 import SignOutControl from "./sign-out-control";
 

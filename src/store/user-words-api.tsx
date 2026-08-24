@@ -12,10 +12,10 @@ import type {
     WordIdType,
     WordWithIdDataType,
     WordWithIdType,
-} from "../interfaces";
-import { CollectionType, ResultType } from "../interfaces";
+} from "../shared/types/interfaces";
+import { CollectionType, ResultType } from "../shared/types/interfaces";
 import { resetUser } from "./auth/auth-slice";
-import { generateRandomString, sortPreData } from "../utilities";
+import { generateRandomString, sortPreData } from "../shared/lib/utilities";
 
 export function handleError(
     error: unknown,

@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import type { WordType, WordWithIdDataType } from "../../../interfaces";
-import { CollectionType } from "../../../interfaces";
+import type { WordType, WordWithIdDataType } from "../../../shared/types/interfaces";
+import { CollectionType } from "../../../shared/types/interfaces";
 import { useUpdateUserWordMutation } from "../../../store/user-words-api";
-import { useAppSelector } from "../../../store/store";
+import { useAppSelector } from "../../../app/store/store";
 
 const StyledCollectionControl = styled("label")<{ $isItchecked: boolean }>`
     display: flex;

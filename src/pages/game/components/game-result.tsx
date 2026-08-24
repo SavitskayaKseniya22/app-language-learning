@@ -1,9 +1,9 @@
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../../store/store";
+import { useAppSelector } from "../../../app/store/store";
 import GameResultDetailed from "./game-result-detailed";
 import GameResultInfo from "./game-result-info";
-import { makeLineFromParcedTime, getParcedTime } from "../../../utilities";
-import type { ResultType } from "../../../interfaces";
+import { makeLineFromParcedTime, getParcedTime } from "../../../shared/lib/utilities";
+import type { ResultType } from "../../../shared/types/interfaces";
 
 function GameResult({
     type,

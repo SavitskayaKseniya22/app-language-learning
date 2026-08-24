@@ -7,8 +7,8 @@ import type {
     ResultPartType,
     StatiscticsType,
     WordType,
-} from "./interfaces";
-import { GameType, ResultType, WordBaseValues } from "./interfaces";
+} from "../types/interfaces";
+import { GameType, ResultType, WordBaseValues } from "../types/interfaces";
 
 export function getRandom(min: number, max: number) {
     return Math.trunc(Math.random() * (max + 1 - min) + min);

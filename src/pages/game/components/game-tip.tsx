@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import type { GameType } from "../../../interfaces";
+import type { GameType } from "../../../shared/types/interfaces";
 
 const StyledGameTip = styled("ul")`
     padding: 1rem;

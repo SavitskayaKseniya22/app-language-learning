@@ -2,11 +2,11 @@ import { useContext, useEffect } from "react";
 import SprintShortGame from "./components/sprint-short-game";
 import SprintLongGame from "./components/sprint-long-game";
 import { resetSprintResult } from "../../store/result-slice";
-import { useAppDispatch } from "../../store/store";
+import { useAppDispatch } from "../../app/store/store";
 import { GameContext } from "../game/components/game-start-screen";
-import { DataQueue } from "../../utilities";
+import { DataQueue } from "../../shared/lib/utilities";
 import ErrorPage from "../error-page/error-page";
-import { ErrorType } from "@/interfaces";
+import { ErrorType } from "@/shared/types/interfaces";
 
 function Sprint() {
     const dispatch = useAppDispatch();

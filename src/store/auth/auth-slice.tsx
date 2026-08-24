@@ -1,6 +1,6 @@
-import type { PayloadAction} from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import type { ActiveUserTypes } from "../../interfaces";
+import type { ActiveUserTypes } from "../../shared/types/interfaces";
 
 export interface AuthState {
     user: ActiveUserTypes | undefined;

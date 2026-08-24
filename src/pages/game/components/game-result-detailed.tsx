@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import type { ResultsState, WordType, WordWithIdType } from "../../../interfaces";
-import { ResultType } from "../../../interfaces";
+import type { ResultsState, WordType, WordWithIdType } from "../../../shared/types/interfaces";
+import { ResultType } from "../../../shared/types/interfaces";
 import {
     useAddToUserWordsMutation,
     useGetUserWordsQuery,
     useUpdateUserResultsMutation,
 } from "../../../store/user-words-api";
-import { useAppSelector } from "../../../store/store";
+import { useAppSelector } from "../../../app/store/store";
 import WordList from "../../text-book-page/components/word-list";
-import { getPercent } from "../../../utilities";
+import { getPercent } from "../../../shared/lib/utilities";
 
 const StyledGameResultContent = styled("ul")`
     display: flex;

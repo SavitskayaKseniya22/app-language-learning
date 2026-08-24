@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { toast } from "react-toastify";
-import { firebaseConfig } from "../../firebase";
-import type { FirebaseErrorTypes, BasicUserCredentials, ActiveUserTypes } from "../../interfaces";
+import { firebaseConfig } from "../../shared/api/firebase/config";
+import type { FirebaseErrorTypes, BasicUserCredentials, ActiveUserTypes } from "../../shared/types/interfaces";
 
 import { setUser } from "./auth-slice";
-import { transformAuthError } from "../../utilities";
+import { transformAuthError } from "../../shared/lib/utilities";
 
 export const authApi = createApi({
     reducerPath: "authApi",

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import ModalContext from "../../modal/modal-context";
 import Auth from "../../auth/auth";
-import { ScreenSize } from "../../../interfaces";
+import { ScreenSize } from "../../../shared/types/interfaces";
 
 const StyledSignInControl = styled("button")`
     padding: 0.5rem;

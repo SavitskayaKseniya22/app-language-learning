@@ -3,11 +3,11 @@ import PuzzlesGame from "./components/puzzles-game";
 import Spinner from "../../components/spinner/spinner";
 import { useGetRandomWordsQuery } from "../../store/words-api";
 import { GameContext } from "../game/components/game-start-screen";
-import { DataQueue, checkStepValue, checkSubtrahendValue, getRandomItemsFromArray } from "../../utilities";
+import { DataQueue, checkStepValue, checkSubtrahendValue, getRandomItemsFromArray } from "../../shared/lib/utilities";
 import { resetPuzzlesResult, setPuzzlesResult } from "../../store/result-slice";
-import { useAppDispatch } from "../../store/store";
+import { useAppDispatch } from "../../app/store/store";
 import ErrorPage from "../error-page/error-page";
-import { ErrorType, GameType } from "../../interfaces";
+import { ErrorType, GameType } from "../../shared/types/interfaces";
 
 function Puzzles() {
     const dispatch = useAppDispatch();

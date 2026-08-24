@@ -1,4 +1,4 @@
-import { ErrorType } from "@/interfaces";
+import { ErrorType } from "@/shared/types/interfaces";
 import styled from "styled-components";
 
 const StyledErrorPage = styled("div")`

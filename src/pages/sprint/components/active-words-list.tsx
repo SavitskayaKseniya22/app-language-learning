@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import styled from "styled-components";
-import type { ActiveWordsTypes } from "../../../interfaces";
+import type { ActiveWordsTypes } from "../../../shared/types/interfaces";
 
 const StyledActiveWordsList = styled("div")`
     display: flex;
