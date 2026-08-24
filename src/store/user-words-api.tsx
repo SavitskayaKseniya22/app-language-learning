@@ -14,7 +14,7 @@ import type {
     WordWithIdType,
 } from "../shared/types/interfaces";
 import { CollectionType, ResultType } from "../shared/types/interfaces";
-import { resetUser } from "./auth/auth-slice";
+import { resetUser } from "../features/auth/model/auth-slice";
 import { generateRandomString, sortPreData } from "../shared/lib/utilities";
 
 export function handleError(

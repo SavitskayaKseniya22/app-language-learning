@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import type { Id } from "react-toastify";
 import { toast } from "react-toastify";
-import type { BasicUserCredentials } from "../../../shared/types/interfaces";
+import type { BasicUserCredentials } from "@shared/types/interfaces";
 
 export const passwordPattern =
     /(?=.*[+-_@$!%*?&#.,;:[\]{}])(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[0-9a-zA-Z+-_@$!%*?&#.,;:[\]{}]{8,}/g;

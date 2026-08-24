@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAppSelector } from "../app/store/store";
+import { useAppSelector } from "../../../app/store/store";
 
 function PrivateRoute() {
     const { user } = useAppSelector(state => state.persist.auth);

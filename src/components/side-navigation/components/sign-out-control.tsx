@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ScreenSize } from "../../../shared/types/interfaces";
-import { resetUser } from "../../../store/auth/auth-slice";
+import { resetUser } from "../../../features/auth/model/auth-slice";
 import { useAppDispatch } from "../../../app/store/store";
 
 const StyledSignOutControl = styled("button")`

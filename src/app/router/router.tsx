@@ -14,7 +14,7 @@ import Collection from "../../pages/collection/collection";
 import GitHubLink from "../../components/side-navigation/components/git-hub-link/git-hub-link";
 import Profile from "../../pages/profile/profile";
 import Games from "../../pages/games/games";
-import PrivateRoute from "../../components/private-route";
+import PrivateRoute from "../../features/auth/ui/private-route";
 import GameStartScreen, { GameInitialData } from "../../pages/game/components/game-start-screen";
 import PuzzleResult from "../../pages/sentences/components/puzzle-result";
 import Constructor from "../../pages/constructor/constructor";

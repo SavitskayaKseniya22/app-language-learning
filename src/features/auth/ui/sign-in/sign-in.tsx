@@ -1,10 +1,10 @@
 import { useCallback, useContext } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useSignInMutation } from "../../../store/auth/auth-api";
-import type { BasicUserCredentials } from "../../../shared/types/interfaces";
-import ModalContext from "../../modal/modal-context";
-import AuthForm from "./auth-form";
+import { useSignInMutation } from "../../api/auth-api";
+import type { BasicUserCredentials } from "../../../../shared/types/interfaces";
+import ModalContext from "../../../../components/modal/modal-context";
+import AuthForm from "@features/auth/ui/auth-form/auth-form";
 
 function SignIn() {
     const [signIn] = useSignInMutation();

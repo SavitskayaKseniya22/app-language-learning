@@ -30,8 +30,9 @@
             "@/*": ["./src/*"],
             "@app/*": ["./src/app/*"],
             "@abstracts/*": ["./src/app/styles/abstracts/*"],
-            "@shared/*": ["./src/shared*"],
+            "@shared/*": ["./src/shared/*"],
             "@images/*": ["./src/shared/assets/images/*"],
+            "@features/*": ["./src/features/*"],
             //
             "@components/*": ["./src/components/*"],
             "@modules/*": ["./src/modules/*"],

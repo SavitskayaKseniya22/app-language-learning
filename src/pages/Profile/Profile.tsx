@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../app/store/store";
-import { resetUser } from "../../store/auth/auth-slice";
+import { resetUser } from "../../features/auth/model/auth-slice";
 import { StyledGameList, StyledGameItem } from "../games/games";
 
 function Profile() {

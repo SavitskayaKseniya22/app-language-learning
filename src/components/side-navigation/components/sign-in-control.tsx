@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import ModalContext from "../../modal/modal-context";
-import Auth from "../../auth/auth";
+import Auth from "../../../features/auth/ui/auth/auth";
 import { ScreenSize } from "../../../shared/types/interfaces";
 
 const StyledSignInControl = styled("button")`
@@ -28,7 +28,7 @@ function SignInControl() {
                 setContent(<Auth />);
             }}>
             <i className="fa-solid fa-user" />
-            <span className="nav__title">Sign in</span>
+            <span className="nav__title">Sign indd</span>
         </StyledSignInControl>
     );
 }

@@ -12,6 +12,7 @@ export default defineConfig({
             "@abstracts": path.resolve("src/app/styles/abstracts"),
             "@shared": path.resolve("src/shared"),
             "@images": path.resolve("src/shared/assets/images"),
+            "@features": path.resolve("src/features"),
 
             //
             "@components": path.resolve("src/components"),
