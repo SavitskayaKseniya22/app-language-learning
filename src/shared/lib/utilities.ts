@@ -1,14 +1,8 @@
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import React from "react";
-import type {
-    DnDWordType,
-    FirebaseAuthErrorTypes,
-    RefinedResultsType,
-    ResultPartType,
-    StatiscticsType,
-    WordType,
-} from "../types/interfaces";
-import { GameType, ResultType, WordBaseValues } from "../types/interfaces";
+import type { DnDWordType, FirebaseAuthErrorTypes, WordType } from "../types/interfaces";
+import {  WordBaseValues } from "../types/interfaces";
+import { GameType } from "@/app/api/user-api";
 
 export function getRandom(min: number, max: number) {
     return Math.trunc(Math.random() * (max + 1 - min) + min);
@@ -69,7 +63,7 @@ export function transformAuthError(response: FetchBaseQueryError) {
 }
 
 export function fetchAndCreateReactImage(partOfUrl: string) {
-    return fetch(`https://raw.githubusercontent.com/irinainina/rslang/rslang-data/data/${partOfUrl}`)
+    return fetch(`https://raw.githubusercontent.com/SavitskayaKseniya22/rslang-data/data/${partOfUrl}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -203,11 +197,11 @@ export class DataQueue {
 
 export function checkStepValue({ difficulty, type }: { difficulty: string; type: GameType }) {
     switch (type) {
-        case GameType.PUZZLES: {
+        case GameType.puzzles: {
             return [5, 10, 15][+difficulty];
         }
 
-        case GameType.CONSTRUCTOR: {
+        case GameType.constructor: {
             return [5, 10, 15, 20, 25, 30][+difficulty];
         }
 
@@ -219,11 +213,11 @@ export function checkStepValue({ difficulty, type }: { difficulty: string; type:
 
 export function checkSubtrahendValue({ difficulty, type }: { difficulty: string; type: GameType }) {
     switch (type) {
-        case GameType.PUZZLES: {
+        case GameType.puzzles: {
             return [1, 5, 10][+difficulty];
         }
 
-        case GameType.CONSTRUCTOR: {
+        case GameType.constructor: {
             return [1, 3, 7, 10, 15, 20][+difficulty];
         }
 
@@ -257,93 +251,3 @@ export function makeLineFromParcedTime({
 }
 
 export const generateRandomString = () => Math.floor(Math.random() * Date.now()).toString(36);
-
-export function getSum(array: Array<number>) {
-    return array.reduce((a, b) => a + b, 0);
-}
-
-export function isItToday(date: number) {
-    return new Date(date).toDateString() === new Date().toDateString();
-}
-export function reduceData(data: StatiscticsType, type: Exclude<ResultType, ResultType.sprint>): ResultPartType {
-    return {
-        score: getSum(data[type].map(item => item.score)),
-        played: data[type].length,
-
-        accuracy:
-            data[type].length > 0
-                ? +(getSum(data[type].map(item => item.accuracy)) / data[type].length).toFixed(3)
-                : undefined,
-
-        learned:
-            type !== ResultType.puzzles && data[type].length > 0
-                ? getSum(data[type].map(item => item.learned))
-                : undefined,
-
-        encountered:
-            type !== ResultType.puzzles && data[type].length > 0
-                ? getSum(data[type].map(item => item.encountered))
-                : undefined,
-
-        time:
-            (type === ResultType.puzzles || type === ResultType.constructor) && data[type].length > 0
-                ? data[type].map(item => item.time).toSorted((a, b) => a - b)[0]
-                : undefined,
-    };
-}
-
-export function sortPreData(preData: StatiscticsType): StatiscticsType {
-    return {
-        sprintShort: preData[ResultType.sprintShort].filter(data => isItToday(data.date)),
-        sprintLong: preData[ResultType.sprintLong].filter(data => isItToday(data.date)),
-        audiocall: preData[ResultType.audiocall].filter(data => isItToday(data.date)),
-        constructor: preData[ResultType.constructor].filter(data => isItToday(data.date)),
-        puzzles: preData[ResultType.puzzles].filter(data => isItToday(data.date)),
-    };
-}
-
-export function refineData(preData: StatiscticsType): RefinedResultsType {
-    const puzzles = reduceData(preData, ResultType.puzzles);
-    const constructor = reduceData(preData, ResultType.constructor);
-    const audiocall = reduceData(preData, ResultType.audiocall);
-    const sprintLong = reduceData(preData, ResultType.sprintLong);
-    const sprintShort = reduceData(preData, ResultType.sprintShort);
-
-    const refinedData = [puzzles, constructor, audiocall, sprintLong, sprintShort];
-
-    const total = {
-        score: 0,
-        played: 0,
-        learned: 0,
-        encountered: 0,
-        accuracy: 0,
-        time: undefined,
-    };
-
-    let accuracyCount = 0;
-
-    for (const item of refinedData) {
-        total.score += item.score;
-        total.played += item.played;
-        total.learned += item.learned ?? 0;
-        total.encountered += item.encountered ?? 0;
-
-        if (item.accuracy !== undefined) {
-            total.accuracy += item.accuracy;
-            accuracyCount += 1;
-        }
-    }
-
-    if (accuracyCount > 0) {
-        total.accuracy = +(total.accuracy / accuracyCount).toFixed(3);
-    }
-
-    return {
-        puzzles,
-        constructor,
-        audiocall,
-        sprintLong,
-        sprintShort,
-        total,
-    };
-}

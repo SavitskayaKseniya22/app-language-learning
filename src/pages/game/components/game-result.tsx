@@ -3,13 +3,9 @@ import { useAppSelector } from "../../../app/store/store";
 import GameResultDetailed from "./game-result-detailed";
 import GameResultInfo from "./game-result-info";
 import { makeLineFromParcedTime, getParcedTime } from "../../../shared/lib/utilities";
-import type { ResultType } from "../../../shared/types/interfaces";
+import type { GameType } from "@/app/api/user-api";
 
-function GameResult({
-    type,
-}: {
-    type: Exclude<ResultType, ResultType.puzzles | ResultType.sprintShort | ResultType.sprintLong>;
-}) {
+function GameResult({ type }: { type: Exclude<GameType, GameType.puzzles | GameType.sprint> }) {
     const results = useAppSelector(state => state.resultsReducer);
     const result = results[type];
     const location = useLocation();

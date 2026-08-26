@@ -2,9 +2,9 @@ import { useState } from "react";
 import styled from "styled-components";
 import StatTable from "./components/stat-table";
 import StatTableControl from "./components/stat-table-control";
-import { useGetUserResultsQuery } from "../../store/user-words-api";
-import { useAppSelector } from "../../app/store/store";
+
 import { StatControlType } from "../../shared/types/interfaces";
+import { useGetUserResultsQuery } from "@/app/api/user-api";
 
 const StyledStatistics = styled("div")`
     flex-grow: 2;
@@ -16,17 +16,7 @@ const StyledStatistics = styled("div")`
 `;
 
 function Statistics() {
-    const { user } = useAppSelector(state => state.persist.auth);
-
-    const { data, isSuccess } = useGetUserResultsQuery(
-        {
-            userId: user?.localId || "localId",
-            tokenId: user?.idToken || "idToken",
-        },
-        {
-            skip: !user,
-        },
-    );
+    const { data, isSuccess } = useGetUserResultsQuery();
 
     const [type, setType] = useState<StatControlType>(StatControlType.TODAY);
 

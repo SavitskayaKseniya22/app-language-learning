@@ -28,7 +28,7 @@ function SignInControl() {
                 setContent(<Auth />);
             }}>
             <i className="fa-solid fa-user" />
-            <span className="nav__title">Sign indd</span>
+            <span className="nav__title">Sign in</span>
         </StyledSignInControl>
     );
 }

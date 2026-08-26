@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import type { RefinedResultsType, StatiscticsType } from "../../../shared/types/interfaces";
 import { ScreenSize } from "../../../shared/types/interfaces";
-import { refineData } from "../../../shared/lib/utilities";
+import type { StatisticsType } from "@/app/api/user-api";
+import { refineData } from "@/app/api/user-api";
 
 const StyledStatisticTable = styled("table")`
     border-spacing: 0.1rem;
@@ -99,14 +98,8 @@ const StyledStatisticTable = styled("table")`
     }
 `;
 
-function StatTable({ preData }: { preData: StatiscticsType | undefined }) {
-    const [data, setData] = useState<undefined | RefinedResultsType>();
-
-    useEffect(() => {
-        if (preData) {
-            setData(refineData(preData));
-        }
-    }, [preData]);
+function StatTable({ preData }: { preData: StatisticsType }) {
+    const data = refineData(preData);
 
     return (
         <StyledStatisticTable>
@@ -140,20 +133,19 @@ function StatTable({ preData }: { preData: StatiscticsType | undefined }) {
             </thead>
 
             <tbody>
-                {data &&
-                    Object.entries(data).map(([key, value]) => (
-                        <tr key={key}>
-                            <th scope="row" className={key === "total" ? "total" : ""}>
-                                {key}
-                            </th>
-                            <td>{value.time}</td>
-                            <td>{value.learned}</td>
-                            <td>{value.encountered}</td>
-                            <td>{value.accuracy}</td>
-                            <td>{value.played}</td>
-                            <td>{value.score}</td>
-                        </tr>
-                    ))}
+                {Object.entries(data).map(([key, value]) => (
+                    <tr key={key}>
+                        <th scope="row" className={key === "total" ? "total" : ""}>
+                            {key}
+                        </th>
+                        <td>{value.time}</td>
+                        <td>{value.learned}</td>
+                        <td>{value.encountered}</td>
+                        <td>{value.accuracy}</td>
+                        <td>{value.played}</td>
+                        <td>{value.score}</td>
+                    </tr>
+                ))}
             </tbody>
         </StyledStatisticTable>
     );

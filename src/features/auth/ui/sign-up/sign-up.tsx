@@ -1,43 +1,34 @@
 import { useCallback, useContext } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useSignInMutation, useSignUpMutation } from "../../api/auth-api";
 import ModalContext from "../../../../components/modal/modal-context";
 import type { BasicUserCredentials } from "../../../../shared/types/interfaces";
 import AuthForm from "../auth-form/auth-form";
-import { useCreateUserDataMutation } from "../../../../store/user-words-api";
+import { supabase } from "@/shared/api/supabase/config";
 
 function SignUp() {
-    const [signUp] = useSignUpMutation();
-    const [signIn] = useSignInMutation();
     const { setContent } = useContext(ModalContext);
     const navigate = useNavigate();
-    const [createUserData] = useCreateUserDataMutation();
 
     const onSubmit = useCallback(
         (data: BasicUserCredentials) => {
-            const { email, password } = data;
-            signUp(data)
-                .unwrap()
-                .then(result => {
-                    const { localId, idToken } = result;
-                    createUserData({ userId: localId, tokenId: idToken });
-                })
-                .then(() => {
-                    signIn({ email, password });
-                })
+            supabase.auth
+                .signUp(data)
 
-                .then(() => {
+                .then(result => {
+                    if (result.error) {
+                        throw result.error;
+                    }
                     setContent(null);
-                    navigate("/profile");
+                    void navigate("/profile");
                 })
                 .catch(error => {
-                    if ("data" in error) {
-                        toast.error(error.data);
+                    if (error instanceof Error) {
+                        toast.error(error.message);
                     }
                 });
         },
-        [createUserData, navigate, setContent, signIn, signUp],
+        [navigate, setContent],
     );
 
     return <AuthForm onSubmit={onSubmit} />;

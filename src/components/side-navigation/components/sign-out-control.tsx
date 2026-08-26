@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { ScreenSize } from "../../../shared/types/interfaces";
-import { resetUser } from "../../../features/auth/model/auth-slice";
-import { useAppDispatch } from "../../../app/store/store";
+import handleLogout from "@/features/auth/api/logout";
 
 const StyledSignOutControl = styled("button")`
     display: none;
@@ -20,13 +19,11 @@ const StyledSignOutControl = styled("button")`
 `;
 
 function SignOutControl() {
-    const dispatch = useAppDispatch();
-
     return (
         <StyledSignOutControl
             type="button"
             onClick={() => {
-                dispatch(resetUser());
+                void handleLogout();
             }}>
             <i className="fa-solid fa-arrow-right-from-bracket" />
             <span>Sign Out</span>

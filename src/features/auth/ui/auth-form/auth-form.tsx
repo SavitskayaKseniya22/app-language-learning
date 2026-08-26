@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
+import type { FieldErrors, SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import type { Id } from "react-toastify";
 import { toast } from "react-toastify";
 import type { BasicUserCredentials } from "@shared/types/interfaces";
-
-export const passwordPattern =
-    /(?=.*[+-_@$!%*?&#.,;:[\]{}])(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[0-9a-zA-Z+-_@$!%*?&#.,;:[\]{}]{8,}/g;
 
 const StyledAuthForm = styled("form")`
     display: flex;
@@ -26,39 +24,24 @@ const StyledInput = styled("input")`
 `;
 
 function AuthForm({ onSubmit }: { onSubmit: (data: BasicUserCredentials) => void }) {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<BasicUserCredentials>({
-        criteriaMode: "all",
-    });
+    const { register, handleSubmit } = useForm<BasicUserCredentials>();
 
-    const emailToastId = React.useRef<null | Id>(null);
-    const passwordToastId = React.useRef<null | Id>(null);
+    const onSubmitGlobal: SubmitHandler<BasicUserCredentials> = data => {
+        onSubmit(data);
+    };
 
-    useEffect(() => {
-        if (emailToastId.current) {
-            toast.dismiss(emailToastId.current);
-        }
-
+    const onInvalid = (errors: FieldErrors<BasicUserCredentials>) => {
+        console.log(errors);
         if (errors.email) {
-            emailToastId.current = toast.warn(errors.email.message);
+            toast.warn(errors.email.message);
         }
-    }, [errors.email]);
-
-    useEffect(() => {
-        if (passwordToastId.current) {
-            toast.dismiss(passwordToastId.current);
-        }
-
         if (errors.password) {
-            passwordToastId.current = toast.warn(errors.password.message);
+            toast.warn(errors.password.message);
         }
-    }, [errors.password]);
+    };
 
     return (
-        <StyledAuthForm onSubmit={handleSubmit(onSubmit)} noValidate>
+        <StyledAuthForm onSubmit={event => void handleSubmit(onSubmitGlobal, onInvalid)(event)} noValidate>
             <StyledInput
                 {...register("email", {
                     required: "Email is required.",
@@ -69,15 +52,9 @@ function AuthForm({ onSubmit }: { onSubmit: (data: BasicUserCredentials) => void
             <StyledInput
                 {...register("password", {
                     required: "Password is required.",
-                    pattern: {
-                        value: passwordPattern,
-                        message:
-                            "The password must contain at least 8 characters, at least one letter, one capital letter, one number and one special character from `+-_@$!%*?&#.,;:[]{}`",
-                    },
                 })}
                 type="password"
                 placeholder="password"
-                title="The password must contain at least 8 characters, at least one letter, one capital letter, one number and one special character from `+-_@$!%*?&#.,;:[]{}`"
             />
 
             <button type="submit">Enter</button>

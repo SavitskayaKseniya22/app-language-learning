@@ -1,31 +1,25 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import type {
     CollectionLikeArraysType,
     CredentialsType,
     FirebaseErrorTypes,
     StatiscticsItemType,
-    StatiscticsResponseType,
     UserIdType,
-    UserResultsType,
     WordIdType,
     WordWithIdDataType,
     WordWithIdType,
+    ResultType,
 } from "../shared/types/interfaces";
-import { CollectionType, ResultType } from "../shared/types/interfaces";
-import { resetUser } from "../features/auth/model/auth-slice";
-import { generateRandomString, sortPreData } from "../shared/lib/utilities";
+import { CollectionType } from "../shared/types/interfaces";
+import { generateRandomString } from "../shared/lib/utilities";
+import handleLogout from "@/features/auth/api/logout";
 
-export function handleError(
-    error: unknown,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    dispatch: ThunkDispatch<any, any, AnyAction>,
-) {
+export function handleError(error: unknown) {
     if (error && typeof error === "object" && "error" in error) {
         const { status, data } = (error as FirebaseErrorTypes).error;
         toast.error(`${status}: ${data.error}`);
-        dispatch(resetUser());
+        void handleLogout();
     } else {
         toast.error(`Not specific error`);
     }
@@ -49,11 +43,11 @@ export const userWordsApi = createApi({
                 method: "PUT",
                 params: { auth: tokenId },
             }),
-            async onQueryStarted(id, { queryFulfilled, dispatch }) {
+            async onQueryStarted(id, { queryFulfilled }) {
                 try {
                     await queryFulfilled;
                 } catch (error) {
-                    handleError(error, dispatch);
+                    handleError(error);
                 }
             },
         }),
@@ -66,44 +60,12 @@ export const userWordsApi = createApi({
             }),
             providesTags: ["UserWords"],
             keepUnusedDataFor: 0,
-            async onQueryStarted(id, { queryFulfilled, dispatch }) {
+            async onQueryStarted(id, { queryFulfilled }) {
                 try {
                     await queryFulfilled;
                 } catch (error) {
-                    handleError(error, dispatch);
+                    handleError(error);
                 }
-            },
-        }),
-
-        getUserResults: builder.query<UserResultsType, CredentialsType>({
-            query: ({ userId, tokenId }) => ({
-                url: `/${userId}/results/.json`,
-                method: "GET",
-                params: { auth: tokenId },
-            }),
-
-            keepUnusedDataFor: 0,
-            async onQueryStarted(id, { queryFulfilled, dispatch }) {
-                try {
-                    await queryFulfilled;
-                } catch (error) {
-                    handleError(error, dispatch);
-                }
-            },
-
-            transformResponse: (response: StatiscticsResponseType | null): UserResultsType => {
-                const extractedData = {
-                    [ResultType.sprintShort]: Object.values(response?.[ResultType.sprintShort] || {}),
-                    [ResultType.sprintLong]: Object.values(response?.[ResultType.sprintLong] || {}),
-                    [ResultType.audiocall]: Object.values(response?.[ResultType.audiocall] || {}),
-                    [ResultType.constructor]: Object.values(response?.[ResultType.constructor] || {}),
-                    [ResultType.puzzles]: Object.values(response?.[ResultType.puzzles] || {}),
-                };
-
-                return {
-                    today: sortPreData(extractedData),
-                    total: extractedData,
-                };
             },
         }),
 
@@ -115,11 +77,11 @@ export const userWordsApi = createApi({
             }),
             keepUnusedDataFor: 0,
             providesTags: ["UserWord"],
-            async onQueryStarted(id, { queryFulfilled, dispatch }) {
+            async onQueryStarted(id, { queryFulfilled }) {
                 try {
                     await queryFulfilled;
                 } catch (error) {
-                    handleError(error, dispatch);
+                    handleError(error);
                 }
             },
         }),
@@ -132,11 +94,11 @@ export const userWordsApi = createApi({
             }),
             keepUnusedDataFor: 0,
             providesTags: ["UserCollection"],
-            async onQueryStarted(id, { queryFulfilled, dispatch }) {
+            async onQueryStarted(id, { queryFulfilled }) {
                 try {
                     await queryFulfilled;
                 } catch (error) {
-                    handleError(error, dispatch);
+                    handleError(error);
                 }
             },
 
@@ -160,11 +122,11 @@ export const userWordsApi = createApi({
                 params: { auth: tokenId },
             }),
             invalidatesTags: ["UserCollection"],
-            async onQueryStarted(id, { queryFulfilled, dispatch }) {
+            async onQueryStarted(id, { queryFulfilled }) {
                 try {
                     await queryFulfilled;
                 } catch (error) {
-                    handleError(error, dispatch);
+                    handleError(error);
                 }
             },
         }),
@@ -177,11 +139,11 @@ export const userWordsApi = createApi({
                 params: { auth: tokenId },
             }),
             invalidatesTags: ["UserCollection", "UserWord", "UserWords"],
-            async onQueryStarted(id, { queryFulfilled, dispatch }) {
+            async onQueryStarted(id, { queryFulfilled }) {
                 try {
                     await queryFulfilled;
                 } catch (error) {
-                    handleError(error, dispatch);
+                    handleError(error);
                 }
             },
         }),
@@ -201,11 +163,11 @@ export const userWordsApi = createApi({
                 params: { auth: tokenId },
             }),
 
-            async onQueryStarted(id, { queryFulfilled, dispatch }) {
+            async onQueryStarted(id, { queryFulfilled }) {
                 try {
                     await queryFulfilled;
                 } catch (error) {
-                    handleError(error, dispatch);
+                    handleError(error);
                 }
             },
         }),
@@ -218,7 +180,7 @@ export const {
     useCreateUserDataMutation,
     useGetUserWordsCollectionsQuery,
     useGetUserWordQuery,
-    useGetUserResultsQuery,
+
     useUpdateUserWordMutation,
     useUpdateUserResultsMutation,
 } = userWordsApi;

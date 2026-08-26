@@ -21,7 +21,7 @@ function WordAudio({ source }: { source: string }) {
             </StyledWordAudioControl>
             <audio
                 ref={audioReference}
-                src={`https://raw.githubusercontent.com/irinainina/rslang/rslang-data/data/${source}`}
+                src={`https://raw.githubusercontent.com/SavitskayaKseniya22/rslang-data/data/${source}`}
                 onEnded={() => {
                     setIsPlaying(false);
                 }}

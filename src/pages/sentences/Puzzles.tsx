@@ -7,7 +7,8 @@ import { DataQueue, checkStepValue, checkSubtrahendValue, getRandomItemsFromArra
 import { resetPuzzlesResult, setPuzzlesResult } from "../../store/result-slice";
 import { useAppDispatch } from "../../app/store/store";
 import ErrorPage from "../error-page/error-page";
-import { ErrorType, GameType } from "../../shared/types/interfaces";
+import { ErrorType } from "../../shared/types/interfaces";
+import { GameType } from "@/app/api/user-api";
 
 function Puzzles() {
     const dispatch = useAppDispatch();
@@ -30,11 +31,11 @@ function Puzzles() {
             setPuzzlesResult({
                 step: checkStepValue({
                     difficulty: initial.group,
-                    type: GameType.PUZZLES,
+                    type: GameType.puzzles,
                 }),
                 subtrahend: checkSubtrahendValue({
                     difficulty: initial.group,
-                    type: GameType.PUZZLES,
+                    type: GameType.puzzles,
                 }),
             }),
         );

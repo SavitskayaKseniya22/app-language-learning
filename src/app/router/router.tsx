@@ -5,7 +5,7 @@ import MainPage from "../../pages/main-page/main-page";
 import TextBookPage from "../../pages/text-book-page/text-book-page";
 import Sprint from "../../pages/sprint/sprint";
 import Audiocall from "../../pages/audiocall/audiocall";
-import { ErrorType, GameDifficultyType, GameType, ResultType } from "../../shared/types/interfaces";
+import { ErrorType, GameDifficultyType } from "../../shared/types/interfaces";
 import GameResult from "../../pages/game/components/game-result";
 import Puzzles from "../../pages/sentences/puzzles";
 import SidePanel from "../../components/side-navigation/side-panel";
@@ -19,6 +19,7 @@ import GameStartScreen, { GameInitialData } from "../../pages/game/components/ga
 import PuzzleResult from "../../pages/sentences/components/puzzle-result";
 import Constructor from "../../pages/constructor/constructor";
 import Statistics from "../../pages/statistics/statistics";
+import { GameType } from "../api/user-api";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -60,7 +61,7 @@ const router = createBrowserRouter(
                             element={<GameStartScreen value={GameDifficultyType.SPRINT} type={GameType.SPRINT} />}
                         />
                         <Route path="game" element={<Sprint />} />
-                        <Route path="result" element={<GameResult type={ResultType.sprint} />} />
+                        <Route path="result" element={<GameResult type={GameType.sprint} />} />
                     </Route>
 
                     <Route path="puzzles" element={<GameInitialData />}>
@@ -78,7 +79,7 @@ const router = createBrowserRouter(
                             element={<GameStartScreen value={GameDifficultyType.AUDIOCALL} type={GameType.AUDIOCALL} />}
                         />
                         <Route path="game" element={<Audiocall />} />
-                        <Route path="result" element={<GameResult type={ResultType.audiocall} />} />
+                        <Route path="result" element={<GameResult type={GameType.audiocall} />} />
                     </Route>
 
                     <Route path="constructor" element={<GameInitialData />}>
@@ -89,7 +90,7 @@ const router = createBrowserRouter(
                             }
                         />
                         <Route path="game" element={<Constructor />} />
-                        <Route path="result" element={<GameResult type={ResultType.constructor} />} />
+                        <Route path="result" element={<GameResult type={GameType.constructor} />} />
                     </Route>
                 </Route>
                 <Route path="*" element={<ErrorPage type={ErrorType.PAGENOTFOUND} />} />

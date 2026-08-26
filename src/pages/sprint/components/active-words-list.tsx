@@ -37,7 +37,7 @@ function ActiveWordsList({ words }: { words: ActiveWordsTypes }) {
             <audio
                 ref={audioReference}
                 controls
-                src={`https://raw.githubusercontent.com/irinainina/rslang/rslang-data/data/${words.first.audio}`}
+                src={`https://raw.githubusercontent.com/SavitskayaKseniya22/rslang-data/data/${words.first.audio}`}
             />
         </StyledActiveWordsList>
     );

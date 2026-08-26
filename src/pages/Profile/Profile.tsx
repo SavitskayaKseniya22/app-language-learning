@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
-import { useAppDispatch } from "../../app/store/store";
-import { resetUser } from "../../features/auth/model/auth-slice";
 import { StyledGameList, StyledGameItem } from "../games/games";
 
 function Profile() {
-    const dispatch = useAppDispatch();
-
     return (
         <main>
             <h2 className="main__title_main">Profile</h2>
@@ -21,13 +17,6 @@ function Profile() {
                     </Link>
                 </StyledGameItem>
             </StyledGameList>
-            <button
-                type="button"
-                onClick={() => {
-                    dispatch(resetUser());
-                }}>
-                Sign Out
-            </button>
         </main>
     );
 }

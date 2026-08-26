@@ -7,7 +7,8 @@ import ConstructorGame from "./components/constructor-game";
 import { useAppDispatch } from "../../app/store/store";
 import { resetConstructorResult, setConstructorResult } from "../../store/result-slice";
 import ErrorPage from "../error-page/error-page";
-import { ErrorType, GameType } from "../../shared/types/interfaces";
+import { ErrorType } from "../../shared/types/interfaces";
+import { GameType } from "@/app/api/user-api";
 
 function Constructor() {
     const { initial } = useContext(GameContext);
@@ -30,11 +31,11 @@ function Constructor() {
             setConstructorResult({
                 step: checkStepValue({
                     difficulty: initial.group,
-                    type: GameType.CONSTRUCTOR,
+                    type: GameType.constructor,
                 }),
                 subtrahend: checkSubtrahendValue({
                     difficulty: initial.group,
-                    type: GameType.CONSTRUCTOR,
+                    type: GameType.constructor,
                 }),
             }),
         );

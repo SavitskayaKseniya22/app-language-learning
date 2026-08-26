@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { ScreenSize } from "../../../shared/types/interfaces";
-import { useAppSelector } from "../../../app/store/store";
 import SignInControl from "./sign-in-control";
 import SignOutControl from "./sign-out-control";
+import { useAuth } from "@/features/auth/model/auth-provider";
 
 const StyledNavigation = styled("ul")`
     display: flex;
@@ -60,7 +60,7 @@ const StyledNavLink = styled(NavLink)<{ $type?: "SUB" }>`
 `;
 
 function MainNavigation() {
-    const { user } = useAppSelector(state => state.persist.auth);
+    const { user } = useAuth();
 
     return (
         <StyledNavigation>

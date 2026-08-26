@@ -1,10 +1,3 @@
-export enum GameType {
-    SPRINT = "Sprint",
-    AUDIOCALL = "Audiocall",
-    PUZZLES = "Puzzles",
-    CONSTRUCTOR = "Constructor",
-}
-
 export enum GameDifficultyType {
     SPRINT = 6,
     AUDIOCALL = 6,
@@ -186,10 +179,10 @@ export enum ResultType {
 export type ComplicatedResultType = AnswersType & PointsType & StreakType;
 
 export type ResultsState = {
+    [ResultType.audiocall]: ComplicatedResultType;
     [ResultType.sprint]: ComplicatedResultType & {
         type: ResultType.sprintShort | ResultType.sprintLong;
     };
-    [ResultType.audiocall]: ComplicatedResultType;
     [ResultType.constructor]: AnswersType & PointsType & SubtrahendType & TimeType;
 
     [ResultType.puzzles]: { middleResult: boolean } & PointsType & {
@@ -224,65 +217,12 @@ export type StatiscticsItemType = {
     [ResultType.puzzles]: BasicResultType & TimeType;
 };
 
-export type StatiscticsResponseType = {
-    [ResultType.sprintShort]: {
-        [id: string]: StatiscticsItemType[ResultType.sprintShort];
-    };
-    [ResultType.sprintLong]: {
-        [id: string]: StatiscticsItemType[ResultType.sprintLong];
-    };
-    [ResultType.audiocall]: {
-        [id: string]: StatiscticsItemType[ResultType.audiocall];
-    };
-    [ResultType.constructor]: {
-        [id: string]: StatiscticsItemType[ResultType.constructor];
-    };
-    [ResultType.puzzles]: {
-        [id: string]: StatiscticsItemType[ResultType.puzzles];
-    };
-};
-
-export type StatiscticsType = {
-    [ResultType.sprintShort]: StatiscticsItemType[ResultType.sprintShort][];
-    [ResultType.sprintLong]: StatiscticsItemType[ResultType.sprintLong][];
-    [ResultType.audiocall]: StatiscticsItemType[ResultType.audiocall][];
-    [ResultType.constructor]: StatiscticsItemType[ResultType.constructor][];
-    [ResultType.puzzles]: StatiscticsItemType[ResultType.puzzles][];
-};
-
-export interface StatiscticsItemTypeWithIdType {
-    [id: string]: StatiscticsItemType;
-}
-
 export enum StatControlType {
     TODAY = "today",
     TOTAL = "total",
 }
 
 export type CredentialsType = UserIdType & TokenIdType;
-
-export type UserResultsType = {
-    total: StatiscticsType;
-    today: StatiscticsType;
-};
-
-export interface ResultPartType {
-    score: number;
-    played: number;
-    accuracy: number | undefined;
-    learned?: number | undefined;
-    encountered?: number | undefined;
-    time?: number | undefined;
-}
-
-export interface RefinedResultsType {
-    [ResultType.puzzles]: ResultPartType;
-    [ResultType.constructor]: ResultPartType;
-    [ResultType.audiocall]: ResultPartType;
-    [ResultType.sprintShort]: ResultPartType;
-    [ResultType.sprintLong]: ResultPartType;
-    total: ResultPartType;
-}
 
 export enum ErrorType {
     ERROR,
