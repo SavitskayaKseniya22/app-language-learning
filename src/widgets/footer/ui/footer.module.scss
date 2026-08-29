@@ -1,0 +1,13 @@
+@use "@abstracts/variables" as vars;
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: vars.$charcoal-blue;
+  gap: 1rem;
+  align-items: center;
+
+  @media (min-width: vars.$tablet) {
+    display: none;
+  }
+}

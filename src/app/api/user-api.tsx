@@ -1,5 +1,5 @@
-import type { Database } from "@/database.types";
 import { supabase } from "@/shared/api/supabase/config";
+import type { Database } from "@/shared/api/supabase/database.types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 function isItToday(date: string) {
@@ -107,11 +107,28 @@ export function refineData(preData: StatisticsType) {
     };
 }
 
+export type Word = Database["public"]["Tables"]["words"]["Row"];
+
+type GetWordsResponse = {
+    words: Word[];
+    total: number;
+    page: number;
+    pageSize: number;
+    totalPages: number;
+};
+
+type GetWordsArguments = {
+    difficulty: number;
+    page: number;
+    pageSize?: number;
+};
+
 export const userApi = createApi({
     reducerPath: "userApi",
     baseQuery: fetchBaseQuery({
         baseUrl: "",
     }),
+    tagTypes: ["Words"],
     endpoints: builder => ({
         getUserResults: builder.query<UserResultsType, void>({
             async queryFn() {
@@ -152,7 +169,52 @@ export const userApi = createApi({
                 }
             },
         }),
+        getWordsByDifficulty: builder.query<GetWordsResponse, GetWordsArguments>({
+            async queryFn({ difficulty, page, pageSize = 20 }) {
+                try {
+                    const from = (page - 1) * pageSize;
+                    const to = from + pageSize - 1;
+
+                    const { data, error, count } = await supabase
+                        .from("words")
+                        .select("*", { count: "exact" })
+                        .eq("difficulty", difficulty)
+                        .order("id", { ascending: true })
+                        .range(from, to);
+
+                    if (error) {
+                        return {
+                            error: {
+                                status: "CUSTOM_ERROR",
+                                error: error.message,
+                            },
+                        };
+                    }
+
+                    const total = count ?? 0;
+
+                    return {
+                        data: {
+                            words: data ?? [],
+                            total,
+                            page,
+                            pageSize,
+                            totalPages: Math.ceil(total / pageSize),
+                        },
+                    };
+                } catch (error) {
+                    return {
+                        error: {
+                            status: "CUSTOM_ERROR",
+                            error: error instanceof Error ? error.message : "Unknown error",
+                        },
+                    };
+                }
+            },
+
+            providesTags: ["Words"],
+        }),
     }),
 });
 
-export const { useGetUserResultsQuery } = userApi;
+export const { useGetUserResultsQuery, useGetWordsByDifficultyQuery } = userApi;

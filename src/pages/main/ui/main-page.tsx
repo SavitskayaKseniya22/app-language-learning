@@ -1,37 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
-import styled from "styled-components";
-import { NavArrow } from "./component/nav-arrow";
-import { ScreenSize } from "../../shared/types/interfaces";
-
-const StyledMainPageBlock = styled("ul")`
-    min-height: 100vh;
-    width: 100%;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2rem;
-
-    @media ${ScreenSize.LAPTOPS} {
-        padding: 2rem;
-    }
-
-    .main-page__link {
-        color: rgb(42, 157, 143);
-    }
-`;
+import styles from "./main-page.module.scss";
 
 function MainPage() {
     return (
-        <main className="main">
-            <NavArrow />
-            <StyledMainPageBlock id="section-0">
+        <main className={styles.main}>
+            <div className={styles.main__section} id="section-0">
                 <h1>Awesome language learning app</h1>
                 <a className="main-page__link" href="#section-1">
                     Learn English by playing games
                 </a>
-            </StyledMainPageBlock>
-            <StyledMainPageBlock id="section-1">
+            </div>
+            <ul className={styles.main__section} id="section-1">
                 <li>
                     <NavLink to="/games/audiocall">
                         <h2>Audio Challenge</h2>
@@ -56,8 +35,8 @@ function MainPage() {
                         <p>Challenge your wit and knowledge in a fast paced and rewarding guessing game!</p>
                     </NavLink>
                 </li>
-            </StyledMainPageBlock>
-            <StyledMainPageBlock id="section-2">
+            </ul>
+            <ul className={styles.main__section} id="section-2">
                 <li>
                     <h3>
                         Use
@@ -99,7 +78,7 @@ function MainPage() {
                         you are on track! Available only for authorized users.
                     </p>
                 </li>
-            </StyledMainPageBlock>
+            </ul>
         </main>
     );
 }

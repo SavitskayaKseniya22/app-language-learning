@@ -1,0 +1,27 @@
+@use "@abstracts/variables" as vars;
+
+.image {
+  overflow: hidden;
+  border-radius: vars.$border-radius-default;
+
+  &--big {
+    width: 64px;
+    height: 64px;
+  }
+
+  &--medium {
+    width: 48px;
+    height: 48px;
+  }
+
+  &--small {
+    width: 32px;
+    height: 32px;
+  }
+
+  img {
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
+  }
+}

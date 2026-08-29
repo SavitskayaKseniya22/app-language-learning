@@ -23,23 +23,28 @@
 // ========================================
 
 @mixin text-s {
-    font-size: 0.75rem;
-    line-height: 1.5;
-}
-
-@mixin text-m {
     font-size: 0.875rem;
     line-height: 1.5;
 }
 
-@mixin text-l {
+@mixin text-m {
     font-size: 1rem;
     line-height: 1.5;
 }
 
+@mixin text-l {
+    font-size: 1.15rem;
+    line-height: 1.5;
+}
+
+@mixin text-btn-s {
+    @include text-s;
+    @include font-onest(500);
+}
+
 @mixin text-btn-m {
     @include text-m;
-    @include font-onest(500);
+    @include font-onest(600);
 }
 
 @mixin text-btn-l {
@@ -48,6 +53,11 @@
 }
 
 @mixin text-emphasis-m {
+    @include text-m;
+    @include font-onest(500);
+}
+
+@mixin text-emphasis-l {
     @include text-l;
     @include font-onest(500);
 }
@@ -166,4 +176,15 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: $lines;
     line-clamp: $lines;
+}
+
+@mixin main-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    flex-grow: 1;
+    min-width: 320px;
+    width: 100%;
+    position: relative;
 }

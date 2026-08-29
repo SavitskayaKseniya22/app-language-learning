@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+/// <reference types="vite-plugin-svgr/client" />
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
 interface ImportMetaEnv {

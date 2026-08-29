@@ -8,6 +8,7 @@ import router from "./app/router/router";
 import "@app/styles/styles.scss";
 import Spinner from "./components/spinner/spinner";
 import { AuthProvider } from "./features/auth/model/auth-provider";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const root = ReactDOM.createRoot(document.querySelector("#root") as HTMLElement);
 

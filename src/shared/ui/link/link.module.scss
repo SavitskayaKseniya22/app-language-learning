@@ -1,0 +1,23 @@
+.link {
+  color: inherit;
+  cursor: pointer;
+  transition: color 150ms;
+
+  &:disabled,
+  &[aria-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.2;
+  }
+
+  &_primary {
+    &:hover {
+      color: var(--palette-blue-dark);
+    }
+  }
+
+  &_secondary {
+    &:hover {
+      color: var(--palette-accent-hover);
+    }
+  }
+}

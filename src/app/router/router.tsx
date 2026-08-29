@@ -1,17 +1,13 @@
 import { Route, Outlet, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import ErrorPage from "../../pages/error-page/error-page";
-import MainPage from "../../pages/main-page/main-page";
-import TextBookPage from "../../pages/text-book-page/text-book-page";
 import Sprint from "../../pages/sprint/sprint";
 import Audiocall from "../../pages/audiocall/audiocall";
 import { ErrorType, GameDifficultyType } from "../../shared/types/interfaces";
 import GameResult from "../../pages/game/components/game-result";
 import Puzzles from "../../pages/sentences/puzzles";
-import SidePanel from "../../components/side-navigation/side-panel";
 import ModalProvider from "../../components/modal/modal-provider";
 import Collection from "../../pages/collection/collection";
-import GitHubLink from "../../components/side-navigation/components/git-hub-link/git-hub-link";
 import Profile from "../../pages/profile/profile";
 import Games from "../../pages/games/games";
 import PrivateRoute from "../../features/auth/ui/private-route";
@@ -20,6 +16,10 @@ import PuzzleResult from "../../pages/sentences/components/puzzle-result";
 import Constructor from "../../pages/constructor/constructor";
 import Statistics from "../../pages/statistics/statistics";
 import { GameType } from "../api/user-api";
+import { MainPage } from "@/pages/main";
+import { TextbookPage } from "@/pages/textbook";
+import { Sidebar } from "@/widgets/sidebar";
+import { Footer } from "@/widgets/footer";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -27,9 +27,8 @@ const router = createBrowserRouter(
             <Route
                 element={
                     <ModalProvider>
-                        <SidePanel />
+                        <Sidebar />
                         <Outlet />
-                        <GitHubLink />
                         <ToastContainer
                             position="top-right"
                             autoClose={5000}
@@ -42,10 +41,11 @@ const router = createBrowserRouter(
                             pauseOnHover
                             theme="light"
                         />
+                        <Footer />
                     </ModalProvider>
                 }>
                 <Route index element={<MainPage />} />
-                <Route path="text-book" element={<TextBookPage />} />
+                <Route path="text-book" element={<TextbookPage />} />
 
                 <Route path="profile" element={<PrivateRoute />}>
                     <Route index element={<Profile />} />

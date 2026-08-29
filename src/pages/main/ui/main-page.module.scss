@@ -1,0 +1,15 @@
+@use "@abstracts/mixins" as mx;
+
+.main {
+  @include mx.main-container;
+}
+
+.main__section {
+  min-height: 100vh;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
