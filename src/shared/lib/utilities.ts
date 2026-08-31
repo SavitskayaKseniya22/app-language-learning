@@ -1,8 +1,9 @@
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import React from "react";
 import type { DnDWordType, FirebaseAuthErrorTypes, WordType } from "../types/interfaces";
-import {  WordBaseValues } from "../types/interfaces";
+import { WordBaseValues } from "../types/interfaces";
 import { GameType } from "@/app/api/user-api";
+import { supabase } from "../api/supabase/config";
 
 export function getRandom(min: number, max: number) {
     return Math.trunc(Math.random() * (max + 1 - min) + min);
@@ -251,3 +252,9 @@ export function makeLineFromParcedTime({
 }
 
 export const generateRandomString = () => Math.floor(Math.random() * Date.now()).toString(36);
+
+export function getWordAssetUrl(path: string | null) {
+    if (!path) return "";
+
+    return supabase.storage.from("words").getPublicUrl(path).data.publicUrl;
+}

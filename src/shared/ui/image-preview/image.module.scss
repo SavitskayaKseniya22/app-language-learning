@@ -3,20 +3,21 @@
 .image {
   overflow: hidden;
   border-radius: vars.$border-radius-default;
+  flex-shrink: 0;
 
   &--big {
+    width: 80px;
+    height: 80px;
+  }
+
+  &--medium {
     width: 64px;
     height: 64px;
   }
 
-  &--medium {
+  &--small {
     width: 48px;
     height: 48px;
-  }
-
-  &--small {
-    width: 32px;
-    height: 32px;
   }
 
   img {

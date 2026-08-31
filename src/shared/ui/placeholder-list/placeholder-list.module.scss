@@ -1,0 +1,14 @@
+@use "@abstracts/mixins" as mx;
+
+.placeholder {
+    display: flex;
+    flex-direction: column;
+    gap: var(--placeholder-gap, 8px);
+    width: 100%;
+}
+
+.placeholder__item {
+    width: 100%;
+
+    @include mx.placeholder-element(var(--placeholder-height, 56px));
+}

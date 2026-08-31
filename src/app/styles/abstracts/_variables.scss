@@ -30,16 +30,26 @@ $color-warning-700: #b54708;
 $color-text-dark: #1a1a1a;
 $color-text-semidark: #252525;
 $color-text-light: #667085;
+$color-white-disabled: #f2fbff;
+$color-stroke: #d0d5dd;
 
 // Neutral
 $cream-50: #f8f5ed;
-$white: #fff;
 $charcoal-blue: #264653ff;
 $verdigris: #2a9d8fff;
+$verdigris-dark: rgb(29 156 142);
 $tuscan-sun: #e9c46aff;
 $sandy-brown: #f4a261ff;
 $burnt-peach: #e76f51ff;
+$burnt-peach-dark: rgb(233 96 62);
 
 // border
 
 $border-radius-default: 8px;
+
+// shadows
+$shadow-big: 4px 16px 44px 0 #00000012;
+$shadow-medium: 3px 12px 16px -2px #00000012;
+$shadow-old: 4px 4px 10px 0 #66708540;
+$shadow-small-outlined: 0 0 0 4px $verdigris;
+$shadow-small-outlined-error: 0 0 0 4px $color-error-100;

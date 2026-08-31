@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetAllWordsQuery } from "../../../store/words-api";
 import type { ActiveWordsTypes, GroupType } from "../../../shared/types/interfaces";
-import { ErrorType, ResultType, WordBaseValues } from "../../../shared/types/interfaces";
+import { ResultType, WordBaseValues } from "../../../shared/types/interfaces";
 import { DataQueue, checkIfAnswerCorrect } from "../../../shared/lib/utilities";
 import Timer from "../../game/components/timer";
 import Streak from "../../game/components/streak";
@@ -13,7 +13,7 @@ import Spinner from "../../../components/spinner/spinner";
 import { useAppDispatch, useAppSelector } from "../../../app/store/store";
 import { updateSprintResult } from "../../../store/result-slice";
 import GameInfo from "../../game/components/game-info";
-import ErrorPage from "../../error-page/error-page";
+import ErrorComponent from "@/shared/ui/error-component/error-component";
 
 function SprintLongGame({ group }: GroupType) {
     const navigate = useNavigate();
@@ -89,7 +89,7 @@ function SprintLongGame({ group }: GroupType) {
         );
     }
 
-    return <ErrorPage type={ErrorType.ERROR} />;
+    return <ErrorComponent />;
 }
 
 export default SprintLongGame;

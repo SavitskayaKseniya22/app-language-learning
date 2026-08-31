@@ -1,9 +1,8 @@
 import { Route, Outlet, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import ErrorPage from "../../pages/error-page/error-page";
 import Sprint from "../../pages/sprint/sprint";
 import Audiocall from "../../pages/audiocall/audiocall";
-import { ErrorType, GameDifficultyType } from "../../shared/types/interfaces";
+import { GameDifficultyType } from "../../shared/types/interfaces";
 import GameResult from "../../pages/game/components/game-result";
 import Puzzles from "../../pages/sentences/puzzles";
 import ModalProvider from "../../components/modal/modal-provider";
@@ -20,15 +19,19 @@ import { MainPage } from "@/pages/main";
 import { TextbookPage } from "@/pages/textbook";
 import { Sidebar } from "@/widgets/sidebar";
 import { Footer } from "@/widgets/footer";
+import ErrorComponent from "@/shared/ui/error-component/error-component";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" errorElement={<ErrorPage type={ErrorType.ERROR} />} element={<Outlet />}>
+        <Route path="/" errorElement={<ErrorComponent />} element={<Outlet />}>
             <Route
                 element={
                     <ModalProvider>
                         <Sidebar />
-                        <Outlet />
+                        <main className="main">
+                            <Outlet />
+                        </main>
+
                         <ToastContainer
                             position="top-right"
                             autoClose={5000}
@@ -93,7 +96,7 @@ const router = createBrowserRouter(
                         <Route path="result" element={<GameResult type={GameType.constructor} />} />
                     </Route>
                 </Route>
-                <Route path="*" element={<ErrorPage type={ErrorType.PAGENOTFOUND} />} />
+                <Route path="*" element={<ErrorComponent error={{ code: 404, message: "Page not found" }} />} />
             </Route>
         </Route>,
     ),

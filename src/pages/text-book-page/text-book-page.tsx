@@ -5,7 +5,7 @@ import GroupSelect from "./components/group-select";
 import { useGetAllWordsQuery } from "../../store/words-api";
 import WordList from "./components/word-list";
 import ModalContext from "../../components/modal/modal-context";
-import GamesPanel from "./components/games-panel";
+import GamesPanel from "../../widgets/games-list/ui/games-list";
 import Spinner from "../../components/spinner/spinner";
 import { useAppSelector } from "../../app/store/store";
 import { useGetUserWordsQuery } from "../../store/user-words-api";

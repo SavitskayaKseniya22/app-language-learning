@@ -1,0 +1,132 @@
+@use "@abstracts/variables" as vars;
+@use "@abstracts/mixins" as mx;
+
+.select {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 240px;
+}
+
+.option {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    text-wrap: balance;
+    cursor: pointer;
+
+    &:hover {
+        background-color: vars.$color-white-disabled;
+    }
+}
+
+.option__text {
+    @include mx.text-btn-m;
+    @include mx.clamp-strings(3);
+}
+
+.option__icon--selected {
+    color: vars.$burnt-peach;
+}
+
+.select__control {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    text-wrap: nowrap;
+    background-color: vars.$color-white;
+    border: 1px solid vars.$color-stroke;
+    border-radius: 8px;
+    box-shadow: none;
+    cursor: pointer;
+
+    @include mx.view-transition;
+
+    &_medium {
+        min-width: 160px;
+        min-height: 40px;
+        padding: 4px 14px;
+    }
+
+    &_small {
+        min-width: 96px;
+        min-height: 32px;
+        padding: 2px 14px;
+    }
+
+    &--disabled {
+        color: vars.$color-text-light;
+        background: vars.$color-white-disabled;
+        pointer-events: none;
+    }
+
+    &--focused {
+        border: 1px solid vars.$charcoal-blue;
+        box-shadow: vars.$shadow-small-outlined;
+    }
+
+    &:hover {
+        border: 1px solid vars.$charcoal-blue;
+    }
+}
+
+.select__indicators {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.select__separator {
+    display: none;
+}
+
+.select__placeholder {
+    color: vars.$color-text-light;
+}
+
+.select__menu {
+    width: max-content;
+    min-width: 100%;
+    max-width: 296px;
+    margin-top: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: vars.$shadow-big;
+}
+
+.select__menulist {
+    max-height: 440px;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: vars.$color-stroke transparent;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: vars.$color-stroke;
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+}
+
+.select__message {
+    padding: 8px 16px;
+    color: vars.$color-text-light;
+}
+
+.select__error {
+    @include mx.text-note-error;
+}
+
+.select__label {
+    color: vars.$color-text-light;
+    @include mx.text-s;
+}

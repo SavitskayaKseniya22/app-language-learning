@@ -3,14 +3,12 @@ import styles from "./main-page.module.scss";
 
 function MainPage() {
     return (
-        <main className={styles.main}>
-            <div className={styles.main__section} id="section-0">
+        <div className={styles.page}>
+            <div className={styles.page__section} id="section-0">
                 <h1>Awesome language learning app</h1>
-                <a className="main-page__link" href="#section-1">
-                    Learn English by playing games
-                </a>
+                <a href="#section-1">Learn English by playing games</a>
             </div>
-            <ul className={styles.main__section} id="section-1">
+            <ul className={styles.page__section} id="section-1">
                 <li>
                     <NavLink to="/games/audiocall">
                         <h2>Audio Challenge</h2>
@@ -36,14 +34,10 @@ function MainPage() {
                     </NavLink>
                 </li>
             </ul>
-            <ul className={styles.main__section} id="section-2">
+            <ul className={styles.page__section} id="section-2">
                 <li>
                     <h3>
-                        Use
-                        <Link to="/text-book" className="main-page__link">
-                            {" "}
-                            the Textbook{" "}
-                        </Link>
+                        Use <Link to="/text-book"> the Textbook </Link>
                         to understand the meaning of the word
                     </h3>
                     <p>
@@ -55,10 +49,7 @@ function MainPage() {
                 <li>
                     <h3>
                         Collect words into
-                        <Link to="/profile/collection" className="main-page__link">
-                            {" "}
-                            Сollection{" "}
-                        </Link>
+                        <Link to="/profile/collection"> Сollection </Link>
                         for practice
                     </h3>
                     <p>
@@ -68,10 +59,7 @@ function MainPage() {
                 <li>
                     <h3>
                         Track your progress in
-                        <Link to="/profile/statistics" className="main-page__link">
-                            {" "}
-                            Statistics
-                        </Link>
+                        <Link to="/profile/statistics"> Statistics</Link>
                     </h3>
                     <p>
                         Your progress is monitored and logged. Be sure to take a look at it once in a while to make sure
@@ -79,7 +67,7 @@ function MainPage() {
                     </p>
                 </li>
             </ul>
-        </main>
+        </div>
     );
 }
 

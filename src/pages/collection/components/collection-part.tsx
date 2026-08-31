@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import GamesPanel from "../../text-book-page/components/games-panel";
+import GamesPanel from "../../../widgets/games-list/ui/games-list";
 import WordList from "../../text-book-page/components/word-list";
 import ModalContext from "../../../components/modal/modal-context";
 import type { CollectionLikeArraysType, WordWithIdType } from "../../../shared/types/interfaces";

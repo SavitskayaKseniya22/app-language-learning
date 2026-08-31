@@ -1,0 +1,12 @@
+@use "@abstracts/mixins" as mx;
+
+.pagination {
+  display: flex;
+  gap: 24px;
+  align-self: center;
+}
+
+.pagination__content {
+  display: flex;
+  gap: 16px;
+}

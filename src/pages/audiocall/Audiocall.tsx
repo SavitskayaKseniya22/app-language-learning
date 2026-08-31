@@ -6,8 +6,7 @@ import { DataQueue } from "../../shared/lib/utilities";
 import AudiocallGame from "./components/audiocall-game";
 import { useAppDispatch } from "../../app/store/store";
 import { resetAudiocallResult } from "../../store/result-slice";
-import ErrorPage from "../error-page/error-page";
-import { ErrorType } from "@/shared/types/interfaces";
+import ErrorComponent from "@/shared/ui/error-component/error-component";
 
 function Audiocall() {
     const { initial } = useContext(GameContext);
@@ -52,7 +51,7 @@ function Audiocall() {
 
     if (isLoading) return <Spinner />;
 
-    return <ErrorPage type={ErrorType.ERROR} />;
+    return <ErrorComponent />;
 }
 
 export default Audiocall;

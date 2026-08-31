@@ -5,9 +5,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-title);
   white-space: nowrap;
   cursor: poiner;
+  color: vars.$color-white;
   transition:
     color 150ms,
     background-color 150ms;
@@ -20,35 +20,42 @@
 
   &_primary {
     cursor: pointer;
-    color: vars.$cream-50;
     background-color: vars.$burnt-peach;
 
     &:hover {
-      background-color: vars.$sandy-brown;
+      background-color: vars.$burnt-peach-dark;
     }
 
     &:active {
-      background-color: vars.$tuscan-sun;
+      background-color: vars.$charcoal-blue;
     }
   }
 
   &_secondary {
     cursor: pointer;
-    color: vars.$cream-50;
     background-color: vars.$verdigris;
 
     &:hover {
-      background-color: #23867a;
+      background-color: vars.$verdigris-dark;
+    }
+
+    &:active {
+      background-color: vars.$charcoal-blue;
     }
   }
 
   &_transparent {
     cursor: pointer;
-    color: var(--palette-black-dark);
+    color: vars.$color-text-dark;
     background-color: transparent;
 
     &:hover {
-      background-color: #dbeafe;
+      background-color: vars.$color-stroke;
+    }
+
+    &:active {
+      background-color: vars.$charcoal-blue;
+      color: vars.$color-white;
     }
   }
 

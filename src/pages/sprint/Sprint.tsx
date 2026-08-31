@@ -5,8 +5,7 @@ import { resetSprintResult } from "../../store/result-slice";
 import { useAppDispatch } from "../../app/store/store";
 import { GameContext } from "../game/components/game-start-screen";
 import { DataQueue } from "../../shared/lib/utilities";
-import ErrorPage from "../error-page/error-page";
-import { ErrorType } from "@/shared/types/interfaces";
+import ErrorComponent from "@/shared/ui/error-component/error-component";
 
 function Sprint() {
     const dispatch = useAppDispatch();
@@ -24,7 +23,7 @@ function Sprint() {
         return <SprintLongGame group={initial.group} />;
     }
 
-    return <ErrorPage type={ErrorType.ERROR} />;
+    return <ErrorComponent />;
 }
 
 export default Sprint;

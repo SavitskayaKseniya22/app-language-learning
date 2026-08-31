@@ -6,9 +6,8 @@ import { DataQueue, checkStepValue, checkSubtrahendValue } from "../../shared/li
 import ConstructorGame from "./components/constructor-game";
 import { useAppDispatch } from "../../app/store/store";
 import { resetConstructorResult, setConstructorResult } from "../../store/result-slice";
-import ErrorPage from "../error-page/error-page";
-import { ErrorType } from "../../shared/types/interfaces";
 import { GameType } from "@/app/api/user-api";
+import ErrorComponent from "@/shared/ui/error-component/error-component";
 
 function Constructor() {
     const { initial } = useContext(GameContext);
@@ -51,7 +50,7 @@ function Constructor() {
 
     if (isLoading) return <Spinner />;
 
-    return <ErrorPage type={ErrorType.ERROR} />;
+    return <ErrorComponent />;
 }
 
 export default Constructor;

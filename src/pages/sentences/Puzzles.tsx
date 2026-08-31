@@ -6,9 +6,8 @@ import { GameContext } from "../game/components/game-start-screen";
 import { DataQueue, checkStepValue, checkSubtrahendValue, getRandomItemsFromArray } from "../../shared/lib/utilities";
 import { resetPuzzlesResult, setPuzzlesResult } from "../../store/result-slice";
 import { useAppDispatch } from "../../app/store/store";
-import ErrorPage from "../error-page/error-page";
-import { ErrorType } from "../../shared/types/interfaces";
 import { GameType } from "@/app/api/user-api";
+import ErrorComponent from "@/shared/ui/error-component/error-component";
 
 function Puzzles() {
     const dispatch = useAppDispatch();
@@ -69,7 +68,7 @@ function Puzzles() {
         );
     }
 
-    return <ErrorPage type={ErrorType.ERROR} />;
+    return <ErrorComponent />;
 }
 
 export default Puzzles;

@@ -1,0 +1,33 @@
+@use "@abstracts/variables" as vars;
+@use "@abstracts/mixins" as mx;
+
+.error {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    text-align: center;
+}
+
+.error__content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+}
+
+.error__accent {
+    margin-bottom: -16px;
+    color: vars.$charcoal-blue;
+    font-size: 128px;
+    line-height: 160px;
+
+    @include mx.font-geologica(600);
+}

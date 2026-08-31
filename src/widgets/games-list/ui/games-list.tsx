@@ -1,15 +1,15 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import ModalContext from "../../../components/modal/modal-context";
-import type { WordType } from "../../../shared/types/interfaces";
-import { StyledGameItem, StyledGameList } from "../../games/games";
+import styles from "./games-list.module.scss";
+import type { Word } from "@/app/api/user-api";
 
-function GamesPanel({ data, group }: { data: WordType[]; group: string }) {
+export default function GamesList({ data }: { data: Word[] }) {
     const { setContent } = useContext(ModalContext);
 
     return (
-        <StyledGameList>
-            <StyledGameItem>
+        <ul className={styles.list}>
+            <li className={styles.list__item}>
                 <Link
                     to="/games/sprint/game"
                     state={{ data }}
@@ -18,18 +18,18 @@ function GamesPanel({ data, group }: { data: WordType[]; group: string }) {
                     }}>
                     <h4>Sprint</h4>
                 </Link>
-            </StyledGameItem>
-            <StyledGameItem>
+            </li>
+            <li className={styles.list__item}>
                 <Link
                     to="/games/constructor/game"
-                    state={{ data, group }}
+                    state={{ data }}
                     onClick={() => {
                         setContent(null);
                     }}>
                     <h4>Constructor</h4>
                 </Link>
-            </StyledGameItem>
-            <StyledGameItem>
+            </li>
+            <li className={styles.list__item}>
                 <Link
                     to="/games/audiocall/game"
                     state={{ data }}
@@ -38,8 +38,8 @@ function GamesPanel({ data, group }: { data: WordType[]; group: string }) {
                     }}>
                     <h4>Audiocall</h4>
                 </Link>
-            </StyledGameItem>
-            <StyledGameItem>
+            </li>
+            <li className={styles.list__item}>
                 <Link
                     to="/games/puzzles"
                     state={{ data }}
@@ -48,9 +48,7 @@ function GamesPanel({ data, group }: { data: WordType[]; group: string }) {
                     }}>
                     <h4>Puzzles</h4>
                 </Link>
-            </StyledGameItem>
-        </StyledGameList>
+            </li>
+        </ul>
     );
 }
-
-export default GamesPanel;
