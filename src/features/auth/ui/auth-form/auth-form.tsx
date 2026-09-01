@@ -1,65 +1,48 @@
-import React, { useEffect } from "react";
 import type { FieldErrors, SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import styled from "styled-components";
-import type { Id } from "react-toastify";
 import { toast } from "react-toastify";
 import type { BasicUserCredentials } from "@shared/types/interfaces";
+import Input from "@/shared/ui/form/input/input";
+import { Button } from "@/shared/ui/button";
+import styles from "./form.module.scss";
 
-const StyledAuthForm = styled("form")`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    justify-content: center;
-    flex-grow: 222;
-`;
-
-const StyledInput = styled("input")`
-    width: 100%;
-    border: none;
-    background-color: rgb(244, 162, 97);
-    text-align: center;
-    font-size: 1.25rem;
-    padding: 0.5rem 1rem;
-`;
-
-function AuthForm({ onSubmit }: { onSubmit: (data: BasicUserCredentials) => void }) {
+export default function AuthForm({ onSubmit }: { onSubmit: SubmitHandler<BasicUserCredentials> }) {
     const { register, handleSubmit } = useForm<BasicUserCredentials>();
 
-    const onSubmitGlobal: SubmitHandler<BasicUserCredentials> = data => {
-        onSubmit(data);
-    };
-
     const onInvalid = (errors: FieldErrors<BasicUserCredentials>) => {
-        console.log(errors);
         if (errors.email) {
             toast.warn(errors.email.message);
         }
+
         if (errors.password) {
             toast.warn(errors.password.message);
         }
     };
 
     return (
-        <StyledAuthForm onSubmit={event => void handleSubmit(onSubmitGlobal, onInvalid)(event)} noValidate>
-            <StyledInput
+        <form
+            onSubmit={event => {
+                void handleSubmit(onSubmit, onInvalid)(event);
+            }}
+            noValidate
+            className={styles.form}>
+            <Input
                 {...register("email", {
-                    required: "Email is required.",
+                    required: "Email is required",
                 })}
                 type="email"
                 placeholder="email"
             />
-            <StyledInput
+
+            <Input
                 {...register("password", {
-                    required: "Password is required.",
+                    required: "Password is required",
                 })}
                 type="password"
                 placeholder="password"
             />
 
-            <button type="submit">Enter</button>
-        </StyledAuthForm>
+            <Button type="submit">Enter</Button>
+        </form>
     );
 }
-
-export default AuthForm;

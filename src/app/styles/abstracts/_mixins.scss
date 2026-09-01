@@ -190,7 +190,7 @@
     height: 100%;
 }
 
-@mixin placeholder-element($size: 56px, $color: vars.$color-stroke, $radius: vars.$border-radius-default) {
+@mixin placeholder-element($size: 56px, $color: vars.$color-stroke, $radius: vars.$radius-default) {
     min-width: $size;
     min-height: $size;
     background-color: $color;

@@ -1,75 +1,89 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import type React from "react";
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { createPortal } from "react-dom";
-import styled from "styled-components";
 import ModalContext from "./modal-context";
+import styles from "./modal.module.scss";
+import { Button } from "@/shared/ui/button";
+
+const useManipulateContainerScroll = () => {
+    const blockScroll = useCallback(() => {
+        const root = document.querySelector("#main-container") as HTMLElement;
+
+        if (root) {
+            root.style.overflow = "hidden";
+            root.style.height = "100svh";
+        }
+    }, []);
+
+    const unBlockScroll = useCallback(() => {
+        const root = document.querySelector("#main-container") as HTMLElement;
+
+        if (root) {
+            root.style.overflow = "";
+            root.style.height = "auto";
+        }
+    }, []);
+
+    return { blockScroll, unBlockScroll };
+};
 
 function ReactPortal({ children }: { children: React.ReactNode }) {
     return createPortal(children, document.querySelector("#root") as HTMLElement);
 }
 
-const StyledModalOuterContainer = styled("div")`
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 130;
-    padding: 4rem 1rem;
-    top: 0;
-    overflow: auto;
-`;
-
-const StyledModalInnerContainer = styled("div")`
-    min-width: 200px;
-    min-height: 200px;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-`;
-
-const StyledModalButton = styled("button")`
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    color: white;
-    font-size: 2rem;
-    z-index: 150;
-`;
-
 function Modal() {
     const { content, setContent } = useContext(ModalContext);
+    const { blockScroll, unBlockScroll } = useManipulateContainerScroll();
 
     useEffect(() => {
-        document.body.style.overflow = content ? "hidden" : "unset";
-    }, [content]);
+        if (content) {
+            blockScroll();
+        } else {
+            unBlockScroll();
+        }
+    }, [blockScroll, content, unBlockScroll]);
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                setContent(null);
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [setContent]);
 
     if (!content) return null;
 
     return (
         <ReactPortal>
-            <StyledModalOuterContainer
+            <div
+                className={styles.modal}
                 onClick={event => {
                     if (event.currentTarget === event.target) {
                         setContent(null);
                     }
                 }}>
-                <StyledModalButton
-                    type="button"
-                    onClick={() => {
-                        setContent(null);
-                    }}
-                    title="Close">
-                    <i className="fa-solid fa-xmark" />
-                </StyledModalButton>
-                <StyledModalInnerContainer>{content}</StyledModalInnerContainer>
-            </StyledModalOuterContainer>
+                <div className={styles.modal__container} role="dialog" aria-modal="true">
+                    <Button
+                        type="button"
+                        view="transparent"
+                        className={styles.modal__button}
+                        onClick={() => {
+                            setContent(null);
+                        }}
+                        title="Close">
+                        <i className="fa-solid fa-xmark" />
+                    </Button>
+                    {content}
+                </div>
+            </div>
         </ReactPortal>
     );
 }

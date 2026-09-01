@@ -28,7 +28,7 @@ const router = createBrowserRouter(
                 element={
                     <ModalProvider>
                         <Sidebar />
-                        <main className="main">
+                        <main className="main" id="main-container">
                             <Outlet />
                         </main>
 

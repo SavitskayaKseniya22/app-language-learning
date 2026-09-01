@@ -4,7 +4,7 @@ import { useAuth } from "@/features/auth/model/auth-provider";
 import clsx from "clsx";
 import handleLogout from "@/features/auth/api/logout";
 import { useContext } from "react";
-import Auth from "@/features/auth/ui/auth/auth";
+import Auth from "@/features/auth/ui/auth-modal/auth-modal";
 import ModalContext from "@/components/modal/modal-context";
 import DeveloperLink from "@/shared/ui/developer-link/developer-link";
 

@@ -1,0 +1,116 @@
+@use "@abstracts/variables" as vars;
+@use "@abstracts/mixins" as mx;
+
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.input__label {
+    width: 100%;
+    display: flex;
+    gap: 4px;
+
+    @include mx.text-s;
+
+    &_required {
+        color: vars.$color-stroke;
+        font-style: italic;
+    }
+}
+
+.input__container {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    color: vars.$color-text-dark;
+    background: vars.$color-white;
+    border: 1px solid vars.$color-stroke;
+    border-radius: vars.$radius-default;
+
+    @include mx.view-transition;
+
+    &_small {
+        min-height: 32px;
+        padding: 3px 14px;
+    }
+
+    &_medium {
+        min-height: 40px;
+        padding: 7px 14px;
+    }
+
+    &:hover {
+        border: 1px solid vars.$charcoal-blue;
+    }
+
+    &:has(input:focus) {
+        box-shadow: vars.$shadow-small-outlined;
+    }
+
+    &:has(input:disabled) {
+        color: vars.$color-text-light;
+        background: vars.$color-white-disabled;
+        border: 1px solid vars.$color-stroke;
+        pointer-events: none;
+    }
+
+    &_invalid {
+        background: vars.$color-white;
+        border: 1px solid vars.$color-error-300;
+
+        &:has(input:focus) {
+            border: 1px solid vars.$color-error-300;
+            box-shadow: vars.$shadow-small-outlined-error;
+        }
+    }
+}
+
+.input__error {
+    @include mx.text-note-error;
+}
+
+.input__field {
+    flex-grow: 1;
+    min-width: 0;
+    padding: 0;
+
+    &::placeholder {
+        color: vars.$color-text-light;
+    }
+}
+
+.input__field,
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    margin: 0;
+    appearance: textfield;
+}
+
+.input__btn {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    color: vars.$color-text-light;
+    aspect-ratio: 1 / 1;
+
+    svg {
+        width: 100%;
+        max-width: 24px;
+        height: 100%;
+        max-height: 24px;
+    }
+
+    &:hover {
+        color: vars.$color-text-dark;
+    }
+
+    &:disabled {
+        color: vars.$color-stroke;
+        pointer-events: none;
+    }
+}

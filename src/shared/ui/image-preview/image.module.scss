@@ -2,7 +2,7 @@
 
 .image {
   overflow: hidden;
-  border-radius: vars.$border-radius-default;
+  border-radius: vars.$radius-default;
   flex-shrink: 0;
 
   &--big {
