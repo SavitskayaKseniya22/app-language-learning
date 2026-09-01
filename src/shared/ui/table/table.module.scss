@@ -1,5 +1,5 @@
-@use "@abstracts/variables" as vars;
 @use "@abstracts/mixins" as mx;
+@use "@abstracts/variables" as vars;
 
 .table {
     position: relative;
@@ -23,18 +23,10 @@
 .table__row {
     min-height: 50px;
     padding: 8px 0;
-
-    &_extra {
-        border: unset !important;
-    }
-
-    &_clickable {
-        cursor: pointer;
-    }
 }
 
 .table__row + .table__row {
-    border-top: 1px solid vars.$color-text-light;
+    border-top: 1px solid vars.$color-stroke;
 }
 
 .table__title,
@@ -42,77 +34,37 @@
     display: flex;
     overflow: hidden;
 
-    &_justify-start {
+    &--justify-start {
         justify-content: flex-start;
         text-align: left;
     }
 
-    &_justify-center {
+    &--justify-center {
         justify-content: center;
         text-align: center;
     }
 
-    &_justify-end {
+    &--justify-end {
         justify-content: flex-end;
         text-align: right;
     }
 
-    &_align-start {
+    &--align-start {
         align-items: flex-start;
     }
 
-    &_align-center {
+    &--align-center {
         align-items: center;
     }
 
-    &_align-end {
+    &--align-end {
         align-items: flex-end;
-    }
-
-    &_overflow {
-        overflow: unset;
     }
 }
 
 .table__title {
-    display: flex;
-    gap: 4px;
-    align-items: center;
     overflow: hidden;
     color: vars.$color-text-light;
 
     @include mx.text-s;
-
-    &.table__title--sortable {
-        cursor: pointer;
-
-        &:hover {
-            color: vars.$color-text-dark;
-        }
-    }
-
-    svg {
-        flex-shrink: 0;
-        width: 16px;
-        height: 16px;
-        transform: rotate(180deg);
-        transition: 0.25s transform ease;
-    }
-
-    &_asc,
-    &_desc {
-        color: vars.$color-text-dark;
-    }
-
-    &_asc {
-        svg {
-            transform: rotate(0);
-        }
-    }
-
-    &_desc {
-        svg {
-            transform: rotate(-180deg);
-        }
-    }
 }

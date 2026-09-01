@@ -81,8 +81,9 @@ function Option<T, OD>(properties: OptionProps<OptionType<T, OD>, false, GroupBa
         <components.Option {...properties}>
             <div className={styles.option}>
                 {data.labelElement ?? <p className={styles.option__text}>{data.label}</p>}
-
-                <i className={clsx("fa-solid", "fa-check", { [styles["option__icon--selected"]]: isSelected })} />
+                {properties.isSelected && (
+                    <i className={clsx("fa-solid", "fa-check", { [styles["option__icon--selected"]]: isSelected })} />
+                )}
             </div>
         </components.Option>
     );

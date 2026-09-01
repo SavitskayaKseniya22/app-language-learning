@@ -1,25 +1,13 @@
 import type { ReactNode } from "react";
-import ImageArrow from "./icon-arrow-down-triangle-16.svg?react";
 import styles from "./table.module.scss";
-
 import clsx from "clsx";
-import SVGWrapper from "../svg-wrapper/svg-wrapper";
-
-export interface SortConfig {
-    key: string;
-    direction: "asc" | "desc";
-}
 
 export type TitleType = {
     key: string;
     widthInGrid: string;
     title?: ReactNode;
-    sortBy?: boolean;
-    isDefault?: boolean;
     justify?: "start" | "center" | "end";
     align?: "start" | "center" | "end";
-    withoutOverflow?: boolean;
-    isExpendable?: boolean;
 };
 
 interface CustomTableDataType {
@@ -28,11 +16,6 @@ interface CustomTableDataType {
         options?: { className?: string };
     }[];
     titles?: TitleType[];
-}
-
-export interface CustomTableSortType {
-    activeItem: SortConfig | undefined;
-    returnNewActiveItem: (value: SortConfig) => void;
 }
 
 function flattenRows(data: CustomTableDataType): CustomTableDataType {
@@ -76,24 +59,12 @@ function flattenRows(data: CustomTableDataType): CustomTableDataType {
 export default function CustomTable({
     tableId,
     data,
-    sort,
     withTitles = true,
 }: {
     tableId: string;
     data: CustomTableDataType;
-    sort?: CustomTableSortType;
     withTitles?: boolean;
 }) {
-    const handleSort = (value: string) => {
-        if (sort) {
-            const config: SortConfig =
-                value === sort?.activeItem?.key
-                    ? { ...sort.activeItem, direction: sort.activeItem.direction === "desc" ? "asc" : "desc" }
-                    : { key: value, direction: "desc" };
-            sort.returnNewActiveItem(config);
-        }
-    };
-
     const gridTemplateColumns = data.titles?.map(item => item.widthInGrid).join(" ");
 
     return (
@@ -101,33 +72,17 @@ export default function CustomTable({
             {data.titles && withTitles && (
                 <div className={styles.table__titles} style={{ gridTemplateColumns }}>
                     {data.titles.map((item, index) => {
-                        const { sortBy, key, justify = "start", align = "center" } = item;
+                        const { justify = "start", align = "center" } = item;
                         return (
-                            <button
+                            <div
                                 key={`${tableId}-title-${index}`}
                                 className={clsx(
                                     styles.table__title,
-                                    { ["styles.table__title--sortable"]: sortBy },
-                                    {
-                                        [styles[`table__title_${sort?.activeItem?.direction}`]]:
-                                            key === sort?.activeItem?.key,
-                                    },
-                                    styles[`table__title_justify-${justify}`],
-                                    styles[`table__cell_align-${align}`],
-                                )}
-                                onClick={() => {
-                                    if (item.sortBy) {
-                                        handleSort(item.key);
-                                    }
-                                    return;
-                                }}>
+                                    styles[`table__title--justify-${justify}`],
+                                    styles[`table__cell--align-${align}`],
+                                )}>
                                 {item.title}
-                                {item.sortBy && (
-                                    <SVGWrapper view={"fill"} className={styles.table__icon}>
-                                        <ImageArrow />
-                                    </SVGWrapper>
-                                )}
-                            </button>
+                            </div>
                         );
                     })}
                 </div>
@@ -140,12 +95,11 @@ export default function CustomTable({
                         style={{ gridTemplateColumns }}
                         key={`${tableId}-row-${index}`}>
                         {data.titles?.map((item, index_) => {
-                            const { key, justify = "start", align = "center", withoutOverflow = false } = item;
+                            const { key, justify = "start", align = "center" } = item;
                             const className = clsx(
                                 styles.table__cell,
-                                styles[`table__cell_justify-${justify}`],
-                                styles[`table__cell_align-${align}`],
-                                withoutOverflow && styles[`table__cell_overflow`],
+                                styles[`table__cell--justify-${justify}`],
+                                styles[`table__cell--align-${align}`],
                             );
                             const nodeId = `${tableId}-cell-${index}-${index_}`;
                             const content = row.content[key];

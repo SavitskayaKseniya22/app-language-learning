@@ -1,22 +1,65 @@
+@use "@abstracts/variables" as vars;
+
 .list {
   display: flex;
   flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.list__games {
+  display: flex;
   gap: 1rem;
   align-items: center;
   justify-content: center;
   flex-grow: 2;
+  flex-wrap: wrap;
 }
 
 .list__item {
   border-radius: 0.5rem;
-  border: 2px solid rgb(231 111 81);
-  width: 268px;
-  height: 100px;
+  border: 1px solid vars.$color-stroke;
+  width: 320px;
+  height: 160px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s;
+
+  &:hover {
+    background-size: 105%;
+    transition: background-size 0.5s;
+  }
 
   a {
     display: block;
     width: 100%;
     height: 100%;
     padding: 1rem;
+  }
+
+  &--sprint {
+    background-image: url("../sticker-sprint.png");
+    background-position-x: right -30px;
+    background-position-y: bottom -30px;
+  }
+
+  &--constructor {
+    background-image: url("../sticker-constructor.png");
+    background-position-x: right -60px;
+    background-position-y: bottom -40px;
+  }
+
+  &--puzzle {
+    background-image: url("../sticker-puzzle.png");
+    background-position-x: right -60px;
+    background-position-y: bottom -30px;
+  }
+
+  &--audiocall {
+    background-image: url("../sticker-audiocall.png");
+    background-size: 90%;
+    background-position-x: right -10px;
+    background-position-y: bottom -30px;
   }
 }

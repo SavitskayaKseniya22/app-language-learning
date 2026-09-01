@@ -22,6 +22,11 @@
 // Typography
 // ========================================
 
+@mixin text-xs {
+    font-size: 0.75rem;
+    line-height: 1.25;
+}
+
 @mixin text-s {
     font-size: 0.875rem;
     line-height: 1.5;
@@ -66,7 +71,7 @@
     @include font-geologica(500);
 
     font-size: 1.25rem;
-    line-height: 1.2;
+    line-height: 1.5;
     letter-spacing: 0.005em;
 }
 
@@ -74,7 +79,7 @@
     @include font-geologica(500);
 
     font-size: 1.5rem;
-    line-height: 1.2;
+    line-height: 1.5;
     letter-spacing: 0.005em;
 }
 
@@ -82,7 +87,7 @@
     @include font-geologica(700);
 
     font-size: 1.75rem;
-    line-height: 1.2;
+    line-height: 1.5;
     letter-spacing: 0.003em;
 }
 

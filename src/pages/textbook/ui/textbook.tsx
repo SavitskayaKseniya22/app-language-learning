@@ -65,7 +65,7 @@ export default function TextbookPage() {
             {data && !error && (
                 <CustomTable
                     tableId={`textbook`}
-                    withTitles={false}
+
                     data={{
                         rows: data.words.map(item => {
                             return {
@@ -79,8 +79,11 @@ export default function TextbookPage() {
                                         />
                                     ),
                                     word: (
-                                        <div>
-                                            <p>{item.word}</p>
+                                        <div className={styles["textbook__column--main"]}>
+                                            <p className={styles["textbook__word--writing"]}>{item.word}</p>
+                                            <p className={styles["textbook__word--transcription"]}>
+                                                {item.transcription}
+                                            </p>
                                             <p>{item.word_translate}</p>
                                         </div>
                                     ),
@@ -129,7 +132,7 @@ export default function TextbookPage() {
             {isFetching && data && <Spinner />}
             {isLoading && <PlaceholderList length={10} height="72px" />}
             <Pagination
-                totalItems={data ? 3600 : undefined}
+                totalItems={data ? data.total : undefined}
                 currentPage={page}
                 onPageChange={setPage}
                 isDisabled={isFetching || !!error}

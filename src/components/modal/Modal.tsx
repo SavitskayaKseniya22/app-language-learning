@@ -31,7 +31,7 @@ const StyledModalInnerContainer = styled("div")`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: 2rem;
 `;
 
 const StyledModalButton = styled("button")`
