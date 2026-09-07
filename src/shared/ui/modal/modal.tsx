@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import ModalContext from "./modal-context";
 import styles from "./modal.module.scss";
 import { Button } from "@/shared/ui/button";
+import clsx from "clsx";
 
 const useManipulateContainerScroll = () => {
     const blockScroll = useCallback(() => {
@@ -70,18 +71,32 @@ function Modal() {
                         setContent(null);
                     }
                 }}>
-                <div className={styles.modal__container} role="dialog" aria-modal="true">
-                    <Button
-                        type="button"
-                        view="transparent"
-                        className={styles.modal__button}
-                        onClick={() => {
-                            setContent(null);
-                        }}
-                        title="Close">
-                        <i className="fa-solid fa-xmark" />
-                    </Button>
-                    {content}
+                <div
+                    className={clsx(
+                        styles.modal__container,
+                        content.options?.size && styles[`modal__container--${content.options?.size}`],
+                    )}
+                    role="dialog"
+                    aria-modal="true">
+                    <div className={styles.modal__header}>
+                        <div>
+                            {content.title && <h2 className={styles.modal__title}>{content.title}</h2>}
+                            {content.subTitle && <p className={styles["modal__title--sub"]}>{content.subTitle}</p>}
+                        </div>
+
+                        <Button
+                            type="button"
+                            view="transparent"
+                            className={styles.modal__button}
+                            onClick={() => {
+                                setContent(null);
+                            }}
+                            title="Close">
+                            <i className="fa-solid fa-xmark" />
+                        </Button>
+                    </div>
+
+                    {content.body}
                 </div>
             </div>
         </ReactPortal>

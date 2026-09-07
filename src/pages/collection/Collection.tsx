@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useAppSelector } from "../../app/store/store";
 import type { WordWithIdType } from "../../shared/types/interfaces";
 import { CollectionType } from "../../shared/types/interfaces";
-import Spinner from "../../components/spinner/spinner";
+import Spinner from "../../shared/ui/spinner/spinner";
 import CollectionPart from "./components/collection-part";
 import { useAddToUserWordsMutation, useGetUserWordsCollectionsQuery } from "../../store/user-words-api";
 

@@ -5,7 +5,7 @@ import clsx from "clsx";
 import handleLogout from "@/features/auth/api/logout";
 import { useContext } from "react";
 import Auth from "@/features/auth/ui/auth-modal/auth-modal";
-import ModalContext from "@/components/modal/modal-context";
+import ModalContext from "@/shared/ui/modal/modal-context";
 import DeveloperLink from "@/shared/ui/developer-link/developer-link";
 
 export default function Sidebar() {
@@ -168,10 +168,14 @@ export default function Sidebar() {
                             type="button"
                             className={clsx(styles.sidebar__link, styles["sidebar__link--button"])}
                             onClick={() => {
-                                setContent(<Auth />);
+                                setContent({
+                                    body: <Auth />,
+                                    title: "Sign in",
+                                    options: { size: "small" },
+                                });
                             }}>
                             <i className="fa-solid fa-user" />
-                            <span className="nav__title">Sign in</span>
+                            <span>Sign in</span>
                         </button>
                     )}
                 </li>

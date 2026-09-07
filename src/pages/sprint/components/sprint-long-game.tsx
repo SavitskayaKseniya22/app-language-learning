@@ -9,7 +9,7 @@ import Streak from "../../game/components/streak";
 import Points from "../../game/components/points";
 import SprintRound from "./sprint-round";
 import ActiveWordsList from "./active-words-list";
-import Spinner from "../../../components/spinner/spinner";
+import Spinner from "../../../shared/ui/spinner/spinner";
 import { useAppDispatch, useAppSelector } from "../../../app/store/store";
 import { updateSprintResult } from "../../../store/result-slice";
 import GameInfo from "../../game/components/game-info";

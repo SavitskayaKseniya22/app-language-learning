@@ -7,10 +7,10 @@ import { AudioWithButton } from "@/shared/ui/audio-track-button";
 import { getWordAssetUrl } from "@/shared/lib/utilities";
 import { CustomSelect } from "@/shared/ui/select/select-from-library";
 import Pagination from "@/shared/ui/pagination/pagination";
-import ModalContext from "@/components/modal/modal-context";
+import ModalContext from "@/shared/ui/modal/modal-context";
 import { Button } from "@/shared/ui/button";
 import { GamesList } from "@/widgets/games-list";
-import Spinner from "@/components/spinner/spinner";
+import Spinner from "@/shared/ui/spinner/spinner";
 import { PlaceholderList } from "@/shared/ui/placeholder-list/placeholder-list";
 import ErrorComponent from "@/shared/ui/error-component/error-component";
 
@@ -56,7 +56,7 @@ export default function TextbookPage() {
                     disabled={!data}
                     onClick={() => {
                         if (data) {
-                            setContent(<GamesList data={data.words} />);
+                            setContent({ body: <GamesList data={data.words} />, title: "Chose a game" });
                         }
                     }}>
                     Practice this set of words

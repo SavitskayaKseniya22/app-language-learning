@@ -4,7 +4,7 @@ import styled from "styled-components";
 import type { WordType } from "../../../shared/types/interfaces";
 import { fetchAndCreateReactImage } from "../../../shared/lib/utilities";
 import CollectionControlPanel from "./collection-control-panel";
-import Spinner from "../../../components/spinner/spinner";
+import Spinner from "../../../shared/ui/spinner/spinner";
 import { useAppSelector } from "../../../app/store/store";
 import { useGetUserWordQuery } from "../../../store/user-words-api";
 import WordProgress from "./word-progress";

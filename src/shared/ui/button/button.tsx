@@ -5,14 +5,14 @@ import clsx from "clsx";
 import styles from "./button.module.scss";
 
 type View = "primary" | "secondary" | "transparent";
-type Size = "small" | "medium" | "big";
+export type SizeType = "small" | "medium" | "big";
 
 interface VariantProperties {
     view?: View;
-    size?: Size;
+    size?: SizeType;
 }
 
-function getButtonClasses(view: View = "primary", size: Size = "medium", className?: string) {
+function getButtonClasses(view: View = "primary", size: SizeType = "medium", className?: string) {
     return clsx(styles.button, styles[`button_${view}`], styles[`button_${size}`], className);
 }
 

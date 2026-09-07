@@ -5,7 +5,7 @@ import Audiocall from "../../pages/audiocall/audiocall";
 import { GameDifficultyType } from "../../shared/types/interfaces";
 import GameResult from "../../pages/game/components/game-result";
 import Puzzles from "../../pages/sentences/puzzles";
-import ModalProvider from "../../components/modal/modal-provider";
+import ModalProvider from "../../shared/ui/modal/modal-provider";
 import Collection from "../../pages/collection/collection";
 import Profile from "../../pages/profile/profile";
 import Games from "../../pages/games/games";

@@ -155,6 +155,12 @@
 // Utilities
 // ========================================
 
+@mixin text-note-basic {
+    @include text-s;
+
+    color: vars.$color-text-light;
+}
+
 @mixin text-note-error {
     @include text-s;
 

@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { GameContext } from "../game/components/game-start-screen";
-import Spinner from "../../components/spinner/spinner";
+import Spinner from "../../shared/ui/spinner/spinner";
 import { useGetRandomWordsQuery } from "../../store/words-api";
 import { DataQueue, checkStepValue, checkSubtrahendValue } from "../../shared/lib/utilities";
 import ConstructorGame from "./components/constructor-game";

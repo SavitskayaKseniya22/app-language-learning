@@ -1,37 +1,36 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { Button } from "@/shared/ui/button";
 import styles from "./auth.module.scss";
 import AuthForm from "../auth-form/auth-form";
 import useSign from "../../api/use-sign";
+import ModalContext from "@/shared/ui/modal/modal-context";
 
-function Auth() {
-    const [authFormType, setAuthFormType] = useState<"signin" | "signup">("signin");
+function Auth({ authFormType = "signin" }: { authFormType?: "signin" | "signup" }) {
     const { onSignIn, onSignUp } = useSign();
+    const { setContent } = useContext(ModalContext);
 
     return (
         <div className={styles.auth}>
             {authFormType === "signin" ? (
                 <>
-                    <h2>Sign in</h2>
                     <AuthForm onSubmit={onSignIn} />
                     <Button
                         type="button"
                         view="transparent"
                         onClick={() => {
-                            setAuthFormType("signup");
+                            setContent({ body: <Auth authFormType={"signup"} />, title: "Registration" });
                         }}>
                         Create new user
                     </Button>
                 </>
             ) : (
                 <>
-                    <h2>Registration</h2>
                     <AuthForm onSubmit={onSignUp} />
                     <Button
                         type="button"
                         view="transparent"
                         onClick={() => {
-                            setAuthFormType("signin");
+                            setContent({ body: <Auth authFormType={"signin"} />, title: "Sign in" });
                         }}>
                         Sign in if registered
                     </Button>

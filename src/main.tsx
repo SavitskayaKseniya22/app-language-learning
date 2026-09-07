@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./app/store/store";
 import { RouterProvider } from "react-router-dom";
-import ModalProvider from "./components/modal/modal-provider";
+import ModalProvider from "./shared/ui/modal/modal-provider";
 import router from "./app/router/router";
 import "@app/styles/styles.scss";
-import Spinner from "./components/spinner/spinner";
+import Spinner from "./shared/ui/spinner/spinner";
 import { AuthProvider } from "./features/auth/model/auth-provider";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 

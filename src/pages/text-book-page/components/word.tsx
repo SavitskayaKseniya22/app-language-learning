@@ -3,7 +3,7 @@ import styled from "styled-components";
 import type { WordType } from "../../../shared/types/interfaces";
 import { ScreenSize } from "../../../shared/types/interfaces";
 import WordDetailed from "./word-detailed";
-import ModalContext from "../../../components/modal/modal-context";
+import ModalContext from "../../../shared/ui/modal/modal-context";
 
 export interface WordModifierType {
     isItEncountered?: boolean;
@@ -60,7 +60,7 @@ function Word({ wordData, modifier }: { wordData: WordType; modifier?: WordModif
         <StyledWord
             $modifier={modifier}
             onClick={() => {
-                setContent(<WordDetailed wordData={wordData} />);
+                setContent({ body: <WordDetailed wordData={wordData} /> });
             }}>
             <h4>{wordData.word}</h4>
             <span className="word__transcription">{wordData.transcription}</span>

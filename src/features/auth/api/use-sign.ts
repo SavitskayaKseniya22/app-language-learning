@@ -1,4 +1,4 @@
-import ModalContext from "@/components/modal/modal-context";
+import ModalContext from "@/shared/ui/modal/modal-context";
 import { supabase } from "@/shared/api/supabase/config";
 import type { BasicUserCredentials } from "@/shared/types/interfaces";
 import { useContext, useCallback } from "react";
