@@ -10,14 +10,14 @@
     width: 100%;
     height: 100%;
     padding: 16px;
-    text-align: center;
     margin: auto;
+    text-align: center;
 }
 
 .error__content {
     display: flex;
-    flex-direction: column;
     flex-grow: 2;
+    flex-direction: column;
     gap: 32px;
     align-items: center;
     justify-content: center;
@@ -25,9 +25,9 @@
 
 .error__accent {
     margin-bottom: -16px;
-    color: vars.$charcoal-blue;
     font-size: 128px;
     line-height: 160px;
+    color: vars.$charcoal-blue;
 
     @include mx.font-geologica(600);
 }

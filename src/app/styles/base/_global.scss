@@ -13,9 +13,9 @@ body {
 }
 
 #root {
-    min-height: 100svh;
     display: flex;
     flex-direction: column;
+    min-height: 100svh;
 
     @media (min-width: vars.$tablet) {
         flex-direction: row;
@@ -24,10 +24,10 @@ body {
 
 // StyledMain
 .main {
-    padding: 1rem;
-    min-width: 320px;
     width: 100%;
+    min-width: 320px;
     max-width: 1560px;
+    padding: 1rem;
     margin: 0 auto;
 
     @media (min-width: vars.$tablet) {
@@ -38,12 +38,12 @@ body {
 // StyledGameContainer
 .game__container {
     display: flex;
-    flex-direction: column;
     flex-grow: 2;
-    justify-content: space-around;
-    text-align: center;
+    flex-direction: column;
     gap: 1rem;
+    justify-content: space-around;
     width: 100%;
+    text-align: center;
 
     @media (min-width: vars.$tablet) {
         width: 90%;

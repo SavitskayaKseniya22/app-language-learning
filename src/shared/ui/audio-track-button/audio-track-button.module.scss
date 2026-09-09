@@ -1,11 +1,11 @@
 @use "@abstracts/variables" as vars;
 
 .audio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 48px;
   height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 1.25rem;
   color: vars.$charcoal-blue;
   cursor: pointer;

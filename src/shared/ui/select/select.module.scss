@@ -36,11 +36,11 @@
     gap: 12px;
     align-items: center;
     text-wrap: nowrap;
+    cursor: pointer;
     background-color: vars.$color-white;
     border: 1px solid vars.$color-stroke;
     border-radius: 8px;
     box-shadow: none;
-    cursor: pointer;
 
     @include mx.view-transition;
 
@@ -58,8 +58,8 @@
 
     &--disabled {
         color: vars.$color-text-light;
-        background: vars.$color-stroke-25;
         pointer-events: none;
+        background: vars.$color-stroke-25;
     }
 
     &--focused {
@@ -100,8 +100,8 @@
 .select__menulist {
     max-height: 440px;
     overflow: auto;
-    scrollbar-width: thin;
     scrollbar-color: vars.$color-stroke transparent;
+    scrollbar-width: thin;
 
     &::-webkit-scrollbar {
         width: 6px;

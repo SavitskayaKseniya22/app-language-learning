@@ -2,10 +2,10 @@
 
 .footer {
   display: flex;
-  justify-content: space-between;
-  background-color: vars.$charcoal-blue;
   gap: 1rem;
   align-items: center;
+  justify-content: space-between;
+  background-color: vars.$charcoal-blue;
 
   @media (min-width: vars.$tablet) {
     display: none;

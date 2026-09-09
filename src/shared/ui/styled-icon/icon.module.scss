@@ -2,28 +2,28 @@
 
 .icon {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 12px;
-  border: 1px solid vars.$color-stroke;
-  color: vars.$charcoal-blue;
   flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: vars.$charcoal-blue;
+  border: 1px solid vars.$color-stroke;
+  border-radius: 12px;
 
   &--small {
-    font-size: 1.5rem;
     width: 48px;
     height: 48px;
+    font-size: 1.5rem;
   }
 
   &--medium {
-    font-size: 2rem;
     width: 64px;
     height: 64px;
+    font-size: 2rem;
   }
 
   &--big {
-    font-size: 2.5rem;
     width: 80px;
     height: 80px;
+    font-size: 2.5rem;
   }
 }

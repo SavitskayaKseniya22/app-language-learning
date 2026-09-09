@@ -5,9 +5,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: vars.$color-white;
   white-space: nowrap;
   cursor: poiner;
-  color: vars.$color-white;
   transition:
     color 150ms,
     background-color 150ms;
@@ -47,8 +47,8 @@
   }
 
   &_transparent {
-    cursor: pointer;
     color: vars.$color-text-dark;
+    cursor: pointer;
     background-color: transparent;
 
     &:hover {
@@ -56,8 +56,8 @@
     }
 
     &:active {
-      background-color: vars.$charcoal-blue;
       color: vars.$color-white;
+      background-color: vars.$charcoal-blue;
     }
   }
 

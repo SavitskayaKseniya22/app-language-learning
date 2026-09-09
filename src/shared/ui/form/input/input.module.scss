@@ -10,15 +10,15 @@
 }
 
 .input__label {
-    width: 100%;
     display: flex;
     gap: 4px;
+    width: 100%;
 
     @include mx.text-s;
 
     &_required {
-        color: vars.$color-stroke;
         font-style: italic;
+        color: vars.$color-stroke;
     }
 }
 
@@ -53,9 +53,9 @@
 
     &:has(input:disabled) {
         color: vars.$color-text-light;
+        pointer-events: none;
         background: vars.$color-stroke-25;
         border: 1px solid vars.$color-stroke;
-        pointer-events: none;
     }
 
     &_invalid {
@@ -95,8 +95,8 @@ input[type="number"]::-webkit-outer-spin-button {
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    color: vars.$color-text-light;
     aspect-ratio: 1 / 1;
+    color: vars.$color-text-light;
 
     svg {
         width: 100%;

@@ -169,8 +169,8 @@
 
 @mixin with-custom-scroll-bar {
     overflow: auto;
-    scrollbar-width: thin;
     scrollbar-color: vars.$color-stroke vars.$color-white;
+    scrollbar-width: thin;
 }
 
 @mixin view-transition {

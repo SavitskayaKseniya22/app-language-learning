@@ -2,25 +2,25 @@
 @use "@abstracts/mixins" as mx;
 
 .sidebar {
-  background-color: vars.$charcoal-blue;
   position: sticky;
   top: 0;
   z-index: 100;
   min-width: 232px;
+  background-color: vars.$charcoal-blue;
 
   @media (min-width: vars.$tablet) {
-    height: 100vh;
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
   }
 }
 
 .sidebar__navigation {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   gap: 0.5rem;
+  justify-content: center;
   padding: 0 1rem 1rem;
 
   @include mx.text-emphasis-l;
@@ -36,10 +36,10 @@
 
     @media (min-width: vars.$tablet) {
       display: flex;
-      justify-content: center;
       flex-direction: column;
-      padding: 0.5rem 0 0.5rem 1rem;
       gap: 0.5rem;
+      justify-content: center;
+      padding: 0.5rem 0 0.5rem 1rem;
     }
   }
 }
@@ -53,24 +53,24 @@
 }
 
 .sidebar__link {
-  color: white;
   display: flex;
   gap: 1rem;
   align-items: center;
   padding: 1rem;
+  color: white;
 
   @media (min-width: vars.$tablet) {
     padding: 0.5rem;
   }
 
   &--active {
-    border-radius: 0 0 0.5rem 0.5rem;
-    background-color: white;
     color: vars.$burnt-peach;
+    background-color: white;
+    border-radius: 0 0 0.5rem 0.5rem;
 
     @media (min-width: vars.$tablet) {
-      border-radius: 0.5rem 0 0 0.5rem;
       padding: 0.5rem;
+      border-radius: 0.5rem 0 0 0.5rem;
     }
   }
 
@@ -88,12 +88,12 @@
 
     @media (min-width: vars.$tablet) {
       display: flex;
-      border-radius: 0.5rem 0 0 0.5rem;
-      padding: 0.5rem;
-      background-color: white;
-      color: vars.$color-text-dark;
       width: 100%;
+      padding: 0.5rem;
+      color: vars.$color-text-dark;
       cursor: pointer;
+      background-color: white;
+      border-radius: 0.5rem 0 0 0.5rem;
     }
   }
 }
