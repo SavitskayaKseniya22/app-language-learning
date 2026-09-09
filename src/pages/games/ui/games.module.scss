@@ -1,0 +1,11 @@
+@use "@abstracts/mixins" as mx;
+
+.page {
+  @include mx.main-container;
+}
+
+.page__section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

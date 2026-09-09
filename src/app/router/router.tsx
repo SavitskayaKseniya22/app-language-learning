@@ -8,7 +8,6 @@ import Puzzles from "../../pages/sentences/puzzles";
 import ModalProvider from "../../shared/ui/modal/modal-provider";
 import Collection from "../../pages/collection/collection";
 import Profile from "../../pages/profile/profile";
-import Games from "../../pages/games/games";
 import PrivateRoute from "../../features/auth/ui/private-route";
 import GameStartScreen, { GameInitialData } from "../../pages/game/components/game-start-screen";
 import PuzzleResult from "../../pages/sentences/components/puzzle-result";
@@ -20,6 +19,7 @@ import { TextbookPage } from "@/pages/textbook";
 import { Sidebar } from "@/widgets/sidebar";
 import { Footer } from "@/widgets/footer";
 import ErrorComponent from "@/shared/ui/error-component/error-component";
+import { GamesPage } from "@/pages/games";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -57,7 +57,7 @@ const router = createBrowserRouter(
                 </Route>
 
                 <Route path="games">
-                    <Route index element={<Games />} />
+                    <Route index element={<GamesPage />} />
                     <Route path="sprint" element={<GameInitialData />}>
                         <Route
                             index
