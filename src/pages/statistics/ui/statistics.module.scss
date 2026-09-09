@@ -1,0 +1,5 @@
+@use "@abstracts/mixins" as mx;
+
+.statistics {
+  @include mx.main-container;
+}

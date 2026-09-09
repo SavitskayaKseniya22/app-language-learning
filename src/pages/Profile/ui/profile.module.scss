@@ -1,0 +1,5 @@
+@use "@abstracts/mixins" as mx;
+
+.profile {
+  @include mx.main-container;
+}

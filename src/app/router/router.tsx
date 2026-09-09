@@ -6,13 +6,10 @@ import { GameDifficultyType } from "../../shared/types/interfaces";
 import GameResult from "../../pages/game/components/game-result";
 import Puzzles from "../../pages/sentences/puzzles";
 import ModalProvider from "../../shared/ui/modal/modal-provider";
-import Collection from "../../pages/collection/collection";
-import Profile from "../../pages/profile/profile";
 import PrivateRoute from "../../features/auth/ui/private-route";
 import GameStartScreen, { GameInitialData } from "../../pages/game/components/game-start-screen";
 import PuzzleResult from "../../pages/sentences/components/puzzle-result";
 import Constructor from "../../pages/constructor/constructor";
-import Statistics from "../../pages/statistics/statistics";
 import { GameType } from "../api/user-api";
 import { MainPage } from "@/pages/main";
 import { TextbookPage } from "@/pages/textbook";
@@ -20,6 +17,9 @@ import { Sidebar } from "@/widgets/sidebar";
 import { Footer } from "@/widgets/footer";
 import ErrorComponent from "@/shared/ui/error-component/error-component";
 import { GamesPage } from "@/pages/games";
+import { ProfilePage } from "@/pages/profile";
+import { CollectionPage } from "@/pages/collection";
+import { StatisticsPage } from "@/pages/statistics";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -51,9 +51,9 @@ const router = createBrowserRouter(
                 <Route path="text-book" element={<TextbookPage />} />
 
                 <Route path="profile" element={<PrivateRoute />}>
-                    <Route index element={<Profile />} />
-                    <Route path="statistics" element={<Statistics />} />
-                    <Route path="collection" element={<Collection />} />
+                    <Route index element={<ProfilePage />} />
+                    <Route path="statistics" element={<StatisticsPage />} />
+                    <Route path="collection" element={<CollectionPage />} />
                 </Route>
 
                 <Route path="games">

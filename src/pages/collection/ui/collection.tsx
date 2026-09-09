@@ -1,55 +1,6 @@
-import { useContext } from "react";
-import styled from "styled-components";
-import GamesPanel from "../../../widgets/games-list/ui/games-list";
-import WordList from "../../text-book-page/components/word-list";
-import ModalContext from "../../../shared/ui/modal/modal-context";
-import type { CollectionLikeArraysType, WordWithIdType } from "../../../shared/types/interfaces";
-import { CollectionType, ScreenSize } from "../../../shared/types/interfaces";
-import { useAppSelector } from "../../../app/store/store";
-import { useAddToUserWordsMutation } from "../../../store/user-words-api";
+import styles from "./collection.module.scss";
 
-const StyledCollectionPart = styled("li")`
-    display: flex;
-    flex-direction: column;
-    flex-grow: 2;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1rem;
-    position: relative;
-
-    @media ${ScreenSize.LAPTOPS} {
-        padding: 2rem;
-    }
-
-    .collection-part__title {
-        @media ${ScreenSize.TABLET} {
-            align-self: flex-start;
-        }
-    }
-
-    .collection-part__controls {
-        display: flex;
-        gap: 1rem;
-        font-size: 1.5rem;
-        color: gray;
-
-        @media ${ScreenSize.TABLET} {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-        }
-    }
-
-    .collection-part__container {
-        flex-grow: 2;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        width: 100%;
-    }
-`;
-
+/*
 function CollectionPart({ data, type }: { data: CollectionLikeArraysType; type: CollectionType }) {
     const { user } = useAppSelector(state => state.persist.auth);
     const { setContent } = useContext(ModalContext);
@@ -110,5 +61,63 @@ function CollectionPart({ data, type }: { data: CollectionLikeArraysType; type: 
         </StyledCollectionPart>
     );
 }
+*/
 
-export default CollectionPart;
+export default function ProfilePage() {
+    //todo
+
+    /*
+  
+  const { user } = useAppSelector(state => state.persist.auth);
+  
+      const { data, isLoading, isSuccess } = useGetUserWordsCollectionsQuery({
+          userId: user!.localId,
+          tokenId: user!.idToken,
+      });
+  
+      const [addToUserWords] = useAddToUserWordsMutation();
+  
+      if (isLoading) return <Spinner />;
+  
+      if (isSuccess) {
+          return (
+              <main className="main">
+                  <h2 className="main__title_main">Collection</h2>
+                  <StyledCollectionList>
+                      <CollectionPart data={data} type={CollectionType.DIFFICULT} />
+                      <CollectionPart data={data} type={CollectionType.SELECTED} />
+                      <CollectionPart data={data} type={CollectionType.LEARNED} />
+                  </StyledCollectionList>
+                  <StyledRemoveAllButton
+                      type="button"
+                      onClick={() => {
+                          if (data) {
+                              const updatedWords: WordWithIdType = {};
+  
+                              for (const word of data.all) {
+                                  Object.assign(updatedWords, {
+                                      [word.id]: {
+                                          ...word,
+                                          selected: false,
+                                          learned: false,
+                                          difficult: false,
+                                          guessed: 0,
+                                      },
+                                  });
+                              }
+  
+                              addToUserWords({
+                                  userId: user!.localId,
+                                  data: updatedWords,
+                                  tokenId: user!.idToken,
+                              });
+                          }
+                      }}>
+                      <i className="fa-regular fa-trash-can" />
+                  </StyledRemoveAllButton>
+              </main>
+          );
+      }
+      return <>no Data</>;*/
+    return <div className={styles.collection}></div>;
+}

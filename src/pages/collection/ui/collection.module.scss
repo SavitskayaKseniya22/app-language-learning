@@ -1,0 +1,5 @@
+@use "@abstracts/mixins" as mx;
+
+.collection {
+  @include mx.main-container;
+}
