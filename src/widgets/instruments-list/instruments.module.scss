@@ -3,17 +3,16 @@
 
 .list {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   gap: 1rem;
 
   li {
     flex-grow: 1;
-    width: 100%;
-    max-width: calc(50% - 0.5rem);
   }
 }
 
 .list__item {
+  position: relative;
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -23,6 +22,10 @@
   border-radius: 12px;
 
   @include mx.view-transition;
+
+  &--disabled {
+    pointer-events: none;
+  }
 
   &:hover {
     background-color: vars.$color-stroke-25;
@@ -36,6 +39,8 @@
 .list__note {
   @include mx.text-note-basic;
 
+  color: vars.$color-text-dark;
+
   &--small {
     @include mx.text-s;
   }
@@ -47,4 +52,20 @@
   &--big {
     @include mx.text-l;
   }
+
+  &--sub {
+    color: vars.$color-text-light;
+    @include mx.text-s;
+  }
+}
+
+.list__user {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: vars.$color-text-light;
+  @include mx.text-s;
 }

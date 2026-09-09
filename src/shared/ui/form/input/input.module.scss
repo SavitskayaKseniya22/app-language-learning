@@ -53,7 +53,7 @@
 
     &:has(input:disabled) {
         color: vars.$color-text-light;
-        background: vars.$color-white-disabled;
+        background: vars.$color-stroke-25;
         border: 1px solid vars.$color-stroke;
         pointer-events: none;
     }

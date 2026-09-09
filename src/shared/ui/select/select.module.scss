@@ -18,7 +18,7 @@
     cursor: pointer;
 
     &:hover {
-        background-color: vars.$color-white-disabled;
+        background-color: vars.$color-stroke-25;
     }
 }
 
@@ -58,7 +58,7 @@
 
     &--disabled {
         color: vars.$color-text-light;
-        background: vars.$color-white-disabled;
+        background: vars.$color-stroke-25;
         pointer-events: none;
     }
 

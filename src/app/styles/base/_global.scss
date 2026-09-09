@@ -27,6 +27,8 @@ body {
     padding: 1rem;
     min-width: 320px;
     width: 100%;
+    max-width: 1560px;
+    margin: 0 auto;
 
     @media (min-width: vars.$tablet) {
         padding: 2rem;

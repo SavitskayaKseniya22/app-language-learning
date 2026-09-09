@@ -1,0 +1,35 @@
+@use "@abstracts/variables" as vars;
+@use "@abstracts/mixins" as mx;
+
+.badge {
+    display: flex;
+    flex-shrink: 0;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+    color: vars.$color-text-light;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid vars.$color-stroke;
+
+    &--small {
+        min-width: 32px;
+        padding: 3px 12px;
+
+        @include mx.text-btn-s;
+    }
+
+    &--medium {
+        min-width: 72px;
+        padding: 4px 12px;
+
+        @include mx.text-btn-m;
+    }
+
+    &--big {
+        min-width: 72px;
+        padding: 4px 12px;
+
+        @include mx.text-btn-l;
+    }
+}

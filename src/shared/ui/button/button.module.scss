@@ -12,6 +12,8 @@
     color 150ms,
     background-color 150ms;
 
+  // todo make it square
+
   &:disabled,
   &[aria-disabled="true"] {
     pointer-events: none;

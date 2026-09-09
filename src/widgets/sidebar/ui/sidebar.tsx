@@ -38,7 +38,7 @@ export default function Sidebar() {
                         }
                         to="/text-book"
                         title="Textbook">
-                        <i className="fa-solid fa-book" />
+                        <i className="fa-solid fa-book-open"></i>
                         <span className={styles.sidebar__title}>Textbook</span>
                     </NavLink>
                 </li>
@@ -64,7 +64,7 @@ export default function Sidebar() {
                                 }
                                 to="/games/sprint"
                                 title="Sprint">
-                                <i className="fa-solid fa-stopwatch" />
+                                <i className="fa-solid fa-stopwatch"></i>
                                 <span className={styles.sidebar__title}>Sprint</span>
                             </NavLink>
                         </li>
@@ -77,7 +77,7 @@ export default function Sidebar() {
                                 }
                                 to="/games/constructor"
                                 title="Constructor">
-                                <i className="fa-solid fa-ellipsis" />
+                                <i className="fa-solid fa-cubes"></i>
                                 <span className={styles.sidebar__title}>Constructor</span>
                             </NavLink>
                         </li>
@@ -90,7 +90,7 @@ export default function Sidebar() {
                                 }
                                 to="/games/audiocall"
                                 title="Audiocall">
-                                <i className="fa-solid fa-music" />
+                                <i className="fa-solid fa-headphones"></i>
                                 <span className={styles.sidebar__title}>Audiocall</span>
                             </NavLink>
                         </li>
@@ -103,7 +103,7 @@ export default function Sidebar() {
                                 }
                                 to="/games/puzzles"
                                 title="Puzzles">
-                                <i className="fa-solid fa-puzzle-piece" />
+                                <i className="fa-solid fa-puzzle-piece"></i>
                                 <span className={styles.sidebar__title}>Puzzles</span>
                             </NavLink>
                         </li>

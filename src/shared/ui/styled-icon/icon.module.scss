@@ -1,0 +1,29 @@
+@use "@abstracts/variables" as vars;
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  border: 1px solid vars.$color-stroke;
+  color: vars.$charcoal-blue;
+  flex-shrink: 0;
+
+  &--small {
+    font-size: 1.5rem;
+    width: 48px;
+    height: 48px;
+  }
+
+  &--medium {
+    font-size: 2rem;
+    width: 64px;
+    height: 64px;
+  }
+
+  &--big {
+    font-size: 2.5rem;
+    width: 80px;
+    height: 80px;
+  }
+}

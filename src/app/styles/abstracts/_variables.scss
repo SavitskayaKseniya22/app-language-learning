@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // breakpoints
 
 $mobile: 320px;
@@ -30,8 +32,9 @@ $color-warning-700: #b54708;
 $color-text-dark: #1a1a1a;
 $color-text-semidark: #252525;
 $color-text-light: #667085;
-$color-white-disabled: #f2fbff;
 $color-stroke: #d0d5dd;
+$color-stroke-50: color.mix(#d0d5dd, #fff, 50%);
+$color-stroke-25: color.mix(#d0d5dd, #fff, 25%);
 
 // Neutral
 $cream-50: #f8f5ed;

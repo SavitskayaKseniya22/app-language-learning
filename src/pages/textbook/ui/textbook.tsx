@@ -56,7 +56,12 @@ export default function TextbookPage() {
                     disabled={!data}
                     onClick={() => {
                         if (data) {
-                            setContent({ body: <GamesList data={data.words} />, title: "Chose a game" });
+                            setContent({
+                                body: <GamesList data={data.words} size="small" />,
+                                title: "Choose a game",
+                                subTitle: "Practice chosen set of words",
+                                options: { size: "big" },
+                            });
                         }
                     }}>
                     Practice this set of words
