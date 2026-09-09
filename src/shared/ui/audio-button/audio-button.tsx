@@ -2,7 +2,7 @@
 import { getWordAssetUrl } from "@/shared/lib/utilities";
 import { useRef, useState } from "react";
 import clsx from "clsx";
-import styles from "./audio-track-button.module.scss";
+import styles from "./audio-button.module.scss";
 
 export default function AudioWithButton({ path }: { path: string }) {
     const [isPlaying, setIsPlaying] = useState(false);
