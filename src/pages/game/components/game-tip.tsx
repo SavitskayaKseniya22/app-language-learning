@@ -1,4 +1,4 @@
-import type { GameType } from "@/app/api/user-api";
+import type { GameType } from "@/entities/user";
 import styled from "styled-components";
 
 const StyledGameTip = styled("ul")`

@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import ModalContext from "../../../shared/ui/modal/modal-context";
+import { ModalContext } from "../../../shared/ui/modal";
 import styles from "./games-list.module.scss";
-import type { Word } from "@/app/api/user-api";
-import StyledIcon from "@/shared/ui/styled-icon/styled-icon";
-import Badge from "@/shared/ui/badge/badge";
-import type { SizeType } from "@/shared/ui/button/button";
+import type { Word } from "@/entities/user";
+import { StyledIcon } from "@/shared/ui/styled-icon";
+import { Badge } from "@/shared/ui/badge";
 import clsx from "clsx";
+import type { SizeType } from "@/shared/types/interfaces";
 
 export default function GamesList({ data, size = "medium" }: { data?: Word[]; size?: SizeType }) {
     const { setContent } = useContext(ModalContext);

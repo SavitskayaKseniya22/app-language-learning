@@ -34,7 +34,7 @@ function ReactPortal({ children }: { children: React.ReactNode }) {
     return createPortal(children, document.querySelector("#root") as HTMLElement);
 }
 
-function Modal() {
+export default function Modal() {
     const { content, setContent } = useContext(ModalContext);
     const { blockScroll, unBlockScroll } = useManipulateContainerScroll();
 
@@ -102,5 +102,3 @@ function Modal() {
         </ReactPortal>
     );
 }
-
-export default Modal;

@@ -1,25 +1,25 @@
 import { Route, Outlet, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Sprint from "../../pages/sprint/sprint";
-import Audiocall from "../../pages/audiocall/audiocall";
-import { GameDifficultyType } from "../../shared/types/interfaces";
-import GameResult from "../../pages/game/components/game-result";
-import Puzzles from "../../pages/sentences/puzzles";
-import ModalProvider from "../../shared/ui/modal/modal-provider";
-import PrivateRoute from "../../features/auth/ui/private-route";
-import GameStartScreen, { GameInitialData } from "../../pages/game/components/game-start-screen";
-import PuzzleResult from "../../pages/sentences/components/puzzle-result";
-import Constructor from "../../pages/constructor/constructor";
-import { GameType } from "../api/user-api";
 import { MainPage } from "@/pages/main";
 import { TextbookPage } from "@/pages/textbook";
 import { Sidebar } from "@/widgets/sidebar";
 import { Footer } from "@/widgets/footer";
-import ErrorComponent from "@/shared/ui/error-component/error-component";
+import { ErrorComponent } from "@/shared/ui/error-component";
 import { GamesPage } from "@/pages/games";
 import { ProfilePage } from "@/pages/profile";
 import { CollectionPage } from "@/pages/collection";
 import { StatisticsPage } from "@/pages/statistics";
+import { GameType } from "@/entities/user";
+import { PrivateRoute } from "@/features/auth";
+import Audiocall from "@/pages/audiocall/audiocall";
+import Constructor from "@/pages/constructor/constructor";
+import GameResult from "@/pages/game/components/game-result";
+import GameStartScreen, { GameInitialData } from "@/pages/game/components/game-start-screen";
+import PuzzleResult from "@/pages/sentences/components/puzzle-result";
+import Puzzles from "@/pages/sentences/puzzles";
+import Sprint from "@/pages/sprint/sprint";
+import { GameDifficultyType } from "@/shared/types/interfaces";
+import { ModalProvider } from "@/shared/ui/modal";
 
 const router = createBrowserRouter(
     createRoutesFromElements(

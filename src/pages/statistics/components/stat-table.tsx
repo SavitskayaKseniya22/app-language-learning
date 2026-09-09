@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ScreenSize } from "../../../shared/types/interfaces";
-import type { StatisticsType } from "@/app/api/user-api";
-import { refineData } from "@/app/api/user-api";
+import type { StatisticsType } from "@/entities/user";
+import { refineData } from "@/entities/user";
 
 const StyledStatisticTable = styled("table")`
     border-spacing: 0.1rem;

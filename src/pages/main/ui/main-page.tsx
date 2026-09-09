@@ -1,6 +1,6 @@
-import styles from "./main-page.module.scss";
+import { InstrumentsList } from "@/widgets/instruments-list";
 import { GamesList } from "@/widgets/games-list";
-import InstrumentsList from "@/widgets/instruments-list/instruments-list";
+import styles from "./main-page.module.scss";
 
 function MainPage() {
     return (

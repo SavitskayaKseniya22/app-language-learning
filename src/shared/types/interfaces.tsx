@@ -228,3 +228,5 @@ export enum ErrorType {
     ERROR,
     PAGENOTFOUND,
 }
+
+export type SizeType = "small" | "medium" | "big";

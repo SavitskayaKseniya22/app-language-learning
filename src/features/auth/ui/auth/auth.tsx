@@ -3,9 +3,9 @@ import { Button } from "@/shared/ui/button";
 import styles from "./auth.module.scss";
 import AuthForm from "../auth-form/auth-form";
 import useSign from "../../api/use-sign";
-import ModalContext from "@/shared/ui/modal/modal-context";
+import { ModalContext } from "@/shared/ui/modal";
 
-function Auth({ authFormType = "signin" }: { authFormType?: "signin" | "signup" }) {
+export default function Auth({ authFormType = "signin" }: { authFormType?: "signin" | "signup" }) {
     const { onSignIn, onSignUp } = useSign();
     const { setContent } = useContext(ModalContext);
 
@@ -39,5 +39,3 @@ function Auth({ authFormType = "signin" }: { authFormType?: "signin" | "signup" 
         </div>
     );
 }
-
-export default Auth;

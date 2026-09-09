@@ -6,7 +6,7 @@ import { DataQueue, checkStepValue, checkSubtrahendValue } from "../../shared/li
 import ConstructorGame from "./components/constructor-game";
 import { useAppDispatch } from "../../app/store/store";
 import { resetConstructorResult, setConstructorResult } from "../../store/result-slice";
-import { GameType } from "@/app/api/user-api";
+import { GameType } from "@/entities/user";
 import ErrorComponent from "@/shared/ui/error-component/error-component";
 
 function Constructor() {

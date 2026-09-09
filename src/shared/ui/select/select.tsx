@@ -137,8 +137,10 @@ function CustomSelectInner<T, OD = undefined>(
     );
 }
 
-export const CustomSelect = forwardRef(CustomSelectInner) as <T, OD = undefined>(
+const CustomSelect = forwardRef(CustomSelectInner) as <T, OD = undefined>(
     properties: CustomSelectProperties<T, OD> & {
         ref?: Ref<SelectInstance<OptionType<T, OD>, false>>;
     },
 ) => JSX.Element;
+
+export default CustomSelect;

@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 import styles from "./sidebar.module.scss";
-import { useAuth } from "@/features/auth/model/auth-provider";
 import clsx from "clsx";
-import handleLogout from "@/features/auth/api/logout";
+import { handleLogout } from "@/features/auth";
 import { useContext } from "react";
-import Auth from "@/features/auth/ui/auth-modal/auth-modal";
-import ModalContext from "@/shared/ui/modal/modal-context";
-import DeveloperLink from "@/shared/ui/developer-link/developer-link";
+import { Auth } from "@/features/auth";
+import { ModalContext } from "@/shared/ui/modal";
+import { DeveloperLink } from "@/shared/ui/developer-link";
+import { useAuth } from "@/features/auth";
 
 export default function Sidebar() {
     const { user } = useAuth();

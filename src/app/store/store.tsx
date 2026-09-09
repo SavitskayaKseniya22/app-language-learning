@@ -3,10 +3,9 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import type { TypedUseSelectorHook } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
 import resultsReducer from "../../store/result-slice";
-
 import { wordsApi } from "../../store/words-api";
 import { userWordsApi } from "../../store/user-words-api";
-import { userApi } from "../api/user-api";
+import { userApi } from "@/entities/user";
 
 const rootReducer = combineReducers({
     [wordsApi.reducerPath]: wordsApi.reducer,
@@ -15,7 +14,7 @@ const rootReducer = combineReducers({
     [userApi.reducerPath]: userApi.reducer,
 });
 
-export const store = configureStore({
+const store = configureStore({
     reducer: rootReducer,
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({}).concat(wordsApi.middleware).concat(userWordsApi.middleware).concat(userApi.middleware),
@@ -26,3 +25,5 @@ export type AppDispatch = typeof store.dispatch;
 
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+export default store;

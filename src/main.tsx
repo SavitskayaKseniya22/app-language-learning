@@ -1,14 +1,14 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { store } from "./app/store/store";
 import { RouterProvider } from "react-router-dom";
-import ModalProvider from "./shared/ui/modal/modal-provider";
-import router from "./app/router/router";
+import { ModalProvider } from "./shared/ui/modal";
 import "@app/styles/styles.scss";
-import Spinner from "./shared/ui/spinner/spinner";
-import { AuthProvider } from "./features/auth/model/auth-provider";
+import { Spinner } from "./shared/ui/spinner";
+import { AuthProvider } from "./features/auth";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { store } from "./app/store";
+import { router } from "./app/routes";
 
 const root = ReactDOM.createRoot(document.querySelector("#root") as HTMLElement);
 

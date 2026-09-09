@@ -1,12 +1,12 @@
-import { supabase } from "@/shared/api/supabase/config";
+import { baseApi } from "@/app/api/base-api";
+import { supabase } from "@/shared/api";
 import type { Database } from "@/shared/api/supabase/database.types";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-function isItToday(date: string) {
+export function isItToday(date: string) {
     return new Date(date).toDateString() === new Date().toDateString();
 }
 
-function sortPreData(preData: StatisticsType): StatisticsType {
+export function sortPreData(preData: StatisticsType): StatisticsType {
     return Object.fromEntries(
         Object.entries(preData).map(([game, results]) => [
             game,
@@ -22,7 +22,7 @@ export enum GameType {
     sprint = "sprint",
 }
 
-type GameResultType = Database["public"]["Tables"]["results"]["Row"];
+export type GameResultType = Database["public"]["Tables"]["results"]["Row"];
 
 export type NewResultType = Database["public"]["Tables"]["results"]["Insert"];
 
@@ -30,7 +30,7 @@ export type ProfileType = Database["public"]["Tables"]["profiles"]["Row"];
 
 export type StatisticsType = Record<string, GameResultType[]>;
 
-type UserResultsType = {
+export type UserResultsType = {
     total: StatisticsType;
     today: StatisticsType;
 };
@@ -109,7 +109,7 @@ export function refineData(preData: StatisticsType) {
 
 export type Word = Database["public"]["Tables"]["words"]["Row"];
 
-type GetWordsResponse = {
+export type GetWordsResponse = {
     words: Word[];
     total: number;
     page: number;
@@ -117,18 +117,13 @@ type GetWordsResponse = {
     totalPages: number;
 };
 
-type GetWordsArguments = {
+export type GetWordsArguments = {
     difficulty: number;
     page: number;
     pageSize?: number;
 };
 
-export const userApi = createApi({
-    reducerPath: "userApi",
-    baseQuery: fetchBaseQuery({
-        baseUrl: "",
-    }),
-    tagTypes: ["Words"],
+export const userApi = baseApi.injectEndpoints({
     endpoints: builder => ({
         getUserResults: builder.query<UserResultsType, void>({
             async queryFn() {

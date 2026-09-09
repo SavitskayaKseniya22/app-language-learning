@@ -1,18 +1,18 @@
-import { useGetWordsByDifficultyQuery } from "@/app/api/user-api";
-import ImagePreview from "@/shared/ui/image-preview/image-preview";
-import CustomTable from "@/shared/ui/table/table";
+import { ImagePreview } from "@/shared/ui/image-preview";
+import { CustomTable } from "@/shared/ui/table";
 import { useContext, useState } from "react";
 import styles from "./textbook.module.scss";
-import { AudioWithButton } from "@/shared/ui/audio-track-button";
+import { AudioWithButton } from "@/shared/ui/audio-button";
 import { getWordAssetUrl } from "@/shared/lib/utilities";
-import { CustomSelect } from "@/shared/ui/select/select-from-library";
-import Pagination from "@/shared/ui/pagination/pagination";
-import ModalContext from "@/shared/ui/modal/modal-context";
+import { ModalContext } from "@/shared/ui/modal";
 import { Button } from "@/shared/ui/button";
 import { GamesList } from "@/widgets/games-list";
-import Spinner from "@/shared/ui/spinner/spinner";
-import { PlaceholderList } from "@/shared/ui/placeholder-list/placeholder-list";
-import ErrorComponent from "@/shared/ui/error-component/error-component";
+import { Spinner } from "@/shared/ui/spinner";
+import { ErrorComponent } from "@/shared/ui/error-component";
+import { Pagination } from "@/shared/ui/pagination";
+import { PlaceholderList } from "@/shared/ui/placeholder-list";
+import { CustomSelect } from "@/shared/ui/select";
+import { useGetWordsByDifficultyQuery } from "@/entities/user";
 
 export default function TextbookPage() {
     const [difficulty, setDifficulty] = useState(1);

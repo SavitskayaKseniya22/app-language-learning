@@ -1,11 +1,10 @@
 import type { ComponentProps } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 import clsx from "clsx";
-
 import styles from "./button.module.scss";
+import type { SizeType } from "@/shared/types/interfaces";
 
 type View = "primary" | "secondary" | "transparent";
-export type SizeType = "small" | "medium" | "big";
 
 interface VariantProperties {
     view?: View;

@@ -4,7 +4,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import type { GameDifficultyType, WordType } from "../../../shared/types/interfaces";
 import GroupPicker from "./group-picker";
 import GameTip from "./game-tip";
-import type { GameType } from "@/app/api/user-api";
+import type { GameType } from "@/entities/user";
 
 interface InintialGameContextType {
     data: undefined | WordType[];

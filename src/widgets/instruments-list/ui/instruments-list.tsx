@@ -1,9 +1,9 @@
-import type { SizeType } from "@/shared/ui/button/button";
 import styles from "./instruments.module.scss";
 import { NavLink } from "react-router-dom";
-import StyledIcon from "@/shared/ui/styled-icon/styled-icon";
+import { StyledIcon } from "@/shared/ui/styled-icon";
 import clsx from "clsx";
-import { useAuth } from "@/features/auth/model/auth-provider";
+import type { SizeType } from "@/shared/types/interfaces";
+import { useAuth } from "@/features/auth";
 
 export default function InstrumentsList({ size = "medium" }: { size?: SizeType }) {
     const { user } = useAuth();

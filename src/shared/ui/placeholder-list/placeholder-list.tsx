@@ -1,5 +1,6 @@
 import styles from "./placeholder-list.module.scss";
-export function PlaceholderList({
+
+export default function PlaceholderList({
     length = 8,
     height = "40px",
     gap = "16px",

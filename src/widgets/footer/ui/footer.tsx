@@ -1,4 +1,4 @@
-import DeveloperLink from "@/shared/ui/developer-link/developer-link";
+import { DeveloperLink } from "@/shared/ui/developer-link";
 import styles from "./footer.module.scss";
 
 export default function Footer() {

@@ -2,7 +2,7 @@ import type { FieldErrors, SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import type { BasicUserCredentials } from "@shared/types/interfaces";
-import Input from "@/shared/ui/form/input/input";
+import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
 import styles from "./form.module.scss";
 

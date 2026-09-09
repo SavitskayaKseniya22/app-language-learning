@@ -1,7 +1,6 @@
-import { supabase } from "@/shared/api/supabase/config";
+import { supabase } from "@/shared/api";
 
 const handleLogout = async () => {
-    console.log("donwe");
     const { error } = await supabase.auth.signOut();
 
     if (error) {

@@ -6,7 +6,7 @@ import { GameContext } from "../game/components/game-start-screen";
 import { DataQueue, checkStepValue, checkSubtrahendValue, getRandomItemsFromArray } from "../../shared/lib/utilities";
 import { resetPuzzlesResult, setPuzzlesResult } from "../../store/result-slice";
 import { useAppDispatch } from "../../app/store/store";
-import { GameType } from "@/app/api/user-api";
+import { GameType } from "@/entities/user";
 import ErrorComponent from "@/shared/ui/error-component/error-component";
 
 function Puzzles() {

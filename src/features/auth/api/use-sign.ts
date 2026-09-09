@@ -1,9 +1,9 @@
-import ModalContext from "@/shared/ui/modal/modal-context";
-import { supabase } from "@/shared/api/supabase/config";
+import { ModalContext } from "@/shared/ui/modal";
 import type { BasicUserCredentials } from "@/shared/types/interfaces";
 import { useContext, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { supabase } from "@/shared/api";
 
 export default function useSign() {
     const { setContent } = useContext(ModalContext);

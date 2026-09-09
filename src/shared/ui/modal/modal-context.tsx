@@ -1,5 +1,5 @@
+import type { SizeType } from "@/shared/types/interfaces";
 import { createContext } from "react";
-import type { SizeType } from "../button/button";
 
 export type ModalContentType = {
     body: React.ReactNode;

@@ -13,7 +13,7 @@ import type {
 } from "../shared/types/interfaces";
 import { CollectionType } from "../shared/types/interfaces";
 import { generateRandomString } from "../shared/lib/utilities";
-import handleLogout from "@/features/auth/api/logout";
+import { handleLogout } from "@/features/auth";
 
 export function handleError(error: unknown) {
     if (error && typeof error === "object" && "error" in error) {
