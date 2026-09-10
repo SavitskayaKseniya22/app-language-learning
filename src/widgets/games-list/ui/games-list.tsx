@@ -24,16 +24,18 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                     <StyledIcon size={size}>
                         <i className="fa-solid fa-stopwatch"></i>
                     </StyledIcon>
-                    <div className={styles.list__description}>
-                        <h3>Sprint</h3>
+                    <div className={styles.list__content}>
+                        <div className={styles.list__description}>
+                            <h3>Sprint</h3>
 
-                        <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
-                            {data
-                                ? "Choose the correct translation before time runs out."
-                                : "Challenge your wit and knowledge in a fast paced and rewarding guessing game!"}
-                        </p>
+                            <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
+                                {data
+                                    ? "Choose the correct translation before time runs out."
+                                    : "Challenge your wit and knowledge in a fast paced and rewarding guessing game!"}
+                            </p>
+                        </div>
+                        <Badge size={size}>Meaning</Badge>
                     </div>
-                    <Badge size={size}>Meaning</Badge>
                 </NavLink>
             </li>
             <li>
@@ -47,14 +49,16 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                     <StyledIcon size={size}>
                         <i className="fa-solid fa-cubes"></i>
                     </StyledIcon>
-                    <div className={styles.list__description}>
-                        <h3>Constructor</h3>
+                    <div className={styles.list__content}>
+                        <div className={styles.list__description}>
+                            <h3>Constructor</h3>
 
-                        <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
-                            {data ? "choose the correct translation before time runs out." : "Improve your spelling!"}
-                        </p>
+                            <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
+                                {data ? "Build each word from he available letters." : "Improve your spelling!"}
+                            </p>
+                        </div>
+                        <Badge size={size}>Spelling</Badge>
                     </div>
-                    <Badge size={size}>Spelling</Badge>
                 </NavLink>
             </li>
             <li>
@@ -68,15 +72,17 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                     <StyledIcon size={size}>
                         <i className="fa-solid fa-headphones"></i>
                     </StyledIcon>
-                    <div className={styles.list__description}>
-                        <h3>Audiocall</h3>
-                        <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
-                            {data
-                                ? "Listen and choose the word you hear."
-                                : "Train your ears as well as your eyes to recognise english speech!"}
-                        </p>
+                    <div className={styles.list__content}>
+                        <div className={styles.list__description}>
+                            <h3>Audiocall</h3>
+                            <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
+                                {data
+                                    ? "Listen and choose the word you hear."
+                                    : "Train your ears as well as your eyes to recognise english speech!"}
+                            </p>
+                        </div>
+                        <Badge size={size}>Listening</Badge>
                     </div>
-                    <Badge size={size}>Listening</Badge>
                 </NavLink>
             </li>
             <li>
@@ -90,15 +96,17 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                     <StyledIcon size={size}>
                         <i className="fa-solid fa-puzzle-piece"></i>
                     </StyledIcon>
-                    <div className={styles.list__description}>
-                        <h3>Puzzles</h3>
-                        <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
-                            {data
-                                ? "Arrange words to complete the sentence."
-                                : "Make puzzles from a set of words. Score more points in the given time!"}
-                        </p>
+                    <div className={styles.list__content}>
+                        <div className={styles.list__description}>
+                            <h3>Puzzles</h3>
+                            <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
+                                {data
+                                    ? "Arrange words to complete the sentence."
+                                    : "Make puzzles from a set of words. Score more points in the given time!"}
+                            </p>
+                        </div>
+                        <Badge size={size}>Grammar</Badge>
                     </div>
-                    <Badge size={size}>Grammar</Badge>
                 </NavLink>
             </li>
         </ul>

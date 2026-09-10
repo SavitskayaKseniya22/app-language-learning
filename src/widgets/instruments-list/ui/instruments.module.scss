@@ -68,4 +68,11 @@
   align-items: center;
   color: vars.$color-text-light;
   @include mx.text-s;
+
+  span {
+    display: none;
+    @media (min-width: vars.$laptop) {
+      display: block;
+    }
+  }
 }
