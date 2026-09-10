@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { GameContext } from "../game/components/game-start-screen";
+import { GameContext } from "../../entities/game/ui/game-start-screen/game-start-screen";
 import Spinner from "../../shared/ui/spinner/spinner";
 import { useGetRandomWordsQuery } from "../../store/words-api";
 import { DataQueue } from "../../shared/lib/utilities";

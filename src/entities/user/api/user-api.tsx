@@ -209,7 +209,52 @@ export const userApi = baseApi.injectEndpoints({
 
             providesTags: ["Words"],
         }),
+
+        getAllWordsByDifficulty: builder.query<
+            {
+                words: Word[];
+                total: number;
+            },
+            { difficulty: number }
+        >({
+            async queryFn({ difficulty }) {
+                try {
+                    const { data, error, count } = await supabase
+                        .from("words")
+                        .select("*", { count: "exact" })
+                        .eq("difficulty", difficulty)
+                        .order("id", { ascending: true });
+
+                    if (error) {
+                        return {
+                            error: {
+                                status: "CUSTOM_ERROR",
+                                error: error.message,
+                            },
+                        };
+                    }
+
+                    const total = count ?? 0;
+
+                    return {
+                        data: {
+                            words: data ?? [],
+                            total,
+                        },
+                    };
+                } catch (error) {
+                    return {
+                        error: {
+                            status: "CUSTOM_ERROR",
+                            error: error instanceof Error ? error.message : "Unknown error",
+                        },
+                    };
+                }
+            },
+
+            providesTags: ["Words"],
+        }),
     }),
 });
 
-export const { useGetUserResultsQuery, useGetWordsByDifficultyQuery } = userApi;
+export const { useGetUserResultsQuery, useGetWordsByDifficultyQuery, useGetAllWordsByDifficultyQuery } = userApi;

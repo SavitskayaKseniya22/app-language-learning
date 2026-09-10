@@ -1,0 +1,24 @@
+@use "@abstracts/mixins" as mx;
+@use "@abstracts/variables" as vars;
+
+.block {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0.5rem;
+  background: linear-gradient(
+    110deg,
+    rgb(207 250 241 / 72%) 0%,
+    rgb(246 248 245 / 82%) 50%,
+    rgb(255 221 218 / 72%) 100%
+  );
+  border-radius: 24px;
+
+  @media (min-width: vars.$laptop) {
+    padding: 1rem;
+  }
+}
+
+.block__content {
+  flex-grow: 1;
+}

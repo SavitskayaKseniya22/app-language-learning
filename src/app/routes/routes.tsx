@@ -14,12 +14,13 @@ import { PrivateRoute } from "@/features/auth";
 import Audiocall from "@/pages/audiocall/audiocall";
 import Constructor from "@/pages/constructor/constructor";
 import GameResult from "@/pages/game/components/game-result";
-import GameStartScreen, { GameInitialData } from "@/pages/game/components/game-start-screen";
+import GameStartScreen from "@/entities/game/ui/game-start-screen/game-start-screen";
 import PuzzleResult from "@/pages/sentences/components/puzzle-result";
 import Puzzles from "@/pages/sentences/puzzles";
-import Sprint from "@/pages/sprint/sprint";
 import { GameDifficultyType } from "@/shared/types/interfaces";
 import { ModalProvider } from "@/shared/ui/modal";
+import { SprintPage } from "@/pages/sprint";
+import { GameDataManager } from "@/entities/game";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -58,41 +59,41 @@ const router = createBrowserRouter(
 
                 <Route path="games">
                     <Route index element={<GamesPage />} />
-                    <Route path="sprint" element={<GameInitialData />}>
-                        <Route
-                            index
-                            element={<GameStartScreen value={GameDifficultyType.SPRINT} type={GameType.SPRINT} />}
-                        />
-                        <Route path="game" element={<Sprint />} />
+
+                    <Route path={GameType.sprint}>
+                        <Route index element={<GameStartScreen type={GameType.sprint} />} />
+
+                        <Route path="game" element={<GameDataManager />}>
+                            <Route index element={<SprintPage />} />
+                        </Route>
+
                         <Route path="result" element={<GameResult type={GameType.sprint} />} />
                     </Route>
+                    <Route path={GameType.puzzles}>
+                        <Route index element={<GameStartScreen type={GameType.puzzles} />} />
 
-                    <Route path="puzzles" element={<GameInitialData />}>
-                        <Route
-                            index
-                            element={<GameStartScreen value={GameDifficultyType.PUZZLES} type={GameType.PUZZLES} />}
-                        />
-                        <Route path="game" element={<Puzzles />} />
-                        <Route path="result" element={<PuzzleResult />} />
+                        <Route path="game" element={<GameDataManager />}>
+                            <Route index element={<SprintPage />} />
+                        </Route>
+
+                        <Route path="result" element={<GameResult type={GameType.puzzles} />} />
                     </Route>
+                    <Route path={GameType.audiocall}>
+                        <Route index element={<GameStartScreen type={GameType.audiocall} />} />
 
-                    <Route path="audiocall" element={<GameInitialData />}>
-                        <Route
-                            index
-                            element={<GameStartScreen value={GameDifficultyType.AUDIOCALL} type={GameType.AUDIOCALL} />}
-                        />
-                        <Route path="game" element={<Audiocall />} />
+                        <Route path="game" element={<GameDataManager />}>
+                            <Route index element={<SprintPage />} />
+                        </Route>
+
                         <Route path="result" element={<GameResult type={GameType.audiocall} />} />
                     </Route>
+                    <Route path={GameType.constructor}>
+                        <Route index element={<GameStartScreen type={GameType.constructor} />} />
 
-                    <Route path="constructor" element={<GameInitialData />}>
-                        <Route
-                            index
-                            element={
-                                <GameStartScreen value={GameDifficultyType.CONSTRUCTOR} type={GameType.CONSTRUCTOR} />
-                            }
-                        />
-                        <Route path="game" element={<Constructor />} />
+                        <Route path="game" element={<GameDataManager />}>
+                            <Route index element={<SprintPage />} />
+                        </Route>
+
                         <Route path="result" element={<GameResult type={GameType.constructor} />} />
                     </Route>
                 </Route>

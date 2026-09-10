@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import PuzzlesGame from "./components/puzzles-game";
 import Spinner from "../../shared/ui/spinner/spinner";
 import { useGetRandomWordsQuery } from "../../store/words-api";
-import { GameContext } from "../game/components/game-start-screen";
+import { GameContext } from "../../entities/game/ui/game-start-screen/game-start-screen";
 import { DataQueue, checkStepValue, checkSubtrahendValue, getRandomItemsFromArray } from "../../shared/lib/utilities";
 import { resetPuzzlesResult, setPuzzlesResult } from "../../store/result-slice";
 import { useAppDispatch } from "../../app/store/store";

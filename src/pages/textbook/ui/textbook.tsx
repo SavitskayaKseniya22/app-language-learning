@@ -11,18 +11,21 @@ import { Spinner } from "@/shared/ui/spinner";
 import { ErrorComponent } from "@/shared/ui/error-component";
 import { Pagination } from "@/shared/ui/pagination";
 import { PlaceholderList } from "@/shared/ui/placeholder-list";
+import type { OptionType } from "@/shared/ui/select";
 import { CustomSelect } from "@/shared/ui/select";
 import { useGetWordsByDifficultyQuery } from "@/entities/user";
+import { difficultyData } from "@/entities/game/model/difficulty";
 
 export default function TextbookPage() {
-    const [difficulty, setDifficulty] = useState(1);
+    const [difficulty, setDifficulty] = useState<OptionType<number>>({ value: 1, label: difficultyData[0].title });
     const [page, setPage] = useState(1);
 
     const { data, isLoading, isFetching, error } = useGetWordsByDifficultyQuery({
-        difficulty,
+        difficulty: difficulty.value,
         page,
         pageSize: 20,
     });
+
     //to do add checkboxes for add to learned
 
     const { setContent } = useContext(ModalContext);
@@ -31,22 +34,16 @@ export default function TextbookPage() {
         <div className={styles.textbook}>
             <div className={styles.textbook__controls}>
                 <CustomSelect
-                    label={`Select difficulty:`}
+                    label={`Select the word difficulty level:`}
                     isLoading={isLoading}
                     isDisabled={isLoading}
                     isSearchable={false}
-                    defaultValue={{ value: difficulty, label: difficulty.toString() }}
-                    options={[
-                        { value: 1, label: "1" },
-                        { value: 2, label: "2" },
-                        { value: 3, label: "3" },
-                        { value: 4, label: "4" },
-                        { value: 5, label: "5" },
-                        { value: 6, label: "6" },
-                    ]}
+                    defaultValue={{ value: 1, label: difficultyData[0].title }}
+                    options={difficultyData.map((item, index) => ({ value: index + 1, label: item.title }))}
+
                     onChange={selectedOption => {
                         if (selectedOption) {
-                            setDifficulty(selectedOption.value);
+                            setDifficulty(selectedOption);
                             setPage(1);
                         }
                     }}

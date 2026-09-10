@@ -7,6 +7,7 @@ import { StyledIcon } from "@/shared/ui/styled-icon";
 import { Badge } from "@/shared/ui/badge";
 import clsx from "clsx";
 import type { SizeType } from "@/shared/types/interfaces";
+import { gamesLabels } from "@/entities/game";
 
 export default function GamesList({ data, size = "medium" }: { data?: Word[]; size?: SizeType }) {
     const { setContent } = useContext(ModalContext);
@@ -15,7 +16,7 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
         <ul className={styles.list}>
             <li>
                 <NavLink
-                    to="/games/sprint/game"
+                    to={data ? "/games/sprint/game" : "/games/sprint"}
                     state={{ data }}
                     onClick={() => {
                         setContent(null);
@@ -29,9 +30,7 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                             <h3>Sprint</h3>
 
                             <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
-                                {data
-                                    ? "Choose the correct translation before time runs out."
-                                    : "Challenge your wit and knowledge in a fast paced and rewarding guessing game!"}
+                                {data ? gamesLabels.sprint.description.main : gamesLabels.sprint.description.sub}
                             </p>
                         </div>
                         <Badge size={size}>Meaning</Badge>
@@ -40,7 +39,7 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
             </li>
             <li>
                 <NavLink
-                    to="/games/constructor/game"
+                    to={data ? "/games/constructor/game" : "/games/constructor"}
                     state={{ data }}
                     onClick={() => {
                         setContent(null);
@@ -54,7 +53,9 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                             <h3>Constructor</h3>
 
                             <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
-                                {data ? "Build each word from he available letters." : "Improve your spelling!"}
+                                {data
+                                    ? gamesLabels.constructor.description.main
+                                    : gamesLabels.constructor.description.sub}
                             </p>
                         </div>
                         <Badge size={size}>Spelling</Badge>
@@ -63,7 +64,7 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
             </li>
             <li>
                 <NavLink
-                    to="/games/audiocall/game"
+                    to={data ? "/games/audiocall/game" : "/games/audiocall"}
                     state={{ data }}
                     onClick={() => {
                         setContent(null);
@@ -76,9 +77,7 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                         <div className={styles.list__description}>
                             <h3>Audiocall</h3>
                             <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
-                                {data
-                                    ? "Listen and choose the word you hear."
-                                    : "Train your ears as well as your eyes to recognise english speech!"}
+                                {data ? gamesLabels.audiocall.description.main : gamesLabels.audiocall.description.sub}
                             </p>
                         </div>
                         <Badge size={size}>Listening</Badge>
@@ -87,7 +86,7 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
             </li>
             <li>
                 <NavLink
-                    to="/games/puzzles"
+                    to={data ? "/games/puzzles/game" : "/games/puzzles"}
                     state={{ data }}
                     onClick={() => {
                         setContent(null);
@@ -100,9 +99,7 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                         <div className={styles.list__description}>
                             <h3>Puzzles</h3>
                             <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
-                                {data
-                                    ? "Arrange words to complete the sentence."
-                                    : "Make puzzles from a set of words. Score more points in the given time!"}
+                                {data ? gamesLabels.puzzles.description.main : gamesLabels.puzzles.description.sub}
                             </p>
                         </div>
                         <Badge size={size}>Grammar</Badge>

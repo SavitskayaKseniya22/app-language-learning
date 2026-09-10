@@ -8,7 +8,7 @@ import Points from "../../game/components/points";
 import { updatePuzzlesTotalResult } from "../../../store/result-slice";
 import ProgressTracking from "../../game/components/progress-tracking";
 import GameInfo from "../../game/components/game-info";
-import { GameContext } from "../../game/components/game-start-screen";
+import { GameContext } from "../../../entities/game/ui/game-start-screen/game-start-screen";
 import StopWatch from "../../game/components/stop-watch";
 
 export const StyledPuzzlesGameAnswer = styled("h4")<{

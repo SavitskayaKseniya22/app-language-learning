@@ -1,0 +1,129 @@
+@use "@abstracts/mixins" as mx;
+@use "@abstracts/variables" as vars;
+
+.screen {
+  @include mx.main-container;
+
+  gap: 2rem;
+}
+
+.screen__content {
+  flex-grow: 1;
+}
+
+.screen__form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100%;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 16px;
+
+  @media (min-width: vars.$laptop) {
+    padding: 2rem;
+  }
+}
+
+.screen__section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.screen__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.screen__item {
+  flex-grow: 2;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+
+  @media (min-width: vars.$laptop) {
+    max-width: calc((100% - 2rem) / 3);
+  }
+}
+
+.screen__difficulty {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  cursor: pointer;
+  border: 1px solid vars.$color-stroke;
+  border-radius: 16px;
+
+  input {
+    display: none;
+  }
+
+  &:has(input:checked) {
+    background-color: vars.$color-stroke-25;
+    border: 1px solid vars.$color-stroke;
+  }
+}
+
+.screen__note {
+  @include mx.text-note-basic;
+}
+
+.screen__footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: auto;
+
+  // border-top: 1px solid vars.$color-stroke;
+}
+
+.screen__tips {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (min-width: vars.$laptop) {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    text-align: center;
+
+    @include mx.text-note-basic;
+
+    @media (min-width: vars.$laptop) {
+      width: 100%;
+      max-width: calc((100% - 2rem) / 4);
+      padding: 1rem;
+    }
+
+    &:not(:last-child) {
+      position: relative;
+
+      &::after {
+        position: absolute;
+        right: 25%;
+        bottom: 0;
+        width: 50%;
+        height: 1px;
+        content: "";
+        background-color: vars.$color-stroke;
+
+        @media (min-width: vars.$laptop) {
+          top: 25%;
+          right: -1rem;
+          width: 1px;
+          height: 50%;
+        }
+      }
+    }
+  }
+}
