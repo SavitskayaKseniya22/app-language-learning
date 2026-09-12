@@ -1,15 +1,21 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import type { WordType } from "../../../shared/types/interfaces";
-import { ScreenSize } from "../../../shared/types/interfaces";
+import type { WordType } from "../../../shared/types/wrong-interfaces";
 import WordDetailed from "./word-detailed";
 import ModalContext from "../../../shared/ui/modal/modal-context";
 
-export interface WordModifierType {
+interface WordModifierType {
     isItEncountered?: boolean;
     isItLearned?: boolean;
     isItCorrect?: boolean;
     isItOdd?: boolean;
+}
+
+enum ScreenSize {
+    MOBILE = "(min-width: 320px)",
+    TABLET = "(min-width: 768px)",
+    LAPTOPS = "(min-width: 1024px)",
+    DESKTOP = "(min-width: 1920px)",
 }
 
 const StyledWord = styled("li")<{ $modifier: WordModifierType | undefined }>`

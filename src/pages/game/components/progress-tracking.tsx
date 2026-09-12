@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { makeEmptyArrayWithIds } from "../../../shared/lib/utilities";
-import type { ProgressType } from "../../../shared/types/interfaces";
+
+type ProgressType = { total: number; streak: number };
 
 const StyledProgressTracking = styled("div")`
     display: flex;
@@ -33,6 +33,13 @@ const StyledProgressInfo = styled("h5")`
     align-items: center;
     flex-wrap: nowrap;
 `;
+
+function makeEmptyArrayWithIds(length: number) {
+    return Array.from({ length }, () => "0").map(item => ({
+        element: item,
+        key: Math.random().toString(),
+    }));
+}
 
 function ProgressTracking({ streak, total }: ProgressType) {
     return (

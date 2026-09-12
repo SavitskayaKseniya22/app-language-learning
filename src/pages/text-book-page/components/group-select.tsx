@@ -1,6 +1,5 @@
 import type React from "react";
 import styled from "styled-components";
-import type { GroupType } from "../../../shared/types/interfaces";
 
 const StyledGroupSelect = styled("select")`
     background-color: transparent;
@@ -14,7 +13,7 @@ const StyledGroupSelect = styled("select")`
 function GroupSelect({
     values,
 }: {
-    values: GroupType & {
+    values: { group: string } & {
         setGroup: React.Dispatch<React.SetStateAction<string>>;
     };
 }) {

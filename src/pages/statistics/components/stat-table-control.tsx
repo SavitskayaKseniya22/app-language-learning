@@ -1,6 +1,5 @@
 import type React from "react";
 import styled from "styled-components";
-import { StatControlType } from "../../../shared/types/interfaces";
 
 const StyledStatisticTableControl = styled("div")`
     display: flex;
@@ -39,6 +38,11 @@ const StyledStatisticTableControl = styled("div")`
         }
     }
 `;
+
+enum StatControlType {
+    TODAY = "today",
+    TOTAL = "total",
+}
 
 function StatTableControl({ onChange }: { onChange: React.Dispatch<React.SetStateAction<StatControlType>> }) {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

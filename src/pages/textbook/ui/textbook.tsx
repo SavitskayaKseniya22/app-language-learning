@@ -3,7 +3,6 @@ import { CustomTable } from "@/shared/ui/table";
 import { useContext, useState } from "react";
 import styles from "./textbook.module.scss";
 import { AudioWithButton } from "@/shared/ui/audio-button";
-import { getWordAssetUrl } from "@/shared/lib/utilities";
 import { ModalContext } from "@/shared/ui/modal";
 import { Button } from "@/shared/ui/button";
 import { GamesList } from "@/widgets/games-list";
@@ -13,11 +12,14 @@ import { Pagination } from "@/shared/ui/pagination";
 import { PlaceholderList } from "@/shared/ui/placeholder-list";
 import type { OptionType } from "@/shared/ui/select";
 import { CustomSelect } from "@/shared/ui/select";
-import { useGetWordsByDifficultyQuery } from "@/entities/user";
+import { getWordAssetUrl, useGetWordsByDifficultyQuery } from "@/entities/user";
 import { difficultyData } from "@/entities/game/model/difficulty";
 
 export default function TextbookPage() {
-    const [difficulty, setDifficulty] = useState<OptionType<number>>({ value: 1, label: difficultyData[0].title });
+    const [difficulty, setDifficulty] = useState<OptionType<number>>({
+        value: difficultyData[0].value,
+        label: difficultyData[0].title,
+    });
     const [page, setPage] = useState(1);
 
     const { data, isLoading, isFetching, error } = useGetWordsByDifficultyQuery({
@@ -39,7 +41,7 @@ export default function TextbookPage() {
                     isDisabled={isLoading}
                     isSearchable={false}
                     defaultValue={{ value: 1, label: difficultyData[0].title }}
-                    options={difficultyData.map((item, index) => ({ value: index + 1, label: item.title }))}
+                    options={difficultyData.map(item => ({ value: item.value, label: item.title }))}
 
                     onChange={selectedOption => {
                         if (selectedOption) {

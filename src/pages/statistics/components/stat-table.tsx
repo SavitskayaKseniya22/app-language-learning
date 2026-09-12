@@ -1,7 +1,13 @@
 import styled from "styled-components";
-import { ScreenSize } from "../../../shared/types/interfaces";
 import type { StatisticsType } from "@/entities/user";
 import { refineData } from "@/entities/user";
+
+enum ScreenSize {
+    MOBILE = "(min-width: 320px)",
+    TABLET = "(min-width: 768px)",
+    LAPTOPS = "(min-width: 1024px)",
+    DESKTOP = "(min-width: 1920px)",
+}
 
 const StyledStatisticTable = styled("table")`
     border-spacing: 0.1rem;

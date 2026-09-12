@@ -2,7 +2,7 @@ import { useCallback, useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import DragAndDrop from "./drag-and-drop";
-import type { DataQueue } from "../../../shared/lib/utilities";
+import type { DataQueue } from "../../../shared/lib/math";
 import { useAppDispatch, useAppSelector } from "../../../app/store/store";
 import Points from "../../game/components/points";
 import { updatePuzzlesTotalResult } from "../../../store/result-slice";

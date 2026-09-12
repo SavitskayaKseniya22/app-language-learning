@@ -1,20 +1,25 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { toast } from "react-toastify";
-import type {
-    CollectionLikeArraysType,
-    CredentialsType,
-    FirebaseErrorTypes,
-    StatiscticsItemType,
-    UserIdType,
-    WordIdType,
-    WordWithIdDataType,
-    WordWithIdType,
-    ResultType,
-} from "../shared/types/interfaces";
-import { CollectionType } from "../shared/types/interfaces";
-import { generateRandomString } from "../shared/lib/utilities";
+import type { WordWithIdDataType, WordWithIdType, ResultType } from "../shared/types/wrong-interfaces";
 import { handleLogout } from "@/features/auth";
 
+enum CollectionType {
+    DIFFICULT = "difficult",
+    LEARNED = "learned",
+    SELECTED = "selected",
+}
+
+interface FirebaseErrorTypes {
+    error: {
+        status: string;
+        data: { error: string };
+    };
+    isUnhandledError: boolean;
+    meta: {
+        request: {};
+        response: {};
+    };
+}
 export function handleError(error: unknown) {
     if (error && typeof error === "object" && "error" in error) {
         const { status, data } = (error as FirebaseErrorTypes).error;
@@ -24,6 +29,39 @@ export function handleError(error: unknown) {
         toast.error(`Not specific error`);
     }
 }
+export type TokenIdType = { tokenId: string };
+export type UserIdType = { userId: string };
+export type CredentialsType = UserIdType & TokenIdType;
+export type WordIdType = { wordId: string };
+
+export type StatiscticsItemType = {
+    [ResultType.sprintShort]: BasicResultType & WordsResultType;
+    [ResultType.sprintLong]: BasicResultType & WordsResultType;
+    [ResultType.audiocall]: BasicResultType & WordsResultType;
+    [ResultType.constructor]: BasicResultType & WordsResultType & TimeType;
+    [ResultType.puzzles]: BasicResultType & TimeType;
+};
+
+export type TimeType = { time: number };
+
+export type BasicResultType = {
+    date: number;
+    score: number;
+    accuracy: number;
+};
+
+export type WordsResultType = {
+    encountered: number;
+    learned: number;
+};
+export interface CollectionLikeArraysType {
+    [CollectionType.DIFFICULT]: WordWithIdDataType[];
+    [CollectionType.LEARNED]: WordWithIdDataType[];
+    [CollectionType.SELECTED]: WordWithIdDataType[];
+    all: WordWithIdDataType[];
+}
+
+const generateRandomString = () => Math.floor(Math.random() * Date.now()).toString(36);
 
 export const userWordsApi = createApi({
     reducerPath: "userWordsApi",

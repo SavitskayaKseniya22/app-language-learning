@@ -1,15 +1,15 @@
 import type { FieldErrors, SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import type { BasicUserCredentials } from "@shared/types/interfaces";
 import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
 import styles from "./form.module.scss";
+import type { UserCredentials } from "../../model/types";
 
-export default function AuthForm({ onSubmit }: { onSubmit: SubmitHandler<BasicUserCredentials> }) {
-    const { register, handleSubmit } = useForm<BasicUserCredentials>();
+export default function AuthForm({ onSubmit }: { onSubmit: SubmitHandler<UserCredentials> }) {
+    const { register, handleSubmit } = useForm<UserCredentials>();
 
-    const onInvalid = (errors: FieldErrors<BasicUserCredentials>) => {
+    const onInvalid = (errors: FieldErrors<UserCredentials>) => {
         if (errors.email) {
             toast.warn(errors.email.message);
         }

@@ -1,8 +1,7 @@
 import type React from "react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import type { WordType } from "../../../shared/types/interfaces";
-import { fetchAndCreateReactImage } from "../../../shared/lib/utilities";
+import type { WordType } from "../../../shared/types/wrong-interfaces";
 import CollectionControlPanel from "./collection-control-panel";
 import Spinner from "../../../shared/ui/spinner/spinner";
 import { useAppSelector } from "../../../app/store/store";
@@ -65,6 +64,22 @@ const StyledWordStatusPanel = styled("div")`
     align-items: center;
     justify-content: center;
 `;
+
+function fetchAndCreateReactImage(partOfUrl: string) {
+    return fetch(`https://raw.githubusercontent.com/SavitskayaKseniya22/rslang-data/data/${partOfUrl}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            return response.blob();
+        })
+        .then(response =>
+            React.createElement("img", {
+                src: URL.createObjectURL(response),
+            }),
+        );
+}
 
 function WordDetailed({ wordData }: { wordData: WordType }) {
     const [image, setImage] = useState<React.ReactElement | null>();

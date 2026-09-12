@@ -2,7 +2,7 @@ import type { ComponentProps } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 import clsx from "clsx";
 import styles from "./button.module.scss";
-import type { SizeType } from "@/shared/types/interfaces";
+import type { SizeType } from "@/shared/types/types";
 
 type View = "primary" | "secondary" | "transparent";
 

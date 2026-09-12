@@ -2,9 +2,23 @@ import type { DropResult } from "@hello-pangea/dnd";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import type { WordForDrop, DropData, DnDWordType } from "../../../shared/types/interfaces";
+
 import { useAppDispatch } from "../../../app/store/store";
 import { updatePuzzlesMiddleResult } from "../../../store/result-slice";
+import type { Word } from "@/entities/user";
+
+export interface WordForDrop {
+    key: string;
+    element: string;
+}
+export interface DropData {
+    source: WordForDrop[];
+    result: WordForDrop[];
+}
+
+export type DnDWordType = Word & {
+    dnd: DropData;
+};
 
 const reorder = (list: WordForDrop[], startIndex: number, endIndex: number) => {
     const result = [...list];
@@ -56,7 +70,7 @@ function DragAndDrop({ word, isItActive }: { word: DnDWordType; isItActive: bool
 
     useEffect(() => {
         if (sentence.source.length === 0) {
-            const istItCorrect = word.textExample === sentence.result.map(item => item.element).join(" ");
+            const istItCorrect = word.text_example === sentence.result.map(item => item.element).join(" ");
 
             dispatch(
                 updatePuzzlesMiddleResult({
@@ -64,7 +78,7 @@ function DragAndDrop({ word, isItActive }: { word: DnDWordType; isItActive: bool
                 }),
             );
         }
-    }, [dispatch, sentence, word.textExample]);
+    }, [dispatch, sentence, word.text_example]);
 
     function onDragEnd(result: DropResult) {
         if (!result.destination) {

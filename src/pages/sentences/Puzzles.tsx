@@ -3,7 +3,7 @@ import PuzzlesGame from "./components/puzzles-game";
 import Spinner from "../../shared/ui/spinner/spinner";
 import { useGetRandomWordsQuery } from "../../store/words-api";
 import { GameContext } from "../../entities/game/ui/game-start-screen/game-start-screen";
-import { DataQueue, checkStepValue, checkSubtrahendValue, getRandomItemsFromArray } from "../../shared/lib/utilities";
+import { DataQueue, checkStepValue, checkSubtrahendValue, getRandomItemsFromArray } from "../../shared/lib/math";
 import { resetPuzzlesResult, setPuzzlesResult } from "../../store/result-slice";
 import { useAppDispatch } from "../../app/store/store";
 import { GameType } from "@/entities/user";

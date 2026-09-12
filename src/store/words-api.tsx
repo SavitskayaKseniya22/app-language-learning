@@ -1,8 +1,29 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { toast } from "react-toastify";
-import type { FirebaseErrorTypes, TextBookValuesTypes, WordType } from "../shared/types/interfaces";
-import { WordBaseValues } from "../shared/types/interfaces";
-import { getRandom } from "../shared/lib/utilities";
+import type { WordType } from "../shared/types/wrong-interfaces";
+
+import { getRandom } from "../shared/lib/math";
+
+enum WordBaseValues {
+    MINGROUP = 0,
+    MAXGROUP = 5,
+    MINPAGE = 0,
+    MAXPAGE = 29,
+    MAXWORD = 19,
+    MINWORD = 0,
+}
+
+interface FirebaseErrorTypes {
+    error: {
+        status: string;
+        data: { error: string };
+    };
+    isUnhandledError: boolean;
+    meta: {
+        request: {};
+        response: {};
+    };
+}
 
 function handleError(error: unknown) {
     if (error && typeof error === "object" && "error" in error) {
@@ -19,7 +40,7 @@ export const wordsApi = createApi({
         baseUrl: "https://lang--app-default-rtdb.europe-west1.firebasedatabase.app/words",
     }),
     endpoints: builder => ({
-        getAllWords: builder.query<WordType[] | null, TextBookValuesTypes>({
+        getAllWords: builder.query<WordType[] | null, { group: string; page: number }>({
             query: ({ group, page }) => ({
                 url: `/${group}/${page}.json`,
                 method: "GET",

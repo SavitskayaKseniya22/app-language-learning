@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import type { DataQueue } from "../../../shared/lib/utilities";
+import type { DataQueue } from "../../../shared/lib/math";
 import { StyledPuzzlesGameAnswer } from "../../sentences/components/puzzles-game";
 import { useAppDispatch, useAppSelector } from "../../../app/store/store";
 import Points from "../../game/components/points";

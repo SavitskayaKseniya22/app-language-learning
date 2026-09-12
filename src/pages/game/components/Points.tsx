@@ -1,6 +1,11 @@
 import styled from "styled-components";
-import type { PointsType, SubtrahendType } from "../../../shared/types/interfaces";
-import { ScreenSize } from "../../../shared/types/interfaces";
+
+enum ScreenSize {
+    MOBILE = "(min-width: 320px)",
+    TABLET = "(min-width: 768px)",
+    LAPTOPS = "(min-width: 1024px)",
+    DESKTOP = "(min-width: 1920px)",
+}
 
 const StyledPointsList = styled("div")`
     display: flex;
@@ -45,21 +50,21 @@ const StyledPointsItem = styled("span")`
     }
 `;
 
-function Points({ step, total, subtrahend }: PointsType & SubtrahendType) {
+function Points({ points, score, penalty = 0 }: { points: number; score: number; penalty?: number }) {
     return (
         <StyledPointsList>
             <h3>
                 <span className="points__title">Total score: </span>
 
-                <StyledPointsItem className="points__total">{total}</StyledPointsItem>
+                <StyledPointsItem className="points__total">{score}</StyledPointsItem>
             </h3>
 
             <h5 className="points__addition">
-                Correct answer score: <StyledPointsItem>{`${step}`}</StyledPointsItem>
+                Correct answer score: <StyledPointsItem>{`${points}`}</StyledPointsItem>
             </h5>
-            {subtrahend > 0 && (
+            {penalty > 0 && (
                 <h5 className="points__addition">
-                    Wrong answer cost: <StyledPointsItem>{`${subtrahend}`}</StyledPointsItem>
+                    Wrong answer cost: <StyledPointsItem>{`${penalty}`}</StyledPointsItem>
                 </h5>
             )}
         </StyledPointsList>

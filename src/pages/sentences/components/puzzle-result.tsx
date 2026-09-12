@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../../../app/store/store";
 import GameResultInfo from "../../game/components/game-result-info";
-import { makeLineFromParcedTime, getParcedTime, getPercent } from "../../../shared/lib/utilities";
 
-import { ResultType } from "../../../shared/types/interfaces";
+import { ResultType } from "../../../shared/types/wrong-interfaces";
 import { useUpdateUserResultsMutation } from "../../../store/user-words-api";
+import { makeLineFromParcedTime } from "@/shared/lib/dates";
 
 function PuzzleResult() {
     const { puzzles } = useAppSelector(state => state.resultsReducer);
@@ -45,7 +45,7 @@ function PuzzleResult() {
                             <h4>{`Wrong: ${puzzles.wrong}`}</h4>
                         </li>
                     </ul>
-                    <div>{makeLineFromParcedTime(getParcedTime({ time: puzzles.time }))}</div>
+                    <div>{makeLineFromParcedTime({ time: puzzles.time })}</div>
                 </GameResultInfo>
             </main>
         );

@@ -6,8 +6,8 @@ import type { Word } from "@/entities/user";
 import { StyledIcon } from "@/shared/ui/styled-icon";
 import { Badge } from "@/shared/ui/badge";
 import clsx from "clsx";
-import type { SizeType } from "@/shared/types/interfaces";
 import { gamesLabels } from "@/entities/game";
+import type { SizeType } from "@/shared/types/types";
 
 export default function GamesList({ data, size = "medium" }: { data?: Word[]; size?: SizeType }) {
     const { setContent } = useContext(ModalContext);

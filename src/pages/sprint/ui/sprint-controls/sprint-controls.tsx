@@ -27,7 +27,7 @@ const StyledChoiceButton = styled("button")<{ $type: "left" | "right" }>`
     }
 `;
 
-function SprintRound({ handleClick }: { handleClick: (value: string) => void }) {
+export default function SprintControls({ handleClick }: { handleClick: (value: string) => void }) {
     const onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const { value } = event.target as HTMLButtonElement;
         handleClick(value);
@@ -64,5 +64,3 @@ function SprintRound({ handleClick }: { handleClick: (value: string) => void }) 
         </StyledChoiceList>
     );
 }
-
-export default SprintRound;

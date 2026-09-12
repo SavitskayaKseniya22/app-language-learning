@@ -6,12 +6,14 @@ import resultsReducer from "../../store/result-slice";
 import { wordsApi } from "../../store/words-api";
 import { userWordsApi } from "../../store/user-words-api";
 import { userApi } from "@/entities/user";
+import { sprintReducer } from "@/pages/sprint";
 
 const rootReducer = combineReducers({
     [wordsApi.reducerPath]: wordsApi.reducer,
     [userWordsApi.reducerPath]: userWordsApi.reducer,
     resultsReducer,
     [userApi.reducerPath]: userApi.reducer,
+    sprintReducer,
 });
 
 const store = configureStore({

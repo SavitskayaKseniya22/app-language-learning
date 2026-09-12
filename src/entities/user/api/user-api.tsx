@@ -39,6 +39,12 @@ export function getSum(array: number[]) {
     return array.reduce((sum, value) => sum + value, 0);
 }
 
+export function getWordAssetUrl(path: string | null) {
+    if (!path) return "";
+
+    return supabase.storage.from("words").getPublicUrl(path).data.publicUrl;
+}
+
 export function reduceData(data: StatisticsType, type: GameType) {
     const results = data[type];
 

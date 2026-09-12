@@ -14,12 +14,12 @@ export default function GameStartScreen({ type }: { type: GameType }) {
     const navigate = useNavigate();
 
     const { register, handleSubmit, control } = useForm<FormType>({
-        defaultValues: { difficulty: 0, complexity: 0 },
+        defaultValues: { difficulty: difficultyData[0].value, complexity: complexityData[0].value },
     });
 
     const onSubmit: SubmitHandler<FormType> = data => {
         void navigate(`/games/${type}/game`, {
-            state: { difficulty: data.difficulty, complexity: data.complexity },
+            state: { difficulty: data.difficulty, complexity: data.complexity, isTimed: true },
         });
     };
 
@@ -46,16 +46,16 @@ export default function GameStartScreen({ type }: { type: GameType }) {
                             </div>
 
                             <ul className={styles.screen__list}>
-                                {difficultyData.map((item, index) => (
+                                {difficultyData.map(item => (
                                     <li key={item.title} className={styles.screen__item}>
                                         <label className={styles.screen__difficulty}>
                                             <input
                                                 {...register("difficulty")}
                                                 type="radio"
-                                                value={index}
-                                                checked={difficultyWatch == index}
+                                                value={item.value}
+                                                checked={difficultyWatch == item.value}
                                             />
-                                            <p className={styles.screen__note}>Level {index}</p>
+                                            <p className={styles.screen__note}>Level {item.value}</p>
                                             <h3>{item.title}</h3>
                                             <p className={styles.screen__note}>Words {item.count}</p>
                                         </label>
@@ -75,14 +75,14 @@ export default function GameStartScreen({ type }: { type: GameType }) {
                                 </div>
 
                                 <ul className={styles.screen__list}>
-                                    {complexityData.map((item, index) => (
+                                    {complexityData.map(item => (
                                         <li key={item.title} className={styles.screen__item}>
                                             <label className={styles.screen__difficulty}>
                                                 <input
                                                     {...register("complexity")}
                                                     type="radio"
-                                                    value={index}
-                                                    checked={complexityWatch == index}
+                                                    value={item.value}
+                                                    checked={complexityWatch == item.value}
                                                 />
 
                                                 <h3>{item.title}</h3>

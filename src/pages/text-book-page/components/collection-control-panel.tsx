@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import type { WordType, WordWithIdDataType } from "../../../shared/types/interfaces";
-import { CollectionType } from "../../../shared/types/interfaces";
+import type { WordType, WordWithIdDataType } from "../../../shared/types/wrong-interfaces";
+
 import CollectionControl from "./collection-control";
 
 const StyledCollectionControlPanel = styled("form")`
@@ -8,6 +8,12 @@ const StyledCollectionControlPanel = styled("form")`
     justify-content: space-between;
     gap: 1rem;
 `;
+
+enum CollectionType {
+    DIFFICULT = "difficult",
+    LEARNED = "learned",
+    SELECTED = "selected",
+}
 
 function CollectionControlPanel({
     wordData,

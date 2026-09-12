@@ -1,6 +1,12 @@
 import type React from "react";
 import styled from "styled-components";
-import { ScreenSize } from "../../../shared/types/interfaces";
+
+enum ScreenSize {
+    MOBILE = "(min-width: 320px)",
+    TABLET = "(min-width: 768px)",
+    LAPTOPS = "(min-width: 1024px)",
+    DESKTOP = "(min-width: 1920px)",
+}
 
 const StyledGameInfo = styled("div")`
     display: flex;

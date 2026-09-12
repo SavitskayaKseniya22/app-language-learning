@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import type { ResultsState, WordType, WordWithIdType } from "../../../shared/types/interfaces";
-import { ResultType } from "../../../shared/types/interfaces";
+import type { ResultsState, WordType, WordWithIdType } from "../../../shared/types/wrong-interfaces";
+import { ResultType } from "../../../shared/types/wrong-interfaces";
 import {
     useAddToUserWordsMutation,
     useGetUserWordsQuery,
@@ -9,7 +9,7 @@ import {
 } from "../../../store/user-words-api";
 import { useAppSelector } from "../../../app/store/store";
 import WordList from "../../text-book-page/components/word-list";
-import { getPercent } from "../../../shared/lib/utilities";
+import { getPercent } from "../../../shared/lib/math";
 
 const StyledGameResultContent = styled("ul")`
     display: flex;

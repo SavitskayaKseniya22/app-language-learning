@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { StyledTimer } from "./timer";
-import { getParcedTime, makeLineFromParcedTime } from "../../../shared/lib/utilities";
+import { makeLineFromParcedTime } from "@/shared/lib/dates";
 
 function StopWatch({ func }: { func: (value: number) => void }) {
     const [time, setTime] = useState(0);
@@ -23,7 +23,7 @@ function StopWatch({ func }: { func: (value: number) => void }) {
 
     return (
         <StyledTimer>
-            <b>{makeLineFromParcedTime(getParcedTime({ time }))}</b>
+            <b>{makeLineFromParcedTime({ time })}</b>
         </StyledTimer>
     );
 }

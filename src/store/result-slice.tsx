@@ -1,14 +1,29 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import type {
-    ComplicatedResultType,
-    WordType,
-    ResultsState,
-    StepType,
-    UpdateResultType,
-    SubtrahendType,
-} from "../shared/types/interfaces";
-import { StepValues, StreakValues, ResultType } from "../shared/types/interfaces";
+import type { WordType, ResultsState } from "../shared/types/wrong-interfaces";
+import { ResultType } from "../shared/types/wrong-interfaces";
+
+enum StepValues {
+    MIN = 10,
+}
+
+enum StreakValues {
+    MIN = 0,
+    MAX = 3,
+}
+
+export type UpdateResultType = {
+    isAnswerCorrect: boolean;
+    word: WordType;
+    time?: number;
+};
+
+type ComplicatedResultType = {
+    answers: { correct: WordType[]; wrong: WordType[] };
+    step: number;
+    total: number;
+    streak: number;
+};
 
 export function updateResultData(
     result: ComplicatedResultType,
@@ -109,7 +124,7 @@ export const resultsSlice = createSlice({
             state[ResultType.sprint] = initialState[ResultType.sprint];
         },
 
-        setPuzzlesResult: (state, action: PayloadAction<StepType & SubtrahendType>) => {
+        setPuzzlesResult: (state, action: PayloadAction<{ step: number } & { subtrahend: number }>) => {
             state.puzzles = { ...initPuzzlesResultValue, ...action.payload };
         },
 
@@ -147,7 +162,7 @@ export const resultsSlice = createSlice({
             state.audiocall = initComplicatedResultValue;
         },
 
-        setConstructorResult: (state, action: PayloadAction<StepType & SubtrahendType>) => {
+        setConstructorResult: (state, action: PayloadAction<{ step: number } & { subtrahend: number }>) => {
             state.constructor = { ...initConstructorResultValue, ...action.payload };
         },
 

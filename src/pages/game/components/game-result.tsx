@@ -2,8 +2,8 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../app/store/store";
 import GameResultDetailed from "./game-result-detailed";
 import GameResultInfo from "./game-result-info";
-import { makeLineFromParcedTime, getParcedTime } from "../../../shared/lib/utilities";
 import type { GameType } from "@/entities/user";
+import { makeLineFromParcedTime } from "@/shared/lib/dates";
 
 function GameResult({ type }: { type: Exclude<GameType, GameType.puzzles | GameType.sprint> }) {
     const results = useAppSelector(state => state.resultsReducer);
@@ -21,7 +21,7 @@ function GameResult({ type }: { type: Exclude<GameType, GameType.puzzles | GameT
                     correct={result.answers.correct.length}
                     wrong={result.answers.wrong.length}
                     total={result.total}>
-                    {"time" in result && <div>{makeLineFromParcedTime(getParcedTime({ time: result.time }))}</div>}
+                    {"time" in result && <div>{makeLineFromParcedTime({ time: result.time })}</div>}
 
                     {location.state?.data && (
                         <button

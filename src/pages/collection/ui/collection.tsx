@@ -1,6 +1,20 @@
 import styles from "./collection.module.scss";
 
 /*
+
+enum CollectionType {
+    DIFFICULT = "difficult",
+    LEARNED = "learned",
+    SELECTED = "selected",
+}
+
+export interface CollectionLikeArraysType {
+    [CollectionType.DIFFICULT]: WordWithIdDataType[];
+    [CollectionType.LEARNED]: WordWithIdDataType[];
+    [CollectionType.SELECTED]: WordWithIdDataType[];
+    all: WordWithIdDataType[];
+}
+
 function CollectionPart({ data, type }: { data: CollectionLikeArraysType; type: CollectionType }) {
     const { user } = useAppSelector(state => state.persist.auth);
     const { setContent } = useContext(ModalContext);

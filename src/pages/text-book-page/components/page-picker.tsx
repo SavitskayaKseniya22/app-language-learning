@@ -1,8 +1,22 @@
 import type { Dispatch, SetStateAction } from "react";
 import { useRef } from "react";
 import styled from "styled-components";
-import type { PageType } from "../../../shared/types/interfaces";
-import { ScreenSize, WordBaseValues } from "../../../shared/types/interfaces";
+
+enum ScreenSize {
+    MOBILE = "(min-width: 320px)",
+    TABLET = "(min-width: 768px)",
+    LAPTOPS = "(min-width: 1024px)",
+    DESKTOP = "(min-width: 1920px)",
+}
+
+enum WordBaseValues {
+    MINGROUP = 0,
+    MAXGROUP = 5,
+    MINPAGE = 0,
+    MAXPAGE = 29,
+    MAXWORD = 19,
+    MINWORD = 0,
+}
 
 const StyledPagePicker = styled("div")`
     display: flex;
@@ -30,7 +44,7 @@ const StyledPagePickerButton = styled("button")`
     }
 `;
 
-function PagePicker({ values }: { values: PageType & { setPage: Dispatch<SetStateAction<number>> } }) {
+function PagePicker({ values }: { values: { page: number } & { setPage: Dispatch<SetStateAction<number>> } }) {
     const borderValues = useRef({ prev: 0, next: 1 });
 
     const handleClick = (value: number) => {

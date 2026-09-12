@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { GameContext } from "../../entities/game/ui/game-start-screen/game-start-screen";
 import Spinner from "../../shared/ui/spinner/spinner";
 import { useGetRandomWordsQuery } from "../../store/words-api";
-import { DataQueue } from "../../shared/lib/utilities";
+import { DataQueue } from "../../shared/lib/math";
 import AudiocallGame from "./components/audiocall-game";
 import { useAppDispatch } from "../../app/store/store";
 import { resetAudiocallResult } from "../../store/result-slice";

@@ -1,15 +1,17 @@
-import type { Word } from "@/entities/user";
 import { useGetAllWordsByDifficultyQuery } from "@/entities/user/api/user-api";
 import { ErrorComponent } from "@/shared/ui/error-component";
 import { Spinner } from "@/shared/ui/spinner";
 import { useLocation, Outlet, type Location } from "react-router-dom";
+import type { GameContextType } from "../../types";
+import { complexityData, difficultyData } from "../../model/difficulty";
 
 export default function GameDataManager() {
-    const { state } = useLocation() as Location<{ difficulty?: number; data?: Word[]; complexity?: number } | null>;
+    const { state } = useLocation() as Location<Partial<GameContextType> | null>;
 
     const passedData = state?.data;
-    const passedDifficulty = state?.difficulty || 0;
-    const passedComplexity = state?.complexity || 0;
+    const passedDifficulty = state?.difficulty || difficultyData[0].value;
+    const passedComplexity = state?.complexity || complexityData[0].value;
+    const passedIsTimed = state?.isTimed;
 
     const { isFetching, error, currentData } = useGetAllWordsByDifficultyQuery(
         {
@@ -25,12 +27,28 @@ export default function GameDataManager() {
         return <ErrorComponent />;
     }
     if (passedData) {
-        return <Outlet context={{ data: passedData, difficulty: passedDifficulty, complexity: passedComplexity }} />;
+        return (
+            <Outlet
+                context={{
+                    data: passedData,
+                    difficulty: passedDifficulty,
+                    complexity: passedComplexity,
+                    isTimed: !!passedIsTimed,
+                }}
+            />
+        );
     }
 
     if (currentData) {
         return (
-            <Outlet context={{ data: currentData.words, difficulty: passedDifficulty, complexity: passedComplexity }} />
+            <Outlet
+                context={{
+                    data: currentData.words,
+                    difficulty: passedDifficulty,
+                    complexity: passedComplexity,
+                    isTimed: !!passedIsTimed,
+                }}
+            />
         );
     }
 }

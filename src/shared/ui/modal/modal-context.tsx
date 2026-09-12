@@ -1,4 +1,4 @@
-import type { SizeType } from "@/shared/types/interfaces";
+import type { SizeType } from "@/shared/types/types";
 import { createContext } from "react";
 
 export type ModalContentType = {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { makeEmptyArrayWithIds } from "../../../shared/lib/utilities";
-import type { ProgressType } from "../../../shared/types/interfaces";
+
+type ProgressType = { total: number; streak: number };
 
 const StyledStreak = styled("ul")`
     display: flex;
@@ -16,6 +16,13 @@ const StyledStreakItem = styled("li")<{ $type: "fullfilled" | "empty" }>`
     border-radius: 50%;
     background-color: ${properties => (properties.$type === "fullfilled" ? "rgb(244, 162, 97)" : "rgba(233, 197, 106, 0.5)")};
 `;
+
+function makeEmptyArrayWithIds(length: number) {
+    return Array.from({ length }, () => "0").map(item => ({
+        element: item,
+        key: Math.random().toString(),
+    }));
+}
 
 function Streak({ streak, total }: ProgressType) {
     return (

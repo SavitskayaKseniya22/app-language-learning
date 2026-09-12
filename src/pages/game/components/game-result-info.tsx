@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import styled from "styled-components";
-import { getPercent, getResultMessage } from "../../../shared/lib/utilities";
+import { getPercent, getResultMessage } from "../../../shared/lib/math";
 
 const StyledGameResultInfo = styled("div")`
     display: flex;
@@ -20,6 +20,18 @@ const StyledGameResultInfo = styled("div")`
         flex-wrap: wrap;
     }
 `;
+
+function getResultMessage(percent: number) {
+    const messages = [
+        "Next time will be better!",
+        "You can do better!",
+        "Nice! You start learning!",
+        "Almost done!",
+        "You are a native now. Congrats!",
+    ];
+
+    return messages[Math.round(percent / 25)];
+}
 
 function GameResultInfo({
     correct,
