@@ -1,0 +1,35 @@
+@use "@abstracts/mixins" as mx;
+@use "@abstracts/variables" as vars;
+
+.points {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 0.5rem;
+  align-items: center;
+  min-width: 232px;
+
+  @media (min-width: vars.$desktop-s) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.points__value {
+  display: inline-block;
+  min-width: 64px;
+
+  &--penalty {
+    min-width: 48px;
+    color: vars.$color-error-700;
+  }
+
+  &--correct {
+    min-width: 48px;
+    color: vars.$color-success-700;
+  }
+}
+
+.points__note {
+  display: flex;
+  gap: 0.5rem;
+}

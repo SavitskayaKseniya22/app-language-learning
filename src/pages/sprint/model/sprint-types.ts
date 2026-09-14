@@ -1,6 +1,6 @@
 import type { Word } from "@/entities/user";
 
-export interface ActiveWordsType {
+export type SprintWordsType = {
     first: Word;
     second: Word;
-}
+};

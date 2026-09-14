@@ -2,7 +2,7 @@ import { ImagePreview } from "@/shared/ui/image-preview";
 import { CustomTable } from "@/shared/ui/table";
 import { useContext, useState } from "react";
 import styles from "./textbook.module.scss";
-import { AudioWithButton } from "@/shared/ui/audio-button";
+import { AudioButton } from "@/shared/ui/audio-button";
 import { ModalContext } from "@/shared/ui/modal";
 import { Button } from "@/shared/ui/button";
 import { GamesList } from "@/widgets/games-list";
@@ -74,7 +74,7 @@ export default function TextbookPage() {
                         rows: data.words.map(item => {
                             return {
                                 content: {
-                                    preview_audio: <AudioWithButton path={item.audio} />,
+                                    preview_audio: <AudioButton path={item.audio} />,
                                     preview: (
                                         <ImagePreview
                                             src={getWordAssetUrl(item.image)}

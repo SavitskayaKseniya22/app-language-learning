@@ -4,12 +4,10 @@ import styled from "styled-components";
 import DragAndDrop from "./drag-and-drop";
 import type { DataQueue } from "../../../shared/lib/math";
 import { useAppDispatch, useAppSelector } from "../../../app/store/store";
-import Points from "../../game/components/points";
+import { Points } from "@/shared/ui/points";
 import { updatePuzzlesTotalResult } from "../../../store/result-slice";
-import ProgressTracking from "../../game/components/progress-tracking";
+import { ProgressTracking } from "@/shared/ui/progress-tracking";
 import GameInfo from "../../game/components/game-info";
-import { GameContext } from "../../../entities/game/ui/game-start-screen/game-start-screen";
-import StopWatch from "../../game/components/stop-watch";
 
 export const StyledPuzzlesGameAnswer = styled("h4")<{
     $type: "correct" | "wrong";
@@ -39,11 +37,12 @@ function PuzzlesGame({ data }: { data: DataQueue }) {
                 <ProgressTracking streak={data.head} total={data.startLength} />
                 <Points step={puzzles.step} total={puzzles.total} subtrahend={puzzles.subtrahend} />
             </GameInfo>
-            <StopWatch
+
+            {/*<StopWatch
                 func={value => {
                     timer.current = value;
                 }}
-            />
+            />*/}
 
             <div className="game__container">
                 <h4>

@@ -6,8 +6,8 @@ import CollectionControlPanel from "./collection-control-panel";
 import Spinner from "../../../shared/ui/spinner/spinner";
 import { useAppSelector } from "../../../app/store/store";
 import { useGetUserWordQuery } from "../../../store/user-words-api";
-import WordProgress from "./word-progress";
-import WordAudio from "./word-audio";
+import { AudioButton } from "@/shared/ui/audio-button";
+import { Streak } from "@/shared/ui/streak";
 
 const StyledWordDetailed = styled("div")`
     gap: 1rem;
@@ -121,14 +121,14 @@ function WordDetailed({ wordData }: { wordData: WordType }) {
             {user && isSuccess && (
                 <StyledWordStatusPanel>
                     <CollectionControlPanel wordData={wordData} wordDataDetailed={wordDataDetailed} />
-                    <WordProgress wordDataDetailed={wordDataDetailed} />
+                    <Streak streak={wordDataDetailed?.guessed || 0} total={wordDataDetailed?.difficult ? 5 : 3} />
                 </StyledWordStatusPanel>
             )}
 
             <StyledWordDetailedMedia>
                 {image}
                 <div className="media__audio">
-                    <WordAudio source={wordData.audio} />
+                    <AudioButton path={wordData.audio} />
                 </div>
             </StyledWordDetailedMedia>
 

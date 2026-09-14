@@ -6,8 +6,8 @@ import styled, { css } from "styled-components";
 import type { DataQueue } from "../../../shared/lib/math";
 import { StyledPuzzlesGameAnswer } from "../../sentences/components/puzzles-game";
 import GameInfo from "../../game/components/game-info";
-import Points from "../../game/components/points";
-import ProgressTracking from "../../game/components/progress-tracking";
+import { Points } from "@/shared/ui/points";
+import { ProgressTracking } from "@/shared/ui/progress-tracking";
 import { useAppDispatch, useAppSelector } from "../../../app/store/store";
 import { updateConstructorResult } from "../../../store/result-slice";
 import StopWatch from "../../game/components/stop-watch";
@@ -119,11 +119,11 @@ function ConstructorGame({ data }: { data: DataQueue }) {
                 <ProgressTracking streak={data.head} total={data.startLength} />
                 <Points step={constructor.step} total={constructor.total} subtrahend={constructor.subtrahend} />
             </GameInfo>
-            <StopWatch
+            {/*<StopWatch
                 func={value => {
                     timer.current = value;
                 }}
-            />
+            />*/}
             <div className="game__container">
                 {middleResult === null ? (
                     <>

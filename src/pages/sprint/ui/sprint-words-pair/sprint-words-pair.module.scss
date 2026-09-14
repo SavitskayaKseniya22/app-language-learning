@@ -1,0 +1,39 @@
+@use "@abstracts/mixins" as mx;
+@use "@abstracts/variables" as vars;
+
+.words {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.words__word {
+  &--main {
+    @include mx.text-headline-xl;
+  }
+
+  &--translated {
+    @include mx.text-headline-m;
+  }
+}
+
+.words__note {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  color: vars.$color-text-light;
+
+  &::before,
+  &::after {
+    display: block;
+    width: 5rem;
+    height: 1px;
+    content: "";
+    background-color: vars.$color-stroke;
+  }
+}
+
+.words__question {
+  color: vars.$color-text-light;
+}

@@ -1,11 +1,11 @@
 import type { Word } from "@/entities/user";
-import type { SprintWordsType } from "@/pages/sprint/model/sprint-types";
 import { getRandom } from "@/shared/lib/math";
+import type { AudiocallWordsType } from "./audiocall-types";
 
 export class DataQueue {
     elements: Word[] = [];
 
-    startPair: SprintWordsType;
+    startFive: AudiocallWordsType;
 
     usedElementsIds: number[];
 
@@ -13,11 +13,22 @@ export class DataQueue {
         this.elements = elements;
 
         this.usedElementsIds = [];
-        this.startPair = this.nextPair();
+        this.startFive = this.nextFive();
     }
 
-    createSecondIndex(firstIndex: number) {
-        return Math.random() <= 0.5 ? firstIndex : getRandom(0, this.elements.length - 1);
+    createAdditionalIndexes(firstIndex: number): number[] {
+        const availableIndexes = this.elements.map((_, index) => index).filter(index => index !== firstIndex);
+
+        const indexes: number[] = [];
+
+        while (indexes.length < 4) {
+            const randomIndex = getRandom(0, availableIndexes.length - 1);
+
+            indexes.push(availableIndexes[randomIndex]);
+            availableIndexes.splice(randomIndex, 1);
+        }
+
+        return indexes;
     }
 
     getRandomAvailableIndex(): number | null {
@@ -33,28 +44,24 @@ export class DataQueue {
         return availableIndexes[getRandom(0, availableIndexes.length - 1)];
     }
 
-    nextPair(): SprintWordsType {
-        if (this.isEmpty) {
-            throw new Error("DataQueue requires at least 2 elements to create a pair");
-        }
-
+    nextFive(): AudiocallWordsType {
         const firstIndex = this.getRandomAvailableIndex();
 
         if (firstIndex === null) {
             throw new Error("Can't find a word");
         }
 
+        const additionalIndexes = this.createAdditionalIndexes(firstIndex);
+
         const first = this.elements[firstIndex];
 
-        const secondIndex = this.createSecondIndex(firstIndex);
-
-        const second = this.elements[secondIndex];
+        const others = additionalIndexes.map(index => this.elements[index]);
 
         this.usedElementsIds.push(first.id);
 
         return {
-            first,
-            second,
+            ref: first,
+            others,
         };
     }
 

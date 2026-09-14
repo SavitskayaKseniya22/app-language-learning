@@ -1,23 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Streak from "../../../game/components/streak";
-import Points from "../../../game/components/points";
+import { Streak } from "@/shared/ui/streak";
+import { Points } from "@/shared/ui/points";
 import { useAppDispatch, useAppSelector } from "../../../../app/store/store";
-import GameInfo from "../../../game/components/game-info";
-import ProgressTracking from "../../../game/components/progress-tracking";
+import { ProgressTracking } from "@/shared/ui/progress-tracking";
 import type { DataQueue } from "@/pages/sprint/model/sprint-data-queue";
 import { updateSpritState } from "../../model/sprint-slice";
-import Timer from "@/pages/game/components/timer";
-import type { ActiveWordsType } from "../../model/sprint-types";
-import SprintWordsPair from "../sprint-words-pair/sprint-words-pair";
+import { Timer } from "@/shared/ui/timer";
+import type { SprintWordsType } from "../../model/sprint-types";
 import SprintControls from "../sprint-controls/sprint-controls";
+import styles from "./sprint-game.module.scss";
+import { GameInfoContainer } from "@/shared/ui/game-info-container";
+import SprintWordsPair from "../sprint-words-pair/sprint-words-pair";
+import { Tips } from "@/shared/ui/tips";
+import { GameType } from "@/entities/user";
 
 export default function SprintGame({ data, isTimed = false }: { data: DataQueue; isTimed?: boolean }) {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const { sprint } = useAppSelector(state => state.sprintReducer);
 
-    const [activeWords, setActiveWords] = useState<ActiveWordsType>(data.startPair);
+    const [activeWords, setActiveWords] = useState<SprintWordsType>(data.startPair);
 
     const handleClick = (value: string) => {
         const { first, second } = activeWords;
@@ -48,17 +51,23 @@ export default function SprintGame({ data, isTimed = false }: { data: DataQueue;
     };
 
     return (
-        <main className="main">
-            <GameInfo>
-                <ProgressTracking streak={data.progress} total={data.length} />
-                <Points points={sprint.points} score={sprint.score} />
-            </GameInfo>
-            {isTimed && <Timer duration={60} doAfterTimer={doAfterTimer} />}
-            <div className="game__container">
-                <Streak streak={sprint.streak} total={3} />
+        <div className={styles.game}>
+            <GameInfoContainer>
+                <div className={styles.game__header}>
+                    <ProgressTracking streak={data.progress} words={data.all} />
+
+                    <Streak streak={sprint.streak} total={3} />
+                    {isTimed && <Timer duration={60} doAfterTimer={doAfterTimer} />}
+                    <Points points={sprint.points} score={sprint.score} />
+                </div>
+            </GameInfoContainer>
+
+            <GameInfoContainer className={styles.game__container}>
                 <SprintWordsPair words={activeWords} />
                 <SprintControls handleClick={handleClick} />
-            </div>
-        </main>
+            </GameInfoContainer>
+
+            <Tips type={GameType.sprint} />
+        </div>
     );
 }

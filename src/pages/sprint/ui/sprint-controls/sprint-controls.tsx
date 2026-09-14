@@ -1,31 +1,7 @@
+import { Button } from "@/shared/ui/button";
 import type React from "react";
 import { useEffect } from "react";
-import styled from "styled-components";
-
-const StyledChoiceList = styled("div")`
-    display: flex;
-    padding: 1rem;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
-`;
-
-const StyledChoiceButton = styled("button")<{ $type: "left" | "right" }>`
-    color: white;
-    padding: 1rem 2rem;
-    font-size: 1.5rem;
-    position: relative;
-    background-color: ${properties => (properties.$type === "left" ? "rgb(231, 111, 81)" : "rgb(42, 157, 143)")};
-
-    .icon {
-        position: absolute;
-        top: 0.5rem;
-        font-size: 1rem;
-        opacity: 0.5;
-        ${properties => properties.$type === "left" && "left: 0.5rem;"}
-        ${properties => properties.$type === "right" && "right: 0.5rem;"}
-    }
-`;
+import styles from "./sprint-controls.module.scss";
 
 export default function SprintControls({ handleClick }: { handleClick: (value: string) => void }) {
     const onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -52,15 +28,13 @@ export default function SprintControls({ handleClick }: { handleClick: (value: s
     }, [handleClick]);
 
     return (
-        <StyledChoiceList>
-            <StyledChoiceButton $type="left" className="choices_false" type="button" value="false" onClick={onClick}>
+        <div className={styles.buttons}>
+            <Button type="button" value="false" onClick={onClick} size="big">
                 false
-                <i className="fa-solid fa-arrow-left icon" />
-            </StyledChoiceButton>
-            <StyledChoiceButton $type="right" className="choices_true" type="button" value="true" onClick={onClick}>
+            </Button>
+            <Button type="button" value="true" onClick={onClick} size="big" view="secondary">
                 true
-                <i className="fa-solid fa-arrow-right icon" />
-            </StyledChoiceButton>
-        </StyledChoiceList>
+            </Button>
+        </div>
     );
 }

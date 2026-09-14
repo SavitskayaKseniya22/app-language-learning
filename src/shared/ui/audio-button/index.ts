@@ -1,1 +1,1 @@
-export { default as AudioWithButton } from "./audio-button";
+export { default as AudioButton } from "./audio-button";

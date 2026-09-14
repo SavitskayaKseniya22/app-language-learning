@@ -1,43 +1,15 @@
-/* eslint-disable jsx-a11y/media-has-caption */
-import { useRef } from "react";
-import styled from "styled-components";
-import { getWordAssetUrl } from "@/entities/user";
-import type { ActiveWordsType } from "../../model/sprint-types";
+import type { SprintWordsType } from "../../model/sprint-types";
+import styles from "./sprint-words-pair.module.scss";
 
-const StyledActiveWordsList = styled("div")`
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    gap: 1rem;
-    text-align: center;
-
-    .audible {
-        cursor: pointer;
-    }
-
-    audio {
-        display: none;
-    }
-`;
-
-export default function SprintWordsPair({ words }: { words: ActiveWordsType }) {
-    const audio = useRef<HTMLAudioElement>(null);
-
+export default function SprintWordsPair({ words }: { words: SprintWordsType }) {
     return (
-        <StyledActiveWordsList>
-            <button
-                onClick={() => {
-                    void audio.current?.play();
-                }}>
-                <h2 title="listen" className="audible">
-                    {words.first.word}
-                </h2>
-            </button>
+        <div className={styles.words}>
+            <p className={styles["words__word--main"]}>{words.first.word}</p>
 
-            <i className="fa-solid fa-arrows-up-down" />
-            <h3>{words.second.word_translate}</h3>
+            <p className={styles.words__note}>means</p>
+            <p className={styles["words__word--translated"]}>{words.second.word_translate}</p>
 
-            <audio ref={audio} src={getWordAssetUrl(words.first.audio)} />
-        </StyledActiveWordsList>
+            <p className={styles.words__question}>Is this translation correct?</p>
+        </div>
     );
 }

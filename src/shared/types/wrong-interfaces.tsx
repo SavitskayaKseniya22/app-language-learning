@@ -15,11 +15,6 @@ export type WordType = {
     group: string;
 };
 
-export interface ActiveWordsTypes {
-    first: WordType;
-    second: WordType;
-}
-
 export type WordWithIdDataType = WordType & {
     guessed?: number;
     difficult?: boolean;

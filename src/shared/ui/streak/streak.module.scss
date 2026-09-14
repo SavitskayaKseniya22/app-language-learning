@@ -1,0 +1,19 @@
+@use "@abstracts/variables" as vars;
+
+.streak {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.streak__item {
+  width: 3rem;
+  height: 1rem;
+  background-color: vars.$color-stroke-50;
+  border-radius: 8px;
+
+  &--filled {
+    background-color: vars.$charcoal-blue;
+  }
+}

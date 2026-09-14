@@ -5,7 +5,7 @@ import clsx from "clsx";
 import styles from "./audio-button.module.scss";
 import { getWordAssetUrl } from "@/entities/user";
 
-export default function AudioWithButton({ path }: { path: string }) {
+export default function AudioButton({ path }: { path: string }) {
     const [isPlaying, setIsPlaying] = useState(false);
     const audioReference = useRef<HTMLAudioElement>(null);
     const handleClick = () => {

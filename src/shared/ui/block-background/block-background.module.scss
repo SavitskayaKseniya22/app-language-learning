@@ -1,8 +1,21 @@
 @use "@abstracts/mixins" as mx;
 @use "@abstracts/variables" as vars;
 
-.block {
+.container {
+  @include mx.main-container;
+
+  gap: 2rem;
+}
+
+.container__note {
+  @include mx.text-l;
+
+  color: vars.$color-text-light;
+}
+
+.container__content {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   height: 100%;
   padding: 0.5rem;
@@ -19,6 +32,6 @@
   }
 }
 
-.block__content {
+.container__backdrop {
   flex-grow: 1;
 }

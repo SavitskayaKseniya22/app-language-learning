@@ -3,10 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { WordType, ResultsState } from "../shared/types/wrong-interfaces";
 import { ResultType } from "../shared/types/wrong-interfaces";
 
-enum StepValues {
-    MIN = 10,
-}
-
 enum StreakValues {
     MIN = 0,
     MAX = 3,
@@ -17,53 +13,6 @@ export type UpdateResultType = {
     word: WordType;
     time?: number;
 };
-
-type ComplicatedResultType = {
-    answers: { correct: WordType[]; wrong: WordType[] };
-    step: number;
-    total: number;
-    streak: number;
-};
-
-export function updateResultData(
-    result: ComplicatedResultType,
-    isAnswerCorrect: boolean,
-    word: WordType,
-): ComplicatedResultType {
-    const updatedResult = { ...result };
-
-    const total = isAnswerCorrect ? updatedResult.total + updatedResult.step : updatedResult.total;
-
-    const step = isAnswerCorrect
-        ? updatedResult.streak === StreakValues.MAX
-            ? updatedResult.step + StepValues.MIN
-            : updatedResult.step
-        : StepValues.MIN;
-
-    const streak =
-        (updatedResult.streak === StreakValues.MAX && isAnswerCorrect) || !isAnswerCorrect
-            ? (updatedResult.streak = StreakValues.MIN)
-            : updatedResult.streak + 1;
-
-    const { correct, wrong } = updatedResult.answers;
-
-    const answers = isAnswerCorrect
-        ? {
-              wrong,
-              correct: [...correct, word],
-          }
-        : {
-              correct,
-              wrong: [...wrong, word],
-          };
-
-    return {
-        answers,
-        step,
-        total,
-        streak,
-    };
-}
 
 const initAnswersValue = { correct: [], wrong: [] };
 
@@ -106,24 +55,6 @@ export const resultsSlice = createSlice({
     name: "results",
     initialState,
     reducers: {
-        updateSprintResult: (
-            state,
-            action: PayloadAction<
-                UpdateResultType & {
-                    type: ResultType.sprintShort | ResultType.sprintLong;
-                }
-            >,
-        ) => {
-            state[ResultType.sprint] = {
-                ...updateResultData(state[ResultType.sprint], action.payload.isAnswerCorrect, action.payload.word),
-                type: action.payload.type,
-            };
-        },
-
-        resetSprintResult: state => {
-            state[ResultType.sprint] = initialState[ResultType.sprint];
-        },
-
         setPuzzlesResult: (state, action: PayloadAction<{ step: number } & { subtrahend: number }>) => {
             state.puzzles = { ...initPuzzlesResultValue, ...action.payload };
         },
@@ -152,14 +83,6 @@ export const resultsSlice = createSlice({
 
         resetPuzzlesResult: state => {
             state.puzzles = initPuzzlesResultValue;
-        },
-
-        updateAudiocallResult: (state, action: PayloadAction<UpdateResultType>) => {
-            state.audiocall = updateResultData(state.audiocall, action.payload.isAnswerCorrect, action.payload.word);
-        },
-
-        resetAudiocallResult: state => {
-            state.audiocall = initComplicatedResultValue;
         },
 
         setConstructorResult: (state, action: PayloadAction<{ step: number } & { subtrahend: number }>) => {
@@ -196,13 +119,10 @@ export const resultsSlice = createSlice({
 });
 
 export const {
-    resetSprintResult,
-    updateSprintResult,
     updatePuzzlesMiddleResult,
     updatePuzzlesTotalResult,
     setPuzzlesResult,
-    updateAudiocallResult,
-    resetAudiocallResult,
+
     resetConstructorResult,
     updateConstructorResult,
     resetPuzzlesResult,

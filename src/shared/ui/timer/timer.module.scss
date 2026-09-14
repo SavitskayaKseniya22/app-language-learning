@@ -1,0 +1,21 @@
+@use "@abstracts/mixins" as mx;
+@use "@abstracts/variables" as vars;
+
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer__content {
+  text-wrap: nowrap;
+}
+
+.timer__time {
+  display: inline-block;
+  min-width: 32px;
+
+  &--ending {
+    color: vars.$color-error-700;
+  }
+}

@@ -1,0 +1,40 @@
+@use "@abstracts/variables" as vars;
+@use "@abstracts/mixins" as mx;
+
+.progress {
+  display: flex;
+  flex-grow: 1;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  min-width: 260px;
+}
+
+.progress__info {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+
+  @include mx.text-emphasis-l;
+}
+
+.progress__list {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.progress__item {
+  flex-grow: 1;
+  height: 1rem;
+  background-color: vars.$color-stroke-50;
+
+  &--filled {
+    background-color: vars.$charcoal-blue;
+  }
+}

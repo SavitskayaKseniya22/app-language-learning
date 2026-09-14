@@ -16,6 +16,8 @@ import GameStartScreen from "@/entities/game/ui/game-start-screen/game-start-scr
 import { ModalProvider } from "@/shared/ui/modal";
 import { SprintPage } from "@/pages/sprint";
 import { GameDataManager } from "@/entities/game";
+import { AudiocallPage } from "@/pages/audiocall";
+import { BlockBackground } from "@/shared/ui/block-background";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -55,7 +57,7 @@ const router = createBrowserRouter(
                 <Route path="games">
                     <Route index element={<GamesPage />} />
 
-                    <Route path={GameType.sprint}>
+                    <Route path={GameType.sprint} element={<BlockBackground type={GameType.sprint} />}>
                         <Route index element={<GameStartScreen type={GameType.sprint} />} />
 
                         <Route path="game" element={<GameDataManager />}>
@@ -64,7 +66,18 @@ const router = createBrowserRouter(
 
                         <Route path="result" element={<GameResult type={GameType.sprint} />} />
                     </Route>
-                    <Route path={GameType.puzzles}>
+
+                    <Route path={GameType.audiocall} element={<BlockBackground type={GameType.audiocall} />}>
+                        <Route index element={<GameStartScreen type={GameType.audiocall} />} />
+
+                        <Route path="game" element={<GameDataManager />}>
+                            <Route index element={<AudiocallPage />} />
+                        </Route>
+
+                        <Route path="result" element={<GameResult type={GameType.audiocall} />} />
+                    </Route>
+
+                    <Route path={GameType.puzzles} element={<BlockBackground type={GameType.puzzles} />}>
                         <Route index element={<GameStartScreen type={GameType.puzzles} />} />
 
                         <Route path="game" element={<GameDataManager />}>
@@ -73,16 +86,8 @@ const router = createBrowserRouter(
 
                         <Route path="result" element={<GameResult type={GameType.puzzles} />} />
                     </Route>
-                    <Route path={GameType.audiocall}>
-                        <Route index element={<GameStartScreen type={GameType.audiocall} />} />
 
-                        <Route path="game" element={<GameDataManager />}>
-                            <Route index element={<SprintPage />} />
-                        </Route>
-
-                        <Route path="result" element={<GameResult type={GameType.audiocall} />} />
-                    </Route>
-                    <Route path={GameType.constructor}>
+                    <Route path={GameType.constructor} element={<BlockBackground type={GameType.constructor} />}>
                         <Route index element={<GameStartScreen type={GameType.constructor} />} />
 
                         <Route path="game" element={<GameDataManager />}>
