@@ -1,6 +1,5 @@
 import type { Word } from "@/entities/user";
 import { getRandom } from "@/shared/lib/math";
-import type { AudiocallWordsType } from "./audiocall-types";
 
 function shuffle<T>(array: Array<T>): Array<T> {
     const arrayCopy = [...array];
@@ -13,31 +12,20 @@ function shuffle<T>(array: Array<T>): Array<T> {
 
 export class DataQueue {
     elements: Word[] = [];
-
-    words: AudiocallWordsType;
+    word: Word & {
+        letters: {
+            value: string;
+            key: `${string}-${string}-${string}-${string}-${string}`;
+            index: number;
+        }[];
+    };
 
     usedElementsIds: number[];
 
     constructor({ elements }: { elements: Word[] }) {
         this.elements = elements;
-
         this.usedElementsIds = [];
-        this.words = this.nextFive();
-    }
-
-    createAdditionalIndexes(firstIndex: number): number[] {
-        const availableIndexes = this.elements.map((_, index) => index).filter(index => index !== firstIndex);
-
-        const indexes: number[] = [];
-
-        while (indexes.length < 4) {
-            const randomIndex = getRandom(0, availableIndexes.length - 1);
-
-            indexes.push(availableIndexes[randomIndex]);
-            availableIndexes.splice(randomIndex, 1);
-        }
-
-        return indexes;
+        this.word = this.nextWordLikeArray();
     }
 
     getRandomAvailableIndex(): number | null {
@@ -53,27 +41,28 @@ export class DataQueue {
         return availableIndexes[getRandom(0, availableIndexes.length - 1)];
     }
 
-    nextFive(): AudiocallWordsType {
+    nextWordLikeArray() {
+        if (this.isEmpty) {
+            throw new Error("DataQueue requires at least 2 elements to create a pair");
+        }
+
         const firstIndex = this.getRandomAvailableIndex();
 
         if (firstIndex === null) {
             throw new Error("Can't find a word");
         }
+        const item = this.elements[firstIndex];
 
-        const additionalIndexes = this.createAdditionalIndexes(firstIndex);
+        const letters = [...item.word].map((value, index) => ({ value, key: crypto.randomUUID(), index: index }));
 
-        const first = this.elements[firstIndex];
+        this.usedElementsIds.push(item.id);
 
-        const others = additionalIndexes.map(index => this.elements[index]);
-
-        this.usedElementsIds.push(first.id);
-
-        this.words = {
-            ref: first,
-            others: shuffle([...others, first]),
+        this.word = {
+            ...item,
+            letters: shuffle(letters),
         };
 
-        return this.words;
+        return this.word;
     }
 
     get length() {

@@ -5,7 +5,7 @@ import { getRandom } from "@/shared/lib/math";
 export class DataQueue {
     elements: Word[] = [];
 
-    startPair: SprintWordsType;
+    words: SprintWordsType;
 
     usedElementsIds: number[];
 
@@ -13,7 +13,7 @@ export class DataQueue {
         this.elements = elements;
 
         this.usedElementsIds = [];
-        this.startPair = this.nextPair();
+        this.words = this.nextPair();
     }
 
     createSecondIndex(firstIndex: number) {
@@ -52,10 +52,12 @@ export class DataQueue {
 
         this.usedElementsIds.push(first.id);
 
-        return {
+        this.words = {
             first,
             second,
         };
+
+        return this.words;
     }
 
     get length() {

@@ -2,13 +2,16 @@ import type { Word } from "@/entities/user";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
-const gamesInitialSettings = {
+export const sprintInitialSettings = {
     streak: {
         max: 3,
         default: 0,
     },
     points: {
         default: 10,
+    },
+    timer: {
+        default: 60,
     },
 };
 
@@ -20,32 +23,40 @@ type GameStateType = {
 };
 
 function updateData(state: GameStateType, isAnswerCorrect: boolean, word: Word): GameStateType {
-    const updatedState = { ...state };
+    let score = state.score;
+    let points = state.points;
+    let streak = state.streak;
 
-    const score = isAnswerCorrect ? updatedState.score + updatedState.points : updatedState.score;
+    const { correct, wrong } = state.answers;
 
-    const points = isAnswerCorrect
-        ? updatedState.streak === gamesInitialSettings.streak.max
-            ? updatedState.points + gamesInitialSettings.points.default
-            : updatedState.points
-        : gamesInitialSettings.points.default;
+    let answers = {
+        correct,
+        wrong,
+    };
 
-    const streak =
-        (updatedState.streak === gamesInitialSettings.streak.max && isAnswerCorrect) || !isAnswerCorrect
-            ? (updatedState.streak = gamesInitialSettings.streak.default)
-            : updatedState.streak + 1;
+    if (isAnswerCorrect) {
+        streak += 1;
 
-    const { correct, wrong } = updatedState.answers;
+        if (streak > sprintInitialSettings.streak.max) {
+            points += sprintInitialSettings.points.default;
+            streak = sprintInitialSettings.streak.default;
+        }
 
-    const answers = isAnswerCorrect
-        ? {
-              wrong,
-              correct: [...correct, word],
-          }
-        : {
-              correct,
-              wrong: [...wrong, word],
-          };
+        score += points;
+
+        answers = {
+            wrong,
+            correct: [...correct, word],
+        };
+    } else {
+        points = sprintInitialSettings.points.default;
+        streak = sprintInitialSettings.streak.default;
+
+        answers = {
+            correct,
+            wrong: [...wrong, word],
+        };
+    }
 
     return {
         answers,
@@ -58,14 +69,14 @@ function updateData(state: GameStateType, isAnswerCorrect: boolean, word: Word):
 const initialState: { sprint: GameStateType } = {
     sprint: {
         answers: { correct: [], wrong: [] },
-        streak: gamesInitialSettings.points.default,
-        points: gamesInitialSettings.points.default,
+        streak: sprintInitialSettings.streak.default,
+        points: sprintInitialSettings.points.default,
         score: 0,
     },
 };
 
 export const sprintStateSlice = createSlice({
-    name: "sprint-results",
+    name: "sprint-state",
     initialState,
     reducers: {
         updateSpritState: (state, action: PayloadAction<{ isAnswerCorrect: boolean; word: Word }>) => {

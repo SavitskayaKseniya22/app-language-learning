@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { DataQueue } from "../../model/audiocall-data-queue";
 import { useAppDispatch, useAppSelector } from "@/app/store/store";
-import { updateAudiocallState } from "../../model/audiocall-slice";
+import { audiocallInitialSettings, updateAudiocallState } from "../../model/audiocall-slice";
 import { ProgressTracking } from "@/shared/ui/progress-tracking";
 import { Points } from "@/shared/ui/points";
 import { Streak } from "@/shared/ui/streak";
@@ -21,7 +21,7 @@ function AudiocallGame({ data, isTimed = false }: { data: DataQueue; isTimed?: b
 
     const { audiocall } = useAppSelector(state => state.audiocallReducer);
 
-    const [activeWords, setActiveWords] = useState<AudiocallWordsType>(data.startFive);
+    const [activeWords, setActiveWords] = useState<AudiocallWordsType>(data.words);
 
     const [middleResult, setMiddleResult] = useState<null | boolean>(null);
 
@@ -86,9 +86,9 @@ function AudiocallGame({ data, isTimed = false }: { data: DataQueue; isTimed?: b
         <div className={styles.game}>
             <GameInfoContainer>
                 <div className={styles.game__header}>
-                    <ProgressTracking streak={data.progress} words={data.all} />{" "}
-                    <Streak streak={audiocall.streak} total={3} />
-                    {isTimed && <Timer duration={60} doAfterTimer={doAfterTimer} />}
+                    <ProgressTracking streak={data.progress} words={data.all} />
+                    <Streak streak={audiocall.streak} total={audiocallInitialSettings.streak.max} />
+                    {isTimed && <Timer duration={audiocallInitialSettings.timer.default} doAfterTimer={doAfterTimer} />}
                     <Points points={audiocall.points} score={audiocall.score} />
                 </div>
             </GameInfoContainer>

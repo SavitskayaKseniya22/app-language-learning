@@ -14,13 +14,6 @@
   gap: 5rem;
 }
 
-.game__round {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
-}
-
 .game__header {
   display: flex;
   flex-direction: column;
@@ -50,23 +43,20 @@
   }
 }
 
-.game__words {
+.words {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 2rem;
   align-items: center;
-  justify-content: center;
 }
 
-.game__word {
-  position: relative;
+.words__word {
+  &--main {
+    @include mx.text-headline-xl;
+  }
 
-  i {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    font-size: 0.75rem;
-    color: vars.$color-text-light;
+  &--translated {
+    @include mx.text-headline-m;
   }
 }
 
@@ -86,12 +76,46 @@
   }
 }
 
-.words__word {
-  &--main {
+.game__words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.game__word {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: vars.$charcoal-blue;
+  background-color: vars.$color-stroke-25;
+  border: 1px solid vars.$color-stroke;
+  border-radius: 4px;
+  @include mx.text-s;
+
+  @media (min-width: vars.$desktop-s) {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 16px;
     @include mx.text-headline-xl;
   }
 
-  &--translated {
-    @include mx.text-headline-m;
+  &--wrong {
+    background-color: vars.$color-error-100;
+    border: 1px solid vars.$color-error-700;
   }
+
+  &--correct {
+    background-color: vars.$color-success-100;
+    border: 1px solid vars.$color-success-700;
+  }
+}
+
+.game__buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
 }

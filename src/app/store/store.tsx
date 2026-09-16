@@ -8,6 +8,7 @@ import { userWordsApi } from "../../store/user-words-api";
 import { userApi } from "@/entities/user";
 import { sprintReducer } from "@/pages/sprint";
 import { audiocallReducer } from "@/pages/audiocall";
+import { constructorReducer } from "@/pages/constructor";
 
 const rootReducer = combineReducers({
     [wordsApi.reducerPath]: wordsApi.reducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     [userApi.reducerPath]: userApi.reducer,
     sprintReducer,
     audiocallReducer,
+    constructorReducer,
 });
 
 const store = configureStore({

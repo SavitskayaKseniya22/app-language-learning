@@ -5,7 +5,7 @@ import { Points } from "@/shared/ui/points";
 import { useAppDispatch, useAppSelector } from "../../../../app/store/store";
 import { ProgressTracking } from "@/shared/ui/progress-tracking";
 import type { DataQueue } from "@/pages/sprint/model/sprint-data-queue";
-import { updateSpritState } from "../../model/sprint-slice";
+import { sprintInitialSettings, updateSpritState } from "../../model/sprint-slice";
 import { Timer } from "@/shared/ui/timer";
 import type { SprintWordsType } from "../../model/sprint-types";
 import SprintControls from "../sprint-controls/sprint-controls";
@@ -20,7 +20,7 @@ export default function SprintGame({ data, isTimed = false }: { data: DataQueue;
     const dispatch = useAppDispatch();
     const { sprint } = useAppSelector(state => state.sprintReducer);
 
-    const [activeWords, setActiveWords] = useState<SprintWordsType>(data.startPair);
+    const [activeWords, setActiveWords] = useState<SprintWordsType>(data.words);
 
     const handleClick = (value: string) => {
         const { first, second } = activeWords;
@@ -55,9 +55,8 @@ export default function SprintGame({ data, isTimed = false }: { data: DataQueue;
             <GameInfoContainer>
                 <div className={styles.game__header}>
                     <ProgressTracking streak={data.progress} words={data.all} />
-
-                    <Streak streak={sprint.streak} total={3} />
-                    {isTimed && <Timer duration={60} doAfterTimer={doAfterTimer} />}
+                    <Streak streak={sprint.streak} total={sprintInitialSettings.streak.max} />
+                    {isTimed && <Timer duration={sprintInitialSettings.timer.default} doAfterTimer={doAfterTimer} />}
                     <Points points={sprint.points} score={sprint.score} />
                 </div>
             </GameInfoContainer>
