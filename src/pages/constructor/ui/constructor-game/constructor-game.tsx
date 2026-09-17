@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Points } from "@/shared/ui/points";
 import { ProgressTracking } from "@/shared/ui/progress-tracking";
-import type { DataQueue } from "../../model/constructor-data-queue";
+
 import styles from "./constructor-game.module.scss";
 import { GameInfoContainer } from "@/shared/ui/game-info-container";
 import { Timer } from "@/shared/ui/timer";
@@ -11,9 +11,11 @@ import { useAppDispatch, useAppSelector } from "@/app/store/store";
 import { constructorInitialSettings, updateConstructorState } from "../../model/constructor-slice";
 import { Streak } from "@/shared/ui/streak";
 import { Tips } from "@/shared/ui/tips";
+import type { Word } from "@/entities/user";
 import { GameType } from "@/entities/user";
 import { Button } from "@/shared/ui/button";
 import clsx from "clsx";
+import { DataQueue } from "../../model/constructor-data-queue";
 
 function ConstructorButton({
     clickOnEmpty,
@@ -42,9 +44,19 @@ function ConstructorButton({
     );
 }
 
-export default function ConstructorGame({ data, isTimed = false }: { data: DataQueue; isTimed?: boolean }) {
+export default function ConstructorGame({
+    elements,
+
+    isTimed = false,
+}: {
+    elements: Word[];
+
+    isTimed?: boolean;
+}) {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+
+    const [data] = useState(() => new DataQueue({ elements }));
 
     const { constructor } = useAppSelector(state => state.constructorReducer);
 

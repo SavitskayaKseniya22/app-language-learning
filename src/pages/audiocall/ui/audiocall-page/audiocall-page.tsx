@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { ErrorComponent } from "@/shared/ui/error-component";
 import AudiocallGame from "../audiocall-game/audiocall-game";
-import { DataQueue } from "../../model/audiocall-data-queue";
 import { resetAudiocallState } from "../../model/audiocall-slice";
 
 export default function AudiocallPage() {
@@ -17,7 +16,7 @@ export default function AudiocallPage() {
     }, []);
 
     if (context.data) {
-        return <AudiocallGame data={new DataQueue({ elements: context.data })} isTimed={context.isTimed} />;
+        return <AudiocallGame elements={context.data} isTimed={context.isTimed} />;
     }
 
     return <ErrorComponent />;

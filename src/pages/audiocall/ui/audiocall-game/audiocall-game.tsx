@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import type { DataQueue } from "../../model/audiocall-data-queue";
 import { useAppDispatch, useAppSelector } from "@/app/store/store";
 import { audiocallInitialSettings, updateAudiocallState } from "../../model/audiocall-slice";
 import { ProgressTracking } from "@/shared/ui/progress-tracking";
@@ -12,12 +11,15 @@ import { AudioButton } from "@/shared/ui/audio-button";
 import styles from "./audiocall.module.scss";
 import { GameInfoContainer } from "@/shared/ui/game-info-container";
 import { Tips } from "@/shared/ui/tips";
+import type { Word } from "@/entities/user";
 import { GameType } from "@/entities/user";
 import { Button } from "@/shared/ui/button";
+import { DataQueue } from "../../model/audiocall-data-queue";
 
-function AudiocallGame({ data, isTimed = false }: { data: DataQueue; isTimed?: boolean }) {
+function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTimed?: boolean }) {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const [data] = useState(() => new DataQueue({ elements }));
 
     const { audiocall } = useAppSelector(state => state.audiocallReducer);
 

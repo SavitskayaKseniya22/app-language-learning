@@ -3,7 +3,6 @@ import type { GameContextType } from "@/entities/game";
 import { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { ErrorComponent } from "@/shared/ui/error-component";
-import { DataQueue } from "@/pages/sprint/model/sprint-data-queue";
 import SprintGame from "../sprint-game/sprint-game";
 import { resetSprintState } from "../../model/sprint-slice";
 
@@ -17,7 +16,7 @@ export default function SprintPage() {
     }, []);
 
     if (context.data) {
-        return <SprintGame data={new DataQueue({ elements: context.data })} isTimed={context.isTimed} />;
+        return <SprintGame elements={context.data} isTimed={context.isTimed} />;
     }
 
     return <ErrorComponent />;

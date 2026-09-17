@@ -19,6 +19,7 @@ import { GameDataManager } from "@/entities/game";
 import { AudiocallPage } from "@/pages/audiocall";
 import { BlockBackground } from "@/shared/ui/block-background";
 import { ConstructorPage } from "@/pages/constructor";
+import { PuzzlePage } from "@/pages/sentences";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -82,7 +83,7 @@ const router = createBrowserRouter(
                         <Route index element={<GameStartScreen type={GameType.puzzles} />} />
 
                         <Route path="game" element={<GameDataManager />}>
-                            <Route index element={<SprintPage />} />
+                            <Route index element={<PuzzlePage />} />
                         </Route>
 
                         <Route path="result" element={<GameResult type={GameType.puzzles} />} />

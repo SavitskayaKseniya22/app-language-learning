@@ -4,7 +4,6 @@ import ErrorComponent from "@/shared/ui/error-component/error-component";
 import { useOutletContext } from "react-router-dom";
 import type { GameContextType } from "@/entities/game";
 import ConstructorGame from "../constructor-game/constructor-game";
-import { DataQueue } from "../../model/constructor-data-queue";
 import { resetConstructorState } from "../../model/constructor-slice";
 
 export default function Constructor() {
@@ -17,7 +16,7 @@ export default function Constructor() {
     }, []);
 
     if (context.data) {
-        return <ConstructorGame data={new DataQueue({ elements: context.data })} isTimed={context.isTimed} />;
+        return <ConstructorGame elements={context.data} isTimed={context.isTimed} />;
     }
 
     return <ErrorComponent />;

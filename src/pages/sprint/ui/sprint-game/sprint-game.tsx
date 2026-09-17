@@ -4,7 +4,6 @@ import { Streak } from "@/shared/ui/streak";
 import { Points } from "@/shared/ui/points";
 import { useAppDispatch, useAppSelector } from "../../../../app/store/store";
 import { ProgressTracking } from "@/shared/ui/progress-tracking";
-import type { DataQueue } from "@/pages/sprint/model/sprint-data-queue";
 import { sprintInitialSettings, updateSpritState } from "../../model/sprint-slice";
 import { Timer } from "@/shared/ui/timer";
 import type { SprintWordsType } from "../../model/sprint-types";
@@ -13,11 +12,15 @@ import styles from "./sprint-game.module.scss";
 import { GameInfoContainer } from "@/shared/ui/game-info-container";
 import SprintWordsPair from "../sprint-words-pair/sprint-words-pair";
 import { Tips } from "@/shared/ui/tips";
+import type { Word } from "@/entities/user";
 import { GameType } from "@/entities/user";
+import { DataQueue } from "../../model/sprint-data-queue";
 
-export default function SprintGame({ data, isTimed = false }: { data: DataQueue; isTimed?: boolean }) {
+export default function SprintGame({ elements, isTimed = false }: { elements: Word[]; isTimed?: boolean }) {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const [data] = useState(() => new DataQueue({ elements }));
+
     const { sprint } = useAppSelector(state => state.sprintReducer);
 
     const [activeWords, setActiveWords] = useState<SprintWordsType>(data.words);

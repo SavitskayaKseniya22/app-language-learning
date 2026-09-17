@@ -2,22 +2,22 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import type { TypedUseSelectorHook } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
-import resultsReducer from "../../store/result-slice";
 import { wordsApi } from "../../store/words-api";
 import { userWordsApi } from "../../store/user-words-api";
 import { userApi } from "@/entities/user";
 import { sprintReducer } from "@/pages/sprint";
 import { audiocallReducer } from "@/pages/audiocall";
 import { constructorReducer } from "@/pages/constructor";
+import { puzzleReducer } from "@/pages/sentences";
 
 const rootReducer = combineReducers({
     [wordsApi.reducerPath]: wordsApi.reducer,
     [userWordsApi.reducerPath]: userWordsApi.reducer,
-    resultsReducer,
     [userApi.reducerPath]: userApi.reducer,
     sprintReducer,
     audiocallReducer,
     constructorReducer,
+    puzzleReducer,
 });
 
 const store = configureStore({
