@@ -18,14 +18,14 @@ export const constructorInitialSettings = {
     },
 };
 
-type GameStateType = {
+type ConstructorStateType = {
     answers: { correct: Word[]; wrong: Word[] };
     points: number;
     score: number;
     streak: number;
 };
 
-const initialState: { constructor: GameStateType } = {
+const initialState: { constructor: ConstructorStateType } = {
     constructor: {
         answers: { correct: [], wrong: [] },
         points: constructorInitialSettings.points.default,
@@ -34,7 +34,7 @@ const initialState: { constructor: GameStateType } = {
     },
 };
 
-function updateData(state: GameStateType, isAnswerCorrect: boolean, word: Word): GameStateType {
+function updateData(state: ConstructorStateType, isAnswerCorrect: boolean, word: Word): ConstructorStateType {
     let score = state.score;
     let points = state.points;
     let streak = state.streak;

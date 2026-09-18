@@ -11,18 +11,19 @@ export const sprintInitialSettings = {
         default: 10,
     },
     timer: {
-        default: 60,
+        default: 10,
+        //todo change to 60
     },
 };
 
-type GameStateType = {
+export type SprintStateType = {
     answers: { correct: Word[]; wrong: Word[] };
     points: number;
     score: number;
     streak: number;
 };
 
-function updateData(state: GameStateType, isAnswerCorrect: boolean, word: Word): GameStateType {
+function updateData(state: SprintStateType, isAnswerCorrect: boolean, word: Word): SprintStateType {
     let score = state.score;
     let points = state.points;
     let streak = state.streak;
@@ -66,7 +67,7 @@ function updateData(state: GameStateType, isAnswerCorrect: boolean, word: Word):
     };
 }
 
-const initialState: { sprint: GameStateType } = {
+const initialState: { sprint: SprintStateType } = {
     sprint: {
         answers: { correct: [], wrong: [] },
         streak: sprintInitialSettings.streak.default,

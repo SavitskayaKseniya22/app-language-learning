@@ -81,6 +81,7 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
     const doAfterTimer = () => {
         void navigate("/games/audiocall/result", {
             state: { data: data.all },
+            replace: true,
         });
     };
 
@@ -155,9 +156,7 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
                             type="button"
                             onClick={() => {
                                 if (data.isEmpty) {
-                                    void navigate("/games/audiocall/result", {
-                                        state: { data: data.all },
-                                    });
+                                    doAfterTimer();
                                 } else {
                                     setActiveWords(data.nextFive());
                                     setMiddleResult(null);

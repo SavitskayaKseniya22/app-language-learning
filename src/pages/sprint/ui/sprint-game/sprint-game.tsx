@@ -38,9 +38,7 @@ export default function SprintGame({ elements, isTimed = false }: { elements: Wo
         );
 
         if (data.isEmpty) {
-            void navigate(`/games/sprint/result`, {
-                state: { data: data.all },
-            });
+            doAfterTimer();
         } else {
             const pair = data.nextPair();
             setActiveWords(pair);
@@ -50,6 +48,7 @@ export default function SprintGame({ elements, isTimed = false }: { elements: Wo
     const doAfterTimer = () => {
         void navigate(`/games/sprint/result`, {
             state: { data: data.all },
+            replace: true,
         });
     };
 

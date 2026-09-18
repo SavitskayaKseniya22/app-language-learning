@@ -13,7 +13,7 @@ export const puzzleInitialSettings = {
     },
 };
 
-type GameStateType = {
+export type PuzzleStateType = {
     points: number;
     score: number;
     streak: number;
@@ -22,7 +22,7 @@ type GameStateType = {
     middleResult: boolean | null;
 };
 
-const initialState: { puzzle: GameStateType } = {
+const initialState: { puzzle: PuzzleStateType } = {
     puzzle: {
         points: 5,
         score: 0,

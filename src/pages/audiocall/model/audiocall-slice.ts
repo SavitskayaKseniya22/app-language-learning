@@ -15,14 +15,14 @@ export const audiocallInitialSettings = {
     },
 };
 
-type GameStateType = {
+type AudiocallStateType = {
     answers: { correct: Word[]; wrong: Word[] };
     points: number;
     score: number;
     streak: number;
 };
 
-function updateData(state: GameStateType, isAnswerCorrect: boolean, word: Word): GameStateType {
+function updateData(state: AudiocallStateType, isAnswerCorrect: boolean, word: Word): AudiocallStateType {
     let score = state.score;
     let points = state.points;
     let streak = state.streak;
@@ -66,7 +66,7 @@ function updateData(state: GameStateType, isAnswerCorrect: boolean, word: Word):
     };
 }
 
-const initialState: { audiocall: GameStateType } = {
+const initialState: { audiocall: AudiocallStateType } = {
     audiocall: {
         answers: { correct: [], wrong: [] },
         streak: audiocallInitialSettings.streak.default,

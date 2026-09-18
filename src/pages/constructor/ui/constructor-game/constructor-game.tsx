@@ -74,6 +74,7 @@ export default function ConstructorGame({
     const doAfterTimer = () => {
         void navigate(`/games/constructor/result`, {
             state: { data: data.all },
+            replace: true,
         });
     };
 
@@ -206,9 +207,7 @@ export default function ConstructorGame({
                         type="button"
                         onClick={() => {
                             if (data.isEmpty) {
-                                void navigate("/games/constructor/result", {
-                                    state: { data: data.all },
-                                });
+                                doAfterTimer();
                             } else {
                                 data.nextWordLikeArray();
                                 setWord({

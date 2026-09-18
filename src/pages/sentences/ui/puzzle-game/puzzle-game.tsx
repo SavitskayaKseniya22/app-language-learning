@@ -31,6 +31,7 @@ export default function PuzzlesGame({
     const doAfterTimer = () => {
         void navigate(`/games/puzzles/result`, {
             state: { data: data.all },
+            replace: true,
         });
     };
     const [word, setWord] = useState(() => data.word);
@@ -53,22 +54,21 @@ export default function PuzzlesGame({
                 <div className={styles.game__round}>
                     <p className={styles["words__word--main"]}>{word.text_example_translate}</p>
                     <p className={styles.words__note}>means</p>
-                    {puzzle.middleResult !== null && (
-                        <>
-                            <p
-                                className={clsx(styles["words__word--translated"], {
-                                    [styles["words__word--true"]]: puzzle.middleResult === true,
-                                    [styles["words__word--false"]]: puzzle.middleResult === false,
-                                })}>
-                                {word.text_example}
-                            </p>
-                        </>
+                    {puzzle.middleResult == null ? (
+                        <DragAndDrop word={word} />
+                    ) : (
+                        <p
+                            className={clsx(styles["words__word--translated"], {
+                                [styles["words__word--true"]]: puzzle.middleResult === true,
+                                [styles["words__word--false"]]: puzzle.middleResult === false,
+                            })}>
+                            {word.text_example}
+                        </p>
                     )}
                 </div>
 
                 {puzzle.middleResult === null ? (
                     <>
-                        <DragAndDrop word={word} />
                         <Button
                             type="button"
                             onClick={() => {
@@ -91,7 +91,7 @@ export default function PuzzlesGame({
                                 dispatch(updatePuzzleState());
 
                                 if (data.isEmpty) {
-                                    void navigate("/games/puzzles/result", { replace: true });
+                                    doAfterTimer();
                                 } else {
                                     dispatch(
                                         updateMiddlePuzzleState({

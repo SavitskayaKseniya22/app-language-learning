@@ -1,0 +1,12 @@
+@use "@abstracts/mixins" as mx;
+
+.textbook {
+  @include mx.main-container;
+}
+
+.textbook__controls {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
