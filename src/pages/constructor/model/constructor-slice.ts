@@ -1,4 +1,5 @@
 import type { Word } from "@/entities/user";
+import type { FinishGameResponse } from "@/entities/user/api/user-api";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -11,7 +12,7 @@ export const constructorInitialSettings = {
         default: 10,
     },
     timer: {
-        default: 60,
+        default: 120,
     },
     penalty: {
         default: 1,
@@ -23,6 +24,7 @@ type ConstructorStateType = {
     points: number;
     score: number;
     streak: number;
+    calculatedResult: FinishGameResponse | null;
 };
 
 const initialState: { constructor: ConstructorStateType } = {
@@ -31,6 +33,7 @@ const initialState: { constructor: ConstructorStateType } = {
         points: constructorInitialSettings.points.default,
         score: 0,
         streak: constructorInitialSettings.streak.default,
+        calculatedResult: null,
     },
 };
 
@@ -97,12 +100,17 @@ export const constructorStateSlice = createSlice({
             };
         },
 
+        finalizeConstructorState: (state, action: PayloadAction<{ calculatedResult: FinishGameResponse }>) => {
+            state.constructor = { ...state.constructor, calculatedResult: action.payload.calculatedResult };
+        },
+
         resetConstructorState: state => {
             state.constructor = initialState.constructor;
         },
     },
 });
 
-export const { updateConstructorState, resetConstructorState } = constructorStateSlice.actions;
+export const { updateConstructorState, resetConstructorState, finalizeConstructorState } =
+    constructorStateSlice.actions;
 
 export default constructorStateSlice.reducer;

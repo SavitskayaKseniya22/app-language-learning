@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import DragAndDrop from "../puzzle-dnd/puzzle-dnd";
-import { useAppDispatch, useAppSelector } from "../../../../app/store/store";
+
 import { Points } from "@/shared/ui/points";
 import { ProgressTracking } from "@/shared/ui/progress-tracking";
 import styles from "./puzzle-game.module.scss";
@@ -8,10 +8,14 @@ import { GameInfoContainer } from "@/shared/ui/game-info-container";
 import { Timer } from "@/shared/ui/timer";
 import { puzzleInitialSettings, updateMiddlePuzzleState, updatePuzzleState } from "../../model/puzzle-slice";
 import type { Word } from "@/entities/user";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { DataQueue } from "../../model/puzzle-data-queue";
 import { Button } from "@/shared/ui/button";
 import clsx from "clsx";
+import { useAppDispatch, useAppSelector } from "@/app/store/store";
+import { useFinishPuzzleMutation } from "@/entities/user/api/user-api";
+import { Spinner } from "@/shared/ui/spinner";
+import { toast } from "react-toastify";
 
 export default function PuzzlesGame({
     elements,
@@ -25,16 +29,45 @@ export default function PuzzlesGame({
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [data] = useState(() => new DataQueue({ elements, complexity }));
-
+    const [word, setWord] = useState(() => data.word);
     const { puzzle } = useAppSelector(state => state.puzzleReducer);
+    const [finishPuzzle, { isLoading }] = useFinishPuzzleMutation();
+
+    const isFinishedReference = useRef(false);
 
     const doAfterTimer = () => {
-        void navigate(`/games/puzzles/result`, {
-            state: { data: data.all },
-            replace: true,
-        });
+        if (isFinishedReference.current) {
+            return;
+        }
+
+        isFinishedReference.current = true;
+
+        try {
+            if (isTimed) {
+                finishPuzzle({
+                    score: puzzle.score,
+                    correctAnswers: puzzle.correct,
+                    totalAnswers: puzzle.correct + puzzle.wrong,
+                })
+                    .unwrap()
+                    .then(() => {
+                        toast.success("Game is finished. The result is saved");
+                        void navigate(`/games/puzzles/result`, {
+                            replace: true,
+                        });
+                    })
+                    .catch(() => {
+                        toast.error("Can't save result");
+                    });
+            } else {
+                void navigate(`/games/puzzles/result`, {
+                    replace: true,
+                });
+            }
+        } catch {
+            isFinishedReference.current = false;
+        }
     };
-    const [word, setWord] = useState(() => data.word);
 
     return (
         <div className={styles.game}>
@@ -106,6 +139,7 @@ export default function PuzzlesGame({
                     </>
                 )}
             </GameInfoContainer>
+            {isLoading && <Spinner />}
         </div>
     );
 }

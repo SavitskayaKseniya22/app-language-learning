@@ -6,7 +6,7 @@ export const puzzleInitialSettings = {
         default: 10,
     },
     timer: {
-        default: 60,
+        default: 120,
     },
     penalty: {
         default: 1,

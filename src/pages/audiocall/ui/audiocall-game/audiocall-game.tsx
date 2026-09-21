@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/app/store/store";
-import { audiocallInitialSettings, updateAudiocallState } from "../../model/audiocall-slice";
+import { audiocallInitialSettings, finalizeAudiocallState, updateAudiocallState } from "../../model/audiocall-slice";
 import { ProgressTracking } from "@/shared/ui/progress-tracking";
 import { Points } from "@/shared/ui/points";
 import { Streak } from "@/shared/ui/streak";
@@ -15,6 +15,9 @@ import type { Word } from "@/entities/user";
 import { GameType } from "@/entities/user";
 import { Button } from "@/shared/ui/button";
 import { DataQueue } from "../../model/audiocall-data-queue";
+import { useFinishGameMutation } from "@/entities/user/api/user-api";
+import { toast } from "react-toastify";
+import { Spinner } from "@/shared/ui/spinner";
 
 function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTimed?: boolean }) {
     const navigate = useNavigate();
@@ -78,11 +81,42 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
         };
     }, [handleKeyDown]);
 
+    const [finishGame, { isLoading }] = useFinishGameMutation();
+
+    const isFinishedReference = useRef(false);
+
     const doAfterTimer = () => {
-        void navigate("/games/audiocall/result", {
-            state: { data: data.all },
-            replace: true,
-        });
+        if (isFinishedReference.current) {
+            return;
+        }
+
+        isFinishedReference.current = true;
+
+        try {
+            if (isTimed) {
+                finishGame({
+                    gameName: "audiocall",
+                    result: { score: audiocall.score, answers: audiocall.answers },
+                })
+                    .unwrap()
+                    .then(result => {
+                        dispatch(finalizeAudiocallState({ calculatedResult: result }));
+                        toast.success("Game is finished. The result is saved");
+                        void navigate(`/games/audiocall/result`, {
+                            replace: true,
+                        });
+                    })
+                    .catch(() => {
+                        toast.error("Can't save result");
+                    });
+            } else {
+                void navigate(`/games/audiocall/result`, {
+                    replace: true,
+                });
+            }
+        } catch {
+            isFinishedReference.current = false;
+        }
     };
 
     return (
@@ -168,6 +202,7 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
                 )}
             </GameInfoContainer>
             <Tips type={GameType.audiocall} />
+            {isLoading && <Spinner />}
         </div>
     );
 }

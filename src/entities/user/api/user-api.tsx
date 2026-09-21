@@ -1,18 +1,9 @@
 import { baseApi } from "@/app/api/base-api";
 import { supabase } from "@/shared/api";
-import type { Database } from "@/shared/api/supabase/database.types";
+import type { Database, Tables } from "@/shared/api/supabase/database.types";
 
 export function isItToday(date: string) {
     return new Date(date).toDateString() === new Date().toDateString();
-}
-
-export function sortPreData(preData: StatisticsType): StatisticsType {
-    return Object.fromEntries(
-        Object.entries(preData).map(([game, results]) => [
-            game,
-            results.filter(result => isItToday(result.date_created)),
-        ]),
-    );
 }
 
 export enum GameType {
@@ -22,9 +13,9 @@ export enum GameType {
     sprint = "sprint",
 }
 
-export type GameResultType = Database["public"]["Tables"]["results"]["Row"];
+export type GameResultType = Database["public"]["Tables"]["game_results"]["Row"];
 
-export type NewResultType = Database["public"]["Tables"]["results"]["Insert"];
+export type NewResultType = Database["public"]["Tables"]["game_results"]["Insert"];
 
 export type ProfileType = Database["public"]["Tables"]["profiles"]["Row"];
 
@@ -45,76 +36,6 @@ export function getWordAssetUrl(path: string | null) {
     return supabase.storage.from("words").getPublicUrl(path).data.publicUrl;
 }
 
-export function reduceData(data: StatisticsType, type: GameType) {
-    const results = data[type];
-
-    const times = results.map(item => item.time).filter((time): time is number => time !== null);
-
-    return {
-        score: getSum(results.map(item => item.score)),
-
-        played: results.length,
-
-        accuracy:
-            results.length > 0 ? +(getSum(results.map(item => item.accuracy)) / results.length).toFixed(3) : undefined,
-
-        learned:
-            type !== GameType.puzzles && results.length > 0
-                ? getSum(results.map(item => item.learned ?? 0))
-                : undefined,
-
-        encountered:
-            type !== GameType.puzzles && results.length > 0
-                ? getSum(results.map(item => item.encountered ?? 0))
-                : undefined,
-
-        time:
-            (type === GameType.puzzles || type === GameType.constructor) && times.length > 0
-                ? Math.min(...times)
-                : undefined,
-    };
-}
-
-export function refineData(preData: StatisticsType) {
-    const games = [GameType.puzzles, GameType.constructor, GameType.audiocall, GameType.sprint];
-
-    const refined = Object.fromEntries(games.map(game => [game, reduceData(preData, game)]));
-
-    const total = {
-        score: 0,
-        played: 0,
-        learned: 0,
-        encountered: 0,
-        accuracy: 0,
-        time: undefined,
-    };
-
-    let accuracyCount = 0;
-
-    for (const item of Object.values(refined)) {
-        total.score += item.score;
-        total.played += item.played;
-        total.learned += item.learned ?? 0;
-        total.encountered += item.encountered ?? 0;
-
-        if (item.accuracy !== undefined) {
-            total.accuracy += item.accuracy;
-            accuracyCount++;
-        }
-    }
-
-    if (accuracyCount) {
-        total.accuracy = +(total.accuracy / accuracyCount).toFixed(3);
-    }
-
-    return {
-        ...refined,
-        total,
-    };
-}
-
-export type Word = Database["public"]["Tables"]["words"]["Row"];
-
 export type GetWordsResponse = {
     words: Word[];
     total: number;
@@ -129,46 +50,142 @@ export type GetWordsArguments = {
     pageSize?: number;
 };
 
+type GameResultRow = Tables<"game_results">;
+
+export type Word = Tables<"words">;
+
+type GameResult = {
+    answers: {
+        correct: Word[];
+        wrong: Word[];
+    };
+    score: number;
+};
+
+type FinishGameArguments = {
+    gameName: string;
+    result: GameResult;
+};
+
+export type FinishGameResponse = {
+    game_id: number;
+    game_name: string;
+    score: number;
+    accuracy: number;
+    new_words: Word[];
+    learned_words: Word[];
+};
+
+type GetUserResultsArguments = {
+    date?: string;
+};
+type FinishPuzzleArguments = {
+    score: number;
+    correctAnswers: number;
+    totalAnswers: number;
+};
+
+type FinishPuzzleResponse = {
+    game_id: number;
+    game_name: "puzzle";
+    score: number;
+    accuracy: number;
+};
+
 export const userApi = baseApi.injectEndpoints({
     endpoints: builder => ({
-        getUserResults: builder.query<UserResultsType, void>({
-            async queryFn() {
-                try {
-                    const { data, error } = await supabase
-                        .from("results")
-                        .select("*")
-                        .order("date_created", { ascending: false });
+        getUserResults: builder.query<GameResultRow[], GetUserResultsArguments | void>({
+            async queryFn(arguments_) {
+                let query = supabase.from("game_results").select("*").order("created_at", { ascending: false });
 
-                    if (error) {
-                        throw error;
-                    }
+                if (arguments_?.date) {
+                    const [year, month, day] = arguments_.date.split("-").map(Number);
 
-                    const extractedData: StatisticsType = {
-                        [GameType.sprint]: [],
-                        [GameType.audiocall]: [],
-                        [GameType.constructor]: [],
-                        [GameType.puzzles]: [],
-                    };
+                    const startOfDay = new Date(year, month - 1, day);
 
-                    for (const result of data) {
-                        extractedData[result.game_name].push(result);
-                    }
+                    const endOfDay = new Date(year, month - 1, day + 1);
 
-                    return {
-                        data: {
-                            today: sortPreData(extractedData),
-                            total: extractedData,
-                        },
-                    };
-                } catch (error) {
+                    query = query.gte("created_at", startOfDay.toISOString()).lt("created_at", endOfDay.toISOString());
+                }
+
+                const { data, error } = await query;
+
+                if (error) {
                     return {
                         error: {
-                            status: "CUSTOM_ERROR",
-                            error: error instanceof Error ? error.message : "Failed to get user results",
+                            status: "CUSTOM_ERROR" as const,
+                            error: error.message,
                         },
                     };
                 }
+
+                return {
+                    data,
+                };
             },
+
+            providesTags: ["GameResults"],
+        }),
+
+        finishGame: builder.mutation<FinishGameResponse, FinishGameArguments>({
+            async queryFn({ gameName, result }) {
+                const answers = [
+                    ...result.answers.correct.map(word => ({
+                        word_id: word.id,
+                        is_correct: true,
+                    })),
+
+                    ...result.answers.wrong.map(word => ({
+                        word_id: word.id,
+                        is_correct: false,
+                    })),
+                ];
+
+                const { data, error } = await supabase.rpc("finish_game", {
+                    p_game_name: gameName,
+                    p_score: result.score,
+                    p_answers: answers,
+                });
+
+                if (error) {
+                    return {
+                        error: {
+                            status: "CUSTOM_ERROR" as const,
+                            error: error.message,
+                        },
+                    };
+                }
+
+                return {
+                    data: data as FinishGameResponse,
+                };
+            },
+
+            invalidatesTags: ["GameResults"],
+        }),
+        finishPuzzle: builder.mutation<FinishPuzzleResponse, FinishPuzzleArguments>({
+            async queryFn({ score, correctAnswers, totalAnswers }) {
+                const { data, error } = await supabase.rpc("finish_puzzle", {
+                    p_score: score,
+                    p_correct_answers: correctAnswers,
+                    p_total_answers: totalAnswers,
+                });
+
+                if (error) {
+                    return {
+                        error: {
+                            status: "CUSTOM_ERROR" as const,
+                            error: error.message,
+                        },
+                    };
+                }
+
+                return {
+                    data: data as FinishPuzzleResponse,
+                };
+            },
+
+            invalidatesTags: ["GameResults"],
         }),
         getWordsByDifficulty: builder.query<GetWordsResponse, GetWordsArguments>({
             async queryFn({ difficulty, page, pageSize = 20 }) {
@@ -263,4 +280,10 @@ export const userApi = baseApi.injectEndpoints({
     }),
 });
 
-export const { useGetUserResultsQuery, useGetWordsByDifficultyQuery, useGetAllWordsByDifficultyQuery } = userApi;
+export const {
+    useGetUserResultsQuery,
+    useGetWordsByDifficultyQuery,
+    useGetAllWordsByDifficultyQuery,
+    useFinishGameMutation,
+    useFinishPuzzleMutation,
+} = userApi;

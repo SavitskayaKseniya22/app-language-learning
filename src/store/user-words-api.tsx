@@ -71,25 +71,6 @@ export const userWordsApi = createApi({
     tagTypes: ["UserCollection", "UserWord", "UserWords"],
 
     endpoints: builder => ({
-        createUserData: builder.mutation<UserIdType, CredentialsType>({
-            query: ({ userId, tokenId }) => ({
-                url: `/${userId}.json`,
-                body: {
-                    userId,
-                    words: {},
-                },
-                method: "PUT",
-                params: { auth: tokenId },
-            }),
-            async onQueryStarted(id, { queryFulfilled }) {
-                try {
-                    await queryFulfilled;
-                } catch (error) {
-                    handleError(error);
-                }
-            },
-        }),
-
         getUserWords: builder.query<WordWithIdType | null, CredentialsType>({
             query: ({ userId, tokenId }) => ({
                 url: `/${userId}/words/.json`,
@@ -215,7 +196,6 @@ export const userWordsApi = createApi({
 export const {
     useGetUserWordsQuery,
     useAddToUserWordsMutation,
-    useCreateUserDataMutation,
     useGetUserWordsCollectionsQuery,
     useGetUserWordQuery,
 

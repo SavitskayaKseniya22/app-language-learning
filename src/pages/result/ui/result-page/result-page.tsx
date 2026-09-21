@@ -10,18 +10,6 @@ import TextBookTable from "@/pages/textbook/ui/textbook-table/textbook-table";
 import type { SprintStateType } from "@/pages/sprint/model/sprint-slice";
 import type { PuzzleStateType } from "@/pages/sentences/model/puzzle-slice";
 
-function getResultMessage(percent: number) {
-    const messages = [
-        "Next time will be better!",
-        "You can do better!",
-        "Nice! You start learning!",
-        "Almost done!",
-        "You are a native now. Congrats!",
-    ];
-
-    return messages[Math.round(percent / 25)];
-}
-
 export default function ResultPage({ type }: { type: GameType }) {
     let passedData: SprintStateType | PuzzleStateType | null = null;
 
@@ -80,11 +68,21 @@ export default function ResultPage({ type }: { type: GameType }) {
                             className={clsx(styles.game__container, styles["game__container--textbook"])}>
                             <div className={styles.game__table}>
                                 <h2>Correct answers</h2>
-                                <TextBookTable tableId="correct answers" words={passedData.answers.correct} />
+                                <TextBookTable
+                                    tableId="correct answers"
+                                    words={passedData.answers.correct}
+                                    new_words={passedData.calculatedResult?.new_words}
+                                    learned_words={passedData.calculatedResult?.learned_words}
+                                />
                             </div>
                             <div className={styles.game__table}>
                                 <h2>Wrong answers</h2>
-                                <TextBookTable tableId="wrong answers" words={passedData.answers.wrong} />
+                                <TextBookTable
+                                    tableId="wrong answers"
+                                    words={passedData.answers.wrong}
+                                    new_words={passedData.calculatedResult?.new_words}
+                                    learned_words={passedData.calculatedResult?.learned_words}
+                                />
                             </div>
                             <div className={styles.game__footer}>
                                 <CustomLinkAsButton type="button" to={`/games/${type}`} replace>
@@ -109,8 +107,6 @@ export default function ResultPage({ type }: { type: GameType }) {
         const totalLength = passedData.correct + passedData.wrong;
 
         const accuracy = getPercent(passedData.correct + passedData.wrong, passedData.correct);
-
-        const message = getResultMessage(accuracy);
 
         return (
             <div className={clsx(styles.game, { [styles["game--empty"]]: totalLength === 0 })}>
@@ -137,7 +133,7 @@ export default function ResultPage({ type }: { type: GameType }) {
                             </div>
                         </GameInfoContainer>
                         <GameInfoContainer className={clsx(styles.game__container)}>
-                            <h2>{message}</h2>
+                            <h2>Game is finished</h2>
 
                             <CustomLinkAsButton type="button" to={`/games/${type}`} replace>
                                 Start again

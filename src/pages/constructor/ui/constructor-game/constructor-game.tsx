@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Points } from "@/shared/ui/points";
 import { ProgressTracking } from "@/shared/ui/progress-tracking";
@@ -8,7 +8,11 @@ import styles from "./constructor-game.module.scss";
 import { GameInfoContainer } from "@/shared/ui/game-info-container";
 import { Timer } from "@/shared/ui/timer";
 import { useAppDispatch, useAppSelector } from "@/app/store/store";
-import { constructorInitialSettings, updateConstructorState } from "../../model/constructor-slice";
+import {
+    constructorInitialSettings,
+    finalizeConstructorState,
+    updateConstructorState,
+} from "../../model/constructor-slice";
 import { Streak } from "@/shared/ui/streak";
 import { Tips } from "@/shared/ui/tips";
 import type { Word } from "@/entities/user";
@@ -16,6 +20,9 @@ import { GameType } from "@/entities/user";
 import { Button } from "@/shared/ui/button";
 import clsx from "clsx";
 import { DataQueue } from "../../model/constructor-data-queue";
+import { Spinner } from "@/shared/ui/spinner";
+import { useFinishGameMutation } from "@/entities/user/api/user-api";
+import { toast } from "react-toastify";
 
 function ConstructorButton({
     clickOnEmpty,
@@ -71,11 +78,42 @@ export default function ConstructorGame({
 
     const [middleResult, setMiddleResult] = useState<null | boolean>(null);
 
+    const [finishGame, { isLoading }] = useFinishGameMutation();
+
+    const isFinishedReference = useRef(false);
+
     const doAfterTimer = () => {
-        void navigate(`/games/constructor/result`, {
-            state: { data: data.all },
-            replace: true,
-        });
+        if (isFinishedReference.current) {
+            return;
+        }
+
+        isFinishedReference.current = true;
+
+        try {
+            if (isTimed) {
+                finishGame({
+                    gameName: "constructor",
+                    result: { score: constructor.score, answers: constructor.answers },
+                })
+                    .unwrap()
+                    .then(result => {
+                        dispatch(finalizeConstructorState({ calculatedResult: result }));
+                        toast.success("Game is finished. The result is saved");
+                        void navigate(`/games/constructor/result`, {
+                            replace: true,
+                        });
+                    })
+                    .catch(() => {
+                        toast.error("Can't save result");
+                    });
+            } else {
+                void navigate(`/games/constructor/result`, {
+                    replace: true,
+                });
+            }
+        } catch {
+            isFinishedReference.current = false;
+        }
     };
 
     return (
@@ -227,6 +265,7 @@ export default function ConstructorGame({
             </GameInfoContainer>
 
             <Tips type={GameType.constructor} />
+            {isLoading && <Spinner />}
         </div>
     );
 }

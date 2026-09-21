@@ -1,8 +1,6 @@
 export {
     GameType,
     getSum,
-    reduceData,
-    refineData,
     userApi,
     useGetUserResultsQuery,
     useGetWordsByDifficultyQuery,

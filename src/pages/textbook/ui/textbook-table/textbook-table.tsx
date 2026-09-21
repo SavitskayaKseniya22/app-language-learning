@@ -5,13 +5,26 @@ import { ImagePreview } from "@/shared/ui/image-preview";
 import { CustomTable } from "@/shared/ui/table";
 import styles from "./textbook.module.scss";
 
-export default function TextBookTable({ tableId, words }: { tableId: string; words: Word[] }) {
+export default function TextBookTable({
+    tableId,
+    words,
+    new_words,
+    learned_words,
+}: {
+    tableId: string;
+    words: Word[];
+    new_words?: Word[];
+    learned_words?: Word[];
+}) {
     return (
         <CustomTable
             tableId={tableId}
 
             data={{
                 rows: words.map(item => {
+                    const learnedIds = learned_words?.map(word => word.id);
+                    const newIds = new_words?.map(word => word.id);
+
                     return {
                         content: {
                             preview_audio: <AudioButton path={item.audio} />,
@@ -37,6 +50,20 @@ export default function TextBookTable({ tableId, words }: { tableId: string; wor
                                     <p>{item.text_example_translate}</p>
                                 </div>
                             ),
+
+                            ...(learned_words && {
+                                learned_words: (
+                                    <div>
+                                        {learnedIds?.includes(item.id) ? <i className="fa-solid fa-check"></i> : ""}
+                                    </div>
+                                ),
+                            }),
+
+                            ...(new_words && {
+                                new_words: (
+                                    <div>{newIds?.includes(item.id) ? <i className="fa-solid fa-check"></i> : ""}</div>
+                                ),
+                            }),
                         },
                     };
                 }),
@@ -51,17 +78,41 @@ export default function TextBookTable({ tableId, words }: { tableId: string; wor
                         key: "preview",
                         widthInGrid: "64px",
                     },
-                    { title: "Word", key: "word", widthInGrid: "minmax(180px, 0.75fr)" },
+                    {
+                        title: "Word",
+                        key: "word",
+                        widthInGrid: "minmax(180px, 0.75fr)",
+                    },
                     {
                         title: "Meaning",
                         key: "meaning",
-                        widthInGrid: "minmax(360px, 2fr)",
+                        widthInGrid: "minmax(240px, 2fr)",
                     },
                     {
                         title: "Example",
                         key: "example",
-                        widthInGrid: "minmax(360px, 2fr)",
+                        widthInGrid: "minmax(240px, 2fr)",
                     },
+
+                    ...(learned_words
+                        ? [
+                              {
+                                  title: "Learned now",
+                                  key: "learned_words",
+                                  widthInGrid: "80px",
+                              },
+                          ]
+                        : []),
+
+                    ...(new_words
+                        ? [
+                              {
+                                  title: "First encounter",
+                                  key: "new_words",
+                                  widthInGrid: "80px",
+                              },
+                          ]
+                        : []),
                 ],
             }}
         />

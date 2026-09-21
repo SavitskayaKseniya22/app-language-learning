@@ -1,4 +1,5 @@
 import type { Word } from "@/entities/user";
+import type { FinishGameResponse } from "@/entities/user/api/user-api";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -20,6 +21,7 @@ type AudiocallStateType = {
     points: number;
     score: number;
     streak: number;
+    calculatedResult: FinishGameResponse | null;
 };
 
 function updateData(state: AudiocallStateType, isAnswerCorrect: boolean, word: Word): AudiocallStateType {
@@ -58,12 +60,7 @@ function updateData(state: AudiocallStateType, isAnswerCorrect: boolean, word: W
         };
     }
 
-    return {
-        answers,
-        points,
-        score,
-        streak,
-    };
+    return { ...state, answers, points, score, streak };
 }
 
 const initialState: { audiocall: AudiocallStateType } = {
@@ -72,6 +69,7 @@ const initialState: { audiocall: AudiocallStateType } = {
         streak: audiocallInitialSettings.streak.default,
         points: audiocallInitialSettings.points.default,
         score: 0,
+        calculatedResult: null,
     },
 };
 
@@ -82,6 +80,9 @@ export const audiocallStateSlice = createSlice({
         updateAudiocallState: (state, action: PayloadAction<{ isAnswerCorrect: boolean; word: Word }>) => {
             state.audiocall = { ...updateData(state.audiocall, action.payload.isAnswerCorrect, action.payload.word) };
         },
+        finalizeAudiocallState: (state, action: PayloadAction<{ calculatedResult: FinishGameResponse }>) => {
+            state.audiocall = { ...state.audiocall, calculatedResult: action.payload.calculatedResult };
+        },
 
         resetAudiocallState: state => {
             state.audiocall = initialState.audiocall;
@@ -89,6 +90,6 @@ export const audiocallStateSlice = createSlice({
     },
 });
 
-export const { updateAudiocallState, resetAudiocallState } = audiocallStateSlice.actions;
+export const { updateAudiocallState, resetAudiocallState, finalizeAudiocallState } = audiocallStateSlice.actions;
 
 export default audiocallStateSlice.reducer;
