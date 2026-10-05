@@ -7,29 +7,27 @@
     gap: 4px;
     align-items: center;
     justify-content: center;
-    color: vars.$color-text-light;
+    color: inherit;
     text-align: center;
-    border: 1px solid vars.$color-stroke;
-    border-radius: 8px;
 
     &--small {
         min-width: 32px;
-        padding: 3px 12px;
+        padding: 0;
 
         @include mx.text-btn-s;
     }
 
     &--medium {
         min-width: 72px;
-        padding: 4px 12px;
+        padding: 0;
 
-        @include mx.text-btn-m;
+        @include mx.text-s;
     }
 
     &--big {
         min-width: 72px;
-        padding: 4px 12px;
+        padding: 0;
 
-        @include mx.text-btn-l;
+        @include mx.text-s;
     }
 }

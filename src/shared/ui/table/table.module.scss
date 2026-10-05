@@ -11,27 +11,29 @@
 .table__row {
     position: relative;
     display: grid;
+    grid-template-columns: var(--table-columns);
     gap: 16px;
     width: 100%;
 }
 
 .table__titles {
-    min-height: 18px;
-    margin-bottom: 8px;
+    min-height: 32px;
+    border-bottom: 1px solid vars.$color-stroke;
 }
 
 .table__row {
-    min-height: 50px;
+    min-height: 44px;
     padding: 8px 0;
 }
 
 .table__row + .table__row {
-    border-top: 1px solid vars.$color-stroke;
+    border-top: 1px solid vars.$color-stroke-50;
 }
 
 .table__title,
 .table__cell {
     display: flex;
+    min-width: 0;
     overflow: hidden;
 
     &--justify-start {
@@ -59,6 +61,73 @@
 
     &--align-end {
         align-items: flex-end;
+    }
+}
+
+.table__label {
+    display: none;
+}
+
+.table__value {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+@media (width < 1024px) {
+    .table__titles {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        min-height: 0;
+        overflow: hidden;
+        clip-path: inset(50%);
+    }
+
+    .table__row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.625rem;
+        padding-block: 1.25rem;
+    }
+
+    .table__cell {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1rem;
+        align-items: baseline;
+        overflow: visible;
+        text-align: left;
+
+        &:not(:has(.table__label)) {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .table__value {
+            font-variant-numeric: tabular-nums;
+            text-align: right;
+        }
+    }
+
+    .table__cell--stacked {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.375rem;
+        padding-block: 0.25rem;
+
+        .table__value {
+            max-width: 65ch;
+            text-align: left;
+        }
+
+        .table__value p + p {
+            margin-top: 0.375rem;
+            color: vars.$color-text-light;
+        }
+    }
+
+    .table__label {
+        display: block;
+        color: vars.$color-text-light;
+
+        @include mx.text-s;
     }
 }
 

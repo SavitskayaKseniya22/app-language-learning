@@ -30,30 +30,30 @@ $color-warning-700: #b54708;
 
 // specific colors
 
-$color-text-dark: #1a1a1a;
-$color-text-semidark: #252525;
-$color-text-light: #667085;
-$color-stroke: #d0d5dd;
-$color-stroke-50: color.mix(#d0d5dd, #fff, 50%);
-$color-stroke-25: color.mix(#d0d5dd, #fff, 25%);
+$color-text-dark: #161616;
+$color-text-semidark: #333;
+$color-text-light: #626262;
+$color-stroke: #c7c7c7;
+$color-stroke-50: color.mix($color-stroke, #fff, 65%);
+$color-stroke-25: #f3f3f3;
 
 // Neutral
-$cream-50: #f8f5ed;
-$charcoal-blue: #264653ff;
-$verdigris: #2a9d8fff;
-$verdigris-dark: #1d9c8e;
-$tuscan-sun: #e9c46aff;
-$sandy-brown: #f4a261ff;
-$burnt-peach: #e76f51ff;
-$burnt-peach-dark: rgb(233 96 62);
+$cream-50: #fff;
+$charcoal-blue: #161616;
+$verdigris: #c63812;
+$verdigris-dark: #a32c0c;
+$tuscan-sun: #e8b300;
+$sandy-brown: #d76c21;
+$burnt-peach: #c63812;
+$burnt-peach-dark: #a32c0c;
 
 // border
 
-$radius-default: 8px;
+$radius-default: 2px;
 
 // shadows
-$shadow-big: 4px 16px 44px 0 #00000012;
-$shadow-medium: 3px 12px 16px -2px #00000012;
-$shadow-old: 4px 4px 10px 0 #66708540;
-$shadow-small-outlined: 0 0 0 4px $verdigris;
+$shadow-big: 0 12px 32px rgb(41 45 41 / 12%);
+$shadow-medium: 0 4px 12px rgb(41 45 41 / 8%);
+$shadow-old: 0 2px 6px rgb(41 45 41 / 8%);
+$shadow-small-outlined: 0 0 0 2px color.change($verdigris, $alpha: 0.25);
 $shadow-small-outlined-error: 0 0 0 4px $color-error-100;

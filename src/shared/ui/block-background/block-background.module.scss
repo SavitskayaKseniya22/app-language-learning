@@ -18,17 +18,11 @@
     flex-grow: 1;
     flex-direction: column;
     height: 100%;
-    padding: 0.5rem;
-    background: linear-gradient(
-        110deg,
-        rgb(207 250 241 / 72%) 0%,
-        rgb(246 248 245 / 82%) 50%,
-        rgb(255 221 218 / 72%) 100%
-    );
-    border-radius: 24px;
+    padding: 0;
+    background: vars.$color-white;
 
     @media (min-width: vars.$laptop) {
-        padding: 1rem;
+        padding: 0;
     }
 }
 

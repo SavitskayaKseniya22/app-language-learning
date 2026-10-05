@@ -106,7 +106,8 @@ test("CustomTable exposes headers and cells under table rows", async t => {
     assert.equal(table.querySelector('[role="columnheader"]').textContent, "Word");
     const cell = table.querySelector('[role="cell"]');
     assert.equal(cell.parentElement.getAttribute("role"), "row");
-    assert.equal(cell.textContent, "hello");
+    assert.equal(cell.querySelector('[aria-hidden="true"]').textContent, "Word");
+    assert.equal(cell.lastElementChild.textContent, "hello");
 });
 
 test("Game completion saves once and keeps answers frozen after success", async t => {

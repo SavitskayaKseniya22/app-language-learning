@@ -170,12 +170,9 @@ export default function ProfilePage() {
                 </div>
                 <section className={styles.profile__section}>
                     <h3>Статистика игр</h3>
-                    <p className={styles.profile__note}>
-                        Даты — в вашем часовом поясе. Учитываются сохранённые игры. Точность усредняется по играм.
-                    </p>
+                    <p>Даты — в вашем часовом поясе. Учитываются сохранённые игры. Точность усредняется по играм.</p>
                     <Metrics items={metrics} />
                     <div className={styles.profile__table}>
-                        <p className={styles.profile__note}>Результаты по играм</p>
                         <CustomTable
                             tableId="profile-statistics"
                             data={{

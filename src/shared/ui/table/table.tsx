@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import styles from "./table.module.scss";
 import clsx from "clsx";
 
@@ -8,6 +8,7 @@ export type TitleType = {
     title?: ReactNode;
     justify?: "start" | "center" | "end";
     align?: "start" | "center" | "end";
+    mobileLayout?: "inline" | "stacked";
 };
 
 interface CustomTableDataType {
@@ -70,7 +71,10 @@ export default function CustomTable({
     return (
         <div className={styles.table} role="table">
             {data.titles && withTitles && (
-                <div className={styles.table__titles} style={{ gridTemplateColumns }} role="row">
+                <div
+                    className={styles.table__titles}
+                    style={{ "--table-columns": gridTemplateColumns } as CSSProperties}
+                    role="row">
                     {data.titles.map((item, index) => {
                         const { justify = "start", align = "center" } = item;
                         return (
@@ -94,12 +98,13 @@ export default function CustomTable({
                     <div
                         role="row"
                         className={clsx(styles.table__row, row.options?.className)}
-                        style={{ gridTemplateColumns }}
+                        style={{ "--table-columns": gridTemplateColumns } as CSSProperties}
                         key={`${tableId}-row-${index}`}>
                         {data.titles?.map((item, index_) => {
                             const { key, justify = "start", align = "center" } = item;
                             const className = clsx(
                                 styles.table__cell,
+                                { [styles["table__cell--stacked"]]: item.mobileLayout === "stacked" },
                                 styles[`table__cell--justify-${justify}`],
                                 styles[`table__cell--align-${align}`],
                             );
@@ -108,7 +113,12 @@ export default function CustomTable({
 
                             return (
                                 <div key={nodeId} className={className} role="cell">
-                                    {content}
+                                    {withTitles && item.title && (
+                                        <span className={styles.table__label} aria-hidden="true">
+                                            {item.title}
+                                        </span>
+                                    )}
+                                    <div className={styles.table__value}>{content}</div>
                                 </div>
                             );
                         })}

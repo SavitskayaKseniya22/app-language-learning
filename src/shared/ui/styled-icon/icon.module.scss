@@ -6,24 +6,22 @@
     align-items: center;
     justify-content: center;
     color: vars.$charcoal-blue;
-    border: 1px solid vars.$color-stroke;
-    border-radius: 12px;
 
     &--small {
-        width: 48px;
-        height: 48px;
-        font-size: 1.5rem;
+        width: 28px;
+        height: 32px;
+        font-size: 1.125rem;
     }
 
     &--medium {
-        width: 64px;
-        height: 64px;
-        font-size: 2rem;
+        width: 32px;
+        height: 36px;
+        font-size: 1.25rem;
     }
 
     &--big {
-        width: 80px;
-        height: 80px;
-        font-size: 2.5rem;
+        width: 36px;
+        height: 40px;
+        font-size: 1.5rem;
     }
 }

@@ -15,6 +15,9 @@ export default function Sidebar() {
     //update modal
     return (
         <nav className={styles.sidebar}>
+            <NavLink to="/" className={styles.sidebar__brand}>
+                lang<span>Практика языка</span>
+            </NavLink>
             <ul className={styles.sidebar__navigation}>
                 <li>
                     <NavLink
@@ -127,12 +130,13 @@ export default function Sidebar() {
 
                             <button
                                 type="button"
+                                aria-label="Выйти"
                                 className={clsx(styles.sidebar__link, styles["sidebar__link--button"])}
                                 onClick={() => {
                                     void handleLogout();
                                 }}>
                                 <i className="fa-solid fa-arrow-right-from-bracket" />
-                                <span>Выйти</span>
+                                <span className={styles.sidebar__title}>Выйти</span>
                             </button>
                         </>
                     ) : (

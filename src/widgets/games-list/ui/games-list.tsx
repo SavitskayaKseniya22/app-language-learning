@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { ModalContext } from "../../../shared/ui/modal";
 import styles from "./games-list.module.scss";
 import type { Word } from "@/entities/user";
-import { StyledIcon } from "@/shared/ui/styled-icon";
 import { Badge } from "@/shared/ui/badge";
 import clsx from "clsx";
 import { gamesLabels } from "@/entities/game";
@@ -22,9 +21,7 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                         setContent(null);
                     }}
                     className={styles.list__item}>
-                    <StyledIcon size={size}>
-                        <i className="fa-solid fa-stopwatch"></i>
-                    </StyledIcon>
+                    <span className={styles.list__mark}>01</span>
                     <div className={styles.list__content}>
                         <div className={styles.list__description}>
                             <h3>Спринт</h3>
@@ -45,9 +42,7 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                         setContent(null);
                     }}
                     className={styles.list__item}>
-                    <StyledIcon size={size}>
-                        <i className="fa-solid fa-cubes"></i>
-                    </StyledIcon>
+                    <span className={styles.list__mark}>02</span>
                     <div className={styles.list__content}>
                         <div className={styles.list__description}>
                             <h3>Конструктор</h3>
@@ -70,9 +65,7 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                         setContent(null);
                     }}
                     className={styles.list__item}>
-                    <StyledIcon size={size}>
-                        <i className="fa-solid fa-headphones"></i>
-                    </StyledIcon>
+                    <span className={styles.list__mark}>03</span>
                     <div className={styles.list__content}>
                         <div className={styles.list__description}>
                             <h3>Аудиовызов</h3>
@@ -92,9 +85,7 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                         setContent(null);
                     }}
                     className={styles.list__item}>
-                    <StyledIcon size={size}>
-                        <i className="fa-solid fa-puzzle-piece"></i>
-                    </StyledIcon>
+                    <span className={styles.list__mark}>04</span>
                     <div className={styles.list__content}>
                         <div className={styles.list__description}>
                             <h3>Пазлы</h3>

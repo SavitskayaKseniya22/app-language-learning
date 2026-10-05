@@ -95,10 +95,10 @@
     @include mx.text-s;
 
     @media (min-width: vars.$desktop-s) {
-        width: 5rem;
-        height: 5rem;
-        border-radius: 16px;
-        @include mx.text-headline-xl;
+        width: 3rem;
+        height: 3rem;
+        border-radius: vars.$radius-default;
+        @include mx.text-headline-m;
     }
 
     &--wrong {

@@ -69,28 +69,31 @@ export default function TextBookTable({
                 }),
                 titles: [
                     {
-                        title: "Произношение",
+                        title: "",
                         key: "preview_audio",
                         widthInGrid: "64px",
                     },
                     {
-                        title: "Изображение",
+                        title: "",
                         key: "preview",
                         widthInGrid: "64px",
                     },
                     {
                         title: "Слово",
                         key: "word",
+                        mobileLayout: "stacked",
                         widthInGrid: "minmax(180px, 0.75fr)",
                     },
                     {
                         title: "Значение",
                         key: "meaning",
+                        mobileLayout: "stacked",
                         widthInGrid: "minmax(240px, 2fr)",
                     },
                     {
                         title: "Пример",
                         key: "example",
+                        mobileLayout: "stacked",
                         widthInGrid: "minmax(240px, 2fr)",
                     },
 

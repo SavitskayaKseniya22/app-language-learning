@@ -4,14 +4,14 @@
 .screen {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
     height: 100%;
-    padding: 1rem;
+    padding: 0;
     background-color: white;
-    border-radius: 16px;
+    border-radius: vars.$radius-default;
 
     @media (min-width: vars.$laptop) {
-        padding: 2rem;
+        padding: 0;
     }
 }
 
@@ -45,15 +45,20 @@
     padding: 1rem;
     cursor: pointer;
     border: 1px solid vars.$color-stroke;
-    border-radius: 16px;
+    border-radius: vars.$radius-default;
 
     input {
         display: none;
     }
 
     &:has(input:checked) {
-        background-color: vars.$color-stroke-25;
-        border: 1px solid vars.$color-stroke;
+        color: vars.$color-white;
+        background-color: vars.$charcoal-blue;
+        border: 1px solid vars.$charcoal-blue;
+
+        .screen__note {
+            color: #c3c3c3;
+        }
     }
 }
 

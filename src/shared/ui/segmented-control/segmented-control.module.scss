@@ -8,8 +8,7 @@
     max-width: 100%;
     padding: 4px;
     background-color: vars.$color-stroke-25;
-    border: 1px solid vars.$color-stroke;
-    border-radius: 12px;
+    border-radius: vars.$radius-default;
     isolation: isolate;
 }
 
@@ -18,6 +17,10 @@
     width: 1px;
     height: 1px;
     opacity: 0;
+
+    &:checked + .control__label {
+        color: vars.$color-white;
+    }
 
     &:focus-visible + .control__label {
         outline: 2px solid vars.$color-text-dark;
@@ -29,10 +32,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 40px;
+    min-height: 36px;
     padding: 0.5rem;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: vars.$radius-default;
 
     @include mx.text-btn-s;
 }
@@ -42,8 +45,8 @@
     inset: 4px auto 4px 4px;
     z-index: -1;
     pointer-events: none;
-    background-color: vars.$color-white;
-    border-radius: 8px;
+    background-color: vars.$charcoal-blue;
+    border-radius: vars.$radius-default;
     transition: transform 0.2s ease;
 
     @media (prefers-reduced-motion: reduce) {

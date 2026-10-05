@@ -4,7 +4,7 @@
 .list {
     display: flex;
     flex-flow: column wrap;
-    gap: 1rem;
+    gap: 1.5rem;
 
     li {
         flex-grow: 1;
@@ -17,9 +17,7 @@
     gap: 1rem;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
-    border: 1px solid vars.$color-stroke-50;
-    border-radius: 12px;
+    padding: 0.5rem 0;
 
     @include mx.view-transition;
 
@@ -28,7 +26,7 @@
     }
 
     &:hover {
-        background-color: vars.$color-stroke-25;
+        color: vars.$verdigris;
     }
 }
 
@@ -50,7 +48,7 @@
     }
 
     &--big {
-        @include mx.text-l;
+        @include mx.text-m;
     }
 }
 
@@ -60,10 +58,8 @@
 }
 
 .list__user {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
     display: flex;
+    flex-shrink: 0;
     gap: 0.5rem;
     align-items: center;
     color: vars.$color-text-light;
@@ -71,7 +67,7 @@
 
     span {
         display: none;
-        @media (min-width: vars.$laptop) {
+        @media (min-width: vars.$desktop-s) {
             display: block;
         }
     }

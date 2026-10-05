@@ -17,7 +17,7 @@
     min-height: 4rem;
     padding: 1rem;
     background-color: vars.$color-stroke-25;
-    border-radius: 16px;
+    border-radius: vars.$radius-default;
 
     li {
         padding: 0.5rem;
