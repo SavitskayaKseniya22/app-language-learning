@@ -35,8 +35,8 @@ export default function GameStartScreen({ type }: { type: GameType }) {
             }}>
             <div className={styles.screen__section}>
                 <div>
-                    <h2>Select the word difficulty level</h2>
-                    <p>Each difficulty level contains 600 words</p>
+                    <h2>Выберите уровень сложности слов</h2>
+                    <p>Каждый уровень содержит 600 слов</p>
                 </div>
 
                 <ul className={styles.screen__list}>
@@ -49,9 +49,9 @@ export default function GameStartScreen({ type }: { type: GameType }) {
                                     value={String(item.value)}
                                     checked={difficultyWatch === String(item.value)}
                                 />
-                                <span className={styles.screen__note}>Level {item.value}</span>
+                                <span className={styles.screen__note}>Уровень {item.value}</span>
                                 <span className={styles.screen__title}>{item.title}</span>
-                                <span className={styles.screen__note}>Words {item.count}</span>
+                                <span className={styles.screen__note}>Слова {item.count}</span>
                             </label>
                         </li>
                     ))}
@@ -61,10 +61,8 @@ export default function GameStartScreen({ type }: { type: GameType }) {
             {type === GameType.puzzles && (
                 <div className={styles.screen__section}>
                     <div>
-                        <h2>Select the sentence complexity level</h2>
-                        <p>
-                            The sentence will be divided into several parts depending on the selected difficulty level.
-                        </p>
+                        <h2>Выберите сложность предложений</h2>
+                        <p>Предложение будет разделено на фрагменты в зависимости от выбранной сложности.</p>
                     </div>
 
                     <ul className={styles.screen__list}>
@@ -86,13 +84,13 @@ export default function GameStartScreen({ type }: { type: GameType }) {
                 </div>
             )}
             <div className={styles.screen__section}>
-                <h2>How to play</h2>
+                <h2>Как играть</h2>
                 <Tips type={type} />
             </div>
 
             <div className={styles.screen__footer}>
                 <div></div>
-                <Button type="submit">Start the game</Button>
+                <Button type="submit">Начать игру</Button>
             </div>
         </form>
     );

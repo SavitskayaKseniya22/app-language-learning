@@ -53,7 +53,7 @@ export default function PuzzlesGame({
                 correctAnswers: puzzle.correct,
                 totalAnswers: puzzle.correct + puzzle.wrong,
             }).unwrap();
-            toast.success("Game is finished. The result is saved");
+            toast.success("Игра завершена. Результат сохранён.");
         }
         await navigate("/games/puzzles/result", { replace: true });
     });
@@ -75,7 +75,7 @@ export default function PuzzlesGame({
             <GameInfoContainer className={styles.game__container} disabled={hasEnded}>
                 <div className={styles.game__round}>
                     <p className={styles.game__translation}>{word.text_example_translate}</p>
-                    <p className={styles.game__hint}>means</p>
+                    <p className={styles.game__hint}>означает</p>
                     {puzzle.middleResult == null ? (
                         <DragAndDrop word={word} disabled={hasEnded} />
                     ) : (
@@ -101,7 +101,7 @@ export default function PuzzlesGame({
                                     }),
                                 );
                             }}>
-                            See the correct answer
+                            Показать правильный ответ
                         </Button>
                     </>
                 ) : (
@@ -123,13 +123,13 @@ export default function PuzzlesGame({
                                     setWord(data.nextPuzzle());
                                 }
                             }}>
-                            Next sentence
+                            Следующее предложение
                         </Button>
                     </>
                 )}
             </GameInfoContainer>
             {isSaving && <Spinner />}
-            {saveFailed && <Button onClick={doAfterTimer}>Retry saving result</Button>}
+            {saveFailed && <Button onClick={doAfterTimer}>Повторить сохранение</Button>}
         </div>
     );
 }

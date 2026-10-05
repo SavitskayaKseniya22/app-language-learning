@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
     <head>
         <meta charset="utf-8" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Lang App</title>
+        <title>Lang App — изучение английского</title>
         <style>
             .startup {
                 max-width: 32rem;
@@ -38,13 +38,13 @@
     <body>
         <div id="root">
             <div class="startup">
-                <p id="startup-loading" role="status">Loading the application…</p>
+                <p id="startup-loading" role="status">Загрузка приложения…</p>
                 <div id="startup-error" role="alert" hidden>
-                    <h1>Unable to load the application</h1>
-                    <p>Please check your connection and refresh the page.</p>
-                    <button type="button" onclick="window.location.reload()">Refresh page</button>
+                    <h1>Не удалось загрузить приложение</h1>
+                    <p>Проверьте подключение к интернету и обновите страницу.</p>
+                    <button type="button" onclick="window.location.reload()">Обновить страницу</button>
                 </div>
-                <noscript>Enable JavaScript to use the application.</noscript>
+                <noscript>Включите JavaScript, чтобы пользоваться приложением.</noscript>
             </div>
         </div>
         <script type="module" src="/src/bootstrap.ts"></script>

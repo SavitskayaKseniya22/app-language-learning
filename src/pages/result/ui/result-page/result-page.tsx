@@ -47,27 +47,27 @@ export default function ResultPage({ type }: { type: GameType }) {
                         <GameInfoContainer>
                             <div className={styles.result__summary}>
                                 <h3>
-                                    Total answers: <span>{totalLength}</span>
+                                    Всего ответов: <span>{totalLength}</span>
                                 </h3>
 
                                 <h3>
-                                    Correct: <span>{passedData.answers.correct.length}</span>
+                                    Верно: <span>{passedData.answers.correct.length}</span>
                                 </h3>
                                 <h3>
-                                    Wrong: <span>{passedData.answers.wrong.length}</span>
+                                    Неверно: <span>{passedData.answers.wrong.length}</span>
                                 </h3>
                                 <h3>
-                                    Accuracy: <span>{accuracy}%</span>
+                                    Точность: <span>{accuracy}%</span>
                                 </h3>
                                 <h3 className={styles.result__score}>
-                                    Score: <span>{passedData.score}</span>
+                                    Очки: <span>{passedData.score}</span>
                                 </h3>
                             </div>
                         </GameInfoContainer>
                         <GameInfoContainer
                             className={clsx(styles.result__content, styles["result__content--detailed"])}>
                             <div className={styles.result__answers}>
-                                <h2>Correct answers</h2>
+                                <h2>Правильные ответы</h2>
                                 <TextBookTable
                                     tableId="correct answers"
                                     words={passedData.answers.correct}
@@ -76,7 +76,7 @@ export default function ResultPage({ type }: { type: GameType }) {
                                 />
                             </div>
                             <div className={styles.result__answers}>
-                                <h2>Wrong answers</h2>
+                                <h2>Неправильные ответы</h2>
                                 <TextBookTable
                                     tableId="wrong answers"
                                     words={passedData.answers.wrong}
@@ -86,16 +86,16 @@ export default function ResultPage({ type }: { type: GameType }) {
                             </div>
                             <div className={styles.result__actions}>
                                 <CustomLinkAsButton type="button" to={`/games/${type}`} replace>
-                                    Start again
+                                    Играть снова
                                 </CustomLinkAsButton>
                             </div>
                         </GameInfoContainer>
                     </>
                 ) : (
                     <GameInfoContainer className={styles.result__content}>
-                        <h2>Not a single answer was given</h2>
+                        <h2>Вы не дали ни одного ответа</h2>
                         <CustomLinkAsButton type="button" to={`/games/${type}`} replace>
-                            Start again
+                            Играть снова
                         </CustomLinkAsButton>
                     </GameInfoContainer>
                 )}
@@ -115,36 +115,36 @@ export default function ResultPage({ type }: { type: GameType }) {
                         <GameInfoContainer>
                             <div className={styles.result__summary}>
                                 <h3>
-                                    Total answers: <span>{totalLength}</span>
+                                    Всего ответов: <span>{totalLength}</span>
                                 </h3>
 
                                 <h3>
-                                    Correct: <span>{passedData.correct}</span>
+                                    Верно: <span>{passedData.correct}</span>
                                 </h3>
                                 <h3>
-                                    Wrong: <span>{passedData.wrong}</span>
+                                    Неверно: <span>{passedData.wrong}</span>
                                 </h3>
                                 <h3>
-                                    Accuracy: <span>{accuracy}%</span>
+                                    Точность: <span>{accuracy}%</span>
                                 </h3>
                                 <h3 className={styles.result__score}>
-                                    Score: <span>{passedData.score}</span>
+                                    Очки: <span>{passedData.score}</span>
                                 </h3>
                             </div>
                         </GameInfoContainer>
                         <GameInfoContainer className={clsx(styles.result__content)}>
-                            <h2>Game is finished</h2>
+                            <h2>Игра завершена</h2>
 
                             <CustomLinkAsButton type="button" to={`/games/${type}`} replace>
-                                Start again
+                                Играть снова
                             </CustomLinkAsButton>
                         </GameInfoContainer>
                     </>
                 ) : (
                     <GameInfoContainer className={styles.result__content}>
-                        <h2>Not a single answer was given</h2>
+                        <h2>Вы не дали ни одного ответа</h2>
                         <CustomLinkAsButton type="button" to={`/games/${type}`} replace>
-                            Start again
+                            Играть снова
                         </CustomLinkAsButton>
                     </GameInfoContainer>
                 )}

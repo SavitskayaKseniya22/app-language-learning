@@ -32,7 +32,7 @@ const router = createBrowserRouter(
             path="/"
             errorElement={
                 <ErrorComponent
-                    error={{ code: 500, message: "Unable to load this page. Please refresh and try again." }}
+                    error={{ code: 500, message: "Не удалось загрузить страницу. Обновите её и попробуйте снова." }}
                 />
             }
             element={<Outlet />}>
@@ -93,7 +93,7 @@ const router = createBrowserRouter(
                                 <BlockBackground
                                     content={{
                                         title: gamesLabels[GameType.sprint].title,
-                                        description: "Practice complete",
+                                        description: "Тренировка завершена",
                                     }}
                                 />
                             }>
@@ -120,7 +120,7 @@ const router = createBrowserRouter(
                                 <BlockBackground
                                     content={{
                                         title: gamesLabels[GameType.audiocall].title,
-                                        description: "Practice complete",
+                                        description: "Тренировка завершена",
                                     }}
                                 />
                             }>
@@ -148,7 +148,7 @@ const router = createBrowserRouter(
                                 <BlockBackground
                                     content={{
                                         title: gamesLabels[GameType.puzzles].title,
-                                        description: "Practice complete",
+                                        description: "Тренировка завершена",
                                     }}
                                 />
                             }>
@@ -175,7 +175,7 @@ const router = createBrowserRouter(
                                 <BlockBackground
                                     content={{
                                         title: gamesLabels[GameType.constructor].title,
-                                        description: "Practice complete",
+                                        description: "Тренировка завершена",
                                     }}
                                 />
                             }>
@@ -183,7 +183,7 @@ const router = createBrowserRouter(
                         </Route>
                     </Route>
                 </Route>
-                <Route path="*" element={<ErrorComponent error={{ code: 404, message: "Page not found" }} />} />
+                <Route path="*" element={<ErrorComponent error={{ code: 404, message: "Страница не найдена" }} />} />
             </Route>
         </Route>,
     ),

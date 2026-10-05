@@ -14,7 +14,7 @@ export default function Sidebar() {
     const { setContent } = useContext(ModalContext);
     //update modal
     return (
-        <nav className={styles.sidebar} aria-label="Main navigation">
+        <nav className={styles.sidebar} aria-label="Основная навигация">
             <ul className={styles.sidebar__navigation}>
                 <li>
                     <NavLink
@@ -24,9 +24,9 @@ export default function Sidebar() {
                             })
                         }
                         to="/"
-                        title="Homepage">
+                        title="Главная">
                         <i className="fa-solid fa-house" />
-                        <span className={styles.sidebar__title}>Homepage</span>
+                        <span className={styles.sidebar__title}>Главная</span>
                     </NavLink>
                 </li>
                 <li>
@@ -37,9 +37,9 @@ export default function Sidebar() {
                             })
                         }
                         to="/text-book"
-                        title="Textbook">
+                        title="Учебник">
                         <i className="fa-solid fa-book-open"></i>
-                        <span className={styles.sidebar__title}>Textbook</span>
+                        <span className={styles.sidebar__title}>Учебник</span>
                     </NavLink>
                 </li>
                 <li>
@@ -50,9 +50,9 @@ export default function Sidebar() {
                             })
                         }
                         to="/games"
-                        title="Games">
+                        title="Игры">
                         <i className="fa-solid fa-puzzle-piece" />
-                        <span className={styles.sidebar__title}>Games</span>
+                        <span className={styles.sidebar__title}>Игры</span>
                     </NavLink>
                     <ul className={styles.sidebar__submenu}>
                         <li>
@@ -63,9 +63,9 @@ export default function Sidebar() {
                                     })
                                 }
                                 to="/games/sprint"
-                                title="Sprint">
+                                title="Спринт">
                                 <i className="fa-solid fa-stopwatch"></i>
-                                <span className={styles.sidebar__title}>Sprint</span>
+                                <span className={styles.sidebar__title}>Спринт</span>
                             </NavLink>
                         </li>
                         <li>
@@ -76,9 +76,9 @@ export default function Sidebar() {
                                     })
                                 }
                                 to="/games/constructor"
-                                title="Constructor">
+                                title="Конструктор">
                                 <i className="fa-solid fa-cubes"></i>
-                                <span className={styles.sidebar__title}>Constructor</span>
+                                <span className={styles.sidebar__title}>Конструктор</span>
                             </NavLink>
                         </li>
                         <li>
@@ -89,9 +89,9 @@ export default function Sidebar() {
                                     })
                                 }
                                 to="/games/audiocall"
-                                title="Audiocall">
+                                title="Аудиовызов">
                                 <i className="fa-solid fa-headphones"></i>
-                                <span className={styles.sidebar__title}>Audiocall</span>
+                                <span className={styles.sidebar__title}>Аудиовызов</span>
                             </NavLink>
                         </li>
                         <li>
@@ -102,9 +102,9 @@ export default function Sidebar() {
                                     })
                                 }
                                 to="/games/puzzles"
-                                title="Puzzles">
+                                title="Пазлы">
                                 <i className="fa-solid fa-puzzle-piece"></i>
-                                <span className={styles.sidebar__title}>Puzzles</span>
+                                <span className={styles.sidebar__title}>Пазлы</span>
                             </NavLink>
                         </li>
                     </ul>
@@ -120,9 +120,9 @@ export default function Sidebar() {
                                     })
                                 }
                                 to="/profile"
-                                title="Profile">
+                                title="Профиль">
                                 <i className="fa-solid fa-user" />
-                                <span className={styles.sidebar__title}>Profile</span>
+                                <span className={styles.sidebar__title}>Профиль</span>
                             </NavLink>
 
                             <ul className={styles.sidebar__submenu}>
@@ -134,9 +134,9 @@ export default function Sidebar() {
                                             })
                                         }
                                         to="/profile/collection"
-                                        title="Collection">
+                                        title="Коллекция">
                                         <i className="fa-regular fa-folder" />
-                                        <span className={styles.sidebar__title}>Collection</span>
+                                        <span className={styles.sidebar__title}>Коллекция</span>
                                     </NavLink>
                                 </li>
                                 <li>
@@ -147,9 +147,9 @@ export default function Sidebar() {
                                             })
                                         }
                                         to="/profile/statistics"
-                                        title="Statistics">
+                                        title="Статистика">
                                         <i className="fa-solid fa-table" />
-                                        <span className={styles.sidebar__title}>Statistics</span>
+                                        <span className={styles.sidebar__title}>Статистика</span>
                                     </NavLink>
                                 </li>
                             </ul>
@@ -160,7 +160,7 @@ export default function Sidebar() {
                                     void handleLogout();
                                 }}>
                                 <i className="fa-solid fa-arrow-right-from-bracket" />
-                                <span>Sign Out</span>
+                                <span>Выйти</span>
                             </button>
                         </>
                     ) : (
@@ -170,12 +170,12 @@ export default function Sidebar() {
                             onClick={() => {
                                 setContent({
                                     body: <Auth />,
-                                    title: "Sign in",
+                                    title: "Войти",
                                     options: { size: "small" },
                                 });
                             }}>
                             <i className="fa-solid fa-user" />
-                            <span>Sign in</span>
+                            <span>Войти</span>
                         </button>
                     )}
                 </li>

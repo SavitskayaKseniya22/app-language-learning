@@ -79,7 +79,7 @@ export default function Modal() {
                     )}
                     role="dialog"
                     aria-labelledby={content.title ? titleId : undefined}
-                    aria-label={content.title ? undefined : "Dialog"}
+                    aria-label={content.title ? undefined : "Диалоговое окно"}
                     aria-modal="true">
                     <div className={styles.modal__header}>
                         <div>
@@ -97,7 +97,7 @@ export default function Modal() {
                             onClick={() => {
                                 setContent(null);
                             }}
-                            title="Close">
+                            title="Закрыть">
                             <i className="fa-solid fa-xmark" />
                         </Button>
                     </div>

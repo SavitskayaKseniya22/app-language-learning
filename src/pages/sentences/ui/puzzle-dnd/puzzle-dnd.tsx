@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import type { DropResult } from "@hello-pangea/dnd";
+import type { DropResult, ResponderProvided } from "@hello-pangea/dnd";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useState } from "react";
 import { useAppDispatch } from "../../../../app/store/store";
@@ -35,7 +35,8 @@ export default function DragAndDrop({ word, disabled = false }: { word: DnDWordT
         setSentence(data);
     };
 
-    const onDragEnd = (result: DropResult) => {
+    const onDragEnd = (result: DropResult, { announce }: ResponderProvided) => {
+        announce(result.destination ? "Фрагмент перемещён." : "Перемещение отменено.");
         if (disabled || !result.destination) {
             return;
         }
@@ -79,7 +80,17 @@ export default function DragAndDrop({ word, disabled = false }: { word: DnDWordT
 
     return (
         <div className={styles.dnd}>
-            <DragDropContext onDragEnd={onDragEnd}>
+            <DragDropContext
+                onDragEnd={onDragEnd}
+                dragHandleUsageInstructions="Нажмите пробел, чтобы начать перемещение. Используйте стрелки для выбора позиции, пробел для подтверждения и Escape для отмены."
+                onDragStart={(_start, { announce }) => announce("Фрагмент выбран для перемещения.")}
+                onDragUpdate={(update, { announce }) =>
+                    announce(
+                        update.destination
+                            ? `Новая позиция: ${update.destination.index + 1}.`
+                            : "Выберите область для размещения фрагмента.",
+                    )
+                }>
                 <Droppable droppableId="result" direction="horizontal">
                     {provided => (
                         <ul ref={provided.innerRef} {...provided.droppableProps} className={styles.dnd__list}>

@@ -8,12 +8,12 @@ function MainPage() {
             <div></div>
 
             <div className={styles.page__section}>
-                <h2>Games</h2>
+                <h2>Игры</h2>
                 <GamesList size="big" />
             </div>
 
             <div className={styles.page__section}>
-                <h2>Instruments</h2>
+                <h2>Инструменты</h2>
                 <InstrumentsList size="small" />
             </div>
         </div>

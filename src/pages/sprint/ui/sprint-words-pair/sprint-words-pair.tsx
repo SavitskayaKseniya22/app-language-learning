@@ -6,10 +6,10 @@ export default function SprintWordsPair({ words }: { words: SprintWordsType }) {
         <div className={styles.words}>
             <p className={styles.words__word}>{words.first.word}</p>
 
-            <p className={styles.words__note}>means</p>
+            <p className={styles.words__note}>означает</p>
             <p className={styles.words__translation}>{words.second.word_translate}</p>
 
-            <p className={styles.words__question}>Is this translation correct?</p>
+            <p className={styles.words__question}>Правильно ли переведено слово?</p>
         </div>
     );
 }

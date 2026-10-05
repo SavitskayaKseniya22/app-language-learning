@@ -19,9 +19,9 @@ export default class AppErrorBoundary extends Component<{ children: ReactNode },
             return (
                 <div className={styles.error} role="alert">
                     <div className={styles.error__content}>
-                        <h1>Unable to load the application</h1>
-                        <p>Please check your connection and refresh the page.</p>
-                        <Button onClick={() => globalThis.location.reload()}>Refresh page</Button>
+                        <h1>Не удалось загрузить приложение</h1>
+                        <p>Проверьте подключение к интернету и обновите страницу</p>
+                        <Button onClick={() => globalThis.location.reload()}>Обновить страницу</Button>
                     </div>
                 </div>
             );

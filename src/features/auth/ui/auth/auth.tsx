@@ -18,9 +18,9 @@ export default function Auth({ authFormType = "signin" }: { authFormType?: "sign
                         type="button"
                         view="transparent"
                         onClick={() => {
-                            setContent({ body: <Auth authFormType={"signup"} />, title: "Registration" });
+                            setContent({ body: <Auth authFormType={"signup"} />, title: "Регистрация" });
                         }}>
-                        Create new user
+                        Создать аккаунт
                     </Button>
                 </>
             ) : (
@@ -30,9 +30,9 @@ export default function Auth({ authFormType = "signin" }: { authFormType?: "sign
                         type="button"
                         view="transparent"
                         onClick={() => {
-                            setContent({ body: <Auth authFormType={"signin"} />, title: "Sign in" });
+                            setContent({ body: <Auth authFormType={"signin"} />, title: "Войти" });
                         }}>
-                        Sign in if registered
+                        Войти в существующий аккаунт
                     </Button>
                 </>
             )}

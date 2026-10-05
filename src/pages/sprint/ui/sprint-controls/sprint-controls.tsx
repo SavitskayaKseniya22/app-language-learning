@@ -31,10 +31,10 @@ export default function SprintControls({ handleClick }: { handleClick: (value: s
     return (
         <div className={styles.buttons}>
             <Button type="button" value="false" onClick={onClick} size="big">
-                false
+                Неверно
             </Button>
             <Button type="button" value="true" onClick={onClick} size="big" view="secondary">
-                true
+                Верно
             </Button>
         </div>
     );

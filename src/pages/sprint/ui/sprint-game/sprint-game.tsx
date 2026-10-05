@@ -71,7 +71,7 @@ export default function SprintGame({ elements, isTimed = false }: { elements: Wo
                 result: { score: sprint.score, answers: sprint.answers },
             }).unwrap();
             dispatch(finalizeSprintState({ calculatedResult: result }));
-            toast.success("Game is finished. The result is saved");
+            toast.success("Игра завершена. Результат сохранён.");
         }
         await navigate("/games/sprint/result", { replace: true });
     });
@@ -95,7 +95,7 @@ export default function SprintGame({ elements, isTimed = false }: { elements: Wo
             <Tips type={GameType.sprint} />
 
             {isSaving && <Spinner />}
-            {saveFailed && <Button onClick={doAfterTimer}>Retry saving result</Button>}
+            {saveFailed && <Button onClick={doAfterTimer}>Повторить сохранение</Button>}
         </div>
     );
 }

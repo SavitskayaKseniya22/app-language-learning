@@ -105,7 +105,7 @@ function CustomSelectInner<T, OD = undefined>(
         errorText,
         isError = false,
         size = "medium",
-        placeholder = "Choose an option",
+        placeholder = "Выберите вариант",
         noOptionsMessage,
         ...selectProperties
     }: CustomSelectProperties<T, OD>,
@@ -126,6 +126,13 @@ function CustomSelectInner<T, OD = undefined>(
                 inputId={inputId}
                 ref={reference}
                 unstyled
+                screenReaderStatus={({ count }) => `Доступных вариантов: ${count}.`}
+                ariaLiveMessages={{
+                    guidance: () => "Используйте стрелки для выбора, Enter для подтверждения и Escape для закрытия.",
+                    onChange: ({ label }) => (label ? `Выбрано: ${label}.` : "Выбор очищен."),
+                    onFocus: ({ label }) => (label ? `Вариант: ${label}.` : ""),
+                    onFilter: ({ resultsMessage }) => resultsMessage,
+                }}
                 menuPosition="fixed"
                 classNames={getClassNames<T, OD>(size)}
                 components={{
@@ -133,9 +140,11 @@ function CustomSelectInner<T, OD = undefined>(
                     DropdownIndicator,
                     ClearIndicator,
                 }}
-                loadingMessage={() => "Loading"}
+                loadingMessage={() => "Загрузка…"}
                 placeholder={placeholder}
-                noOptionsMessage={noOptionsMessage ?? (() => (isError ? "Something happened" : "No match"))}
+                noOptionsMessage={
+                    noOptionsMessage ?? (() => (isError ? "Не удалось загрузить варианты" : "Ничего не найдено"))
+                }
             />
 
             {errorText && <p className={styles.select__error}>{errorText}</p>}

@@ -28,23 +28,23 @@ export default function AuthForm({ onSubmit }: { onSubmit: SubmitHandler<UserCre
             className={styles.form}>
             <Input
                 {...register("email", {
-                    required: "Email is required",
+                    required: "Укажите электронную почту",
                 })}
                 type="email"
-                aria-label="Email"
-                placeholder="email"
+                aria-label="Электронная почта"
+                placeholder="Электронная почта"
             />
 
             <Input
                 {...register("password", {
-                    required: "Password is required",
+                    required: "Укажите пароль",
                 })}
                 type="password"
-                aria-label="Password"
-                placeholder="password"
+                aria-label="Пароль"
+                placeholder="Пароль"
             />
 
-            <Button type="submit">Enter</Button>
+            <Button type="submit">Продолжить</Button>
         </form>
     );
 }

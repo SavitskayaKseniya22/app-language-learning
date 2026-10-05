@@ -34,7 +34,7 @@ const Input = forwardRef<HTMLInputElement, LabeledInputProperties>(function Inpu
                 isRequired ? (
                     <label htmlFor={inputId} className={styles.input__label}>
                         {label}
-                        <span className={styles.input__required}>*required</span>
+                        <span className={styles.input__required}>*обязательно</span>
                     </label>
                 ) : (
                     <label htmlFor={inputId} className={styles.input__label}>
@@ -51,7 +51,7 @@ const Input = forwardRef<HTMLInputElement, LabeledInputProperties>(function Inpu
                 {clearButtonProps && (
                     <button
                         type="button"
-                        aria-label="Clear input"
+                        aria-label="Очистить поле"
                         {...clearButtonProps}
                         className={clsx(styles.input__clear, clearButtonProps.className)}>
                         <i className="fa-solid fa-xmark"></i>

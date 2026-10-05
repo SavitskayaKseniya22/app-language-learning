@@ -100,7 +100,7 @@ export default function ConstructorGame({
                 result: { score: constructor.score, answers: constructor.answers },
             }).unwrap();
             dispatch(finalizeConstructorState({ calculatedResult: result }));
-            toast.success("Game is finished. The result is saved");
+            toast.success("Игра завершена. Результат сохранён.");
         }
         await navigate("/games/constructor/result", { replace: true });
     });
@@ -124,7 +124,7 @@ export default function ConstructorGame({
             <GameInfoContainer className={styles.assembly__content} disabled={hasEnded}>
                 <div className={styles.assembly__prompt}>
                     <p className={styles.assembly__translation}>{word.word_translate}</p>
-                    <p className={styles.assembly__hint}>means</p>
+                    <p className={styles.assembly__hint}>означает</p>
                     {middleResult === null ? (
                         <ul className={styles.assembly__letters}>
                             {word.pressedLetters.map(item => (
@@ -209,7 +209,7 @@ export default function ConstructorGame({
                                     })),
                                 });
                             }}>
-                            Clear
+                            Очистить
                         </Button>
                         <Button
                             type="button"
@@ -227,7 +227,7 @@ export default function ConstructorGame({
                                     }),
                                 );
                             }}>
-                            See the correct answer
+                            Показать правильный ответ
                         </Button>
                     </div>
                 ) : (
@@ -249,14 +249,14 @@ export default function ConstructorGame({
                                 setMiddleResult(null);
                             }
                         }}>
-                        Next word
+                        Следующее слово
                     </Button>
                 )}
             </GameInfoContainer>
 
             <Tips type={GameType.constructor} />
             {isSaving && <Spinner />}
-            {saveFailed && <Button onClick={doAfterTimer}>Retry saving result</Button>}
+            {saveFailed && <Button onClick={doAfterTimer}>Повторить сохранение</Button>}
         </div>
     );
 }

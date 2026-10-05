@@ -52,7 +52,7 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
                 result: { score: audiocall.score, answers: audiocall.answers },
             }).unwrap();
             dispatch(finalizeAudiocallState({ calculatedResult: result }));
-            toast.success("Game is finished. The result is saved");
+            toast.success("Игра завершена. Результат сохранён.");
         }
         await navigate("/games/audiocall/result", { replace: true });
     });
@@ -95,7 +95,7 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
             <GameInfoContainer className={styles.game__container} disabled={hasEnded}>
                 <div className={styles.game__round}>
                     <AudioButton path={activeWords.ref.audio} />
-                    <p className={styles.game__hint}>means</p>
+                    <p className={styles.game__hint}>означает</p>
                     {middleResult === null ? (
                         <>
                             <div className={styles.game__words}>
@@ -124,7 +124,7 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
 
                 {middleResult === null ? (
                     <Button type="button" onClick={() => answer(null)}>
-                        See the correct answer
+                        Показать правильный ответ
                     </Button>
                 ) : (
                     <>
@@ -141,14 +141,14 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
                                     setMiddleResult(null);
                                 }
                             }}>
-                            Next word
+                            Следующее слово
                         </Button>
                     </>
                 )}
             </GameInfoContainer>
             <Tips type={GameType.audiocall} />
             {isSaving && <Spinner />}
-            {saveFailed && <Button onClick={doAfterTimer}>Retry saving result</Button>}
+            {saveFailed && <Button onClick={doAfterTimer}>Повторить сохранение</Button>}
         </div>
     );
 }

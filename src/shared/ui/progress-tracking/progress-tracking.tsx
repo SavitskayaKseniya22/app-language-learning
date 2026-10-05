@@ -6,7 +6,7 @@ export default function ProgressTracking({ streak, words }: { words: Word[]; str
     return (
         <div className={styles.progress}>
             <div className={styles.progress__info}>
-                {streak} of {words.length}
+                {streak} из {words.length}
             </div>
             <ul className={styles.progress__list}>
                 {words.map((item, index) => (

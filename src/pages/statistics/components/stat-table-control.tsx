@@ -25,7 +25,7 @@ function StatTableControl({ onChange }: { onChange: React.Dispatch<React.SetStat
             />
 
             <label htmlFor={StatControlType.TODAY} className={styles.control__label}>
-                Today
+                Сегодня
             </label>
 
             <input
@@ -38,7 +38,7 @@ function StatTableControl({ onChange }: { onChange: React.Dispatch<React.SetStat
             />
 
             <label htmlFor={StatControlType.TOTAL} className={styles.control__label}>
-                All time
+                За всё время
             </label>
             <div className={styles.control__indicator} />
         </div>

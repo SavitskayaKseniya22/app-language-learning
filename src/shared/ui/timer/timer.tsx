@@ -35,7 +35,7 @@ export default function Timer({ duration, doAfterTimer }: TimerProperties) {
     return (
         <div className={styles.timer}>
             <h3 className={styles.timer__content}>
-                Time:{" "}
+                Время:{" "}
                 <span
                     className={clsx(styles.timer__time, {
                         [styles["timer__time--ending"]]: timer < 10,

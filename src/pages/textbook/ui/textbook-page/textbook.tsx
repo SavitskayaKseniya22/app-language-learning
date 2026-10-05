@@ -39,7 +39,7 @@ export default function TextbookPage() {
         <div className={styles.textbook}>
             <div className={styles.textbook__controls}>
                 <CustomSelect
-                    label={`Select the word difficulty level:`}
+                    label={"Выберите уровень сложности слов:"}
                     isLoading={isLoading}
                     isDisabled={isLoading}
                     isSearchable={false}
@@ -60,13 +60,13 @@ export default function TextbookPage() {
                         if (data) {
                             setContent({
                                 body: <GamesList data={data.words} size="small" />,
-                                title: "Choose a game",
-                                subTitle: "Practice chosen set of words",
+                                title: "Выберите игру",
+                                subTitle: "Тренировка выбранных слов",
                                 options: { size: "big" },
                             });
                         }
                     }}>
-                    Practice this set of words
+                    Тренировать эти слова
                 </Button>
             </div>
             {data && !error && <TextBookTable tableId="textbook" words={data.words} />}

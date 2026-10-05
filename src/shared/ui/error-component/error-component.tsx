@@ -14,17 +14,17 @@ export default function ErrorComponent({ error }: { error?: { code: number; mess
             <div className={styles.error__content}>
                 {error?.code && <p className={styles.error__accent}>{error.code}</p>}
 
-                <h1>{error?.message || "Something went wrong"}</h1>
+                <h1>{error?.message || "Произошла ошибка"}</h1>
 
-                {!error && errorFromRoute instanceof Error && <p>{errorFromRoute.message}</p>}
+                {!error && errorFromRoute instanceof Error && <p>Не удалось выполнить действие. Попробуйте снова.</p>}
 
                 {error?.code === 404 ? (
                     <CustomLinkAsButton to="/" view="primary">
-                        To dashboard
+                        На главную
                     </CustomLinkAsButton>
                 ) : (
                     <Button onClick={handleRefresh} view="primary">
-                        Refresh page
+                        Обновить страницу
                     </Button>
                 )}
             </div>

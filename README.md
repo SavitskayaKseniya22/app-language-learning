@@ -1,26 +1,26 @@
 # [Lang app](https://app-language-learning.netlify.app/)
 
-App for learning English through games
+Приложение для изучения английского языка через игры
 
-## Features
+## Возможности
 
-- Mobile layout
-- Authorization
-- Textbook
-- Sprint game
-- Audiocall game
-- Puzzles game
-- Constructor game
-- User collection of words
-- User game statistics
+- Адаптивный интерфейс
+- Авторизация
+- Учебник
+- Игра «Спринт»
+- Игра «Аудиовызов»
+- Игра «Пазлы»
+- Игра «Конструктор»
+- Личная коллекция слов
+- Статистика игр
 
-## Tech Stack
+## Технологии
 
 - React
 - Vite
 - Typescript
 - Redux
-- SCSS modules
+- SCSS-модули
 - Eslint
 - Prettier
 - React-hook-form
@@ -29,29 +29,29 @@ App for learning English through games
 - Supabase
 - React-toastify
 
-## How to use
+## Запуск проекта
 
-1. Clone the repo
+1. Клонируйте репозиторий
 
 ```bash
 git clone https://github.com/SavitskayaKseniya22/lang-app.git
 ```
 
-2. Install dependencies
+2. Установите зависимости
 
 ```bash
 npm install
 ```
 
-3. Copy `.env.example` to `.env.local` and set your Supabase URL and publishable key. The Supabase project must contain the tables and RPC functions described in `src/shared/api/supabase/database.types.ts`.
+3. Скопируйте `.env.example` в `.env.local` и укажите URL проекта Supabase и публичный ключ. В проекте Supabase должны быть таблицы и RPC-функции, описанные в `src/shared/api/supabase/database.types.ts`.
 
-4. Start the dev server
+4. Запустите сервер разработки
 
 ```bash
 npm run dev
 ```
 
-### Screenshots:
+### Скриншоты
 
 ![изображение](https://github.com/SavitskayaKseniya22/projects-photos/blob/main/photos/lang-app/screenshots/main-page.png)
 ![изображение](https://github.com/SavitskayaKseniya22/projects-photos/blob/main/photos/lang-app/screenshots/textbook-desktop.png)

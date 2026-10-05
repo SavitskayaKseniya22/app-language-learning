@@ -27,13 +27,13 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                     </StyledIcon>
                     <div className={styles.list__content}>
                         <div className={styles.list__description}>
-                            <h3>Sprint</h3>
+                            <h3>Спринт</h3>
 
                             <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
                                 {data ? gamesLabels.sprint.description.main : gamesLabels.sprint.description.sub}
                             </p>
                         </div>
-                        <Badge size={size}>Meaning</Badge>
+                        <Badge size={size}>Значение</Badge>
                     </div>
                 </NavLink>
             </li>
@@ -50,7 +50,7 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                     </StyledIcon>
                     <div className={styles.list__content}>
                         <div className={styles.list__description}>
-                            <h3>Constructor</h3>
+                            <h3>Конструктор</h3>
 
                             <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
                                 {data
@@ -58,7 +58,7 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                                     : gamesLabels.constructor.description.sub}
                             </p>
                         </div>
-                        <Badge size={size}>Spelling</Badge>
+                        <Badge size={size}>Правописание</Badge>
                     </div>
                 </NavLink>
             </li>
@@ -75,12 +75,12 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                     </StyledIcon>
                     <div className={styles.list__content}>
                         <div className={styles.list__description}>
-                            <h3>Audiocall</h3>
+                            <h3>Аудиовызов</h3>
                             <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
                                 {data ? gamesLabels.audiocall.description.main : gamesLabels.audiocall.description.sub}
                             </p>
                         </div>
-                        <Badge size={size}>Listening</Badge>
+                        <Badge size={size}>Аудирование</Badge>
                     </div>
                 </NavLink>
             </li>
@@ -97,12 +97,12 @@ export default function GamesList({ data, size = "medium" }: { data?: Word[]; si
                     </StyledIcon>
                     <div className={styles.list__content}>
                         <div className={styles.list__description}>
-                            <h3>Puzzles</h3>
+                            <h3>Пазлы</h3>
                             <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
                                 {data ? gamesLabels.puzzles.description.main : gamesLabels.puzzles.description.sub}
                             </p>
                         </div>
-                        <Badge size={size}>Grammar</Badge>
+                        <Badge size={size}>Грамматика</Badge>
                     </div>
                 </NavLink>
             </li>

@@ -69,27 +69,27 @@ export default function TextBookTable({
                 }),
                 titles: [
                     {
-                        title: "Audio Preview",
+                        title: "Произношение",
                         key: "preview_audio",
                         widthInGrid: "64px",
                     },
                     {
-                        title: "Preview",
+                        title: "Изображение",
                         key: "preview",
                         widthInGrid: "64px",
                     },
                     {
-                        title: "Word",
+                        title: "Слово",
                         key: "word",
                         widthInGrid: "minmax(180px, 0.75fr)",
                     },
                     {
-                        title: "Meaning",
+                        title: "Значение",
                         key: "meaning",
                         widthInGrid: "minmax(240px, 2fr)",
                     },
                     {
-                        title: "Example",
+                        title: "Пример",
                         key: "example",
                         widthInGrid: "minmax(240px, 2fr)",
                     },
@@ -97,7 +97,7 @@ export default function TextBookTable({
                     ...(learned_words
                         ? [
                               {
-                                  title: "Learned now",
+                                  title: "Выучено сейчас",
                                   key: "learned_words",
                                   widthInGrid: "80px",
                               },
@@ -107,7 +107,7 @@ export default function TextBookTable({
                     ...(new_words
                         ? [
                               {
-                                  title: "First encounter",
+                                  title: "Новое слово",
                                   key: "new_words",
                                   widthInGrid: "80px",
                               },

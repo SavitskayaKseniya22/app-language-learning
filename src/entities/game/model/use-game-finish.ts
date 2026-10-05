@@ -18,7 +18,7 @@ export function useGameFinish(onFinish: () => Promise<void>) {
             () => {
                 pending.current = false;
                 setPhase("failed");
-                toast.error("Can't save result. Please try again.");
+                toast.error("Не удалось сохранить результат. Попробуйте снова.");
             },
         );
     };

@@ -5,7 +5,7 @@ export default function DeveloperLink() {
         <a
             href="https://github.com/SavitskayaKseniya22"
             target="_blank"
-            title="Developer's GitHub"
+            title="GitHub разработчика"
             rel="noreferrer"
             className={styles.sidelink}>
             <i className="fa-brands fa-github" />
