@@ -27,7 +27,7 @@ const Input = forwardRef<HTMLInputElement, LabeledInputProperties>(function Inpu
     reference,
 ) {
     const generatedId = useId();
-    const inputId = properties.id ?? generatedId;
+    const inputId = properties.id ?? (label ? generatedId : undefined);
     return (
         <div className={clsx(styles.input, className)}>
             {label ? (

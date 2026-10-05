@@ -54,6 +54,9 @@ type GameResultRow = Tables<"game_results">;
 
 export type Word = Tables<"words">;
 
+export type UserWordProgress = Tables<"user_word_progress"> & { words: Word | null };
+export type UserDashboard = { games: GameResultRow[]; progress: UserWordProgress[]; totalWords: number };
+
 type GameResult = {
     answers: {
         correct: Word[];
@@ -95,6 +98,44 @@ type FinishPuzzleResponse = {
 
 export const userApi = baseApi.injectEndpoints({
     endpoints: builder => ({
+        getUserDashboard: builder.query<UserDashboard, string>({
+            async queryFn(userId) {
+                try {
+                    const games: GameResultRow[] = [];
+                    const progress: UserWordProgress[] = [];
+                    // Supabase limits each response; read all pages for accurate totals.
+                    for (let from = 0; ; from += 500) {
+                        const { data, error } = await supabase
+                            .from("game_results")
+                            .select("*")
+                            .eq("user_id", userId)
+                            .order("created_at", { ascending: false })
+                            .order("id", { ascending: false })
+                            .range(from, from + 499);
+                        if (error) throw error;
+                        games.push(...data);
+                        if (data.length < 500) break;
+                    }
+                    for (let from = 0; ; from += 500) {
+                        const { data, error } = await supabase
+                            .from("user_word_progress")
+                            .select("*, words(*)")
+                            .eq("user_id", userId)
+                            .order("word_id")
+                            .range(from, from + 499);
+                        if (error) throw error;
+                        progress.push(...data);
+                        if (data.length < 500) break;
+                    }
+                    const { count, error } = await supabase.from("words").select("id", { count: "exact", head: true });
+                    if (error) throw error;
+                    return { data: { games, progress, totalWords: count ?? 0 } };
+                } catch {
+                    return { error: { status: "CUSTOM_ERROR", error: "Не удалось загрузить профиль." } };
+                }
+            },
+            providesTags: ["GameResults", "Words"],
+        }),
         getUserResults: builder.query<GameResultRow[], GetUserResultsArguments>({
             async queryFn(arguments_) {
                 let query = supabase
@@ -286,6 +327,7 @@ export const userApi = baseApi.injectEndpoints({
 });
 
 export const {
+    useGetUserDashboardQuery,
     useGetUserResultsQuery,
     useGetWordsByDifficultyQuery,
     useGetAllWordsByDifficultyQuery,

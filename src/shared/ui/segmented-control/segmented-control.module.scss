@@ -1,0 +1,52 @@
+@use "@abstracts/mixins" as mx;
+@use "@abstracts/variables" as vars;
+
+.control {
+    position: relative;
+    display: grid;
+    width: 18rem;
+    max-width: 100%;
+    padding: 4px;
+    background-color: vars.$color-stroke-25;
+    border: 1px solid vars.$color-stroke;
+    border-radius: 12px;
+    isolation: isolate;
+}
+
+.control__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+
+    &:focus-visible + .control__label {
+        outline: 2px solid vars.$color-text-dark;
+        outline-offset: -2px;
+    }
+}
+
+.control__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 8px;
+
+    @include mx.text-btn-s;
+}
+
+.control__indicator {
+    position: absolute;
+    inset: 4px auto 4px 4px;
+    z-index: -1;
+    pointer-events: none;
+    background-color: vars.$color-white;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+}

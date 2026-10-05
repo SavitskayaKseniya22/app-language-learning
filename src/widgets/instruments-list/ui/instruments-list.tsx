@@ -28,46 +28,22 @@ export default function InstrumentsList({ size = "medium" }: { size?: SizeType }
                     </div>
                 </NavLink>
             </li>
+
             <li>
                 <NavLink
-                    to="/profile/collection"
-                    aria-disabled={!user}
-                    className={clsx(styles.list__item, { [styles[`list__item--disabled`]]: !user })}>
-                    <StyledIcon size={size}>
-                        <i className="fa-regular fa-folder" />
-                    </StyledIcon>
-                    <div className={styles.list__description}>
-                        <h3>Коллекция</h3>
-
-                        <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
-                            Собирайте слова в коллекцию для тренировок!
-                        </p>
-
-                        <p className={styles.list__details}>
-                            Набор выбранных слов для индивидуальных тренировок в играх
-                        </p>
-                    </div>
-                    <p className={styles.list__user}>
-                        <span>Доступно после входа в аккаунт</span>
-                        <i className="fa-solid fa-user"></i>
-                    </p>
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    to="/profile/statistics"
+                    to="/profile"
                     aria-disabled={!user}
                     className={clsx(styles.list__item, { [styles[`list__item--disabled`]]: !user })}>
                     <StyledIcon size={size}>
                         <i className="fa-solid fa-table" />
                     </StyledIcon>
                     <div className={styles.list__description}>
-                        <h3>Статистика</h3>
+                        <h3>Мой профиль</h3>
                         <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
-                            Следите за прогрессом в статистике!
+                            Следите за прогрессом изучения английского!
                         </p>
                         <p className={styles.list__details}>
-                            Результаты тренировок сохраняются. Проверяйте статистику, чтобы следить за своим прогрессом!
+                            Выученные слова, статистика и история ваших игр — в одном месте.
                         </p>
                     </div>
                     <p className={styles.list__user}>

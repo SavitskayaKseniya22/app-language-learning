@@ -1,0 +1,88 @@
+@use "@abstracts/mixins" as mx;
+@use "@abstracts/variables" as vars;
+
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 0;
+
+    @media (min-width: vars.$desktop-s) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (width <= 400px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.metrics__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-width: 0;
+    padding: 1.25rem;
+    background-color: vars.$color-white;
+    border: 1px solid vars.$color-stroke;
+    border-radius: 12px;
+}
+
+.metrics__label {
+    color: vars.$color-text-dark;
+
+    @include mx.text-emphasis-m;
+}
+
+.metrics__content {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0;
+}
+
+.metrics__value {
+    font-variant-numeric: tabular-nums;
+    color: vars.$charcoal-blue;
+    overflow-wrap: anywhere;
+
+    @include mx.text-headline-xl;
+}
+
+.metrics__description {
+    margin-top: auto;
+
+    @include mx.text-note-basic;
+}
+
+.metrics--secondary {
+    gap: 0.5rem;
+
+    .metrics__card {
+        gap: 0.5rem;
+        padding: 0.875rem 1rem;
+        background-color: vars.$color-stroke-25;
+        border-color: transparent;
+        border-radius: 8px;
+    }
+
+    .metrics__label {
+        color: vars.$color-text-light;
+
+        @include mx.text-s;
+    }
+
+    .metrics__content {
+        flex-direction: row;
+        gap: 0.5rem;
+        align-items: baseline;
+    }
+
+    .metrics__value {
+        @include mx.text-headline-s;
+    }
+
+    .metrics__description {
+        margin-top: 0;
+    }
+}

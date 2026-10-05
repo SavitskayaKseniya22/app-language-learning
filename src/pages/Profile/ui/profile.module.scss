@@ -1,5 +1,65 @@
 @use "@abstracts/mixins" as mx;
+@use "@abstracts/variables" as vars;
 
 .profile {
     @include mx.main-container;
+}
+
+.profile__header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    overflow-wrap: anywhere;
+}
+
+.profile__activity {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.profile__section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.25rem;
+    background-color: vars.$color-white;
+    border: 1px solid vars.$color-stroke;
+    border-radius: 16px;
+
+    h2,
+    h3 {
+        margin: 0;
+    }
+}
+
+.profile__note {
+    @include mx.text-note-basic;
+}
+
+.profile__table {
+    overflow-x: auto;
+
+    > div {
+        min-width: 740px;
+    }
+}
+
+.profile__words {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.profile__word {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.75rem;
+    border-bottom: 1px solid vars.$color-stroke;
+}
+
+.profile__btn {
+    align-self: flex-end;
 }

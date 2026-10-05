@@ -21,8 +21,6 @@ import {
     PuzzlePage,
     ResultPage,
     ProfilePage,
-    CollectionPage,
-    StatisticsPage,
     GameStartScreen,
 } from "./lazy-pages";
 
@@ -66,8 +64,6 @@ const router = createBrowserRouter(
 
                 <Route path="profile" element={<PrivateRoute />}>
                     <Route index element={<ProfilePage />} />
-                    <Route path="statistics" element={<StatisticsPage />} />
-                    <Route path="collection" element={<CollectionPage />} />
                 </Route>
 
                 <Route path="games">

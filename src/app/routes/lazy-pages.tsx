@@ -9,6 +9,4 @@ export const ConstructorPage = lazy(() => import("@/pages/constructor/ui/constru
 export const PuzzlePage = lazy(() => import("@/pages/sentences/ui/puzzle-page/puzzle-page"));
 export const ResultPage = lazy(() => import("@/pages/result/ui/result-page/result-page"));
 export const ProfilePage = lazy(() => import("@/pages/profile/ui/profile"));
-export const CollectionPage = lazy(() => import("@/pages/collection/ui/collection"));
-export const StatisticsPage = lazy(() => import("@/pages/statistics/ui/statistics"));
 export const GameStartScreen = lazy(() => import("@/entities/game/ui/game-start-screen/game-start-screen"));

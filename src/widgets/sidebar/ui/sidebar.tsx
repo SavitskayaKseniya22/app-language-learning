@@ -14,7 +14,7 @@ export default function Sidebar() {
     const { setContent } = useContext(ModalContext);
     //update modal
     return (
-        <nav className={styles.sidebar} aria-label="Основная навигация">
+        <nav className={styles.sidebar}>
             <ul className={styles.sidebar__navigation}>
                 <li>
                     <NavLink
@@ -125,34 +125,6 @@ export default function Sidebar() {
                                 <span className={styles.sidebar__title}>Профиль</span>
                             </NavLink>
 
-                            <ul className={styles.sidebar__submenu}>
-                                <li>
-                                    <NavLink
-                                        className={({ isActive }) =>
-                                            clsx(styles.sidebar__link, styles["sidebar__link--sub"], {
-                                                [styles["sidebar__link--active"]]: isActive,
-                                            })
-                                        }
-                                        to="/profile/collection"
-                                        title="Коллекция">
-                                        <i className="fa-regular fa-folder" />
-                                        <span className={styles.sidebar__title}>Коллекция</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink
-                                        className={({ isActive }) =>
-                                            clsx(styles.sidebar__link, styles["sidebar__link--sub"], {
-                                                [styles["sidebar__link--active"]]: isActive,
-                                            })
-                                        }
-                                        to="/profile/statistics"
-                                        title="Статистика">
-                                        <i className="fa-solid fa-table" />
-                                        <span className={styles.sidebar__title}>Статистика</span>
-                                    </NavLink>
-                                </li>
-                            </ul>
                             <button
                                 type="button"
                                 className={clsx(styles.sidebar__link, styles["sidebar__link--button"])}
