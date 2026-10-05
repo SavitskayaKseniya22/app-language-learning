@@ -98,5 +98,10 @@ Storage переносятся отдельно.
 
 ### Скриншоты
 
-![изображение](https://github.com/SavitskayaKseniya22/projects-photos/blob/main/photos/lang-app/screenshots/main-page.png)
-![изображение](https://github.com/SavitskayaKseniya22/projects-photos/blob/main/photos/lang-app/screenshots/textbook-desktop.png)
+<img width="1920" height="955" alt="Screenshot 2026-10-05 at 22-08-19 Lang App — изучение английского" src="https://github.com/user-attachments/assets/95a373b5-5b08-4737-9693-88f18eca05d6" />
+<img width="1920" height="955" alt="Screenshot 2026-10-05 at 22-08-29 Lang App — изучение английского" src="https://github.com/user-attachments/assets/11c91b5b-750b-417e-8bcb-9ffd4d443e84" />
+<img width="1903" height="955" alt="Screenshot 2026-10-05 at 22-09-26 Lang App — изучение английского" src="https://github.com/user-attachments/assets/f4c9d2b8-330c-490c-b729-799526f9383e" />
+<img width="1920" height="955" alt="Screenshot 2026-10-05 at 22-08-35 Lang App — изучение английского" src="https://github.com/user-attachments/assets/413ec63e-4793-4329-a583-ffdb17142e6d" />
+
+
+
