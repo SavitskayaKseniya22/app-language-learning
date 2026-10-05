@@ -5,7 +5,7 @@ App for learning English through games
 ## Features
 
 - Mobile layout
-- Autorization
+- Authorization
 - Textbook
 - Sprint game
 - Audiocall game
@@ -17,16 +17,16 @@ App for learning English through games
 ## Tech Stack
 
 - React
-- Create-react-app
+- Vite
 - Typescript
 - Redux
-- Styled-components
+- SCSS modules
 - Eslint
 - Prettier
 - React-hook-form
 - React-router
-- React-beautiful-dnd
-- Firebase
+- @hello-pangea/dnd
+- Supabase
 - React-toastify
 
 ## How to use
@@ -43,10 +43,12 @@ git clone https://github.com/SavitskayaKseniya22/lang-app.git
 npm install
 ```
 
-3. Start the dev server
+3. Copy `.env.example` to `.env.local` and set your Supabase URL and publishable key. The Supabase project must contain the tables and RPC functions described in `src/shared/api/supabase/database.types.ts`.
+
+4. Start the dev server
 
 ```bash
-npm start
+npm run dev
 ```
 
 ### Screenshots:
