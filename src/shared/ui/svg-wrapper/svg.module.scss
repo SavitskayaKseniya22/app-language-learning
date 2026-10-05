@@ -12,13 +12,13 @@
         }
     }
 
-    &_stroke {
+    &--stroke {
         svg path {
             stroke: currentcolor;
         }
     }
 
-    &_fill {
+    &--fill {
         svg path {
             fill: currentcolor;
         }

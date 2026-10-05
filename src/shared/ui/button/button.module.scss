@@ -2,89 +2,89 @@
 @use "@abstracts/mixins" as mx;
 
 .button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: vars.$color-white;
-  white-space: nowrap;
-  cursor: poiner;
-  transition:
-    color 150ms,
-    background-color 150ms;
-
-  // todo make it square
-
-  &:disabled,
-  &[aria-disabled="true"] {
-    pointer-events: none;
-    opacity: 0.2;
-  }
-
-  &_primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: vars.$color-white;
+    white-space: nowrap;
     cursor: pointer;
-    background-color: vars.$burnt-peach;
+    transition:
+        color 150ms,
+        background-color 150ms;
 
-    &:hover {
-      background-color: vars.$burnt-peach-dark;
+    // todo make it square
+
+    &:disabled,
+    &[aria-disabled="true"] {
+        pointer-events: none;
+        opacity: 0.2;
     }
 
-    &:active {
-      background-color: vars.$charcoal-blue;
-    }
-  }
+    &--primary {
+        cursor: pointer;
+        background-color: vars.$burnt-peach;
 
-  &_secondary {
-    cursor: pointer;
-    background-color: vars.$verdigris;
+        &:hover {
+            background-color: vars.$burnt-peach-dark;
+        }
 
-    &:hover {
-      background-color: vars.$verdigris-dark;
-    }
-
-    &:active {
-      background-color: vars.$charcoal-blue;
-    }
-  }
-
-  &_transparent {
-    color: vars.$color-text-dark;
-    cursor: pointer;
-    background-color: transparent;
-
-    &:hover {
-      background-color: vars.$color-stroke;
+        &:active {
+            background-color: vars.$charcoal-blue;
+        }
     }
 
-    &:active {
-      color: vars.$color-white;
-      background-color: vars.$charcoal-blue;
+    &--secondary {
+        cursor: pointer;
+        background-color: vars.$verdigris;
+
+        &:hover {
+            background-color: vars.$verdigris-dark;
+        }
+
+        &:active {
+            background-color: vars.$charcoal-blue;
+        }
     }
-  }
 
-  &_small {
-    min-width: 2rem;
-    min-height: 2rem;
-    padding-inline: 1rem;
-    border-radius: 0.375rem;
+    &--transparent {
+        color: vars.$color-text-dark;
+        cursor: pointer;
+        background-color: transparent;
 
-    @include mx.text-btn-s;
-  }
+        &:hover {
+            background-color: vars.$color-stroke;
+        }
 
-  &_medium {
-    min-width: 2.5rem;
-    min-height: 2.5rem;
-    padding-inline: 1rem;
-    border-radius: 0.5rem;
+        &:active {
+            color: vars.$color-white;
+            background-color: vars.$charcoal-blue;
+        }
+    }
 
-    @include mx.text-btn-m;
-  }
+    &--small {
+        min-width: 2rem;
+        min-height: 2rem;
+        padding-inline: 1rem;
+        border-radius: 0.375rem;
 
-  &_big {
-    min-width: 3rem;
-    min-height: 3rem;
-    padding-inline: 2rem;
-    border-radius: 0.75rem;
+        @include mx.text-btn-s;
+    }
 
-    @include mx.text-btn-l;
-  }
+    &--medium {
+        min-width: 2.5rem;
+        min-height: 2.5rem;
+        padding-inline: 1rem;
+        border-radius: 0.5rem;
+
+        @include mx.text-btn-m;
+    }
+
+    &--big {
+        min-width: 3rem;
+        min-height: 3rem;
+        padding-inline: 2rem;
+        border-radius: 0.75rem;
+
+        @include mx.text-btn-l;
+    }
 }

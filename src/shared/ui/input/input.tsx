@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { forwardRef } from "react";
+import { forwardRef, useId } from "react";
 import styles from "./input.module.scss";
 import clsx from "clsx";
 
@@ -26,29 +26,34 @@ const Input = forwardRef<HTMLInputElement, LabeledInputProperties>(function Inpu
     },
     reference,
 ) {
+    const generatedId = useId();
+    const inputId = properties.id ?? generatedId;
     return (
-        <label className={clsx(styles.input, className)}>
+        <div className={clsx(styles.input, className)}>
             {label ? (
                 isRequired ? (
-                    <div className={styles.input__label}>
+                    <label htmlFor={inputId} className={styles.input__label}>
                         {label}
-                        <p className={styles.input__label_required}>*required</p>
-                    </div>
+                        <span className={styles.input__required}>*required</span>
+                    </label>
                 ) : (
-                    <div className={styles.input__label}>{label}</div>
+                    <label htmlFor={inputId} className={styles.input__label}>
+                        {label}
+                    </label>
                 )
             ) : undefined}
 
             <div
-                className={clsx(styles.input__container, styles[`input__container_${inputSize}`], {
-                    [styles.input__container_invalid]: errorMessage,
+                className={clsx(styles.input__container, styles[`input__container--${inputSize}`], {
+                    [styles["input__container--invalid"]]: errorMessage,
                 })}>
-                <input ref={reference} {...properties} className={clsx(styles.input__field)} />
+                <input ref={reference} {...properties} id={inputId} className={clsx(styles.input__field)} />
                 {clearButtonProps && (
                     <button
                         type="button"
+                        aria-label="Clear input"
                         {...clearButtonProps}
-                        className={clsx(styles.input__btn, styles.input__btn, clearButtonProps.className)}>
+                        className={clsx(styles.input__clear, clearButtonProps.className)}>
                         <i className="fa-solid fa-xmark"></i>
                     </button>
                 )}
@@ -57,7 +62,7 @@ const Input = forwardRef<HTMLInputElement, LabeledInputProperties>(function Inpu
             {isWithErrorText && errorMessage && errorMessage.trim().length > 0 && (
                 <p className={styles.input__error}>{errorMessage}</p>
             )}
-        </label>
+        </div>
     );
 });
 

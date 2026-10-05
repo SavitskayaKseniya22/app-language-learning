@@ -1,28 +1,28 @@
 @use "@abstracts/variables" as vars;
 
 .image {
-  flex-shrink: 0;
-  overflow: hidden;
-  border-radius: vars.$radius-default;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: vars.$radius-default;
 
-  &--big {
-    width: 80px;
-    height: 80px;
-  }
+    &--big {
+        width: 80px;
+        height: 80px;
+    }
 
-  &--medium {
-    width: 64px;
-    height: 64px;
-  }
+    &--medium {
+        width: 64px;
+        height: 64px;
+    }
 
-  &--small {
-    width: 48px;
-    height: 48px;
-  }
+    &--small {
+        width: 48px;
+        height: 48px;
+    }
 
-  img {
-    min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;
-  }
+    img {
+        min-width: 100%;
+        min-height: 100%;
+        object-fit: cover;
+    }
 }

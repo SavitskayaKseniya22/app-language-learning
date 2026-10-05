@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import type React from "react";
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect, useId } from "react";
 import { createPortal } from "react-dom";
 import ModalContext from "./modal-context";
 import styles from "./modal.module.scss";
@@ -35,6 +35,7 @@ function ReactPortal({ children }: { children: React.ReactNode }) {
 }
 
 export default function Modal() {
+    const titleId = useId();
     const { content, setContent } = useContext(ModalContext);
     const { blockScroll, unBlockScroll } = useManipulateContainerScroll();
 
@@ -77,17 +78,22 @@ export default function Modal() {
                         content.options?.size && styles[`modal__container--${content.options?.size}`],
                     )}
                     role="dialog"
+                    aria-labelledby={content.title ? titleId : undefined}
+                    aria-label={content.title ? undefined : "Dialog"}
                     aria-modal="true">
                     <div className={styles.modal__header}>
                         <div>
-                            {content.title && <h2 className={styles.modal__title}>{content.title}</h2>}
-                            {content.subTitle && <p className={styles["modal__title--sub"]}>{content.subTitle}</p>}
+                            {content.title && (
+                                <h2 id={titleId} className={styles.modal__title}>
+                                    {content.title}
+                                </h2>
+                            )}
+                            {content.subTitle && <p className={styles.modal__subtitle}>{content.subTitle}</p>}
                         </div>
 
                         <Button
                             type="button"
                             view="transparent"
-                            className={styles.modal__button}
                             onClick={() => {
                                 setContent(null);
                             }}

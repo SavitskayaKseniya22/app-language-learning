@@ -22,7 +22,6 @@ body {
     }
 }
 
-// StyledMain
 .main {
     width: 100%;
     min-width: 320px;
@@ -32,26 +31,5 @@ body {
 
     @media (min-width: vars.$tablet) {
         padding: 2rem;
-    }
-}
-
-// StyledGameContainer
-.game__container {
-    display: flex;
-    flex-grow: 2;
-    flex-direction: column;
-    gap: 1rem;
-    justify-content: space-around;
-    width: 100%;
-    text-align: center;
-
-    @media (min-width: vars.$tablet) {
-        width: 90%;
-    }
-    @media (min-width: vars.$laptop) {
-        width: 70%;
-    }
-    @media (min-width: vars.$desktop) {
-        width: 50%;
     }
 }

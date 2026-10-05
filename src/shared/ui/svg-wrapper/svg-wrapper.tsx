@@ -8,5 +8,5 @@ export default function SVGWrapper({
 }: {
     view: "stroke" | "fill";
 } & React.ComponentProps<"span">) {
-    return <span className={clsx(styles.svg, styles[`svg_${view}`], className)}>{children}</span>;
+    return <span className={clsx(styles.svg, styles[`svg--${view}`], className)}>{children}</span>;
 }

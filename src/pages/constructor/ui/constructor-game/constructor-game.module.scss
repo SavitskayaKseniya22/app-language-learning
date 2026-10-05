@@ -1,121 +1,119 @@
 @use "@abstracts/variables" as vars;
 @use "@abstracts/mixins" as mx;
 
-.game {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  height: 100%;
+.assembly {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
 }
 
-.game__container {
-  flex-grow: 1;
-  flex-direction: column;
-  gap: 5rem;
+.assembly__content {
+    flex-grow: 1;
+    flex-direction: column;
+    gap: 5rem;
 }
 
-.game__header {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  justify-content: space-between;
-  width: 100%;
+.assembly__header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: space-between;
+    width: 100%;
 
-  @media (min-width: vars.$desktop-s) {
-    flex-direction: row;
-    gap: 4rem;
-  }
+    @media (min-width: vars.$desktop-s) {
+        flex-direction: row;
+        gap: 4rem;
+    }
 
-  & > *:not(:last-child) {
-    position: relative;
+    & > *:not(:last-child) {
+        position: relative;
 
+        &::after {
+            @media (min-width: vars.$desktop-s) {
+                position: absolute;
+                top: 25%;
+                right: -2rem;
+                width: 1px;
+                height: 50%;
+                content: "";
+                background-color: vars.$color-stroke;
+            }
+        }
+    }
+}
+
+.assembly__prompt {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.assembly__translation {
+    @include mx.text-headline-xl;
+}
+
+.assembly__answer {
+    @include mx.text-headline-m;
+}
+
+.assembly__hint {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    color: vars.$color-text-light;
+
+    &::before,
     &::after {
-      @media (min-width: vars.$desktop-s) {
-        position: absolute;
-        top: 25%;
-        right: -2rem;
-        width: 1px;
-        height: 50%;
+        display: block;
+        width: 5rem;
+        height: 1px;
         content: "";
         background-color: vars.$color-stroke;
-      }
     }
-  }
 }
 
-.words {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
+.assembly__letters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
 }
 
-.words__word {
-  &--main {
-    @include mx.text-headline-xl;
-  }
+.assembly__letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: vars.$charcoal-blue;
+    background-color: vars.$color-stroke-25;
+    border: 1px solid vars.$color-stroke;
+    border-radius: 4px;
+    @include mx.text-s;
 
-  &--translated {
-    @include mx.text-headline-m;
-  }
+    @media (min-width: vars.$desktop-s) {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 16px;
+        @include mx.text-headline-xl;
+    }
+
+    &--wrong {
+        background-color: vars.$color-error-100;
+        border: 1px solid vars.$color-error-700;
+    }
+
+    &--correct {
+        background-color: vars.$color-success-100;
+        border: 1px solid vars.$color-success-700;
+    }
 }
 
-.words__note {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  color: vars.$color-text-light;
-
-  &::before,
-  &::after {
-    display: block;
-    width: 5rem;
-    height: 1px;
-    content: "";
-    background-color: vars.$color-stroke;
-  }
-}
-
-.game__words {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-}
-
-.game__word {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  color: vars.$charcoal-blue;
-  background-color: vars.$color-stroke-25;
-  border: 1px solid vars.$color-stroke;
-  border-radius: 4px;
-  @include mx.text-s;
-
-  @media (min-width: vars.$desktop-s) {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 16px;
-    @include mx.text-headline-xl;
-  }
-
-  &--wrong {
-    background-color: vars.$color-error-100;
-    border: 1px solid vars.$color-error-700;
-  }
-
-  &--correct {
-    background-color: vars.$color-success-100;
-    border: 1px solid vars.$color-success-700;
-  }
-}
-
-.game__buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
+.assembly__actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
 }

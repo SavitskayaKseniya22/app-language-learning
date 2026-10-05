@@ -15,11 +15,6 @@
     width: 100%;
 
     @include mx.text-s;
-
-    &_required {
-        font-style: italic;
-        color: vars.$color-stroke;
-    }
 }
 
 .input__container {
@@ -33,12 +28,12 @@
 
     @include mx.view-transition;
 
-    &_small {
+    &--small {
         min-height: 32px;
         padding: 3px 14px;
     }
 
-    &_medium {
+    &--medium {
         min-height: 40px;
         padding: 7px 14px;
     }
@@ -58,7 +53,7 @@
         border: 1px solid vars.$color-stroke;
     }
 
-    &_invalid {
+    &--invalid {
         background: vars.$color-white;
         border: 1px solid vars.$color-error-300;
 
@@ -90,7 +85,7 @@ input[type="number"]::-webkit-outer-spin-button {
     appearance: textfield;
 }
 
-.input__btn {
+.input__clear {
     display: flex;
     flex-shrink: 0;
     align-items: center;
@@ -113,4 +108,9 @@ input[type="number"]::-webkit-outer-spin-button {
         color: vars.$color-stroke;
         pointer-events: none;
     }
+}
+
+.input__required {
+    font-style: italic;
+    color: vars.$color-stroke;
 }

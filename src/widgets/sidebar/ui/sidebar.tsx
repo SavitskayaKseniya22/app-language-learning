@@ -14,7 +14,7 @@ export default function Sidebar() {
     const { setContent } = useContext(ModalContext);
     //update modal
     return (
-        <div className={styles.sidebar}>
+        <nav className={styles.sidebar} aria-label="Main navigation">
             <ul className={styles.sidebar__navigation}>
                 <li>
                     <NavLink
@@ -54,7 +54,7 @@ export default function Sidebar() {
                         <i className="fa-solid fa-puzzle-piece" />
                         <span className={styles.sidebar__title}>Games</span>
                     </NavLink>
-                    <ul className={styles["sidebar__navigation--sub"]}>
+                    <ul className={styles.sidebar__submenu}>
                         <li>
                             <NavLink
                                 className={({ isActive }) =>
@@ -125,7 +125,7 @@ export default function Sidebar() {
                                 <span className={styles.sidebar__title}>Profile</span>
                             </NavLink>
 
-                            <ul className={styles["sidebar__navigation--sub"]}>
+                            <ul className={styles.sidebar__submenu}>
                                 <li>
                                     <NavLink
                                         className={({ isActive }) =>
@@ -180,9 +180,9 @@ export default function Sidebar() {
                     )}
                 </li>
             </ul>
-            <div className={styles.sidebar__sidelink}>
+            <div className={styles.sidebar__credits}>
                 <DeveloperLink />
             </div>
-        </div>
+        </nav>
     );
 }

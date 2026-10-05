@@ -41,11 +41,11 @@ export default function ResultPage({ type }: { type: GameType }) {
         );
 
         return (
-            <div className={clsx(styles.game, { [styles["game--empty"]]: totalLength === 0 })}>
+            <div className={clsx(styles.result, { [styles["result--empty"]]: totalLength === 0 })}>
                 {totalLength > 0 ? (
                     <>
                         <GameInfoContainer>
-                            <div className={styles.game__header}>
+                            <div className={styles.result__summary}>
                                 <h3>
                                     Total answers: <span>{totalLength}</span>
                                 </h3>
@@ -59,14 +59,14 @@ export default function ResultPage({ type }: { type: GameType }) {
                                 <h3>
                                     Accuracy: <span>{accuracy}%</span>
                                 </h3>
-                                <h3 className={styles["game__stat--main"]}>
+                                <h3 className={styles.result__score}>
                                     Score: <span>{passedData.score}</span>
                                 </h3>
                             </div>
                         </GameInfoContainer>
                         <GameInfoContainer
-                            className={clsx(styles.game__container, styles["game__container--textbook"])}>
-                            <div className={styles.game__table}>
+                            className={clsx(styles.result__content, styles["result__content--detailed"])}>
+                            <div className={styles.result__answers}>
                                 <h2>Correct answers</h2>
                                 <TextBookTable
                                     tableId="correct answers"
@@ -75,7 +75,7 @@ export default function ResultPage({ type }: { type: GameType }) {
                                     learned_words={passedData.calculatedResult?.learned_words}
                                 />
                             </div>
-                            <div className={styles.game__table}>
+                            <div className={styles.result__answers}>
                                 <h2>Wrong answers</h2>
                                 <TextBookTable
                                     tableId="wrong answers"
@@ -84,7 +84,7 @@ export default function ResultPage({ type }: { type: GameType }) {
                                     learned_words={passedData.calculatedResult?.learned_words}
                                 />
                             </div>
-                            <div className={styles.game__footer}>
+                            <div className={styles.result__actions}>
                                 <CustomLinkAsButton type="button" to={`/games/${type}`} replace>
                                     Start again
                                 </CustomLinkAsButton>
@@ -92,7 +92,7 @@ export default function ResultPage({ type }: { type: GameType }) {
                         </GameInfoContainer>
                     </>
                 ) : (
-                    <GameInfoContainer className={styles.game__container}>
+                    <GameInfoContainer className={styles.result__content}>
                         <h2>Not a single answer was given</h2>
                         <CustomLinkAsButton type="button" to={`/games/${type}`} replace>
                             Start again
@@ -109,11 +109,11 @@ export default function ResultPage({ type }: { type: GameType }) {
         const accuracy = getPercent(passedData.correct + passedData.wrong, passedData.correct);
 
         return (
-            <div className={clsx(styles.game, { [styles["game--empty"]]: totalLength === 0 })}>
+            <div className={clsx(styles.result, { [styles["result--empty"]]: totalLength === 0 })}>
                 {totalLength > 0 ? (
                     <>
                         <GameInfoContainer>
-                            <div className={styles.game__header}>
+                            <div className={styles.result__summary}>
                                 <h3>
                                     Total answers: <span>{totalLength}</span>
                                 </h3>
@@ -127,12 +127,12 @@ export default function ResultPage({ type }: { type: GameType }) {
                                 <h3>
                                     Accuracy: <span>{accuracy}%</span>
                                 </h3>
-                                <h3 className={styles["game__stat--main"]}>
+                                <h3 className={styles.result__score}>
                                     Score: <span>{passedData.score}</span>
                                 </h3>
                             </div>
                         </GameInfoContainer>
-                        <GameInfoContainer className={clsx(styles.game__container)}>
+                        <GameInfoContainer className={clsx(styles.result__content)}>
                             <h2>Game is finished</h2>
 
                             <CustomLinkAsButton type="button" to={`/games/${type}`} replace>
@@ -141,7 +141,7 @@ export default function ResultPage({ type }: { type: GameType }) {
                         </GameInfoContainer>
                     </>
                 ) : (
-                    <GameInfoContainer className={styles.game__container}>
+                    <GameInfoContainer className={styles.result__content}>
                         <h2>Not a single answer was given</h2>
                         <CustomLinkAsButton type="button" to={`/games/${type}`} replace>
                             Start again

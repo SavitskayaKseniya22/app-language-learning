@@ -2,106 +2,106 @@
 @use "@abstracts/mixins" as mx;
 
 .sidebar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  min-width: 232px;
-  background-color: vars.$charcoal-blue;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    min-width: 232px;
+    background-color: vars.$charcoal-blue;
 
-  @media (min-width: vars.$tablet) {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-  }
+    @media (min-width: vars.$tablet) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100vh;
+    }
 }
 
 .sidebar__navigation {
-  display: flex;
-  flex-direction: row;
-  gap: 0.5rem;
-  justify-content: center;
-  padding: 0 1rem 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: center;
+    padding: 0 1rem 1rem;
 
-  @include mx.text-emphasis-l;
+    @include mx.text-emphasis-l;
 
-  @media (min-width: vars.$tablet) {
-    flex-direction: column;
-    padding: 1rem 0 1rem 1rem;
-    @include mx.text-emphasis-m;
-  }
+    @media (min-width: vars.$tablet) {
+        flex-direction: column;
+        padding: 1rem 0 1rem 1rem;
+        @include mx.text-emphasis-m;
+    }
+}
 
-  &--sub {
+.sidebar__submenu {
     display: none;
 
     @media (min-width: vars.$tablet) {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      justify-content: center;
-      padding: 0.5rem 0 0.5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        justify-content: center;
+        padding: 0.5rem 0 0.5rem 1rem;
     }
-  }
 }
 
 .sidebar__title {
-  display: none;
-
-  @media (min-width: vars.$tablet) {
-    display: inline;
-  }
-}
-
-.sidebar__link {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  padding: 1rem;
-  color: white;
-
-  @media (min-width: vars.$tablet) {
-    padding: 0.5rem;
-  }
-
-  &--active {
-    color: vars.$burnt-peach;
-    background-color: white;
-    border-radius: 0 0 0.5rem 0.5rem;
-
-    @media (min-width: vars.$tablet) {
-      padding: 0.5rem;
-      border-radius: 0.5rem 0 0 0.5rem;
-    }
-  }
-
-  &--sub {
-    color: vars.$verdigris;
-
-    &--active {
-      color: white;
-      background-color: vars.$verdigris;
-    }
-  }
-
-  &--button {
     display: none;
 
     @media (min-width: vars.$tablet) {
-      display: flex;
-      width: 100%;
-      padding: 0.5rem;
-      color: vars.$color-text-dark;
-      cursor: pointer;
-      background-color: white;
-      border-radius: 0.5rem 0 0 0.5rem;
+        display: inline;
     }
-  }
 }
 
-.sidebar__sidelink {
-  display: none;
+.sidebar__link {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    color: white;
 
-  @media (min-width: vars.$tablet) {
-    display: block;
-  }
+    @media (min-width: vars.$tablet) {
+        padding: 0.5rem;
+    }
+
+    &--active {
+        color: vars.$burnt-peach;
+        background-color: white;
+        border-radius: 0 0 0.5rem 0.5rem;
+
+        @media (min-width: vars.$tablet) {
+            padding: 0.5rem;
+            border-radius: 0.5rem 0 0 0.5rem;
+        }
+    }
+
+    &--sub {
+        color: vars.$verdigris;
+
+        &.sidebar__link--active {
+            color: white;
+            background-color: vars.$verdigris;
+        }
+    }
+
+    &--button {
+        display: none;
+
+        @media (min-width: vars.$tablet) {
+            display: flex;
+            width: 100%;
+            padding: 0.5rem;
+            color: vars.$color-text-dark;
+            cursor: pointer;
+            background-color: white;
+            border-radius: 0.5rem 0 0 0.5rem;
+        }
+    }
+}
+
+.sidebar__credits {
+    display: none;
+
+    @media (min-width: vars.$tablet) {
+        display: block;
+    }
 }

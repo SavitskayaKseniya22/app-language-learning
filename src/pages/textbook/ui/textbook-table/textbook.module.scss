@@ -1,18 +1,16 @@
 @use "@abstracts/mixins" as mx;
 
-.textbook__column--main {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+.textbook__word {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
 }
 
-.textbook__word {
-  &--transcription {
+.textbook__transcription {
     font-style: italic;
     @include mx.text-xs;
-  }
+}
 
-  &--writing {
+.textbook__spelling {
     @include mx.text-headline-s;
-  }
 }

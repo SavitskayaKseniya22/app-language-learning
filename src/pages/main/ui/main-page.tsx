@@ -5,7 +5,7 @@ import styles from "./main-page.module.scss";
 function MainPage() {
     return (
         <div className={styles.page}>
-            <div className={styles.page__banner}></div>
+            <div></div>
 
             <div className={styles.page__section}>
                 <h2>Games</h2>

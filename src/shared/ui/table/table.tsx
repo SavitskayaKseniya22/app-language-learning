@@ -68,18 +68,19 @@ export default function CustomTable({
     const gridTemplateColumns = data.titles?.map(item => item.widthInGrid).join(" ");
 
     return (
-        <div className={styles.table}>
+        <div className={styles.table} role="table">
             {data.titles && withTitles && (
-                <div className={styles.table__titles} style={{ gridTemplateColumns }}>
+                <div className={styles.table__titles} style={{ gridTemplateColumns }} role="row">
                     {data.titles.map((item, index) => {
                         const { justify = "start", align = "center" } = item;
                         return (
                             <div
                                 key={`${tableId}-title-${index}`}
+                                role="columnheader"
                                 className={clsx(
                                     styles.table__title,
                                     styles[`table__title--justify-${justify}`],
-                                    styles[`table__cell--align-${align}`],
+                                    styles[`table__title--align-${align}`],
                                 )}>
                                 {item.title}
                             </div>
@@ -91,6 +92,7 @@ export default function CustomTable({
             {flattenRows(data).rows.map((row, index) => {
                 return (
                     <div
+                        role="row"
                         className={clsx(styles.table__row, row.options?.className)}
                         style={{ gridTemplateColumns }}
                         key={`${tableId}-row-${index}`}>
@@ -105,7 +107,7 @@ export default function CustomTable({
                             const content = row.content[key];
 
                             return (
-                                <div key={nodeId} className={className}>
+                                <div key={nodeId} className={className} role="cell">
                                     {content}
                                 </div>
                             );

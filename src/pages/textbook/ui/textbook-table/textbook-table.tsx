@@ -32,9 +32,9 @@ export default function TextBookTable({
                                 <ImagePreview src={getWordAssetUrl(item.image)} alt={item.text_meaning} size="medium" />
                             ),
                             word: (
-                                <div className={styles["textbook__column--main"]}>
-                                    <p className={styles["textbook__word--writing"]}>{item.word}</p>
-                                    <p className={styles["textbook__word--transcription"]}>{item.transcription}</p>
+                                <div className={styles.textbook__word}>
+                                    <p className={styles.textbook__spelling}>{item.word}</p>
+                                    <p className={styles.textbook__transcription}>{item.transcription}</p>
                                     <p>{item.word_translate}</p>
                                 </div>
                             ),

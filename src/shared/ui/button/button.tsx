@@ -12,7 +12,7 @@ interface VariantProperties {
 }
 
 function getButtonClasses(view: View = "primary", size: SizeType = "medium", className?: string) {
-    return clsx(styles.button, styles[`button_${view}`], styles[`button_${size}`], className);
+    return clsx(styles.button, styles[`button--${view}`], styles[`button--${size}`], className);
 }
 
 type ButtonProperties = ComponentProps<"button"> & VariantProperties;

@@ -1,0 +1,37 @@
+.control {
+    position: relative;
+    display: flex;
+    width: 16rem;
+}
+
+.control__indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8rem;
+    height: 2rem;
+    background-color: rgb(38 70 83 / 20%);
+    transition: 0.5s;
+}
+
+.control__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8rem;
+    height: 2rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.control__input {
+    display: none;
+
+    &[value="today"]:checked ~ .control__indicator {
+        transform: translateX(0);
+    }
+
+    &[value="total"]:checked ~ .control__indicator {
+        transform: translateX(8rem);
+    }
+}

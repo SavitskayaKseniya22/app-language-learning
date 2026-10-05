@@ -2,77 +2,77 @@
 @use "@abstracts/mixins" as mx;
 
 .list {
-  display: flex;
-  flex-flow: column wrap;
-  gap: 1rem;
+    display: flex;
+    flex-flow: column wrap;
+    gap: 1rem;
 
-  li {
-    flex-grow: 1;
-  }
+    li {
+        flex-grow: 1;
+    }
 }
 
 .list__item {
-  position: relative;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-  border: 1px solid vars.$color-stroke-50;
-  border-radius: 12px;
+    position: relative;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 1px solid vars.$color-stroke-50;
+    border-radius: 12px;
 
-  @include mx.view-transition;
+    @include mx.view-transition;
 
-  &--disabled {
-    pointer-events: none;
-  }
+    &--disabled {
+        pointer-events: none;
+    }
 
-  &:hover {
-    background-color: vars.$color-stroke-25;
-  }
+    &:hover {
+        background-color: vars.$color-stroke-25;
+    }
 }
 
 .list__description {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 .list__note {
-  @include mx.text-note-basic;
+    @include mx.text-note-basic;
 
-  color: vars.$color-text-dark;
+    color: vars.$color-text-dark;
 
-  &--small {
-    @include mx.text-s;
-  }
+    &--small {
+        @include mx.text-s;
+    }
 
-  &--medium {
-    @include mx.text-m;
-  }
+    &--medium {
+        @include mx.text-m;
+    }
 
-  &--big {
-    @include mx.text-l;
-  }
+    &--big {
+        @include mx.text-l;
+    }
+}
 
-  &--sub {
+.list__details {
     color: vars.$color-text-light;
     @include mx.text-s;
-  }
 }
 
 .list__user {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  color: vars.$color-text-light;
-  @include mx.text-s;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    color: vars.$color-text-light;
+    @include mx.text-s;
 
-  span {
-    display: none;
-    @media (min-width: vars.$laptop) {
-      display: block;
+    span {
+        display: none;
+        @media (min-width: vars.$laptop) {
+            display: block;
+        }
     }
-  }
 }

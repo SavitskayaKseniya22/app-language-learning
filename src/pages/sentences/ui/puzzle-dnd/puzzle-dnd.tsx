@@ -15,12 +15,13 @@ const reorder = (list: WordForDrop[], startIndex: number, endIndex: number) => {
     return result;
 };
 
-export default function DragAndDrop({ word }: { word: DnDWordType }) {
+export default function DragAndDrop({ word, disabled = false }: { word: DnDWordType; disabled?: boolean }) {
     const dispatch = useAppDispatch();
 
     const [sentence, setSentence] = useState<DropData>(word.dnd);
 
     const updateSentense = (data: DropData) => {
+        if (disabled) return;
         if (data.source.length === 0) {
             const istItCorrect = word.text_example === data.result.map(item => item.element).join(" ");
 
@@ -35,7 +36,7 @@ export default function DragAndDrop({ word }: { word: DnDWordType }) {
     };
 
     const onDragEnd = (result: DropResult) => {
-        if (!result.destination) {
+        if (disabled || !result.destination) {
             return;
         }
 
@@ -81,12 +82,13 @@ export default function DragAndDrop({ word }: { word: DnDWordType }) {
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="result" direction="horizontal">
                     {provided => (
-                        <ul
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}
-                            className={styles["dnd__element--droppable"]}>
+                        <ul ref={provided.innerRef} {...provided.droppableProps} className={styles.dnd__list}>
                             {sentence.result.map((item, index) => (
-                                <Draggable key={item.key} draggableId={item.key} index={index}>
+                                <Draggable
+                                    key={item.key}
+                                    draggableId={item.key}
+                                    index={index}
+                                    isDragDisabled={disabled}>
                                     {provided => (
                                         <li
                                             ref={provided.innerRef}
@@ -104,12 +106,13 @@ export default function DragAndDrop({ word }: { word: DnDWordType }) {
 
                 <Droppable droppableId="source" direction="horizontal">
                     {provided => (
-                        <ul
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}
-                            className={styles["dnd__element--dragabble"]}>
+                        <ul ref={provided.innerRef} {...provided.droppableProps} className={styles.dnd__list}>
                             {sentence.source.map((item, index) => (
-                                <Draggable key={item.key} draggableId={item.key} index={index}>
+                                <Draggable
+                                    key={item.key}
+                                    draggableId={item.key}
+                                    index={index}
+                                    isDragDisabled={disabled}>
                                     {provided => (
                                         <li
                                             ref={provided.innerRef}

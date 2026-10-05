@@ -10,7 +10,7 @@ interface VariantProperties {
 }
 
 function getClasses(view: View = "primary", className?: string) {
-    return clsx(styles.link, styles[`link_${view}`], className);
+    return clsx(styles.link, styles[`link--${view}`], className);
 }
 
 type CustomLinkProperties = LinkProps &

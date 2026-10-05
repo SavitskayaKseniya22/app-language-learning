@@ -1,16 +1,16 @@
 @use "@abstracts/variables" as vars;
 
 .audio {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  font-size: 1.25rem;
-  color: vars.$charcoal-blue;
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    font-size: 1.25rem;
+    color: vars.$charcoal-blue;
+    cursor: pointer;
 
-  &--playing {
-    color: vars.$burnt-peach;
-  }
+    &--playing {
+        color: vars.$burnt-peach;
+    }
 }

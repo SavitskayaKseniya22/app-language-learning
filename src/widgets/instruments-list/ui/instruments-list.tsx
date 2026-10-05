@@ -21,7 +21,7 @@ export default function InstrumentsList({ size = "medium" }: { size?: SizeType }
                             Use the Textbook to understand the meaning of the word!
                         </p>
 
-                        <p className={styles["list__note--sub"]}>
+                        <p className={styles.list__details}>
                             3600 of the most commonly used english words are organised in 6 sections for a convenient
                             and measured learning experience. <br /> Don&apos;t hesitate to mark words as
                             &quot;difficult&quot; or &quot;learned&quot; to better track your progress!
@@ -44,7 +44,7 @@ export default function InstrumentsList({ size = "medium" }: { size?: SizeType }
                             Collect words into Сollection for practice!
                         </p>
 
-                        <p className={styles["list__note--sub"]}>
+                        <p className={styles.list__details}>
                             A set of selected words for individual training in games.
                         </p>
                     </div>
@@ -67,7 +67,7 @@ export default function InstrumentsList({ size = "medium" }: { size?: SizeType }
                         <p className={clsx(styles.list__note, styles[`list__note--${size}`])}>
                             Track your progress in Statistics!
                         </p>
-                        <p className={styles["list__note--sub"]}>
+                        <p className={styles.list__details}>
                             Your progress is monitored and logged. Be sure to take a look at it once in a while to make
                             sure you are on track!
                         </p>

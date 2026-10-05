@@ -1,29 +1,29 @@
 @use "@abstracts/variables" as vars;
 
 .icon {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  color: vars.$charcoal-blue;
-  border: 1px solid vars.$color-stroke;
-  border-radius: 12px;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    color: vars.$charcoal-blue;
+    border: 1px solid vars.$color-stroke;
+    border-radius: 12px;
 
-  &--small {
-    width: 48px;
-    height: 48px;
-    font-size: 1.5rem;
-  }
+    &--small {
+        width: 48px;
+        height: 48px;
+        font-size: 1.5rem;
+    }
 
-  &--medium {
-    width: 64px;
-    height: 64px;
-    font-size: 2rem;
-  }
+    &--medium {
+        width: 64px;
+        height: 64px;
+        font-size: 2rem;
+    }
 
-  &--big {
-    width: 80px;
-    height: 80px;
-    font-size: 2.5rem;
-  }
+    &--big {
+        width: 80px;
+        height: 80px;
+        font-size: 2.5rem;
+    }
 }

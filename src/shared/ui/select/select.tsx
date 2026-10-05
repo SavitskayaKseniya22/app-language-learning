@@ -10,7 +10,7 @@ import type {
 import { components } from "react-select";
 import Select from "react-select";
 import clsx from "clsx";
-import { forwardRef, type JSX, type ReactNode, type Ref } from "react";
+import { forwardRef, useId, type JSX, type ReactNode, type Ref } from "react";
 
 import styles from "./select.module.scss";
 
@@ -40,7 +40,7 @@ function getClassNames<T, OD>(
         control: ({ isDisabled, isFocused }) =>
             clsx(
                 styles.select__control,
-                size === "small" ? styles.select__control_small : styles.select__control_medium,
+                size === "small" ? styles["select__control--small"] : styles["select__control--medium"],
                 {
                     [styles["select__control--disabled"]]: isDisabled,
                     [styles["select__control--focused"]]: isFocused,
@@ -48,13 +48,12 @@ function getClassNames<T, OD>(
             ),
 
         menu: () => styles.select__menu,
-        menuList: () => styles.select__menulist,
+        menuList: () => styles["select__menu-list"],
         placeholder: () => styles.select__placeholder,
         indicatorsContainer: () => styles.select__indicators,
         indicatorSeparator: () => styles.select__separator,
         loadingMessage: () => styles.select__message,
         noOptionsMessage: () => styles.select__message,
-        container: () => styles.select__container,
     };
 }
 
@@ -82,7 +81,7 @@ function Option<T, OD>(properties: OptionProps<OptionType<T, OD>, false, GroupBa
             <div className={styles.option}>
                 {data.labelElement ?? <p className={styles.option__text}>{data.label}</p>}
                 {properties.isSelected && (
-                    <i className={clsx("fa-solid", "fa-check", { [styles["option__icon--selected"]]: isSelected })} />
+                    <i className={clsx("fa-solid", "fa-check", { [styles.option__check]: isSelected })} />
                 )}
             </div>
         </components.Option>
@@ -112,12 +111,19 @@ function CustomSelectInner<T, OD = undefined>(
     }: CustomSelectProperties<T, OD>,
     reference: Ref<SelectInstance<OptionType<T, OD>, false>>,
 ) {
+    const generatedId = useId();
+    const inputId = selectProperties.inputId ?? generatedId;
     return (
         <div className={clsx(styles.select, className)}>
-            {label && <div className={styles.select__label}>{label}</div>}
+            {label && (
+                <label htmlFor={inputId} className={styles.select__label}>
+                    {label}
+                </label>
+            )}
 
             <Select<OptionType<T, OD>, false>
                 {...selectProperties}
+                inputId={inputId}
                 ref={reference}
                 unstyled
                 menuPosition="fixed"

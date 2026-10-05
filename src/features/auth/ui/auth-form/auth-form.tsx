@@ -31,6 +31,7 @@ export default function AuthForm({ onSubmit }: { onSubmit: SubmitHandler<UserCre
                     required: "Email is required",
                 })}
                 type="email"
+                aria-label="Email"
                 placeholder="email"
             />
 
@@ -39,6 +40,7 @@ export default function AuthForm({ onSubmit }: { onSubmit: SubmitHandler<UserCre
                     required: "Password is required",
                 })}
                 type="password"
+                aria-label="Password"
                 placeholder="password"
             />
 
