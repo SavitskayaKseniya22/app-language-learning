@@ -52,7 +52,7 @@ export default function InstrumentsList({ size = "medium" }: { size?: SizeType }
                     </p>
                 </NavLink>
             </li>
-            <li>
+            {/* <li>
                 <NavLink to="/leaderboard" className={styles.list__item}>
                     <StyledIcon size={size}>
                         <i className="fa-solid fa-ranking-star"></i>
@@ -64,7 +64,7 @@ export default function InstrumentsList({ size = "medium" }: { size?: SizeType }
                         </p>
                     </div>
                 </NavLink>
-            </li>
+            </li>*/}
         </ul>
     );
 }
