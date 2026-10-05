@@ -1,3 +1,7 @@
+import { useStore } from "react-redux";
+import type { RootState } from "@/app/store/store";
+import { useAuth } from "@/features/auth";
+import { useGameFinish } from "@/entities/game/model/use-game-finish";
 import { useNavigate } from "react-router-dom";
 import DragAndDrop from "../puzzle-dnd/puzzle-dnd";
 
@@ -6,9 +10,9 @@ import { ProgressTracking } from "@/shared/ui/progress-tracking";
 import styles from "./puzzle-game.module.scss";
 import { GameInfoContainer } from "@/shared/ui/game-info-container";
 import { Timer } from "@/shared/ui/timer";
-import { puzzleInitialSettings, updateMiddlePuzzleState, updatePuzzleState } from "../../model/puzzle-slice";
+import { puzzleInitialSettings, updateMiddlePuzzleState } from "../../model/puzzle-slice";
 import type { Word } from "@/entities/user";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { DataQueue } from "../../model/puzzle-data-queue";
 import { Button } from "@/shared/ui/button";
 import clsx from "clsx";
@@ -27,47 +31,32 @@ export default function PuzzlesGame({
     isTimed?: boolean;
 }) {
     const navigate = useNavigate();
+    const store = useStore<RootState>();
+    const { user } = useAuth();
     const dispatch = useAppDispatch();
     const [data] = useState(() => new DataQueue({ elements, complexity }));
     const [word, setWord] = useState(() => data.word);
     const { puzzle } = useAppSelector(state => state.puzzleReducer);
-    const [finishPuzzle, { isLoading }] = useFinishPuzzleMutation();
+    const [finishPuzzle] = useFinishPuzzleMutation();
 
-    const isFinishedReference = useRef(false);
-
-    const doAfterTimer = () => {
-        if (isFinishedReference.current) {
-            return;
+    const {
+        finish: doAfterTimer,
+        ended,
+        hasEnded,
+        isSaving,
+        saveFailed,
+    } = useGameFinish(async () => {
+        if (isTimed && user) {
+            const { puzzle } = store.getState().puzzleReducer;
+            await finishPuzzle({
+                score: puzzle.score,
+                correctAnswers: puzzle.correct,
+                totalAnswers: puzzle.correct + puzzle.wrong,
+            }).unwrap();
+            toast.success("Game is finished. The result is saved");
         }
-
-        isFinishedReference.current = true;
-
-        try {
-            if (isTimed) {
-                finishPuzzle({
-                    score: puzzle.score,
-                    correctAnswers: puzzle.correct,
-                    totalAnswers: puzzle.correct + puzzle.wrong,
-                })
-                    .unwrap()
-                    .then(() => {
-                        toast.success("Game is finished. The result is saved");
-                        void navigate(`/games/puzzles/result`, {
-                            replace: true,
-                        });
-                    })
-                    .catch(() => {
-                        toast.error("Can't save result");
-                    });
-            } else {
-                void navigate(`/games/puzzles/result`, {
-                    replace: true,
-                });
-            }
-        } catch {
-            isFinishedReference.current = false;
-        }
-    };
+        await navigate("/games/puzzles/result", { replace: true });
+    });
 
     return (
         <div className={styles.game}>
@@ -83,17 +72,17 @@ export default function PuzzlesGame({
                 </div>
             </GameInfoContainer>
 
-            <GameInfoContainer className={styles.game__container}>
+            <GameInfoContainer className={styles.game__container} disabled={hasEnded}>
                 <div className={styles.game__round}>
-                    <p className={styles["words__word--main"]}>{word.text_example_translate}</p>
-                    <p className={styles.words__note}>means</p>
+                    <p className={styles.game__translation}>{word.text_example_translate}</p>
+                    <p className={styles.game__hint}>means</p>
                     {puzzle.middleResult == null ? (
-                        <DragAndDrop word={word} />
+                        <DragAndDrop word={word} disabled={hasEnded} />
                     ) : (
                         <p
-                            className={clsx(styles["words__word--translated"], {
-                                [styles["words__word--true"]]: puzzle.middleResult === true,
-                                [styles["words__word--false"]]: puzzle.middleResult === false,
+                            className={clsx(styles.game__answer, {
+                                [styles["game__answer--correct"]]: puzzle.middleResult === true,
+                                [styles["game__answer--wrong"]]: puzzle.middleResult === false,
                             })}>
                             {word.text_example}
                         </p>
@@ -105,14 +94,14 @@ export default function PuzzlesGame({
                         <Button
                             type="button"
                             onClick={() => {
-                                console.log("chewck");
+                                if (ended.current) return;
                                 dispatch(
                                     updateMiddlePuzzleState({
                                         middleResult: false,
                                     }),
                                 );
                             }}>
-                            Check
+                            See the correct answer
                         </Button>
                     </>
                 ) : (
@@ -121,7 +110,7 @@ export default function PuzzlesGame({
                             type="button"
                             view="secondary"
                             onClick={() => {
-                                dispatch(updatePuzzleState());
+                                if (ended.current) return;
 
                                 if (data.isEmpty) {
                                     doAfterTimer();
@@ -139,7 +128,8 @@ export default function PuzzlesGame({
                     </>
                 )}
             </GameInfoContainer>
-            {isLoading && <Spinner />}
+            {isSaving && <Spinner />}
+            {saveFailed && <Button onClick={doAfterTimer}>Retry saving result</Button>}
         </div>
     );
 }

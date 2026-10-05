@@ -4,10 +4,10 @@ import type { TypedUseSelectorHook } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
 
 import { userApi } from "@/entities/user";
-import { sprintReducer } from "@/pages/sprint";
-import { audiocallReducer } from "@/pages/audiocall";
-import { constructorReducer } from "@/pages/constructor";
-import { puzzleReducer } from "@/pages/sentences";
+import sprintReducer from "@/pages/sprint/model/sprint-slice";
+import audiocallReducer from "@/pages/audiocall/model/audiocall-slice";
+import constructorReducer from "@/pages/constructor/model/constructor-slice";
+import puzzleReducer from "@/pages/sentences/model/puzzle-slice";
 
 const rootReducer = combineReducers({
     [userApi.reducerPath]: userApi.reducer,

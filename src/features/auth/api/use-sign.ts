@@ -26,7 +26,7 @@ export default function useSign() {
 
     const onSignUp = useCallback(
         async (data: UserCredentials) => {
-            const { error } = await supabase.auth.signUp(data);
+            const { data: signUpData, error } = await supabase.auth.signUp(data);
 
             if (error) {
                 toast.error(error.message);
@@ -34,7 +34,11 @@ export default function useSign() {
             }
 
             setContent(null);
-            void navigate("/profile");
+            if (signUpData.session) {
+                void navigate("/profile");
+            } else {
+                toast.info("Check your email to confirm your account before signing in.");
+            }
         },
         [navigate, setContent],
     );

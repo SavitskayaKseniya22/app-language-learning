@@ -18,27 +18,19 @@ export default function Timer({ duration, doAfterTimer }: TimerProperties) {
     }, [doAfterTimer]);
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            setTimer(previousTimer => {
-                if (previousTimer <= 1) {
-                    clearInterval(intervalId);
-
-                    if (!hasFinishedReference.current) {
-                        hasFinishedReference.current = true;
-                        callbackReference.current();
-                    }
-
-                    return 0;
-                }
-
-                return previousTimer - 1;
-            });
+        if (timer === 0) return;
+        const timeoutId = setTimeout(() => {
+            setTimer(previousTimer => Math.max(0, previousTimer - 1));
         }, 1000);
+        return () => clearTimeout(timeoutId);
+    }, [timer]);
 
-        return () => {
-            clearInterval(intervalId);
-        };
-    }, []);
+    useEffect(() => {
+        if (timer === 0 && !hasFinishedReference.current) {
+            hasFinishedReference.current = true;
+            callbackReference.current();
+        }
+    }, [timer]);
 
     return (
         <div className={styles.timer}>

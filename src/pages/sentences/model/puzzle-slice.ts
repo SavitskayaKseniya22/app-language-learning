@@ -43,23 +43,21 @@ export const puzzleStateSlice = createSlice({
                 middleResult: boolean | null;
             }>,
         ) => {
-            state.puzzle.middleResult = action.payload.middleResult;
-        },
-
-        updatePuzzleState: state => {
+            const { middleResult } = action.payload;
+            if (middleResult === null) {
+                state.puzzle.middleResult = null;
+                return;
+            }
+            if (state.puzzle.middleResult !== null) return;
+            state.puzzle.middleResult = middleResult;
             if (state.puzzle.middleResult) {
                 state.puzzle.score += state.puzzle.points;
                 state.puzzle.correct += 1;
             } else {
-                state.puzzle.score =
-                    state.puzzle.score > 0
-                        ? (state.puzzle.score -= puzzleInitialSettings.penalty.default)
-                        : state.puzzle.score;
+                state.puzzle.score = Math.max(0, state.puzzle.score - puzzleInitialSettings.penalty.default);
 
                 state.puzzle.wrong += 1;
             }
-
-            state.puzzle.middleResult = false;
         },
 
         resetPuzzleState: state => {
@@ -68,6 +66,6 @@ export const puzzleStateSlice = createSlice({
     },
 });
 
-export const { updateMiddlePuzzleState, updatePuzzleState, resetPuzzleState } = puzzleStateSlice.actions;
+export const { updateMiddlePuzzleState, resetPuzzleState } = puzzleStateSlice.actions;
 
 export default puzzleStateSlice.reducer;

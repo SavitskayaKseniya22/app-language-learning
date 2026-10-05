@@ -9,19 +9,22 @@ import { AuthProvider } from "./features/auth";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { store } from "./app/store";
 import { router } from "./app/routes";
+import AppErrorBoundary from "./app/app-error-boundary";
 
 const root = ReactDOM.createRoot(document.querySelector("#root") as HTMLElement);
 
 root.render(
     <React.StrictMode>
-        <Suspense fallback={<Spinner />}>
-            <AuthProvider>
+        <AppErrorBoundary>
+            <Suspense fallback={<Spinner />}>
                 <Provider store={store}>
-                    <ModalProvider>
-                        <RouterProvider router={router} />
-                    </ModalProvider>
+                    <AuthProvider>
+                        <ModalProvider>
+                            <RouterProvider router={router} />
+                        </ModalProvider>
+                    </AuthProvider>
                 </Provider>
-            </AuthProvider>
-        </Suspense>
+            </Suspense>
+        </AppErrorBoundary>
     </React.StrictMode>,
 );

@@ -19,12 +19,12 @@ export class DataQueue {
     usedElementsIds: number[];
     complexity: number;
 
-    constructor({ elements, complexity = 0 }: { elements: Word[]; complexity?: number }) {
+    constructor({ elements, complexity = 1 }: { elements: Word[]; complexity?: number }) {
         this.elements = elements;
 
         this.usedElementsIds = [];
 
-        this.complexity = complexity - 1;
+        this.complexity = Math.min(3, Math.max(1, complexity)) - 1;
         this.word = this.nextPuzzle();
     }
 
@@ -84,7 +84,7 @@ export class DataQueue {
         const array = sentence.split(" ");
         const partition = [3, 5, array.length][this.complexity];
 
-        const maxWordsInPart = Math.round(array.length / partition);
+        const maxWordsInPart = Math.max(1, Math.round(array.length / partition));
 
         let dividedSentence: string[] = [];
 

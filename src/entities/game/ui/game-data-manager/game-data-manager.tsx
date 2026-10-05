@@ -27,6 +27,8 @@ export default function GameDataManager() {
         return <ErrorComponent />;
     }
     if (passedData) {
+        if (passedData.length === 0)
+            return <ErrorComponent error={{ code: 400, message: "No words available for this game" }} />;
         return (
             <Outlet
                 context={{
@@ -40,6 +42,8 @@ export default function GameDataManager() {
     }
 
     if (currentData) {
+        if (currentData.words.length === 0)
+            return <ErrorComponent error={{ code: 400, message: "No words available for this game" }} />;
         return (
             <Outlet
                 context={{

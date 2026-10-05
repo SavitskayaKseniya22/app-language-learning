@@ -9,17 +9,16 @@
         "@reduxjs/toolkit": "^2.12.0",
         "@supabase/supabase-js": "^2.112.4",
         "clsx": "^2.1.1",
-        "firebase": "^12.18.0",
         "react": "^19.2.8",
         "react-dom": "^19.2.8",
         "react-hook-form": "^7.46.2",
         "react-redux": "^9.3.0",
         "react-router-dom": "^7.18.2",
         "react-select": "^5.10.2",
-        "react-toastify": "^11.1.0",
-        "styled-components": "^6.0.8"
+        "react-toastify": "^11.1.0"
     },
     "scripts": {
+        "test": "node --import ./tests/register-typescript.mjs --test",
         "dev": "vite",
         "build": "tsc --noEmit && vite build",
         "build:node": "tsc -p tsconfig.node.json --noEmit",
@@ -49,6 +48,7 @@
         "eslint-plugin-react-refresh": "^0.5.4",
         "eslint-plugin-unicorn": "^65.0.1",
         "globals": "^17.11.0",
+        "jsdom": "^30.1.2",
         "postcss-scss": "^4.0.9",
         "prettier": "^3.9.6",
         "sass": "^1.103.1",

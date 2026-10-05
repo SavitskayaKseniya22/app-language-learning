@@ -1,3 +1,7 @@
+import { useStore } from "react-redux";
+import type { RootState } from "@/app/store/store";
+import { useAuth } from "@/features/auth";
+import { useGameFinish } from "@/entities/game/model/use-game-finish";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/app/store/store";
@@ -21,6 +25,8 @@ import { Spinner } from "@/shared/ui/spinner";
 
 function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTimed?: boolean }) {
     const navigate = useNavigate();
+    const store = useStore<RootState>();
+    const { user } = useAuth();
     const dispatch = useAppDispatch();
     const [data] = useState(() => new DataQueue({ elements }));
 
@@ -30,94 +36,50 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
 
     const [middleResult, setMiddleResult] = useState<null | boolean>(null);
 
-    const id = useRef<null | number>(null);
+    const [finishGame] = useFinishGameMutation();
 
-    const handleKeyDown = useCallback(
-        (event: KeyboardEvent) => {
-            switch (event.code) {
-                case "Digit1": {
-                    id.current = activeWords.others[0].id;
-                    break;
-                }
-                case "Digit2": {
-                    id.current = activeWords.others[1].id;
-                    break;
-                }
-                case "Digit3": {
-                    id.current = activeWords.others[2].id;
-                    break;
-                }
-                case "Digit4": {
-                    id.current = activeWords.others[3].id;
-                    break;
-                }
-                case "Digit5": {
-                    id.current = activeWords.others[4].id;
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
+    const {
+        finish: doAfterTimer,
+        ended,
+        hasEnded,
+        isSaving,
+        saveFailed,
+    } = useGameFinish(async () => {
+        if (isTimed && user) {
+            const { audiocall } = store.getState().audiocallReducer;
+            const result = await finishGame({
+                gameName: "audiocall",
+                result: { score: audiocall.score, answers: audiocall.answers },
+            }).unwrap();
+            dispatch(finalizeAudiocallState({ calculatedResult: result }));
+            toast.success("Game is finished. The result is saved");
+        }
+        await navigate("/games/audiocall/result", { replace: true });
+    });
 
-            if (id.current) {
-                dispatch(
-                    updateAudiocallState({
-                        isAnswerCorrect: id.current === activeWords.ref.id,
-                        word: activeWords.ref,
-                    }),
-                );
-                setMiddleResult(id.current === activeWords.ref.id);
-            }
+    const answered = useRef(false);
+
+    const answer = useCallback(
+        (selectedId: number | null) => {
+            if (answered.current || ended.current) return;
+            answered.current = true;
+            const isAnswerCorrect = selectedId === activeWords.ref.id;
+            dispatch(updateAudiocallState({ isAnswerCorrect, word: activeWords.ref }));
+            setMiddleResult(isAnswerCorrect);
         },
-        [dispatch, activeWords.others, activeWords.ref],
+        [activeWords.ref, dispatch, ended],
     );
 
     useEffect(() => {
-        document.addEventListener("keydown", handleKeyDown);
-
-        return () => {
-            document.removeEventListener("keydown", handleKeyDown);
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.repeat || !/^Digit[1-5]$/.test(event.code)) return;
+            event.preventDefault();
+            const selectedWord = activeWords.others[Number(event.code.slice(-1)) - 1];
+            if (selectedWord) answer(selectedWord.id);
         };
-    }, [handleKeyDown]);
-
-    const [finishGame, { isLoading }] = useFinishGameMutation();
-
-    const isFinishedReference = useRef(false);
-
-    const doAfterTimer = () => {
-        if (isFinishedReference.current) {
-            return;
-        }
-
-        isFinishedReference.current = true;
-
-        try {
-            if (isTimed) {
-                finishGame({
-                    gameName: "audiocall",
-                    result: { score: audiocall.score, answers: audiocall.answers },
-                })
-                    .unwrap()
-                    .then(result => {
-                        dispatch(finalizeAudiocallState({ calculatedResult: result }));
-                        toast.success("Game is finished. The result is saved");
-                        void navigate(`/games/audiocall/result`, {
-                            replace: true,
-                        });
-                    })
-                    .catch(() => {
-                        toast.error("Can't save result");
-                    });
-            } else {
-                void navigate(`/games/audiocall/result`, {
-                    replace: true,
-                });
-            }
-        } catch {
-            isFinishedReference.current = false;
-        }
-    };
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, [activeWords.others, answer]);
 
     return (
         <div className={styles.game}>
@@ -130,10 +92,10 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
                 </div>
             </GameInfoContainer>
 
-            <GameInfoContainer className={styles.game__container}>
+            <GameInfoContainer className={styles.game__container} disabled={hasEnded}>
                 <div className={styles.game__round}>
                     <AudioButton path={activeWords.ref.audio} />
-                    <p className={styles.words__note}>means</p>
+                    <p className={styles.game__hint}>means</p>
                     {middleResult === null ? (
                         <>
                             <div className={styles.game__words}>
@@ -144,16 +106,7 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
                                         size="big"
                                         key={element.id}
                                         className={styles.game__word}
-                                        onClick={() => {
-                                            dispatch(
-                                                updateAudiocallState({
-                                                    isAnswerCorrect: element.id === activeWords.ref.id,
-                                                    word: activeWords.ref,
-                                                }),
-                                            );
-
-                                            setMiddleResult(element.id === activeWords.ref.id);
-                                        }}>
+                                        onClick={() => answer(element.id)}>
                                         {element.word_translate}
                                         <i>{index + 1}</i>
                                     </Button>
@@ -162,7 +115,7 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
                         </>
                     ) : (
                         <>
-                            <p className={styles["words__word--translated"]}>
+                            <p className={styles.game__answer}>
                                 {activeWords.ref.word} - {activeWords.ref.word_translate}
                             </p>
                         </>
@@ -170,17 +123,7 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
                 </div>
 
                 {middleResult === null ? (
-                    <Button
-                        type="button"
-                        onClick={() => {
-                            setMiddleResult(false);
-                            dispatch(
-                                updateAudiocallState({
-                                    isAnswerCorrect: false,
-                                    word: activeWords.ref,
-                                }),
-                            );
-                        }}>
+                    <Button type="button" onClick={() => answer(null)}>
                         See the correct answer
                     </Button>
                 ) : (
@@ -189,10 +132,12 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
                         <Button
                             type="button"
                             onClick={() => {
+                                if (ended.current) return;
                                 if (data.isEmpty) {
                                     doAfterTimer();
                                 } else {
                                     setActiveWords(data.nextFive());
+                                    answered.current = false;
                                     setMiddleResult(null);
                                 }
                             }}>
@@ -202,7 +147,8 @@ function AudiocallGame({ elements, isTimed = false }: { elements: Word[]; isTime
                 )}
             </GameInfoContainer>
             <Tips type={GameType.audiocall} />
-            {isLoading && <Spinner />}
+            {isSaving && <Spinner />}
+            {saveFailed && <Button onClick={doAfterTimer}>Retry saving result</Button>}
         </div>
     );
 }

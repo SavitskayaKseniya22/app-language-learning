@@ -77,6 +77,7 @@ export type FinishGameResponse = {
 };
 
 type GetUserResultsArguments = {
+    userId: string;
     date?: string;
 };
 type FinishPuzzleArguments = {
@@ -94,9 +95,13 @@ type FinishPuzzleResponse = {
 
 export const userApi = baseApi.injectEndpoints({
     endpoints: builder => ({
-        getUserResults: builder.query<GameResultRow[], GetUserResultsArguments | void>({
+        getUserResults: builder.query<GameResultRow[], GetUserResultsArguments>({
             async queryFn(arguments_) {
-                let query = supabase.from("game_results").select("*").order("created_at", { ascending: false });
+                let query = supabase
+                    .from("game_results")
+                    .select("*")
+                    .eq("user_id", arguments_.userId)
+                    .order("created_at", { ascending: false });
 
                 if (arguments_?.date) {
                     const [year, month, day] = arguments_.date.split("-").map(Number);

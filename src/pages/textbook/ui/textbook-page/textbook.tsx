@@ -20,7 +20,12 @@ export default function TextbookPage() {
     });
     const [page, setPage] = useState(1);
 
-    const { data, isLoading, isFetching, error } = useGetWordsByDifficultyQuery({
+    const {
+        currentData: data,
+        isLoading,
+        isFetching,
+        error,
+    } = useGetWordsByDifficultyQuery({
         difficulty: difficulty.value,
         page,
         pageSize: 20,
@@ -50,7 +55,7 @@ export default function TextbookPage() {
                 />
                 <Button
                     type="button"
-                    disabled={!data}
+                    disabled={!data || data.words.length === 0 || isFetching || !!error}
                     onClick={() => {
                         if (data) {
                             setContent({

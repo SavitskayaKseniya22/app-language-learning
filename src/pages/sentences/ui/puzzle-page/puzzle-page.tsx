@@ -14,7 +14,7 @@ export default function PuzzlePage() {
 
     useEffect(() => {
         dispatch(resetPuzzleState());
-    }, []);
+    }, [dispatch]);
 
     if (context.data) {
         return <PuzzleGame elements={context.data} complexity={context.complexity} isTimed={context.isTimed} />;

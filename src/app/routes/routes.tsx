@@ -1,35 +1,49 @@
 import { Route, Outlet, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
-import { MainPage } from "@/pages/main";
-import { TextbookPage } from "@/pages/textbook";
 import { Sidebar } from "@/widgets/sidebar";
 import { Footer } from "@/widgets/footer";
 import { ErrorComponent } from "@/shared/ui/error-component";
-import { GamesPage } from "@/pages/games";
-import { ProfilePage } from "@/pages/profile";
-import { CollectionPage } from "@/pages/collection";
-import { StatisticsPage } from "@/pages/statistics";
 import { GameType } from "@/entities/user";
 import { PrivateRoute } from "@/features/auth";
-import GameStartScreen from "@/entities/game/ui/game-start-screen/game-start-screen";
 import { ModalProvider } from "@/shared/ui/modal";
-import { SprintPage } from "@/pages/sprint";
 import { GameDataManager, gamesLabels } from "@/entities/game";
-import { AudiocallPage } from "@/pages/audiocall";
 import { BlockBackground } from "@/shared/ui/block-background";
-import { ConstructorPage } from "@/pages/constructor";
-import { PuzzlePage } from "@/pages/sentences";
-import { ResultPage } from "@/pages/result";
+import { Spinner } from "@/shared/ui/spinner";
+
+import {
+    MainPage,
+    TextbookPage,
+    GamesPage,
+    SprintPage,
+    AudiocallPage,
+    ConstructorPage,
+    PuzzlePage,
+    ResultPage,
+    ProfilePage,
+    CollectionPage,
+    StatisticsPage,
+    GameStartScreen,
+} from "./lazy-pages";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" errorElement={<ErrorComponent />} element={<Outlet />}>
+        <Route
+            path="/"
+            errorElement={
+                <ErrorComponent
+                    error={{ code: 500, message: "Unable to load this page. Please refresh and try again." }}
+                />
+            }
+            element={<Outlet />}>
             <Route
                 element={
                     <ModalProvider>
                         <Sidebar />
                         <main className="main" id="main-container">
-                            <Outlet />
+                            <Suspense fallback={<Spinner />}>
+                                <Outlet />
+                            </Suspense>
                         </main>
 
                         <ToastContainer

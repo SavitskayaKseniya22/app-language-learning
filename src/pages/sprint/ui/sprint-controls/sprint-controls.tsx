@@ -5,12 +5,13 @@ import styles from "./sprint-controls.module.scss";
 
 export default function SprintControls({ handleClick }: { handleClick: (value: string) => void }) {
     const onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        const { value } = event.target as HTMLButtonElement;
+        const { value } = event.currentTarget;
         handleClick(value);
     };
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.repeat) return;
             if (event.code === "ArrowLeft") {
                 event.preventDefault();
                 handleClick("false");

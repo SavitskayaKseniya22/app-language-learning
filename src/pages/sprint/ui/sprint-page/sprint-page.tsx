@@ -13,7 +13,7 @@ export default function SprintPage() {
 
     useEffect(() => {
         dispatch(resetSprintState());
-    }, []);
+    }, [dispatch]);
 
     if (context.data) {
         return <SprintGame elements={context.data} isTimed={context.isTimed} />;

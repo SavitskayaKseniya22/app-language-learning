@@ -13,7 +13,7 @@ export default function AudiocallPage() {
 
     useEffect(() => {
         dispatch(resetAudiocallState());
-    }, []);
+    }, [dispatch]);
 
     if (context.data) {
         return <AudiocallGame elements={context.data} isTimed={context.isTimed} />;

@@ -1,4 +1,9 @@
-import { useRef, useState } from "react";
+import { Button } from "@/shared/ui/button";
+import { useStore } from "react-redux";
+import type { RootState } from "@/app/store/store";
+import { useAuth } from "@/features/auth";
+import { useGameFinish } from "@/entities/game/model/use-game-finish";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Streak } from "@/shared/ui/streak";
 import { Points } from "@/shared/ui/points";
@@ -21,6 +26,8 @@ import { Spinner } from "@/shared/ui/spinner";
 
 export default function SprintGame({ elements, isTimed = false }: { elements: Word[]; isTimed?: boolean }) {
     const navigate = useNavigate();
+    const store = useStore<RootState>();
+    const { user } = useAuth();
     const dispatch = useAppDispatch();
     const [data] = useState(() => new DataQueue({ elements }));
 
@@ -29,6 +36,7 @@ export default function SprintGame({ elements, isTimed = false }: { elements: Wo
     const [activeWords, setActiveWords] = useState<SprintWordsType>(data.words);
 
     const handleClick = (value: string) => {
+        if (ended.current) return;
         const { first, second } = activeWords;
 
         const isAnswerCorrect = data.checkIfAnswerCorrect(value, first, second);
@@ -47,43 +55,26 @@ export default function SprintGame({ elements, isTimed = false }: { elements: Wo
             setActiveWords(pair);
         }
     };
-    const [finishGame, { isLoading }] = useFinishGameMutation();
+    const [finishGame] = useFinishGameMutation();
 
-    const isFinishedReference = useRef(false);
-
-    const doAfterTimer = () => {
-        if (isFinishedReference.current) {
-            return;
+    const {
+        finish: doAfterTimer,
+        ended,
+        hasEnded,
+        isSaving,
+        saveFailed,
+    } = useGameFinish(async () => {
+        if (isTimed && user) {
+            const { sprint } = store.getState().sprintReducer;
+            const result = await finishGame({
+                gameName: "sprint",
+                result: { score: sprint.score, answers: sprint.answers },
+            }).unwrap();
+            dispatch(finalizeSprintState({ calculatedResult: result }));
+            toast.success("Game is finished. The result is saved");
         }
-
-        isFinishedReference.current = true;
-
-        try {
-            if (isTimed) {
-                finishGame({
-                    gameName: "sprint",
-                    result: { score: sprint.score, answers: sprint.answers },
-                })
-                    .unwrap()
-                    .then(result => {
-                        dispatch(finalizeSprintState({ calculatedResult: result }));
-                        toast.success("Game is finished. The result is saved");
-                        void navigate(`/games/sprint/result`, {
-                            replace: true,
-                        });
-                    })
-                    .catch(() => {
-                        toast.error("Can't save result");
-                    });
-            } else {
-                void navigate(`/games/sprint/result`, {
-                    replace: true,
-                });
-            }
-        } catch {
-            isFinishedReference.current = false;
-        }
-    };
+        await navigate("/games/sprint/result", { replace: true });
+    });
 
     return (
         <div className={styles.game}>
@@ -96,14 +87,15 @@ export default function SprintGame({ elements, isTimed = false }: { elements: Wo
                 </div>
             </GameInfoContainer>
 
-            <GameInfoContainer className={styles.game__container}>
+            <GameInfoContainer className={styles.game__container} disabled={hasEnded}>
                 <SprintWordsPair words={activeWords} />
                 <SprintControls handleClick={handleClick} />
             </GameInfoContainer>
 
             <Tips type={GameType.sprint} />
 
-            {isLoading && <Spinner />}
+            {isSaving && <Spinner />}
+            {saveFailed && <Button onClick={doAfterTimer}>Retry saving result</Button>}
         </div>
     );
 }

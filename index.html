@@ -5,9 +5,48 @@
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Lang App</title>
+        <style>
+            .startup {
+                max-width: 32rem;
+                padding: 1.5rem;
+                margin: 10vh auto;
+                font-family: system-ui, sans-serif;
+                text-align: center;
+            }
+        </style>
+        <script>
+            window.addEventListener(
+                "error",
+                event => {
+                    if (!(event.target instanceof HTMLScriptElement)) return;
+                    const showStartupError = () => {
+                        const loading = document.getElementById("startup-loading");
+                        const errorPanel = document.getElementById("startup-error");
+                        if (loading) loading.hidden = true;
+                        if (errorPanel) errorPanel.hidden = false;
+                    };
+                    if (document.readyState === "loading") {
+                        document.addEventListener("DOMContentLoaded", showStartupError, { once: true });
+                    } else {
+                        showStartupError();
+                    }
+                },
+                true,
+            );
+        </script>
     </head>
     <body>
-        <div id="root"></div>
-        <script type="module" src="/src/main.tsx"></script>
+        <div id="root">
+            <div class="startup">
+                <p id="startup-loading" role="status">Loading the application…</p>
+                <div id="startup-error" role="alert" hidden>
+                    <h1>Unable to load the application</h1>
+                    <p>Please check your connection and refresh the page.</p>
+                    <button type="button" onclick="window.location.reload()">Refresh page</button>
+                </div>
+                <noscript>Enable JavaScript to use the application.</noscript>
+            </div>
+        </div>
+        <script type="module" src="/src/bootstrap.ts"></script>
     </body>
 </html>

@@ -1,5 +1,9 @@
+import { useStore } from "react-redux";
+import type { RootState } from "@/app/store/store";
+import { useAuth } from "@/features/auth";
+import { useGameFinish } from "@/entities/game/model/use-game-finish";
 import type { ComponentProps } from "react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Points } from "@/shared/ui/points";
 import { ProgressTracking } from "@/shared/ui/progress-tracking";
@@ -61,6 +65,8 @@ export default function ConstructorGame({
     isTimed?: boolean;
 }) {
     const navigate = useNavigate();
+    const store = useStore<RootState>();
+    const { user } = useAuth();
     const dispatch = useAppDispatch();
 
     const [data] = useState(() => new DataQueue({ elements }));
@@ -78,48 +84,31 @@ export default function ConstructorGame({
 
     const [middleResult, setMiddleResult] = useState<null | boolean>(null);
 
-    const [finishGame, { isLoading }] = useFinishGameMutation();
+    const [finishGame] = useFinishGameMutation();
 
-    const isFinishedReference = useRef(false);
-
-    const doAfterTimer = () => {
-        if (isFinishedReference.current) {
-            return;
+    const {
+        finish: doAfterTimer,
+        ended,
+        hasEnded,
+        isSaving,
+        saveFailed,
+    } = useGameFinish(async () => {
+        if (isTimed && user) {
+            const { constructor } = store.getState().constructorReducer;
+            const result = await finishGame({
+                gameName: "constructor",
+                result: { score: constructor.score, answers: constructor.answers },
+            }).unwrap();
+            dispatch(finalizeConstructorState({ calculatedResult: result }));
+            toast.success("Game is finished. The result is saved");
         }
-
-        isFinishedReference.current = true;
-
-        try {
-            if (isTimed) {
-                finishGame({
-                    gameName: "constructor",
-                    result: { score: constructor.score, answers: constructor.answers },
-                })
-                    .unwrap()
-                    .then(result => {
-                        dispatch(finalizeConstructorState({ calculatedResult: result }));
-                        toast.success("Game is finished. The result is saved");
-                        void navigate(`/games/constructor/result`, {
-                            replace: true,
-                        });
-                    })
-                    .catch(() => {
-                        toast.error("Can't save result");
-                    });
-            } else {
-                void navigate(`/games/constructor/result`, {
-                    replace: true,
-                });
-            }
-        } catch {
-            isFinishedReference.current = false;
-        }
-    };
+        await navigate("/games/constructor/result", { replace: true });
+    });
 
     return (
-        <div className={styles.game}>
+        <div className={styles.assembly}>
             <GameInfoContainer>
-                <div className={styles.game__header}>
+                <div className={styles.assembly__header}>
                     <ProgressTracking streak={data.progress} words={data.all} />
                     <Streak streak={constructor.streak} total={constructorInitialSettings.streak.max} />
                     {isTimed && (
@@ -132,26 +121,26 @@ export default function ConstructorGame({
                     />
                 </div>
             </GameInfoContainer>
-            <GameInfoContainer className={styles.game__container}>
-                <div className={styles.words}>
-                    <p className={styles["words__word--main"]}>{word.word_translate}</p>
-                    <p className={styles.words__note}>means</p>
+            <GameInfoContainer className={styles.assembly__content} disabled={hasEnded}>
+                <div className={styles.assembly__prompt}>
+                    <p className={styles.assembly__translation}>{word.word_translate}</p>
+                    <p className={styles.assembly__hint}>means</p>
                     {middleResult === null ? (
-                        <ul className={styles.game__words}>
+                        <ul className={styles.assembly__letters}>
                             {word.pressedLetters.map(item => (
-                                <li key={item.key} className={styles.game__word}>
+                                <li key={item.key} className={styles.assembly__letter}>
                                     {item.value}
                                 </li>
                             ))}
                         </ul>
                     ) : (
-                        <ul className={styles.game__words}>
+                        <ul className={styles.assembly__letters}>
                             {word.pressedLetters.map((item, index) => (
                                 <li
                                     key={item.key}
-                                    className={clsx(styles.game__word, {
-                                        [styles["game__word--wrong"]]: item.value !== word.word[index],
-                                        [styles["game__word--correct"]]: item.value === word.word[index],
+                                    className={clsx(styles.assembly__letter, {
+                                        [styles["assembly__letter--wrong"]]: item.value !== word.word[index],
+                                        [styles["assembly__letter--correct"]]: item.value === word.word[index],
                                     })}>
                                     {item.value}
                                 </li>
@@ -161,7 +150,7 @@ export default function ConstructorGame({
                 </div>
 
                 {middleResult === null ? (
-                    <ul className={styles.game__words}>
+                    <ul className={styles.assembly__letters}>
                         {word.letters.map(item => (
                             <li key={item.key}>
                                 <ConstructorButton
@@ -202,11 +191,11 @@ export default function ConstructorGame({
                         ))}
                     </ul>
                 ) : (
-                    <p className={styles["words__word--translated"]}>{word.word}</p>
+                    <p className={styles.assembly__answer}>{word.word}</p>
                 )}
 
                 {middleResult === null ? (
-                    <div className={styles.game__buttons}>
+                    <div className={styles.assembly__actions}>
                         <Button
                             type="button"
                             view="secondary"
@@ -225,6 +214,7 @@ export default function ConstructorGame({
                         <Button
                             type="button"
                             onClick={() => {
+                                if (ended.current) return;
                                 const isAnswerCorrect =
                                     word.pressedLetters.map(item => item.value).join("") === word.word;
 
@@ -265,7 +255,8 @@ export default function ConstructorGame({
             </GameInfoContainer>
 
             <Tips type={GameType.constructor} />
-            {isLoading && <Spinner />}
+            {isSaving && <Spinner />}
+            {saveFailed && <Button onClick={doAfterTimer}>Retry saving result</Button>}
         </div>
     );
 }

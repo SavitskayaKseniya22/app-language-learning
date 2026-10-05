@@ -16,7 +16,7 @@ export default function ErrorComponent({ error }: { error?: { code: number; mess
 
                 <h1>{error?.message || "Something went wrong"}</h1>
 
-                {errorFromRoute instanceof Error && <p>{errorFromRoute.message}</p>}
+                {!error && errorFromRoute instanceof Error && <p>{errorFromRoute.message}</p>}
 
                 {error?.code === 404 ? (
                     <CustomLinkAsButton to="/" view="primary">

@@ -30,7 +30,7 @@ export class DataQueue {
 
         const indexes: number[] = [];
 
-        while (indexes.length < 4) {
+        while (indexes.length < 4 && availableIndexes.length > 0) {
             const randomIndex = getRandom(0, availableIndexes.length - 1);
 
             indexes.push(availableIndexes[randomIndex]);

@@ -13,7 +13,7 @@ export default function Constructor() {
 
     useEffect(() => {
         dispatch(resetConstructorState());
-    }, []);
+    }, [dispatch]);
 
     if (context.data) {
         return <ConstructorGame elements={context.data} isTimed={context.isTimed} />;

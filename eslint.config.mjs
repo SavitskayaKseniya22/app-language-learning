@@ -20,6 +20,10 @@ export default tseslint.config(
         },
     },
     js.configs.recommended,
+    {
+        files: ["tests/**/*.mjs"],
+        languageOptions: { globals: globals.node },
+    },
     ...tseslint.configs.recommendedTypeChecked.map(config => ({
         ...config,
         files: ["src/**/*.{ts,tsx}"],
@@ -72,5 +76,12 @@ export default tseslint.config(
         },
     },
 
+    {
+        files: ["src/shared/api/supabase/database.types.ts"],
+        rules: {
+            // Supabase generates unions with `never` for empty schemas.
+            "@typescript-eslint/no-redundant-type-constituents": "off",
+        },
+    },
     eslintConfigPrettier,
 );
